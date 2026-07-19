@@ -1,0 +1,2354 @@
+
+
+===== PAGE 1 =====
+AI
+Note
+Mid 2026 (Spring)
+Topic
+Full Mid term Note
+Createdby
+Md. Ashikur Rahman Mirza
+CamScanner
+
+===== PAGE 2 =====
+why so serious
+Just chill and vibe with it
+CamScanner
+
+===== PAGE 3 =====
+4#
+#
+BFs ared? FIFo method cond Queue.
+BFSA1habaw
+Questiong
+FronierS,Ag，,B,x,F，K
+Expbred list
+S,A,B,C,D,G,H,E,F,I
+finalpah。S-A-C-E-k
+optimae
+225
+SC=
+00
+properchiesof
+e
+BES。
+comple+eness
+Weighted mesure
+yUnueighted
+Tirme complexiy -0(6d)
+hene,
+space Complenity- 0(b)
+b=braneh
+d=depth
+aa (4r-Graph-weightedR(aroplimali)
+situaionUAa ao.
+CamScanner
+
+===== PAGE 4 =====
+Quegtiong
+ioslepgcorg
+Fmontierc。
+ExploredLs：S,A,C,DF,B
+H0.8A
+4rod.rou
+公
+multiple node
+sexpre
+Fina
+pash.
+S-D-G
+CaIarAr
+otacost=1+=2
+optima
+esstslqmo
+qm
+S
+10
+RrOT
+Cos+-20
+(t(s+=3+1+1G√
+graphoptinalt
+225
+Tnweighted
+yriTol
+depend  on
+(do-tisgno)
+Hhe sidaation.
+CamScanner
+
+===== PAGE 5 =====
+099.
+#BFS
+procticcs
+3
+starcfing
+22
+3
+3.3
+Gral
+Is,
+G
+2,2
+2.3
+ool,Vuiori9
+3,2
+umop-dn-beeia
+3
+3-1
+G
+We car move,
+oibond
+L-R-ClD
+So
+Freontier。s,
+(2.2）（,(32)32)G
+(3,3
+explorred list:(
+(22)(2,2),(2）)(31)(2,3)（2(32)
+bA3），
+finabPeen.
+(G/3,3
+S(22)-(22)-(2,3)-G(3,)
+L
+8
+puzzle
+BFS
+Jnee stueture  is,
+（2
+C4
+(1,1)
+(32)
+Ans  paxn s
+Tree
+今
+(23)
+)
+(32)
+(6
+G
+Ci,3)
+
+===== PAGE 6 =====
+Breadth-first search
+Strategy: expand shallowest node first
+Implementation: The frontier is a queue of FiFO
+Oradea
+Neamt
+口
+口
+Zerind
+lasi
+Arad
+Sibiu
+Fagaras
+Vaslui
+RimnicuVilcea
+Timisoara
+Pitesti
+Lugoj
+口
+Hirsova
+Mehadia
+Urziceni
+Bucharest
+Dobreta
+craiova
+Eforie
+口
+Giurgiu
+66
+三
+Richard,Philip
+(AIUB)
+AIUB2024
+28/44
+
+===== PAGE 7 =====
+Bueharest
+人
++Suym
+S，T，
+1348
+ns
+(5)（55)
+Timisota,
+Rimicu V;leea ,
+BE?
+Timisoray
+meha dia
+Rimicu
+iSibiu,
+2
+Orondea,
+Oandea,
+Hsat!
+—
+33
+一
+Cb
+Fontier:
+33
+90010
+tinal patn。
+uosan
+
+===== PAGE 8 =====
+##
+staekuse
+DFSaT2
+DFS
+①Alphabatieftravas
+Staek g nsyAlphabatie
+ortdenpush R（
+rorden
+follou
+B
+AphabaiepushSlaeka(apush
+RF
+B
+A
+#Question 。
+Alphabaties
+fraves
+0
+Frontier
+B
+B
+0718
+71
+D
+β
+FxploredLis+O,S,A,C,E,k
+5leorospl.(
+finapansA-C-E-K
+ar(Alphabaiestravoy
+omm
+popla
+ACD
+CamScanner
+
+===== PAGE 9 =====
+#Queshon:
+Alphabetie
+push
+TOY
+A
+Exploredlis+,SBHGG,LA,D,C
+FEK
+final
+pacths
+S-A-e-E-K
+Trk
+Left
+Righ+
+Goa
+Groal
+Iravas
+push
+propercties?
+Ineomplele
+mon-optmae
+Tme complexity-
+(6#
+speecomplexity-O（bxd
+CamScanner
+
+===== PAGE 10 =====
+ Questhion : DFs : Proetice ailh
+fitaveyand
+pus'h
+G
+push
+Alphabetie
+Frontien
+G
+A
+ExploredLiss,D，，G
+Pinal  path:
+--s
+fravg
+Alpha betiepestFrontier
+D
+melhod G
+Ans612
+ineomplele
+adhiropofoeo
+rouydo-uou
+ExplonedLis S,A，C,FEG)D,B
+final,pacth
+:.S-C-F.-G
+CamScanner
+
+===== PAGE 11 =====
+123
+2,3
+3,13,2 3,3
+()(（)(
+2,2
+11
+2,1
+G(33)
+1685
+1,1
+,2
+1,3
+ig(3.3)
+YOF
+$1:/21
+T
+3/2
+1
+2,3
+1,2
+3
+P,2
+1,1
+3,2
+P2
+#
+palhotollow,
+Goroei9
+#DFS  prae tiee
+2,2
+000
+个
+1,1
+3.1
+32
+(11)
+1,2
+(23((32)
+hefre,
+(2;2)
+S(
+"ypod
+5
+(1,3)
+'oS
+2
+3
+
+===== PAGE 12 =====
+Rim
+!wil
+Buehanest
+Buehares
+↑
+Bueh
+R'nm
+"DFS
++agra
+Fgray
+Gvaph ((id)
+Rim
+22
+Sibiu，
+Arad- Sibiu - 
+ListO,Arad,
+#Ge
+finol padh:
+4402
+Euplorced
+
+===== PAGE 13 =====
+3:28
+ gemini.google.com/app/8
++
+·Rule:StartatS,goal is G,pushnodes in alphabeticalorder.
+·Frontier(Queue):
+1.[S]
+2.[A,B]
+3.[B,C,D](Expand A)
+4.[C,D](Expand B-alreadyexplored A/C)
+5.[D,G](CconnectstoG)
+6.[G]
+PathTraversed:S→A→B→C→G(Level bylevel)
+Question2
+a)Completeness andCostOptimality
+Algorithm
+Completeness
+CostOptimality
+DFS
+No(Canget stuck in infinite loopsNo（Finds the leftmost path,not
+in infinite spaces).
+the shortest).
+BFS
+Yes(Iif thebranching factoris
+Yes(Only if all stepcostsare
+finite).
+equal).
+田Export to Sheets
+口
+b) Utility-BasedAgent
+"happy") way to get there.lt uses a UtilityFunction tomap a state toareal number describing
+the degree of satisfaction.
+·Procedure:1.Sensorsperceive theenvironment.
+2.The agent maintains an internal state.
+3.Itevaluates"Whatwill theworldbelikeifIdoactionX?"
+4.TheUtilityFunctioncalculatesthe"worth"of thatresulting state.
+5.The agentchoosesthe action that maximizesexpected utility.
+Question3:8-PuzzleProblem
+a)Finding Heuristics
+·i) h1 (Misplaced Tiles): Compare Initial State to Goal State.
+·Tiles1,2,3,5,6,8aremisplaced.(Note：Theblank spaceisusuallynotcountedasa
+tile).
+.h1=6
+·ii)h2(Manhattan Distance):Sum of |c1-c2|+|y1-y2|for each tile.
+·Tile1:（1,1)to(0,0)=2steps
+·Tile2:(2,2）to(0,1)=3 steps
+Tile3:（2,1）to（0,2)=3steps
+Tile4:(0,1)to(1,2)=2steps
+
+===== PAGE 14 =====
+COMPARING
+UNINFORMEDSEARCHSTRATEGIES
+1914
+Breadth-
+Uniform-
+Depth-
+Depth-
+Iterative
+Bidirectional
+Criterion
+First
+Cost
+First
+Limited
+Deepening
+(if applicable)
+Complete?
+Yes1
+Yes1,2
+No
+No
+Yes1
+Yes1.4
+Optimal cost?
+Yes3
+Yes
+No
+No
+Yes3
+Yes3,4
+Time
+O(bd)
+0(b1+1C/)
+0(bm)
+0(b)
+O(bd)
+O(bd/2)
+Space
+O(bd)
+0(b1+0/)
+(q)o
+O(be)
+O(bd)
+O(bd/2)
+Figure3.15Evaluationofsearch algorithms.bis thebranchingfactor;m is themaximum
+depthofthesearch tree:dis thedepthoftheshallowestsolution,orismwhen thereis
+no solution:is the depth limit.Superscript caveats are as follows:complete if bis
+finite,and the state space either has a solution or is finite.²complete if all action costs are
+≥>0:3cost-optimal if action costs are all identical; 4 if both directions are breadth-first
+oruniform-cost.
+
+===== PAGE 15 =====
+#S74#
+leve
+m Grenaral
+Aphabetiefravey
+cutoff
+EnploredList:ABC
+final path:
+So  No Solufon Cithinhe limt
+propertiesg
+Non-ophimal
+FrmeComplexity:0
+7.7
+5A.20
+in-complete
+SpaeeI/ -
+bxd
+CamScanner
+
+===== PAGE 16 =====
+Q181132
+Amg:
+JerahbnNumber
+Exploned
+Lis-
+Is+ itercabion
+A
+。
+2nd
+A;B,C
+”
+3td
+A,B,D,E,C(F
+CB(D
+CA
+Tn itercaHon dhrec, we
+ounnesut
+properties?
+complele
+Time complexity
+CamScanner
+
+===== PAGE 17 =====
+USS
+270
+127126
+GC3
+moitnisf
+G
+.2.3.0
+Step-1°
+open: A(5), D(c), B()
+slose:S
+Step-2
+open D(c), B(8), G()
+ChraTstepy
+elose s,A
+TOTY
+1205
+S+cp-3openB(8)e(8),E(8)1G(u)
+'Alphahabie
+orden ollou
+close。 s,A, 0
+CamScanner
+
+===== PAGE 18 =====
+Step-q:
+open:c(8），E（8),G(1u)
+close : S, A, D, β
+tmyioq
+Step-5°
+open:E(8),FEG(13)G()F(15)
+clos : S, A,D, B,c
+710
+2661
+step-G
+openBG2(13), G(4),F(15),Gg(15)
+close:S，A,D,β,c,E
+Step-7:
+OpenGπ(1),F(15),Gπg (1s
+ elose
+<Goe
+uop
+So,fina pathS-D-C-G2
+properctise 
+extrca
+Tese=0
+complete
+Optimal
+Time complexity - 
+paee
+edge aue in-Agrah,
+300
+CamScanner
+
+===== PAGE 19 =====
+#UcS+Baefe
+A，-a
+[SToNode(u3
+A
+B
+C
+T
+—
+S,m,O,
+a
+E
+F
+SHuaeling
+4aPo
+Gc
+H
+uGrS
+Apply
+A
+M
+Z
+0
+Lef=4
+t=dn
++o
+Righ+=2
+E=umoP
+Ans:
+)，B(2),D(3)
+合
+uado
+close:
+A
+openxTcT
+)，D(3)，E(3)，(u)
+Step-02 。
+open:
+(RTA
+222
+lose:
+A, β
+AlphabetieOrrdert
+Step-03
+.uado
+E(3), c(),G (6
+close: A,B,D
+?ho-d
+Dpen:
+C(μ), F(5), G(c), H (s
+close: A,B,D,E
+open:
+F(5), 6(),H(c),(G
+closeAB,D，E,
+
+===== PAGE 20 =====
+Step-oc
+G(G),H(c)，(c),(=),S)
+open:
+close A,B.D, E ,C ,F
+p-0
+open:
+H(G)， I(G)，()， s(8), L()
+close A,B,D,E,e,F,G
+Step-08°
+peT(G), (>)， S(8)， L(),m(9)
+qbse:
+A,B,D,E,C,f,H
+step-09
+(),s()，(), m(2)
+A,B, D, E,e, F,G,H,I
+uado
+(1())()5
+A,B,D,∈,C,f,G，H,T，
+Step-11
+openo
+L(9),m(9),k(10)，N(12)
+S(8)
+A-B-E-f-S=
+=2+3+2+3=$10
+
+===== PAGE 21 =====
+# Topie→B- dircetional#
+(1（8）日
+580A
+aT cononpon
+HT
+aAT BFS
+E（IR)
+(P
+DFS
+use
+80
+wo4ane
+（）9（
+B
+usimg
+BfS:
+SHan++oendA,β,CD
+Endto 8+ar+G,E,F,D
+52897
+.So
+Gueue is:
+AB,C,D),
+F,E)G
+finapath：A-B-D-∈-G
+Dermila
+tixeqmoosmiT
+faDPsu
+puθot+2s
+ABD
+Endto
+start
+GED
+120
+finalpahA-B-D-G
+CamScanner
+
+===== PAGE 22 =====
+properchiee of B:- dineetione
+complete
+time and spaee complerily →
+11
+optima
+sulevsileionsd=（m）d
+Fxeneise
+12
+ni429-（m)n
+（m）n
+buisnos
+BAS:
+sldieeimbA
+svStar6end
+①，4,2，8,C,9,35
+endostart
+16,12115,139
+000
+n
+8,,915,10,12,1℃
+Using
+DFS
+Sturtto/end
+14，8，
+leibmotodnom
+Lusing
+Alphcbce
+usnd
+sibedu
+finaepath;
+1-4-8-9-10-12-16
+CamScanner
+
+===== PAGE 23 =====
+Tmform
+#y
+a(n)=pa-lh cos+
+Admissibl e
+h(n)<h'm)
+h(n) =eg+imaleralve
+h’（n=aetualvalve
+,cunderstimate
+non-Admissible≤h(n)h13
+h(m)≥h
+h(n）
+21011C
+Ovet-estimake
+P-L
+Manhatan dislanee
+'disfanee!
+Eueledian
+n=n)+(αy2-y
+CamScanner
+
+===== PAGE 24 =====
+s-Sa(dymform Seoneh-
+Guread Bes+ finst Seanch (GBFs)
+ A* Seaneh.
+# Topie + Guready  Best-lirstSearch #
+ehherseolue
+ignarepath co st.
+h(n)uavaue<har=otcden
+Example。
+Ams 
+open
+close,
+10
+8
+S
+[]
+10
+B
+20
+7.8
+ABE
+[]
+20
+25
+22
+[SA]
+E
+11
+D
+12
+S,A,C
+F
+B
+E
+10
+SACF
+Sopath is,S-A-eF
+heroisticvalue KTeqr
+Brs)
+F
+h(s)=15
+G24,
+In-eomplelte
+h（4)=10
+S-F=15
+non-optima
+cause iHs
+h(c)=11
+A-F=10
+follou- heroistic value)
+=4-2
+CamScanner
+
+===== PAGE 25 =====
+Fuereise
+S-G-13
+C=29-I
+AG=12
+S-Gc=13
+B-6
+p-G=20
+C-G=7
+D-G=
+G
+三
+8
+GF
+2
+H-G=
+Hng
+ado
+close
+[]
+B
+[s,]
+F
+E
+A
+[B.F]
+Gr
+A
+Ls,B,F,G
+工
+A
+So fnal  poQh
+-G
+CamScanner
+
+===== PAGE 26 =====
+Greedy best-first search Cont.
+Straight-line distance
+□Oradoa
+lo Bucharest
+Noaml
+peuy
+366
+P
+Bucharest
+87
+0
+Zerind
+151
+Craiova
+75
+160
+lasi
+Dobreta
+242
+Arad
+口
+140
+Eforie
+161
+92
+Fagaras
+178
+Sibiu
+66
+Fagaras
+Giurgiu
+77
+118
+口
+Hirsova
+Vaslui
+151
+80
+lasi
+226
+RimnicuVilcea
+Timisoara
+Lugoj
+244
+Mehadia
+142
+241
+111
+211
+Neamt
+97
+Pitesti
+234
+Lugoj
+Oradea
+380
+70
+86
+Pitesti
+98
+146
+107
+85
+口
+Hirsova
+Rimnicu Vilcea
+Mohadia
+Urziceni
+193
+86
+Sibiu
+75
+138
+253
+/Bucharost
+Timisoara
+329
+120
+Dobrota
+口
+Urziceni
+90
+80
+口
+DCraiova
+Vaslui
+Eforie
+199
+Giurgiu
+Zerind
+374
+CA
+
+===== PAGE 27 =====
+Greedy best-first search Cont.
+(a)The initial state
+Arad
+366
+（b)After expanding Arad
+Arad
+Timisoara
+Zerind
+253
+329
+374
+(e)After expanding Sibiu
+Ard
+Sibiu
+LRUNTLUE
+Zerind
+329
+374
+Arad
+P
+Fagaras
+Cradea
+366
+176
+380
+193
+RichardPhilip (AlUB)
+AI
+AIUB2024
+8/20
+
+===== PAGE 28 =====
+Greedy best-first search Cont.
+(d)After expandingFagaras
+Arad
+Sibiu
+Timisoara
+Zerind
+329
+Arad
+Fagaris
+Oradea
+LumainVikt
+366
+380
+193
+Sibu
+Bucharest
+253
+D
+Richard Philip (AlUB)
+AI
+AIUB2024
+9/20
+
+===== PAGE 29 =====
+4dF
+Seareh
+[m）d+（mm)）（n）
+admissible and
+Simulabion.
+#TopieASeatreh Consisene
+omdfldmissible
+for admissible cheek
+snsteiemosmiei nqosg inlo
+n(n)≤b（m)
+Fort
+consisdeng
+checkr
+SigoT
+h（m)≤1(mm)+b（m
+J16#
+heroistic vale
+of neighbout
+1=0-9
+Question?
+Ang
+Admiesible
+h(m)<h’（n)
+S(12) ≤ 1+1+10, 3+10
+12,13
+α()≤11
+consistene
+b（0)≤10
+CamScanner
+
+===== PAGE 30 =====
+nou pr consikeney,
+h（n）≤c(nm)+h（m)
+S0
+S→a=12<+11
+—12≤12
+s→b=12≤3+0
+=12≤3
+So +his graph is ineonsistene 
+4
+Simulaonrseien
+p-Q=1+,6=
+p-R=4+2=Gx
+β-R-S=4+2+1=
+2（S
+P-Q-R=1+2+2=51
+paths+h(n)
+P-Q-S=1+5+(=7
+costof
+P-Q-T=1+12+0=13
+p--R-S=1+2+2+1=C
+CamScanner
+
+===== PAGE 31 =====
+P-O-R-S
+P-R-S-T=+2+3+O
+1（-01191
+msleong
+gofinal lowes+
+pathis,
+01G4（
+P-α-R-S-T
+taions
+Finallowest 
+paxhcos+=
+Hns
+CamScanner
+
+===== PAGE 32 =====
+Seareh
+herroishie Value
+SeaTehA，
+Eha+if,
+hertoisic value a (LG3T 2T（<
+2
+,
+gron
+h(n)≤h（n)
+Fanula
+TuC3r
+A-r，hene,
+h()= henois+ie vaue,
+h'(n) =Aetual
+patn
+cost
+wo4san
+3
+Ee kno
+2
+h(mh（m)+e(nm
+3
+5
+2
+larA iid， Groa Node Ga heroistie value = O
+heroistie
+yalueof
+D
+
+===== PAGE 33 =====
+Step-01。
+（
+（
+h’(n）C(m）+（h)
+h(b)=0
+Last
+palh cos+
+heraoistic
+value
+FE
+口
+D-G=2，b(D=2
+heroistie
+value
+o-dats
+heroistic
+另m°
+value
+E-G=3
+So, h(E)= 3
+=+h(2)=3
+Step-o4?
+herogtievalueof
+5+h(3)=8
+So, h(e) =8
+C-∈-D-=5++h(2)=
+90-28
+hetolstic volue of β
+h(B) =8
+=（)+
+B-C-E-E=
+1+5+h(3)=8
+B-c--(D-)=1+5+1+h(2)=
+M
+f
+
+===== PAGE 34 =====
+0-
+heroistievalve of
+B
+-0)-8-
+=3+6+h(2)=11
+A-B-D{E-)=+C++h(3)=13
+A-C-
+=2+5+h(3) =10
+So,
+b(A)= 10
+B
+b(A)=10
+h(B)=8
+h(e)=8
+h(θ)=2
+h(∈)=3
+h(F) = b
+
+===== PAGE 35 =====
+A* Problem Practice
+Shaikat Das Joy
+Lecturer-AlUB
+
+===== PAGE 36 =====
+2
+1,2
+S
+Question:ApplyA*to reach G from S.Robot can move
+direction with cost is up-1, down-2,left-3,right-4.And
+2,1
+2,2
+Heuristicvalue isbased on ManhattanDistance,where
+2
+h(n)=I(x2-x) +(y2-y)1
+3,1
+3,2
+3
+G
+Answer:
+Here, g(n) /path cost = up (1), down (2), left (3), right (4)
+Heuristic value for tile (1,1) = |(3-1) + (2-1) | = 3
+Heuristicvalue for tile(1,2)=|(3-1) +(2-2) |=2
+Heuristic value for tile(2,1) =|(3-2) +(2-1) |= 2
+Heuristic value for tile (2,2) = | (3-2) + (2-2) |= 1
+Heuristicvalue for tile(3,1) =|(3-3) +(2-1)|= 1
+Heuristic value for tile(3,2) =|(3-3) +(2-2) |= 0
+
+===== PAGE 37 =====
+2
+1,1
+1,2
+f(n)=g(n)+h(n)
+S
+Step 1-> (1,1) -> (1,2) and (2,1)
+(1,1)->(1,2)=R(4) +2 = 6
+2,1
+2,2
+(1,1)->(2,1)=D(2)+2=4
+3,1
+3,2
+Step 2-> (2,1) -> (1,1) already visited, (2,2) and (3,1)
+G
+(1,1)->(2,1)->(2,2) =D(2) +R(4) + 1 = 7
+(1,1)->(2,1)->(3,1)=D(2)+D(2)+1=5
+Step 3-> (3,1) -> (2,1) already visited, (3,2)
+[0]=0+()+()+()=(）<-()<-()<-(
+Final Path =(1,1)-(2,1)-(3,1)-(3,2) with cost 2+2+4 =8
+
+===== PAGE 38 =====
+2
+3
+1,1
+1,2
+1,3
+Successor Number:Exactlythe number of
+S
+possiblenextstatefromthecurrentstate.
+2.3
+*ForthisexamplefromSwecanmove totwo
+2,1
+2,2
+2
+positionsso,Successor Numberis2
+* If you are in (2,2) position then Successor
+3,1
+3,2
+3,3
+3
+G
+numberwillbe=4
+BranchingFactor:Maximumnumber of
+Successornumberforaparticularscenario.
+So, branching factor is 4
+
+===== PAGE 39 =====
+#8uz
+Problem
+3
+5
+intail
+2022h
+problem
+aG
+MG
+Ams 。
+1
+3
+2
+3
+2
+G
+C
+5
+8
+7
+8
+mtial
+h(y)
+h（
+point
+R
+D
+1
+3
+h
+3
+2
+G
+2
+G
+7
+5
+8
+5
+8
+W=5
+h=3
+mex+page
+CamScanner
+
+===== PAGE 40 =====
+R(h(5)
+(h=3)
+3
+4
+2
+C
+2
+C
+7
+5
+8
+C
+8
+R
+3
+2
+3
+4
+2
+G
+G
+4
+2
+G
++
+B
+5
+8
+5
+h=y
+=y
+h=4
+R
+3
+2
+3
+9
+2
+2
+3
+4
+5
+C
+G
+2
+#
+C
+5
+8
+h
+5
+8
+子
+8
+7
+5
+n
+一
+h=5
+h=5
+h
+5
+R
+2
+3
+2
+3
+4
+5
+G
+h
+7
+8
+8
+h=6
+h
+R-D-D-R
+So,Righ+ paxh to solve,
+CamScanner
+
+===== PAGE 41 =====
+3
+2
+中
+2
+9
+5
+y
+P
+7
+8
+Goal
+3
+4
+2
+G
+9
+S
+P
+haq
+2
+G
+ns
+h:
+h27
+CamScanner
+
+===== PAGE 42 =====
+ digram  g ..theory p
+art  Nt Diagram Draw 不
+x   
+GA..
+ peas diagram  g, 可
+ analysis 不 structures maintain 不
+CamScanner
+
+===== PAGE 43 =====
+A* search cont.
+p-s
+oBuchares
+Meamt
+Arsd
+3e6
+P
+Bucharest
+87
+PUUA
+151
+Craiova
+160
+Dobreta
+242
+140
+Eforie
+161
+92
+Fagaras
+99
+Fagun
+Ciurgiu
+77
+118
+口
+Hirsovs
+151
+80
+lasi
+226
+Rmnicu Vacea
+Lugoj
+24
+Mrhadia
+142
+241
+211
+Neaml
+PAest
+234
+97
+Oradea
+380
+98
+Pitesti
+98
+146
+85
+Hirtova
+Rimnicu Vikea
+Mohads
+161
+Urticena
+86
+Sibiu
+75
+133
+Bucharrs
+Tinlsoars
+329
+120
+Dobreta
+口
+Urzicenl
+90
+DCrBovE
+Vaslui
+Eforie
+19
+Gurgiu
+Zerind
+374
+
+===== PAGE 44 =====
+A* search cont.
+(a)Theinitialstate
+Ar
+36604366
+(b) AfterexpandingArad
+Ared
+Sahru
+Camisoy
+Lerind
+5Z+016
+447-118+329
+(c)After expanding Sibiu
+Ara
+Sahio
+insnary
+Terind
+47=118+329
+449m75+374
+Arad
+Faa
+646=280+366415=239+176671=291+380 413=220+193
+(d) After expanding Rimnicu Vilcea
+Sabio
+CmrMar
+Zerind
+447-118+329
+449-75+374
+AdpFaern
+COhmdka
+64622a+366415=239+176671=91+30
+Crawa
+Pneul
+Sihis
+526366+160417=317+100553=00÷253
+Richard.Philip(AlUB)
+AI
+AIUB2024
+12/20
+
+===== PAGE 45 =====
+A*search cont.
+(e)Afler expanding Fagaras
+Ard
+Sihiu
+Terind
+447=118+329
+449m754374
+Arad
+Fagaras
+Oraea
+99+082=919
+671-291+380
+Sihiu
+CHachurr
+CCraavapCPeeh
+Sibsu
+52m146+160417=317+100 55300+253
+()After expandingPitesti
+Sahiu
+mncary
+Tenad
+447118+329
+Ard
+Fagans
+Oradea
+646m280+366
+671=291+380
+Sateu
+ucharest
+Paesti
+Siba
+591=338+253450=4500
+526m66+160
+553=300+253
+PCluxcharey
+Craowa
+418=418+0615=455+160 607=414+193
+Richard.Philip (AlUB)
+AI
+AIUB2024
+13/20
+
+===== PAGE 46 =====
+HeuristicFunctions
+The8-puzzlewasoneoftheearliestheuristicsearchproblems.
+7
+2
+4
+2
+5
+3
+5
+8
+3
+7
+8
+6
+Start State
+Goal State
+Richard.PhTip(AiUB)
+AI
+AIUB2024
+17/20
+
+===== PAGE 47 =====
+HeuristicFunctions 8-puzzle
+h= the numberofmisplaced tiles.
+Alloftheeighttilesareoutofposition,sothestartstatewould
+have hl=8.hl isan admissible heuristicbecause itis clear
+thatany tilethatisoutofplacemustbemovedatleastonce.
+h2=the sumofthedistancesofthe tilesfrom theirgoal
+positions.
+tilescannotmove alongdiagonals,thedistancewewillcountis
+thesumofthehorizontal andverticaldistances.Thisis
+sometimescalled thecityblockdistanceorManhattandistance.
+h2 is also admissible because all any move can do ismove one
+tileonestepcloser to the goal.Tiles1to8in the startstate
+give a Manhattan distance of
+（）+（9）+（）+（）+（）+（)+（）=²y
++2（8)=18.
+Richard,Philip (AlUB)
+AI
+AIUB2024
+18/20
+
+===== PAGE 48 =====
+3:28
+ gemini.google.com/app/8
++
+a)CompletenessandCostOptimality
+Algorithm
+Completeness
+CostOptimality
+DFS
+No(Can get stuck in infinite loopsNo(Finds theleftmost path,not
+in infinite spaces).
+the shortest).
+BFS
+Yes(lf thebranching factoris
+Yes(Only if all step costs are
+finite).
+equal).
+田Export to Sheets
+口
+b) Utility-Based Agent
+A Utility-Based agent doesn't just lookfora“goalstate,but triestofind thebest(most
+"happy")way toget there.lt uses a Utility Functionto map a state to areal number describing
+the degree of satisfaction.
+·Procedure:1.Sensorsperceive the environment.
+2.Theagent maintainsaninternalstate.
+3.Itevaluates"Whatwill theworldbelikeifIdoactionX?"
+4.TheUtilityFunctioncalculatesthe"worth"of thatresulting state.
+5.The agentchoosesthe actionthat maximizesexpected utility.
+Question3:8-PuzzleProblem
+a)Finding Heuristics
+·i) h (Misplaced Tiles): Compare Initial State to Goal State.
+Tiles1,2,3,5,6,8aremisplaced.(Note：Theblankspaceisusuallynotcountedasa
+tile).
+.h1=6
+Tile1:（1,1）to(0,0)=2steps
+Tile2:(2,2）to（O,1)=3steps
+·Tile 3:(2,1)to(O,2)=3 steps
+·Tile 4:(0,1)to（1,2)=2 steps
+Tile5:（0,0)to(2,2)=4steps
+Tile 6:（1,0)to(2,0)=1step
+Tile7:(2,0)to(2,0)=0steps
+Tile8:(1,2)to（1,0)=2steps
+·h2=2+3+3+2+4+1+0+2=17
+Question4:ASearch*
+Rule:f（n)=g(n)+h(n) where gis path cost and h is heuristic.
+StartatA.Goal is G.
+1.FromA:
+·ToB:f（B)=1+7=8
+
+===== PAGE 49 =====
+3:28
+ gemini.google.com/app/8   十 
+目
+Question3:8-PuzzleProblem
+InitalStatGalState（MispacedTles）
+a)Heuristicscalculation
+i)h:MisplacedTiles
+Tle1:（1,1），Gal（0,0）（Misaed）
+Tile2:（2,2），Gal-（0,1）1（Mislaced）
+Til3:（2,1），Gal（0,2）1（Misaced）
+Til4:（0，1），Gal（1,2）（Mislaed）
+Tile5:（0,0），Goal（2,2）（Mislaced）
+Til6:（1,0），Gl-（2,0）（Misaed）
+T7:（2,0）G（2,0）（Crrect）
+·T8:（1,2）,Ga-（1,0）（Mislaced）
+TotalMispacedTiles（h）:7(）
+i)h2:ManhattanDistance
+（Vertica/Horizonta）
+：1-c2+y1-y2
+·Tile1:Initial(1,1)→Goal(0,0):|1-0|+|1-0=2
+·Tile2:Initial(2,2)→Goal(O,1):|2-0|+|2-1|=3
+·Tile3:Initial(2,1)→Goal(O,2):|2-0|+|1-2|=3
+·Tile5:Initial(0,0)→Goal(2,2):|0-2|+|0-2=4
+0-+-:（）（）
+·Tile7:Initial(2,0)→Goal(2,0):|2-2|+|0-0|=0
+·Tile8:Initial(1,2)→Goal（1,0):|1-1|+|2-0|=2
+TotalManhattanDistance（h2）:2+3+3+2+4+1+0+2=17
+b)Partial State Space Tree(Up toDepth 2)
+StatSpTre（Bank）
+31
+Level o(Root):
+[54_]
+[618]
+CLJ
+
+===== PAGE 50 =====
+Hill-climbing in Local Minima
+1
+2
+4
+5
+7
+3
+6
+8
+H=5
+Down
+Left
+Right
+1
+4
+1
+2
+4
+1
+2
+4
+1
+2
+4
+5
+2
+7
+5
+6
+7
+5
+7
+5
+7
+3
+6
+8
+3
+8
+3
+6
+8
+3
+6
+8
+H=5
+H=S
+H=4
+H=5
+Up
+Down
+Right
+个
+2
+4
+1
+2
+4
+1
+2
+4
+5
+5
+7
+3
+7
+1
+7
+3
+8
+8
+3
+6
+6
+6
+8
+H=5
+H=5
+H=5
+6
+Richard,Philip (AlUB）
+AI
+AIUB2024
+15/37
+
+===== PAGE 51 =====
+MERICAN
+SIMPLEREFLEXAGENTS
+1994
+CamScanner
+
+===== PAGE 52 =====
+Problem??
+Agent
+Sensors
+Infinite Loop
+in
+Whattheworld
+Deterministic
+islikenow
+SRA
+Environment
+Works only if
+Solution??
+the
+Randomized
+Environment
+is
+SRA
+Fully
+Observable
+WhatactionI
+Condition-actionrules
+shoulddonow
+Actuators
+Figure 2.9
+Schematicdiagram ofa simplerefexagent.
+functionSIMPLE-REFLEX-AGENT(percept)returnsanaction
+persistent:rules,a set ofcondition-actionrules
+stateINTERPRET-INPUT(percept)
+ruleRuLE-MATCH(state,rules)
+Whatwill happen?when,
+actionrule.AcTION
+VacuumCleanerwithpoorperception!
+returnaction
+Withoutlocationsensor!
+Figure2.10
+Asimplereflexagent.Itactsaccordingtoarulewhoseconditionmatches
+the current state,as definedby thepercept.
+CamScanner
+
+===== PAGE 53 =====
+PRAESIDIUM
+MODEL-BASEDREFLEXAGENTS
+CIVITA
+1994
+CamScanner
+
+===== PAGE 54 =====
+Sensors
+State
+Howtheworldevolves
+Whattheworld
+islikenow
+Environment
+Whatmyactionsdo
+Condition-action rules
+What actionI
+shoulddonow
+Agent
+Actuators
+Figure 2.11
+A model-basedreflexagent.
+functionMoDEL-BASED-REFLEX-AGENT(percept)returnsanaction
+persistent:state,the agent's currentconception of the world state
+model,adescriptionofhowthenextstatedependsoncurrentstateand action
+rules,asetofcondition-actionrules
+action,themostrecentaction,initiallynone
+stateUPDATE-STATE(state,action,percept,model)
+ruleRULE-MATCH(state,rules)
+actionrule.AcTIoN
+returnaction
+Figure 2.12
+Amodel-basedreflexagent.Itkeepstrackof thecurrentstateof theworld,
+using an internal model.It then chooses an action in the same way as the reflex agent.
+CamScanner
+
+===== PAGE 55 =====
+GOAL-BASED AGENT
+CIVITAT
+1994
+S
+CamScanner
+
+===== PAGE 56 =====
+PRAESIDIUM
+GOAL-BASEDAGENT
+1994
+Sensors
+State
+Whattheworld
+How theworldevolves
+islikenow
+Environment
+Whatitwill belike
+Whatmy actionsdo
+ifI doactionA
+What actionI
+Goals
+shoulddonow
+Agent
+Actuators
+Figure 2.13
+Amodel-based,goal-based agent.It keeps trackof the world state aswell as
+a set of goals it is trying to achieve,and chooses an action that will (eventually) lead to the
+achievementofitsgoals.
+CamScanner
+
+===== PAGE 57 =====
+UTILITY-BASEDAGENTS
+1994
+CamScanner
+
+===== PAGE 58 =====
+Sensors
+State
+What the world
+Howtheworldevolves
+is like now
+Environment
+Whatitwill be like
+Whatmyactionsdo
+if I do action A
+Utility
+HowhappyIwill be
+in sucha state
+What actionI
+should do now
+Agent
+Actuators
+Figure 2.14A model-based,utility-based agent. It uses a model of the world,along with
+a utility function that measures its preferences among states of the world.Then it chooses the
+actionthat leadsto the best expectedutility,where expectedutilityiscomputedby averaging
+overallpossibleoutcomestates,weightedbytheprobabilityoftheoutcome.
+CamScanner
+
+===== PAGE 59 =====
+PRAESIDIUN
+LEARNING AGENT
+1994
+Performancestandard
+Critic
+Sensors
+feedback
+Environment
+changes
+Learning
+Performance
+element
+element
+knowledge
+learning
+goals
+Problem
+generator
+Agent
+Actuators
+Figure 2.15
+Ageneral learningagent.
+CamScanner
+
+===== PAGE 60 =====
+PRAESIDIUM
+SPECIFYING THE TASK ENVIRONMENT:
+PEASDESCRIPTION
+1994
+Agent Type
+Performance
+Environment
+Actuators
+Sensors
+Measure
+Taxi driver
+Safe,fast,
+Roads,other
+Steering,
+Cameras,radar,
+legal,
+trafic, police,
+accelerator,
+speedometer,GPS,engine
+comfortable
+pedestrians,
+brake, signal,
+sensors,accelerometer,
+trip, maximize
+customers,
+horn, display,
+microphones,touchscreen
+profits,
+weather
+speech
+minimize
+impact on
+otherroad
+users
+Figure2.4PEASdescriptionofthetaskenvironmentforan automatedtaxidriver.
+CamScanner
+
+===== PAGE 61 =====
+PEAS: Examples
+1994
+AgentType
+Performance
+Environment
+Actuators
+Sensors
+Measure
+Medical
+Healthy patient,
+Patient,hospital,
+Displayof
+Keyboard entry
+diagnosis system
+reduced costs
+staff
+questions,tests,
+ofsymptoms,
+diagnoses,
+findings,patient's
+treatments,
+answers
+referrals
+Satelliteimage
+Correct image
+Downlink from
+Display of scene
+Colorpixel
+analysis system
+categorization
+orbiting satellite
+categorization
+Part-picking
+Percentage of
+Conveyor belt
+Jointedarmand
+Camera,joint
+robot
+parts in correct
+with parts;bins
+hand
+angle sensors
+bins
+Refinery
+Purity, yield,
+Refinery.
+Valves,pumps,
+Temperature,
+controller
+safety
+operators
+heaters,displays
+pressure,
+chemical sensors
+Interactive
+Student'sscore
+Setofstudents,
+Display of
+Keyboard entry
+English tutor
+on test
+testing agency
+exercises,
+suggestions,
+corrections
+Figure 2.5
+Examples of agent typesand theirPEASdescriptions.
+CamScanner
+
+===== PAGE 62 =====
+Thahk
+nof
+S
+CamScanner
+
+===== PAGE 63 =====
+PRAESIDIUM
+n World Problem
+MERICAN
+Vacuum
+1994
+R
+R
+R
+88
+8
+S
+R
+Figure3.2The state-spacegraph for the two-cell vacuumworld.There are8states and three
+actionsforeach state:L=Left,R=Right,S=Suck.
+
+===== PAGE 64 =====
+PRAESIDIUM
+VACUUM WORLD:
+PROBLEM FORMULATION
+1994
+States: The state is determined by both the agent location and the dirt locations. The
+agent is in one of two locations, each of which might or might not contain dirt. Thus,
+there are 2 × 22=8possible world states.A larger environment with n locations has
+n·2" states.
+Initial state: Any state can be designated as the initial state.
+Actions:In this simple environment,each state has just three actions: Left,Right,and
+Suck. Larger environments might also include Up and Down.
+Transition model: The actions have their expected effects, except that moving Left in
+the leftmost square,movingRight in the rightmostsquare,andSucking in a clean square
+have no effect. The complete state space is shown in Figure 3.3.
+Goal test: This checks whether all the squares are clean.
+Path cost:Each step costs 1, so the path cost is the number of steps in the path.
+
+===== PAGE 65 =====
+8-PUZZLE:
+PROBLEMFORMULATION
+1994
+States:Astatedescriptionspecifiesthe location ofeach of theeighttiles and theblank
+inone of theninesquares.
+Initial state:Anystate canbe designated asthe initial state.Note that anygivengoal
+canbereachedfromexactlyhalfofthepossibleinitialstates(Exercise3.4).
+Actlons:The simplestformulation defines the actions asmovements of theblankspace
+Lef,Right,Up.or Down.Different subsetsof these are possible dependingon where
+the blank is.
+Transitionmodel:Givena state andaction,thisretumstheresultingstate;forexample.
+ifweapplyLeff tothestartstateinFigure3.4,theresultingstatehasthe5andtheblank
+switched.
+Goal test:This checkswhether the state matches the goal configuration shown inFig-
+ure 3.4.(Othergoal configurationsarepossible.)
+Path cost:Each step costs 1,sothe path cost is the number of steps in the path.
+
+===== PAGE 66 =====
+Example- Vacuum World
+888
+88
+3
+88
+In this case there are eight possible world states.
+There are three possible actions: left, right, and suck.
+The goal is to clean up all the dirt, i.e., the goal is equivale
+PRAESIDTUA
+A
+the set of states 7,8.
+994
+Richard,Philip
+(AIUB)
+AI
+AIUB2024
+8/44
+
+===== PAGE 67 =====
+Search Problem formulation for vacuum world
+This can be formulated as a problem as follows:
+States: The state is determined by both the agent location and
+the dirt locations. Thus, there are 2.22 = 8 possible world
+states.A larger environment with n locations has n.2 states.
+Initial state: Any state can be the initial state.
+Actions: In this simple environment,each state has just three
+actions: Left, Right, and Suck. Larger environments might
+also include Up and Down.
+Transition model: The actions have their expected effects,
+except that moving Left in the leftmost square, moving Right in
+the rightmost square, and sucking in a clean square have no
+effect.
+Goal test: This checks whether all the squares are clean.
+Path cost: Each step costs 1, so the path cost is the numbeo
+1994
+steps on the path.
+Richard,Philip（AiUB）
+AI
+AIUB2024
+9/44
+
+===== PAGE 68 =====
+Search Problem formulation
+Exercise
+Formulate the following problem as the search problem.
+The 8-puzzle: The 8-puzzle has 9!/2 = 181,440 reachable
+states and is easily solved. Why?. Please find the mathematics
+behind this.
+8-queens problem: Initial state-empty board then possible
+worldstates
+64
+64!
+8
+8!(64 - 8)!
+8
+5
+2
+3
+6
+5
+6
+8
+8
+PRAESIDIUM
+6
+5
+StartState
+Goal State
+1994
+67
+8
+Richard,Philip
+(AIUB）
+AIUB2024
+13/44
+
+===== PAGE 69 =====
+Properties of Breadth-first search
+Complete: Guaranteed to find a solution if one exists?
+Yes (if b is finite)
+Optimal: Guaranteed to find the least cost path?
+Yes (if cost = 1 per step); not optimal in general
+Time: 1 + b + b² + b3 + ... + bd = O(bd), i.e., exponential in d
+Space: O(bd) (keeps every node in memory)
+Space is the big problem; can easily generate nodes at 1MB/sec
+so 24hrs = 86GB.
+1node
+bnodes
+stiers
+b² nodes
+bs nodes
+bnodes
+994
+Richard,Philip（AiUB)
+AI
+AIUB2024
+29/44
+
+===== PAGE 70 =====
+Properties of Depth-first search
+Complete: No. fails in infinite-depth
+spaces, spaces withloops
+Modify to avoidrepeatedstates alongpath
+→ complete in finite spaces
+Optimal: No
+Time: O(bm): terrible if m is much larger than d
+but if solutions are dense,may be much faster than breadth-first
+Space: O(bm), i.e., linear space!
+1node
+bnodes
+b²nodes
+m tiers
+PRAESIDIUM
+bmnodes
+1994
+a
+Richard.Philip
+（AIUB)
+AIUB2024
+44
+
+===== PAGE 71 =====
+Exercise 1
+· You are tasked with designing a robot navigation system where
+the robot can move up, down, left, or right, if there are no walls
+blocking its way. The goal is to reach the bottom right corner of
+the room. The robot can only see its immediate next squares,
+but not anything else. Blocks can appear randomly anywhere at
+the room, at any time. There is also an opposing robot whose
+objective is to damage your robot.Determine whether this
+agent's environment is single- or multi-agent, fully or partially
+observable,episodic or sequential, static or dynamic, and
+deterministic or stochastic.
+1994
+a
+Richard.Philip
+(AIUB)
+AIUB2024
+39/44
+
+===== PAGE 72 =====
+11:16
+ chatgpt.com/c/6a27a136-
++
+arenowallsblockingitsway.Thegoal istoreachthe
+bottomrightcornerof theroom.Therobotcanonlyseeits
+immediatenextsquares,butnotanythingelse.Blockscan
+appearrandomly anywhere at theroom,atanytime.There
+isalsoanopposingrobotwhoseobjectiveistodamage
+yourrobot.Determinewhetherthisagent'senvironmentis
+single-rmulti-agentfullyorpartiallyobservablepisodic
+orsequential,staticordynamic,anddeterministicor
+stochastic.
+Thisenvironmentcanbeclassifiedasfollows:
+Property
+Classification
+Reason
+AgentType
+Multi-Agent
+There aretworobots:yourrobot and an opposing
+robot that tries to damage it.
+Observability
+PartiallyObservable
+Therobotcanonlyseeitsimmediateneighboring
+squares,nottheentireroom.
+TaskStructure
+Sequential
+Eachactionaffectsfuturestatesandfuture
+decisions.Movingnowinfluenceslater
+possibilities.
+Environment Change
+Dynamic
+Blockscanappearrandomlyatanytime,andthe
+opposingrobotisalsomoving/acting.The
+environmentcanchangewhiletherobotis
+operating.
+Outcome Certainty
+Stochastic
+Theappearanceofblocksisrandom,andthe
+opponent'sactionsintroduceuncertainty,sothe
+nextstatecannotbepredictedwithcertainty.
+Final Answer
+·Multi-Agent
+·PartiallyObservable
+·Sequential
+·Dynamic
+·Stochastic
+Thisialassicexamplefamulti-agent,artiallyobservable,squentialdynamic,and
+stochasticenvironment.
+B
+B
+
+===== PAGE 73 =====
+Exercise2
+Suppose that you are designing an artificially intelligent wall
+painting robot. The wall is divided into 144 squares in a 12 x 12
+grid design. The robot can paint a single square in a singular
+action. It then moves the hand to the next square and paints.
+The job is finished when the entire wall is painted. Give a formal
+description of this problem as a search problem.What is the size
+of the state space?
+991
+Richard,Philip
+(AIUB)
+AIUB2024
+40/44
+
+===== PAGE 74 =====
+Example- Vacuum World
+888
+88
+3
+88
+In this case there are eight possible world states.
+There are three possible actions: left, right, and suck.
+The goal is to clean up all the dirt, i.e., the goal is equivale
+PRAESIDTUA
+A
+the set of states 7,8.
+994
+Richard,Philip
+(AIUB)
+AI
+AIUB2024
+8/44
+
+===== PAGE 75 =====
+Search Problem formulation for vacuum world
+This can be formulated as a problem as follows:
+States: The state is determined by both the agent location and
+the dirt locations. Thus, there are 2.22 = 8 possible world
+states.A larger environment with n locations has n.2 states.
+Initial state: Any state can be the initial state.
+Actions: In this simple environment, each state has just three
+actions: Left, Right, and Suck. Larger environments might
+also include Up and Down.
+Transition model: The actions have their expected effects,
+except that moving Left in the leftmost square, moving Right in
+the rightmost square, and sucking in a clean square have no
+effect.
+Goal test: This checks whether all the squares are clean.
+mI
+Path cost: Each step costs 1, so the path cost is the numbeof
+1994
+steps on the path.
+2
+Richard,Philip（AiUB）
+AI
+AIUB2024
+9/44
+
+===== PAGE 76 =====
+Example - The 8-puzzle problem
+5
+4
+1
+2
+3
+8
+8
+4
+7
+3
+2
+7
+6
+5
+Start State
+Goal State
+states: a state description specifies the location of each of the
+eight tiles in one of the nine squares. For efficiency, it is also
+useful to include a location for theblank.
+operators: blank moves left, right, up, or down.
+goal test: as in figure
+path cost: length of path
+S
+1994
+Richard,Philip
+(AIUB)
+AIUB2024
+11/44
+
+===== PAGE 77 =====
+Example -The 8-queensproblem
+The goal of this problem is to place 8 queens on the board so that
+none can attack the others. The following is not a solution!
+不
+goal test: 8 queens on board, none attacked
+path cost: irrelevant
+PRAESIOIUM
+1994
+Richard,Philip
+(AIUB)
+AI
+AIUB2024
+12/44

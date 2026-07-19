@@ -1,0 +1,8 @@
+PartA (30 mins)Mark:20
+1.a)Pertorm Uniform Cost Search(UCS) starting from
+node A with the goal ofreaching node J.ifpriority
+same for different nodes,tie break using alphabetical
+order.
+(b) Draw the schematic diagram ofaUtilits-Based
+Agent and deseribeitsworkingprocedure
+G6a

@@ -1,0 +1,56 @@
+Part-B
+Answer bothQuestion 1 and Question 2.
+Answer any four from Question 2.
+Answerathe followingquestions fromQuestion1
+[1x20]=20
+a) Consider the graph on the right,
+10
+destinationnodeGstaringfromnde
+S.Node (A,B, C, D and E} are the
+intermediate nodes.Your task is to
+find the path from S to the destination
+nodeGwiththe leastcmulative cost
+using Uniform Cost Search. Show the
+steps of serehingthbestpath.
+b)ConsidethegaphiveninquestionolvethsoblemwhereisthestardeandGis10
+thismd
+[4x15=60]
+Answer any four from Question 2.
+15
+a）Coiiststng
+Gisthegoal staein thegph.Th
+heuristic value h（n） is given in square
+boxes nnd the step costs arc given in
+the edgesConstrut theehreet
+find the least cost pathfrom the start
+state Sto.thegoal state Gusing A
+search for thc given graph. Clearly
+mention the expand sequencc and,
+path with path cost.
+b）ExlainComleesndOpilppisfltrativeDpnngachortm.
+15
+)Describe theworkingprodurefa tilty Based Agent and drwits schematic dara
+15
+d)Apply the alpha-beta pruning
+A
+MAX
+15
+sideand showthe serchtree that
+slgorithm to the gnme tree given right-
+?
+MIN
+would bbuiltbythislgorithmMae
+sure that you show where the alpha
+andbetclidndh
+?
+MAX
+prtsfthhada
+result:
+M
+N
+e(DecibetheTuringTestthatcan beusedtotesthActing hmanlyperspecive
+DevpdinfttvanRothd
+15
+ddn
+Spring2023-24CSC3217ArificialIntelligenceand Expert System
+Page2

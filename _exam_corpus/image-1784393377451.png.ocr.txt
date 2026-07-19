@@ -1,0 +1,39 @@
+AMERICANINTERNATIONALUNIVERSITY-BANGLADESH
+SETA
+Faculty of Science and Technology
+Department of Computer Science
+CSC 3217 ArtificialIntelligence and Expert System (Section:ALL)
+Mid Term Examination
+Total Marks:100
+Fall 2025-26
+Moderator:Supta Richard Philip
+Time:2hours
+Convenor: Shakila Rahman
+General Instructions:
+L.Allqestionsare aliged with theOBE progamoucomes
+lL.Rotar the qoestion paper along with the answer serip.
+reachapecifc destiation.n the3x3gridherobot canmve left,right,
+up,and down and start in location S (2,I and the goal is location G(3,3)
+The black location indicates there is a walland robot cannot move in that
+location. Solve the problem using Breadth-First Search (BFS）and Depth
+First Search (DFS).
+Clearly show the following:Frontier updates at each step,explored set,
+Expanded tree structure,Final path from S to G
+Figure1:3x3Maze
+threersngedinaw.Throbot canperfo t followingactionseachwithaassociatd
+ove Left:Cost=5
+Move Right:Cest=10
+Clean:Cost=15
+laitiaRly:
+Oe he mdlle room is clean (Clean rooms are denoted as blank）
+Theobot（R）is psitioned in themiddleroom
+The lett and nght rooms are dity (D）
+Tho gal ofte agent is to clean allrooms.
+a）Draw the state space gaph
+b）Delnewher hisaen'senvirnment issingleormut-agentfullyor parially observable
+pslsttirdaicnddtmiistcrchast.
+)Usingiform CostSearch(UCS）,finda soltin （ie.,a sequenceofactions）ifoneexists.Show
+the expanded tree with stepwise cost evaluation.
+10
+25-26Csc3217Atfcal lnteligence andExpertSystem
+Page1

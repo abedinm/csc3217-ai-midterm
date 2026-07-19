@@ -1,0 +1,863 @@
+<title>CSC 3217 Midterm — Cram Guide</title>
+<style>
+  :root{
+    --paper:#e9ecef; --card:#ffffff; --card2:#f4f6f8;
+    --ink:#20242c; --ink-soft:#586172; --ink-faint:#8b94a3;
+    --line:#d3d9e0; --line-soft:#e4e8ee;
+    --blue:#1668b3; --blue-bg:#e7f0fa;
+    --red:#c8382f; --red-bg:#fbe9e7;
+    --green:#2c8656; --green-bg:#e6f4ec;
+    --amber:#c07d12; --amber-bg:#faf0dc;
+    --code-bg:#f2f5f8;
+    --sans:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+    --mono:"Cascadia Code",Consolas,"SF Mono",ui-monospace,monospace;
+    --maxw:1180px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#14171c; --card:#1c2027; --card2:#22272f;
+      --ink:#e8eaee; --ink-soft:#a2abb8; --ink-faint:#727b8a;
+      --line:#2d333d; --line-soft:#262b33;
+      --blue:#5aa2e6; --blue-bg:#15263a;
+      --red:#eb7168; --red-bg:#331a18;
+      --green:#5cc78a; --green-bg:#152b20;
+      --amber:#e0a844; --amber-bg:#2e2410;
+      --code-bg:#171b21;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171c; --card:#1c2027; --card2:#22272f;
+    --ink:#e8eaee; --ink-soft:#a2abb8; --ink-faint:#727b8a;
+    --line:#2d333d; --line-soft:#262b33;
+    --blue:#5aa2e6; --blue-bg:#15263a;
+    --red:#eb7168; --red-bg:#331a18;
+    --green:#5cc78a; --green-bg:#152b20;
+    --amber:#e0a844; --amber-bg:#2e2410;
+    --code-bg:#171b21;
+  }
+  :root[data-theme="light"]{
+    --paper:#e9ecef; --card:#ffffff; --card2:#f4f6f8;
+    --ink:#20242c; --ink-soft:#586172; --ink-faint:#8b94a3;
+    --line:#d3d9e0; --line-soft:#e4e8ee;
+    --blue:#1668b3; --blue-bg:#e7f0fa;
+    --red:#c8382f; --red-bg:#fbe9e7;
+    --green:#2c8656; --green-bg:#e6f4ec;
+    --amber:#c07d12; --amber-bg:#faf0dc;
+    --code-bg:#f2f5f8;
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+  /* layout */
+  .shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:34px;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  nav.toc{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:26px 0 40px;font-family:var(--sans)}
+  nav.toc h4{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:18px 0 8px}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;font-size:13.5px;padding:4px 10px;border-left:2px solid transparent;border-radius:0 4px 4px 0;transition:.15s}
+  nav.toc a:hover{color:var(--blue);background:var(--card);border-left-color:var(--blue)}
+  main{padding-bottom:80px;min-width:0}
+
+  /* header */
+  header.top{padding:40px 0 26px;border-bottom:1px solid var(--line)}
+  .kicker{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  h1{font-family:var(--sans);font-weight:800;letter-spacing:-.02em;font-size:clamp(30px,5vw,46px);line-height:1.04;margin:12px 0 10px;text-wrap:balance}
+  .sub{font-size:17px;color:var(--ink-soft);max-width:62ch}
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;font-family:var(--sans)}
+  .facts span{font-size:12.5px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--ink-soft)}
+  .facts b{color:var(--ink)}
+
+  section{padding:34px 0;border-bottom:1px solid var(--line-soft)}
+  h2{font-family:var(--sans);font-weight:800;font-size:clamp(21px,3vw,27px);letter-spacing:-.01em;margin:0 0 6px;scroll-margin-top:16px;display:flex;align-items:baseline;gap:12px;text-wrap:balance}
+  h2 .num{font-size:14px;color:var(--blue);font-weight:700;font-variant-numeric:tabular-nums}
+  h3{font-family:var(--sans);font-weight:700;font-size:17px;margin:26px 0 8px;color:var(--ink)}
+  h4{font-family:var(--sans);font-weight:700;font-size:13.5px;margin:0 0 8px;letter-spacing:.02em}
+  p{margin:10px 0}
+  .lead{color:var(--ink-soft);font-size:16px;max-width:70ch}
+  a.inline{color:var(--blue)}
+
+  /* cards & callouts */
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .method{background:var(--blue-bg);border:1px solid color-mix(in srgb,var(--blue) 30%,transparent);border-radius:12px;padding:18px 22px;margin:16px 0}
+  .method h4{color:var(--blue)}
+  .method ol{margin:6px 0;padding-left:22px}
+  .method li{margin:6px 0}
+  .warn{background:var(--red-bg);border-left:3px solid var(--red);border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .warn b{color:var(--red)}
+  .good{background:var(--green-bg);border-left:3px solid var(--green);border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .good b{color:var(--green)}
+  .note{background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:6px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+  .note b{color:var(--amber)}
+
+  code{font-family:var(--mono);font-size:.9em;background:var(--code-bg);padding:.1em .4em;border-radius:4px}
+  .trace{font-family:var(--mono);font-size:13px;line-height:1.7;background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;overflow-x:auto}
+  .trace .step{white-space:pre;display:block}
+  .trace .pop{color:var(--blue);font-weight:700}
+  .trace .goal{color:var(--green);font-weight:700}
+  .trace .cut{color:var(--red);font-weight:700}
+  .mono{font-family:var(--mono)}
+
+  /* tables */
+  .tbl{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;font-family:var(--sans)}
+  .tbl th,.tbl td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  .tbl th{background:var(--card2);font-weight:700;font-size:12.5px;letter-spacing:.02em}
+  .tbl td .mono,.tbl td code{font-size:12.5px}
+  .yes{color:var(--green);font-weight:700}
+  .no{color:var(--red);font-weight:700}
+  .maybe{color:var(--amber);font-weight:700}
+  .tblwrap{overflow-x:auto}
+
+  /* priority tiers */
+  .tier{border-radius:12px;padding:16px 20px;margin:14px 0;border:1px solid var(--line)}
+  .tier .tag{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:999px;color:#fff;display:inline-block}
+  .t1{background:var(--green-bg);border-color:color-mix(in srgb,var(--green) 35%,transparent)}
+  .t1 .tag{background:var(--green)}
+  .t2{background:var(--blue-bg);border-color:color-mix(in srgb,var(--blue) 30%,transparent)}
+  .t2 .tag{background:var(--blue)}
+  .t3{background:var(--amber-bg);border-color:color-mix(in srgb,var(--amber) 32%,transparent)}
+  .t3 .tag{background:var(--amber)}
+  .tier ul{margin:10px 0 2px;padding-left:20px;font-family:var(--sans);font-size:14.5px}
+  .tier li{margin:5px 0}
+  .tier li b{color:var(--ink)}
+
+  /* svg graph */
+  .figwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px;margin:16px 0;overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto;margin:0 auto}
+  .gnode{fill:var(--card2);stroke:var(--ink-soft);stroke-width:2}
+  .gnode.start{fill:var(--blue-bg);stroke:var(--blue)}
+  .gnode.goal{fill:var(--green-bg);stroke:var(--green)}
+  .glabel{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:16px;text-anchor:middle;dominant-baseline:central}
+  .gedge{stroke:var(--ink-soft);stroke-width:1.8;fill:none}
+  .gcost{fill:var(--ink);font-family:var(--mono);font-size:13px;font-weight:700;text-anchor:middle}
+  .gcost-bg{fill:var(--card)}
+  .gh{fill:var(--amber);font-family:var(--mono);font-size:11.5px;font-weight:700;text-anchor:middle}
+
+  .puzzle{display:inline-grid;grid-template-columns:repeat(3,38px);gap:3px;font-family:var(--mono);font-weight:700;margin:6px 14px 6px 0;vertical-align:middle}
+  .puzzle span{width:38px;height:38px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--line);border-radius:5px;font-size:16px}
+  .puzzle span.blank{background:transparent;border-style:dashed}
+  .puzzle span.hit{background:var(--red-bg);border-color:var(--red);color:var(--red)}
+  .pzrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0}
+  .arrow{font-family:var(--sans);font-size:22px;color:var(--ink-faint);margin:0 4px}
+
+  .pill{font-family:var(--sans);font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:999px;display:inline-block}
+  .pill.b{background:var(--blue-bg);color:var(--blue)}
+  .pill.g{background:var(--green-bg);color:var(--green)}
+  .pill.r{background:var(--red-bg);color:var(--red)}
+  .pill.a{background:var(--amber-bg);color:var(--amber)}
+
+  ul.clean{padding-left:20px}
+  ul.clean li{margin:6px 0}
+  dl.defs{margin:10px 0}
+  dl.defs dt{font-family:var(--sans);font-weight:700;color:var(--ink);margin-top:12px}
+  dl.defs dd{margin:2px 0 0;color:var(--ink-soft)}
+
+  .schema{font-family:var(--mono);font-size:12.5px;white-space:pre;background:var(--code-bg);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;line-height:1.5}
+
+  .backtop{position:fixed;right:18px;bottom:18px;background:var(--blue);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;text-decoration:none;padding:9px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.2);opacity:.92}
+  .backtop:hover{opacity:1}
+
+  @media (max-width:860px){
+    .shell{grid-template-columns:1fr;gap:0}
+    nav.toc{position:static;height:auto;border-bottom:1px solid var(--line);margin-bottom:6px}
+    nav.toc .toc-inner{columns:2;column-gap:18px}
+    .grid2,.grid3{grid-template-columns:1fr}
+  }
+  @media print{
+    nav.toc,.backtop{display:none}
+    .shell{display:block}
+    body{background:#fff}
+    section{break-inside:avoid}
+  }
+</style>
+
+<div class="shell">
+  <nav class="toc">
+    <div class="toc-inner">
+      <h4>Start here</h4>
+      <a href="#map">What to study first</a>
+      <a href="#graph">The one graph, 5 ways</a>
+      <h4>Search algorithms</h4>
+      <a href="#ucs">Uniform Cost (UCS)</a>
+      <a href="#bfsdfs">BFS &amp; DFS</a>
+      <a href="#astar">A* search</a>
+      <a href="#gbfs">Greedy (GBFS)</a>
+      <a href="#dlsids">DLS &amp; IDS</a>
+      <h4>Applied</h4>
+      <a href="#puzzle">8-puzzle heuristics</a>
+      <a href="#admiss">Admissible / consistent</a>
+      <a href="#alphabeta">Alpha-beta pruning</a>
+      <a href="#formal">Formal problem + state space</a>
+      <h4>Theory / short answers</h4>
+      <a href="#props">Comparison table</a>
+      <a href="#peas">PEAS</a>
+      <a href="#env">Environment types</a>
+      <a href="#agents">Agent types</a>
+      <a href="#turing">Turing test &amp; AI approaches</a>
+      <a href="#shorts">Quick short-answers</a>
+      <a href="#checklist">Exam-morning checklist</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="top" id="top">
+      <div class="kicker">CSC 3217 · Artificial Intelligence &amp; Expert System · Midterm</div>
+      <h1>The night-before cram guide</h1>
+      <p class="sub">Every past paper (Fall 2025-26 → Spring 2023-24) asks the <b>same ~10 question types</b>. Learn the method for each, practice the worked examples, memorize the theory boxes. That is the whole exam.</p>
+      <div class="facts">
+        <span><b>100</b> marks</span>
+        <span><b>2</b> hours</span>
+        <span>Question&nbsp;<b>5</b> is mandatory (CO3)</span>
+        <span>Answer Q5 on the question paper</span>
+        <span>Calculator allowed on some sets</span>
+      </div>
+    </header>
+
+    <!-- ============ MAP ============ -->
+    <section id="map">
+      <h2><span class="num">01</span> What to study first</h2>
+      <p class="lead">Ranked by how often it shows up across the papers I read. If you only have a few hours, do Tier 1 until you can do it without looking, then Tier 2.</p>
+
+      <div class="tier t1">
+        <span class="tag">Tier 1 · appears every time</span>
+        <ul>
+          <li><b>Uniform Cost Search (UCS)</b> — least-cost path on a weighted graph, showing frontier + explored + path + cost.</li>
+          <li><b>BFS &amp; DFS</b> — simulate frontier/explored/tree/path/cost, insert nodes <b>alphabetically</b>, then explain completeness &amp; optimality.</li>
+          <li><b>A* search</b> — <code>f(n)=g(n)+h(n)</code>, find path + cost from a graph with heuristics.</li>
+          <li><b>PEAS description</b> — for a given robot (candy/apple sorter, vacuum, water purifier). Free marks.</li>
+          <li><b>Environment properties</b> — classify along the 7 dimensions.</li>
+        </ul>
+      </div>
+
+      <div class="tier t2">
+        <span class="tag">Tier 2 · very likely</span>
+        <ul>
+          <li><b>Greedy Best-First Search (GBFS)</b> — expand on <code>h(n)</code> only.</li>
+          <li><b>8-puzzle heuristics</b> — h₁ = misplaced tiles, h₂ = Manhattan distance; then run GBFS.</li>
+          <li><b>Formal problem definition</b> — initial state, actions, transition model, goal test, path cost + <b>state-space size</b> &amp; <b>branching factor</b>.</li>
+          <li><b>Admissibility &amp; consistency</b> — "Is it possible / optimal to solve with A*? Explain."</li>
+          <li><b>Alpha-beta pruning</b> — update α/β on a game tree, mark the cuts.</li>
+        </ul>
+      </div>
+
+      <div class="tier t3">
+        <span class="tag">Tier 3 · shows up sometimes (short answers)</span>
+        <ul>
+          <li><b>Agent types</b> + schematic diagram — goal-based, utility-based, model-based.</li>
+          <li><b>Turing Test / Acting Humanly / Thinking Rationally.</b></li>
+          <li><b>DLS &amp; IDS</b> — depth-limited and iterative deepening.</li>
+          <li><b>Well-defined problem</b> (8-puzzle), <b>tree vs graph search</b>, the <code>f=(2−w)g+w·h</code> trick, True/False + MCQ.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ THE GRAPH ============ -->
+    <section id="graph">
+      <h2><span class="num">02</span> The one graph, solved five ways</h2>
+      <p class="lead">Learn the five search algorithms on a <b>single</b> graph so you see exactly how they differ. Same start <span class="mono">S</span>, same goal <span class="mono">G</span>, same edge costs. Only the <b>rule for which node to expand next</b> changes.</p>
+
+      <div class="figwrap">
+        <svg viewBox="0 0 600 340" role="img" aria-label="Weighted directed graph from S to G">
+          <defs>
+            <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"/>
+            </marker>
+          </defs>
+          <!-- edges -->
+          <line class="gedge" x1="82" y1="156" x2="182" y2="92" marker-end="url(#ah)"/>
+          <line class="gedge" x1="82" y1="184" x2="182" y2="248" marker-end="url(#ah)"/>
+          <line class="gedge" x1="200" y1="102" x2="200" y2="238" marker-end="url(#ah)"/>
+          <line class="gedge" x1="222" y1="90" x2="342" y2="122" marker-end="url(#ah)"/>
+          <line class="gedge" x1="221" y1="252" x2="342" y2="140" marker-end="url(#ah)"/>
+          <line class="gedge" x1="222" y1="262" x2="340" y2="252" marker-end="url(#ah)"/>
+          <line class="gedge" x1="360" y1="152" x2="360" y2="228" marker-end="url(#ah)"/>
+          <line class="gedge" x1="382" y1="138" x2="520" y2="164" marker-end="url(#ah)"/>
+          <line class="gedge" x1="380" y1="244" x2="520" y2="180" marker-end="url(#ah)"/>
+          <!-- cost labels -->
+          <g><rect class="gcost-bg" x="122" y="116" width="16" height="16"/><text class="gcost" x="130" y="128">1</text></g>
+          <g><rect class="gcost-bg" x="122" y="208" width="16" height="16"/><text class="gcost" x="130" y="220">4</text></g>
+          <g><rect class="gcost-bg" x="206" y="162" width="16" height="16"/><text class="gcost" x="214" y="174">2</text></g>
+          <g><rect class="gcost-bg" x="272" y="98" width="16" height="16"/><text class="gcost" x="280" y="110">5</text></g>
+          <g><rect class="gcost-bg" x="270" y="184" width="16" height="16"/><text class="gcost" x="278" y="196">1</text></g>
+          <g><rect class="gcost-bg" x="272" y="248" width="16" height="16"/><text class="gcost" x="280" y="260">5</text></g>
+          <g><rect class="gcost-bg" x="366" y="182" width="16" height="16"/><text class="gcost" x="374" y="194">3</text></g>
+          <g><rect class="gcost-bg" x="442" y="140" width="16" height="16"/><text class="gcost" x="450" y="152">7</text></g>
+          <g><rect class="gcost-bg" x="442" y="196" width="16" height="16"/><text class="gcost" x="450" y="208">2</text></g>
+          <!-- nodes -->
+          <circle class="gnode start" cx="60" cy="170" r="22"/><text class="glabel" x="60" y="170">S</text>
+          <text class="gh" x="60" y="205">h=7</text>
+          <circle class="gnode" cx="200" cy="80" r="22"/><text class="glabel" x="200" y="80">A</text>
+          <text class="gh" x="200" y="47">h=6</text>
+          <circle class="gnode" cx="200" cy="260" r="22"/><text class="glabel" x="200" y="260">B</text>
+          <text class="gh" x="200" y="295">h=4</text>
+          <circle class="gnode" cx="360" cy="130" r="22"/><text class="glabel" x="360" y="130">C</text>
+          <text class="gh" x="360" y="97">h=4</text>
+          <circle class="gnode" cx="360" cy="250" r="22"/><text class="glabel" x="360" y="250">D</text>
+          <text class="gh" x="360" y="285">h=2</text>
+          <circle class="gnode goal" cx="540" cy="170" r="22"/><text class="glabel" x="540" y="170">G</text>
+          <text class="gh" x="540" y="205">h=0</text>
+        </svg>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft);font-family:var(--sans)">
+        Edges (directed): S→A=1, S→B=4, A→B=2, A→C=5, B→C=1, B→D=5, C→D=3, C→G=7, D→G=2.
+        Heuristics (straight-line guess to G): h(S)=7, h(A)=6, h(B)=4, h(C)=4, h(D)=2, h(G)=0.
+      </p>
+
+      <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Algorithm</th><th>Expands node with lowest…</th><th>Path found</th><th>Cost</th><th>Optimal?</th></tr></thead>
+        <tbody>
+          <tr><td><b>UCS</b></td><td><code>g(n)</code> = cost so far</td><td class="mono">S→A→B→C→D→G</td><td class="mono">9</td><td><span class="yes">Yes ✓</span></td></tr>
+          <tr><td><b>BFS</b></td><td>shallowest (fewest edges)</td><td class="mono">S→A→C→G</td><td class="mono">13</td><td><span class="no">No</span> — fewest edges ≠ cheapest</td></tr>
+          <tr><td><b>DFS</b></td><td>deepest (last-pushed pops first)</td><td class="mono">S→B→D→G</td><td class="mono">11</td><td><span class="no">No guarantee</span></td></tr>
+          <tr><td><b>GBFS</b></td><td><code>h(n)</code> = guess to goal</td><td class="mono">S→B→D→G</td><td class="mono">11</td><td><span class="no">No</span> — ignores path cost</td></tr>
+          <tr><td><b>A*</b></td><td><code>f(n)=g(n)+h(n)</code></td><td class="mono">S→A→B→C→D→G</td><td class="mono">9</td><td><span class="yes">Yes ✓</span> (h admissible)</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>The one-line summary:</b> UCS looks backward (cost so far), GBFS looks forward (guess to go), A* looks both ways, BFS/DFS ignore cost entirely. That single idea answers half the exam.</div>
+    </section>
+
+    <!-- ============ UCS ============ -->
+    <section id="ucs">
+      <h2><span class="num">03</span> Uniform Cost Search (UCS)</h2>
+      <p class="lead">Expand the frontier node with the <b>smallest cumulative cost g(n)</b>. It is Dijkstra's algorithm. This is the single most-asked question in the course.</p>
+
+      <div class="method">
+        <h4>Method — write it exactly like this</h4>
+        <ol>
+          <li>Keep a <b>frontier</b> as a priority queue of paths, ordered by total cost <code>g</code>. Start with <code>S:0</code>.</li>
+          <li>Pop the <b>cheapest</b> path. If its last node is the goal → <b>stop</b>, report path + cost.</li>
+          <li>Otherwise move that node to the <b>explored set</b> and add each neighbour with <code>g = g(parent) + edge</code>.</li>
+          <li>If a node is already in the frontier with a higher cost, <b>keep the cheaper</b> one.</li>
+          <li>Repeat. Show the frontier and explored set at <b>every</b> step — that's where the marks are.</li>
+        </ol>
+      </div>
+
+      <h3>Worked trace (the graph above)</h3>
+      <div class="trace">
+<span class="step">Frontier {S:0}                       Explored { }</span>
+<span class="step"><span class="pop">pop S(0)</span>  → add A:1, B:4         Explored {S}</span>
+<span class="step">Frontier {A:1, B:4}</span>
+<span class="step"><span class="pop">pop A(1)</span>  → B:1+2=3 (beats 4), C:1+5=6</span>
+<span class="step">Frontier {B:3, C:6}                  Explored {S,A}</span>
+<span class="step"><span class="pop">pop B(3)</span>  → C:3+1=4 (beats 6), D:3+5=8</span>
+<span class="step">Frontier {C:4, D:8}                  Explored {S,A,B}</span>
+<span class="step"><span class="pop">pop C(4)</span>  → D:4+3=7 (beats 8), G:4+7=11</span>
+<span class="step">Frontier {D:7, G:11}                 Explored {S,A,B,C}</span>
+<span class="step"><span class="pop">pop D(7)</span>  → G:7+2=9 (beats 11)</span>
+<span class="step">Frontier {G:9}                       Explored {S,A,B,C,D}</span>
+<span class="step"><span class="goal">pop G(9) → GOAL</span></span>
+<span class="step"></span>
+<span class="step">Path: S → A → B → C → D → G     Cost = 9</span>
+      </div>
+      <div class="warn"><b>Trap:</b> UCS is goal-tested <b>when you pop it off the frontier</b>, not when you first generate it. If you'd stopped when G was first added at cost 11, you'd get the wrong answer. Pop-then-test.</div>
+
+      <div class="note"><b>Vacuum-cleaner version (fully-text problem, no graph given).</b> States = (robot room; dirt of L,R). Actions Left=5, Right=10, Clean=15. Start = robot Middle, L&amp;R dirty. Cheapest plan: <code>Right(10) → Clean(15) → Left(5) → Left(5) → Clean(15) = 50</code> — go <b>right first</b>, because the two return moves are cheap Lefts. The tempting left-first plan costs 55 (two expensive Rights back). Optimal cost is <b>50</b>; full UCS trace is Drill 5 in the trainer.</div>
+    </section>
+
+    <!-- ============ BFS DFS ============ -->
+    <section id="bfsdfs">
+      <h2><span class="num">04</span> BFS &amp; DFS</h2>
+      <p class="lead">Both ignore edge cost for choosing the next node — they differ only in <b>order</b>. Insert successors <b>alphabetically</b> (the papers always say so). Show frontier, explored set, tree, path, and path-cost.</p>
+
+      <div class="grid2">
+        <div class="method">
+          <h4>BFS — breadth first (FIFO queue)</h4>
+          <ol>
+            <li>Frontier is a <b>queue</b> (first-in-first-out).</li>
+            <li>Expand the front node; add unseen neighbours (alphabetical) to the <b>back</b>.</li>
+            <li>Explores <b>level by level</b>. First goal found = shallowest.</li>
+          </ol>
+        </div>
+        <div class="method">
+          <h4>DFS — depth first (LIFO stack)</h4>
+          <ol>
+            <li>Frontier is a <b>stack</b> (last-in-first-out).</li>
+            <li>Always dive into the first (alphabetical) child before its siblings.</li>
+            <li>Explores one branch <b>all the way down</b>, then backtracks.</li>
+          </ol>
+        </div>
+      </div>
+
+      <h3>Worked trace (same graph)</h3>
+      <div class="grid2">
+        <div>
+          <h4>BFS</h4>
+          <div class="trace">
+<span class="step">Frontier: S</span>
+<span class="step"> → S-A, S-B</span>
+<span class="step"> → S-B, S-A-C</span>
+<span class="step"> → S-A-C, S-B-D</span>
+<span class="step"> → S-B-D, <span class="goal">S-A-C-G</span></span>
+<span class="step">Explored: S, A, B, C</span>
+<span class="step">Path: S-A-C-G   Cost = 1+5+7 = 13</span>
+          </div>
+        </div>
+        <div>
+          <h4>DFS</h4>
+          <div class="trace">
+<span class="step">Frontier (stack): S</span>
+<span class="step"> → push A, B → pop B (last pushed)</span>
+<span class="step"> → push C, D → pop D → G generated</span>
+<span class="step">Explored: S, B, D</span>
+<span class="step">Path: <span class="goal">S-B-D-G</span></span>
+<span class="step">Cost = 4+5+2 = 11</span>
+          </div>
+          <p style="font-size:12.5px;color:var(--ink-faint);margin:6px 0 0">Convention (official answer scripts): push children alphabetically — the alphabetically <b>last</b> child pops first. State your convention on the script.</p>
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft)">BFS reaches G in 3 edges (S-A-C-G) but pays 13. DFS plunges to depth 5. Neither <em>chose</em> the cheap path — they don't look at cost.</p>
+
+      <h3 id="complete">Completeness &amp; optimality — the memorized answer</h3>
+      <div class="grid2">
+        <div class="good">
+          <b>BFS is complete and optimal*</b><br>
+          <b>Complete:</b> it searches level by level, so even with an infinite tree it will always reach a goal if one exists.<br>
+          <b>Optimal:</b> the first goal it finds is the shallowest — so it's optimal <b>only when every step costs the same</b> (unit cost). With varying costs, use UCS instead.
+        </div>
+        <div class="warn">
+          <b>DFS is neither complete nor optimal</b><br>
+          <b>Not complete:</b> on an infinite/deep branch it dives forever and may never reach the goal.<br>
+          <b>Not optimal:</b> it returns the first path it stumbles into, which may be far more expensive than the best one.
+        </div>
+      </div>
+      <p style="font-size:13px;color:var(--ink-faint)">*BFS space complexity O(bᵈ) is its real weakness — it stores the whole frontier. DFS wins on memory: O(bd).</p>
+    </section>
+
+    <!-- ============ A STAR ============ -->
+    <section id="astar">
+      <h2><span class="num">05</span> A* Search</h2>
+      <p class="lead">Expand the node with the smallest <code>f(n) = g(n) + h(n)</code> — cost so far <b>plus</b> heuristic guess to the goal. Best of UCS and Greedy combined.</p>
+
+      <div class="method">
+        <h4>Method</h4>
+        <ol>
+          <li>For each frontier node compute <code>f = g + h</code>.</li>
+          <li>Expand the smallest <code>f</code>. Break ties however the paper says (often alphabetical).</li>
+          <li>Goal-test when popped. Keep the cheaper copy of repeated nodes.</li>
+          <li>Write each node as <code>g + h = f</code> so the marker sees your working.</li>
+        </ol>
+      </div>
+
+      <h3>Worked trace (same graph)</h3>
+      <div class="trace">
+<span class="step">S: 0+7=7</span>
+<span class="step"><span class="pop">expand S</span> → A:1+6=7 , B:4+4=8</span>
+<span class="step"><span class="pop">expand A(7)</span> → B:3+4=7 (beats 8) , C:6+4=10</span>
+<span class="step"><span class="pop">expand B(7)</span> → C:4+4=8 (beats 10) , D:8+2=10</span>
+<span class="step"><span class="pop">expand C(8)</span> → D:7+2=9 (beats 10) , G:11+0=11</span>
+<span class="step"><span class="pop">expand D(9)</span> → G:9+0=9 (beats 11)</span>
+<span class="step"><span class="goal">expand G(9) → GOAL</span></span>
+<span class="step"></span>
+<span class="step">Path: S → A → B → C → D → G     Cost = 9  (optimal)</span>
+      </div>
+      <div class="good"><b>Why A* here is optimal:</b> the heuristic never over-estimates the true remaining cost (it's <b>admissible</b>) — so A* is guaranteed to return the cheapest path. See §09.</div>
+
+      <div class="note"><b>Also seen: the GBFS-then-actual-cost combo (Fall 2024-25 Q5).</b> With h(S)=22, h(A)=20, h(B)=8, h(C)=14, h(D)=11, h(G)=0: run A* on <code>g+h</code>, and separately run GBFS on <code>h</code> alone. They often reach the goal by <em>different</em> paths — that contrast is the point of the question.</div>
+    </section>
+
+    <!-- ============ GBFS ============ -->
+    <section id="gbfs">
+      <h2><span class="num">06</span> Greedy Best-First Search (GBFS)</h2>
+      <p class="lead">Expand the node with the smallest <b>h(n)</b> only — pure "how close does it <em>look</em>." Fast, but blind to how much you've already spent, so not optimal.</p>
+
+      <h3>Worked trace (same graph)</h3>
+      <div class="trace">
+<span class="step">expand S (h=7) → A:h6 , B:h4        pick B (lowest h)</span>
+<span class="step">expand B (h=4) → C:h4 , D:h2         pick D</span>
+<span class="step">expand D (h=2) → G:h0                pick G</span>
+<span class="step"><span class="goal">expand G → GOAL</span></span>
+<span class="step">Path: S → B → D → G     Cost = 4+5+2 = 11  (not optimal — A* found 9)</span>
+      </div>
+      <p>Present it as an <b>open list / closed list</b> if the paper asks (open = frontier, closed = explored). Same idea, different words.</p>
+      <div class="warn"><b>Don't confuse GBFS with A*.</b> GBFS ranks by <code>h</code>. A* ranks by <code>g+h</code>. One letter of difference, but GBFS drops optimality.</div>
+    </section>
+
+    <!-- ============ DLS IDS ============ -->
+    <section id="dlsids">
+      <h2><span class="num">07</span> Depth-Limited (DLS) &amp; Iterative Deepening (IDS)</h2>
+      <div class="grid2">
+        <div class="card">
+          <h4>DLS — Depth-Limited Search</h4>
+          <p style="margin-top:4px">DFS with a hard depth limit <code>ℓ</code>. Nodes deeper than <code>ℓ</code> are never expanded.</p>
+          <ul class="clean">
+            <li><b>Q style:</b> "list the order nodes are evaluated, depth limit = 3." Just do DFS but stop descending past level 3.</li>
+            <li><span class="no">Incomplete</span> if the goal is deeper than <code>ℓ</code>. <span class="no">Not optimal.</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>IDS — Iterative Deepening</h4>
+          <p style="margin-top:4px">Run DLS with limit 0, then 1, then 2, … until the goal is found.</p>
+          <ul class="clean">
+            <li><b>Complete</b> (finite b) and <b>optimal</b> for unit step costs — like BFS.</li>
+            <li>Uses DFS memory <code>O(bd)</code> — like DFS.</li>
+            <li>Re-expanding upper levels is cheap; it's the <b>best uninformed search</b> when you don't know the depth.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8 PUZZLE ============ -->
+    <section id="puzzle">
+      <h2><span class="num">08</span> 8-puzzle heuristics</h2>
+      <p class="lead">Two heuristics you must be able to compute by hand: <b>h₁ = number of misplaced tiles</b>, <b>h₂ = sum of Manhattan distances</b>. Never count the blank.</p>
+
+      <div class="pzrow">
+        <div>
+          <h4>Start</h4>
+          <div class="puzzle">
+            <span class="hit">3</span><span>1</span><span>2</span>
+            <span class="hit">4</span><span class="blank"></span><span>5</span>
+            <span>6</span><span>7</span><span>8</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+        <div>
+          <h4>Goal</h4>
+          <div class="puzzle">
+            <span class="blank"></span><span>1</span><span>2</span>
+            <span>3</span><span>4</span><span>5</span>
+            <span>6</span><span>7</span><span>8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h4>h₁ — misplaced tiles</h4>
+          <p>Compare each tile to its goal cell. Only tiles <b>3</b> and <b>4</b> are out of place (highlighted).</p>
+          <p class="mono" style="font-size:15px"><b>h₁ = 2</b></p>
+        </div>
+        <div class="card">
+          <h4>h₂ — Manhattan distance</h4>
+          <p>For each misplaced tile, add |Δrow| + |Δcol| to its goal cell.</p>
+          <ul class="clean" style="font-size:14px">
+            <li>tile 3: (1,1)→(2,1) = 1</li>
+            <li>tile 4: (2,1)→(2,2) = 1</li>
+          </ul>
+          <p class="mono" style="font-size:15px"><b>h₂ = 2</b></p>
+        </div>
+      </div>
+
+      <h3>Then run GBFS on h₁</h3>
+      <p>Move the <b>blank</b> (Up/Down/Left/Right), compute h₁ of each result, take the smallest.</p>
+      <div class="pzrow">
+        <div class="puzzle">
+          <span class="hit">3</span><span>1</span><span>2</span>
+          <span class="hit">4</span><span class="blank"></span><span>5</span>
+          <span>6</span><span>7</span><span>8</span>
+        </div>
+        <span class="arrow">→</span>
+        <div>
+          <div style="font-size:12px;color:var(--ink-faint);font-family:var(--sans)">blank Left · h₁=1</div>
+          <div class="puzzle">
+            <span class="hit">3</span><span>1</span><span>2</span>
+            <span class="blank"></span><span>4</span><span>5</span>
+            <span>6</span><span>7</span><span>8</span>
+          </div>
+        </div>
+        <span class="arrow">→</span>
+        <div>
+          <div style="font-size:12px;color:var(--green);font-family:var(--sans)">blank Up · h₁=0 · GOAL</div>
+          <div class="puzzle">
+            <span class="blank"></span><span>1</span><span>2</span>
+            <span>3</span><span>4</span><span>5</span>
+            <span>6</span><span>7</span><span>8</span>
+          </div>
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--ink-soft)">The other three moves (Up/Down/Right from start) all give h₁=3, so greedy rejects them. Solution: <b>Left, Up</b> — 2 moves.</p>
+    </section>
+
+    <!-- ============ ADMISSIBILITY ============ -->
+    <section id="admiss">
+      <h2><span class="num">09</span> Admissible &amp; consistent — "can we use A*? is it optimal?"</h2>
+      <p class="lead">This is the "explain your answer" question that follows a graph. Learn the two definitions and the one-line test.</p>
+
+      <dl class="defs">
+        <dt>Admissible heuristic</dt>
+        <dd><code>h(n) ≤ h*(n)</code> — the heuristic <b>never over-estimates</b> the true cheapest cost from n to the goal. Guarantees A* (tree search) is <b>optimal</b>.</dd>
+        <dt>Consistent (monotonic) heuristic</dt>
+        <dd><code>h(n) ≤ cost(n,n′) + h(n′)</code> for every edge — the estimate never drops by more than the real step. Guarantees A* (graph search) is optimal. <b>Consistent ⇒ admissible</b> (not the reverse).</dd>
+      </dl>
+
+      <div class="good">
+        <b>How to answer "Is it possible to solve this graph with A*?"</b><br>
+        Yes — A* works on any graph with a defined heuristic. It is <b>complete</b> (finds a solution if one exists) and, provided the heuristic is <b>admissible</b>, it is <b>optimal</b>. Then check one or two nodes: e.g. at S, <code>h(S)=7 ≤</code> true cost 9 ✓, so the heuristic doesn't over-estimate → optimal path guaranteed.
+      </div>
+      <div class="note"><b>A* is always complete and optimal — memorize the caveat:</b> "complete and optimal <em>provided the heuristic is admissible</em> (and consistent for graph search)." Examiners want that condition, not just "yes."</div>
+    </section>
+
+    <!-- ============ ALPHA BETA ============ -->
+    <section id="alphabeta">
+      <h2><span class="num">10</span> Alpha-Beta Pruning</h2>
+      <p class="lead">Minimax that skips branches that can't change the result. <b>α</b> = best MAX has guaranteed so far; <b>β</b> = best MIN has guaranteed so far.</p>
+
+      <div class="method">
+        <h4>Rules</h4>
+        <ol>
+          <li>Start every node with <code>α = −∞, β = +∞</code>; pass them down.</li>
+          <li>At a <b>MAX</b> node, raise α to the best child value. At a <b>MIN</b> node, lower β.</li>
+          <li><b>Prune</b> the moment <code>α ≥ β</code> (equivalently <code>β ≤ α</code>): the remaining children of that node are cut — don't evaluate them.</li>
+          <li>Evaluate <b>left to right</b>. Report which leaves were skipped.</li>
+        </ol>
+      </div>
+
+      <h3>Tiny worked example</h3>
+      <div class="schema">        MAX  (root)
+        /        \
+     MIN B      MIN C
+     /  \       /   \
+    3    5     2    (9)  ← pruned
+
+ B: sees 3 → β=3; sees 5 (5&gt;3, MIN keeps 3) → B = 3
+ root MAX: α = 3
+ C: sees 2 → β=2.  Now β(2) ≤ α(3)  → PRUNE the 9.
+ root = max(3, 2) = 3</div>
+      <p>On the big exam tree you do exactly this, left to right, writing each α/β update next to the node and crossing out every pruned branch. In the Fall 2024-25 tree, branches under <b>F</b> and <b>P</b> get pruned because <code>α ≥ β</code> there.</p>
+      <div class="warn"><b>Most-lost marks:</b> forgetting to <b>carry α/β downward</b> to children, and pruning on <code>&gt;</code> only — the cut fires on <code>α ≥ β</code> (equal counts).</div>
+    </section>
+
+    <!-- ============ FORMAL PROBLEM ============ -->
+    <section id="formal">
+      <h2><span class="num">11</span> Formal problem definition + state space</h2>
+      <p class="lead">"Describe this robot task as a search problem." Always the same five components, then two numbers. Template below — swap in whatever robot they give (garden 4×5, wall 12×12, maze 3×3).</p>
+
+      <div class="card">
+        <h4>The five components (garden-watering robot, 4×5 = 20 cells)</h4>
+        <dl class="defs">
+          <dt>Initial state</dt><dd>Robot at its start cell; all 20 squares unwatered.</dd>
+          <dt>Actions</dt><dd>{ Up, Down, Left, Right, Water }.</dd>
+          <dt>Transition model</dt><dd>A move changes the robot's cell (if not off-grid); Water marks the current cell watered.</dd>
+          <dt>Goal test</dt><dd>All 20 squares are watered.</dd>
+          <dt>Path cost</dt><dd>1 per action (total number of actions).</dd>
+        </dl>
+      </div>
+
+      <div class="grid2">
+        <div class="method">
+          <h4>State-space size</h4>
+          <p>= (robot positions) × (watered/not for each cell)</p>
+          <p class="mono" style="font-size:15px">= 20 × 2²⁰ = <b>20,971,520</b></p>
+          <p style="font-size:13px;color:var(--ink-soft)">Wall-painting 12×12 → 144 × 2¹⁴⁴. Maze n cells with no "paint" state → just n reachable cells.</p>
+        </div>
+        <div class="method">
+          <h4>Branching factor</h4>
+          <p>Max number of actions from a state.</p>
+          <p class="mono" style="font-size:15px"><b>b = 5</b></p>
+          <p style="font-size:13px;color:var(--ink-soft)">(4 moves + Water). Fewer at edges/corners. <b>Branching factor</b> = actions per node; <b>state space</b> = total distinct states — don't mix them up, that's a common sub-question.</p>
+        </div>
+      </div>
+
+      <h3>Well-defined problem (the 8-puzzle version)</h3>
+      <div class="good"><b>Yes, the 8-puzzle is well-defined.</b> A problem is well-defined when its <b>initial state, actions, goal test, and path cost</b> are all clearly specified (+ transition model). For the 8-puzzle: initial = the given board; actions = slide blank U/D/L/R; goal test = board equals goal arrangement; path cost = 1 per slide. All unambiguous → well-defined.</div>
+    </section>
+
+    <!-- ============ COMPARISON TABLE ============ -->
+    <section id="props">
+      <h2><span class="num">12</span> Completeness &amp; optimality — one table to memorize</h2>
+      <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Algorithm</th><th>Complete?</th><th>Optimal?</th><th>Time</th><th>Space</th><th>Ranks by</th></tr></thead>
+        <tbody>
+          <tr><td><b>BFS</b></td><td class="yes">Yes</td><td class="maybe">Only if unit cost</td><td class="mono">O(bᵈ)</td><td class="mono">O(bᵈ)</td><td>depth</td></tr>
+          <tr><td><b>DFS</b></td><td class="no">No</td><td class="no">No</td><td class="mono">O(bᵐ)</td><td class="mono">O(bm)</td><td>depth (deep)</td></tr>
+          <tr><td><b>UCS</b></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="mono">O(b^…)</td><td class="mono">large</td><td><code>g(n)</code></td></tr>
+          <tr><td><b>DLS</b></td><td class="no">No (if ℓ&lt;d)</td><td class="no">No</td><td class="mono">O(bˡ)</td><td class="mono">O(bℓ)</td><td>depth ≤ ℓ</td></tr>
+          <tr><td><b>IDS</b></td><td class="yes">Yes</td><td class="maybe">Only if unit cost</td><td class="mono">O(bᵈ)</td><td class="mono">O(bd)</td><td>depth, rising</td></tr>
+          <tr><td><b>GBFS</b></td><td class="no">No</td><td class="no">No</td><td class="mono">O(bᵐ)</td><td class="mono">O(bᵐ)</td><td><code>h(n)</code></td></tr>
+          <tr><td><b>A*</b></td><td class="yes">Yes</td><td class="yes">Yes*</td><td class="mono">expon.</td><td class="mono">large</td><td><code>g+h</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p style="font-size:13px;color:var(--ink-faint)">b = branching factor, d = goal depth, m = max depth, ℓ = depth limit. *A* optimal when h is admissible (tree) / consistent (graph).</p>
+    </section>
+
+    <!-- ============ PEAS ============ -->
+    <section id="peas">
+      <h2><span class="num">13</span> PEAS descriptions</h2>
+      <p class="lead"><b>P</b>erformance measure · <b>E</b>nvironment · <b>A</b>ctuators · <b>S</b>ensors. Almost-free marks — every paper asks for one robot. Four filled examples below cover all of them.</p>
+
+      <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Agent</th><th>Performance</th><th>Environment</th><th>Actuators</th><th>Sensors</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Candy / apple sorting robot</b></td>
+            <td>% sorted into correct jar, speed, few errors, no damage</td>
+            <td>Conveyor belt, jars, the candies/apples, workshop</td>
+            <td>Robotic arm / gripper, belt motor, sorting flaps</td>
+            <td>Camera, colour sensor, barcode / weight sensor</td>
+          </tr>
+          <tr>
+            <td><b>Vacuum-cleaner robot</b></td>
+            <td>Cleanliness, cells cleaned, energy used, time</td>
+            <td>The rooms / floor, dirt, walls, furniture</td>
+            <td>Wheels/motors, suction, brushes</td>
+            <td>Dirt sensor, bump/wall sensor, position sensor</td>
+          </tr>
+          <tr>
+            <td><b>Water-purifying agent</b></td>
+            <td>Water purity, litres/hr, low chemical waste, safety</td>
+            <td>Water tank, pipes, filters, contaminants</td>
+            <td>Valves, pumps, filter controls, chemical dosers</td>
+            <td>Turbidity / pH / TDS sensors, flow &amp; level sensors</td>
+          </tr>
+          <tr>
+            <td><b>Garden-watering robot</b></td>
+            <td>All plants watered, right amount, water saved, time</td>
+            <td>Garden grid, plants, soil, weather</td>
+            <td>Wheels, water nozzle / sprayer, arm</td>
+            <td>Soil-moisture sensor, camera, GPS/position, rain sensor</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="note"><b>Format tip:</b> write it as a labelled list (P: … / E: … / A: … / S: …) or a 4-row table. Two or three concrete items per letter is plenty.</div>
+    </section>
+
+    <!-- ============ ENVIRONMENT ============ -->
+    <section id="env">
+      <h2><span class="num">14</span> Environment properties</h2>
+      <p class="lead">Classify an agent's environment along these dimensions. Define the pair, then pick a side and justify in one line.</p>
+      <div class="tblwrap">
+      <table class="tbl">
+        <thead><tr><th>Dimension</th><th>Meaning</th><th>Vacuum</th><th>Candy sorter</th></tr></thead>
+        <tbody>
+          <tr><td><b>Fully / Partially observable</b></td><td>Can sensors see the whole state at once?</td><td>Partially (only its cell)</td><td>Partially</td></tr>
+          <tr><td><b>Single / Multi-agent</b></td><td>Are other agents acting?</td><td>Single</td><td>Single</td></tr>
+          <tr><td><b>Deterministic / Stochastic</b></td><td>Does an action's result vary?</td><td>Deterministic</td><td>Deterministic (mostly)</td></tr>
+          <tr><td><b>Episodic / Sequential</b></td><td>Do past actions affect the future?</td><td>Sequential</td><td>Episodic (each candy independent)</td></tr>
+          <tr><td><b>Static / Dynamic</b></td><td>Does the world change while thinking?</td><td>Static</td><td>Dynamic (belt keeps moving)</td></tr>
+          <tr><td><b>Discrete / Continuous</b></td><td>Finite distinct states &amp; actions?</td><td>Discrete</td><td>Discrete</td></tr>
+          <tr><td><b>Known / Unknown</b></td><td>Does the agent know the rules?</td><td>Known</td><td>Known</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="warn"><b>Answering "single- or multi-agent, episodic or sequential…?"</b> Give the pair, choose one, add a 4-word reason. E.g. vacuum = "single-agent (no other actors), sequential (dirt state carries over), static, deterministic, partially observable."</div>
+    </section>
+
+    <!-- ============ AGENTS ============ -->
+    <section id="agents">
+      <h2><span class="num">15</span> Agent types (draw the schematic)</h2>
+      <p class="lead">A "draw the schematic and describe" question. All are the agent-program-in-environment box with sensors in, actuators out — they differ by what's <b>inside</b>.</p>
+
+      <div class="schema">  ┌──────────────── AGENT ────────────────┐
+  │                                        │
+  │   State  ──▶  "What the world is       │
+  │     ▲          like now"               │
+  │     │              │                   │
+  │  [Model:          ▼                    │
+  │  how world   [Goals] / [Utility fn]    │
+  │  evolves]          │                   │
+  │     │              ▼                   │
+  │     └──── "What action is best" ───────┼──▶ Actuators
+  │                    ▲                   │
+  └────────────────────┼───────────────────┘
+        Sensors ───────┘   (Environment)</div>
+
+      <div class="grid3">
+        <div class="card"><h4>Model-based reflex</h4><p style="font-size:14px">Keeps <b>internal state</b> + a <b>model</b> of how the world evolves, to handle partial observability. Acts on condition-action rules.</p></div>
+        <div class="card"><h4>Goal-based</h4><p style="font-size:14px">Adds an explicit <b>goal</b>. Chooses actions that move toward the goal — uses search/planning. More flexible than reflex.</p></div>
+        <div class="card"><h4>Utility-based</h4><p style="font-size:14px">Adds a <b>utility function</b> that scores <em>how good</em> each state is, not just goal/not-goal. Picks the action maximizing <b>expected utility</b> — best when goals conflict or are uncertain.</p></div>
+      </div>
+    </section>
+
+    <!-- ============ TURING ============ -->
+    <section id="turing">
+      <h2><span class="num">16</span> Turing Test &amp; the four approaches to AI</h2>
+      <div class="grid2">
+        <div class="card">
+          <h4>Turing Test (Acting Humanly)</h4>
+          <p>A machine is "intelligent" if a human interrogator, chatting via text with a hidden human and the machine, <b>cannot reliably tell which is which</b>. To pass it a machine needs: natural-language processing, knowledge representation, automated reasoning, machine learning. The <b>Total</b> Turing Test adds computer vision + robotics (physical interaction).</p>
+        </div>
+        <div class="card">
+          <h4>The four approaches (a 2×2)</h4>
+          <dl class="defs" style="margin:0">
+            <dt>Acting humanly</dt><dd>Turing-test approach — behave like a person.</dd>
+            <dt>Thinking humanly</dt><dd>Cognitive modeling — mimic human thought.</dd>
+            <dt>Thinking rationally</dt><dd>"Laws of thought" — formal logic.</dd>
+            <dt>Acting rationally</dt><dd>Rational-agent — do the thing that maximizes expected performance. (Modern AI's stance.)</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SHORTS ============ -->
+    <section id="shorts">
+      <h2><span class="num">17</span> Quick short-answers</h2>
+
+      <div class="card">
+        <h4>Tree search vs Graph search</h4>
+        <p><b>Tree search</b> keeps no record of visited states — it can revisit the same state and loop forever on cycles. <b>Graph search</b> keeps an <b>explored/closed set</b> and never expands the same state twice — avoids cycles and redundant work (costs memory).</p>
+      </div>
+
+      <div class="card">
+        <h4>The <code>f(n) = (2−w)·g(n) + w·h(n)</code> trick</h4>
+        <div class="tblwrap">
+        <table class="tbl" style="margin:6px 0">
+          <thead><tr><th>w</th><th>f becomes</th><th>= which strategy</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">0</td><td class="mono">2·g(n)</td><td>ranks by g only → <b>Uniform Cost Search</b></td></tr>
+            <tr><td class="mono">1</td><td class="mono">g(n)+h(n)</td><td>→ <b>A* search</b></td></tr>
+            <tr><td class="mono">2</td><td class="mono">2·h(n)</td><td>ranks by h only → <b>Greedy Best-First</b></td></tr>
+          </tbody>
+        </table>
+        </div>
+        <p style="font-size:13.5px;color:var(--ink-soft);margin:4px 0 0">More weight on h → greedier/faster but less optimal; more weight on g → more like UCS.</p>
+      </div>
+
+      <div class="card">
+        <h4>Branching factor vs state space (they ask this)</h4>
+        <p><b>Branching factor (b)</b> = how many successors one node has (actions available). <b>State space</b> = the total number of distinct states the problem can be in. Small b, huge state space is typical (b=4, states=2²⁰).</p>
+      </div>
+
+      <div class="card">
+        <h4>True/False &amp; MCQ fast facts (Spring 2023-24 style)</h4>
+        <ul class="clean" style="font-size:14px">
+          <li>A* is complete <b>and</b> optimal if h is admissible — <b>True</b>.</li>
+          <li>Greedy BFS uses <code>f(n)=h(n)</code>; A* uses <code>f(n)=g(n)+h(n)</code>.</li>
+          <li>IDS combines DFS's memory with BFS's completeness — <b>True</b>.</li>
+          <li>DFS is complete — <b>False</b>.</li>
+          <li>In α-β, pruning fires when <b>α ≥ β</b>.</li>
+          <li>A crossword solver is a <b>static, single-agent</b> environment; a part-picking robot is <b>not</b> fully observable-only, etc. — read carefully.</li>
+          <li>An environment is uncertain if it is <b>not fully observable or not deterministic</b> — <b>True</b>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CHECKLIST ============ -->
+    <section id="checklist">
+      <h2><span class="num">18</span> Exam-morning checklist</h2>
+      <div class="grid2">
+        <div class="good">
+          <b>You're ready if you can, from a blank page:</b>
+          <ul class="clean" style="margin:8px 0 0">
+            <li>Run UCS / BFS / DFS / GBFS / A* on any small graph, showing frontier + explored + path + cost.</li>
+            <li>Compute h₁ and h₂ for an 8-puzzle.</li>
+            <li>Write PEAS for any robot in 30 seconds.</li>
+            <li>Classify an environment on all 7 dimensions.</li>
+            <li>State completeness/optimality of each algorithm <em>with the caveat</em>.</li>
+            <li>Prune an α-β tree and mark the cuts.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <b>In the exam room:</b>
+          <ul class="clean" style="margin:8px 0 0">
+            <li><b>Do Q5 first</b> — it's mandatory and usually A*/GBFS, which you now know cold.</li>
+            <li>Always <b>show the frontier at each step</b> — that's where partial marks live, even if the final number slips.</li>
+            <li>Write the heuristic condition for A* optimality; don't just say "yes."</li>
+            <li>Insert nodes <b>alphabetically</b> unless told otherwise.</li>
+            <li>Goal-test on <b>pop</b> for UCS/A*, not on generation.</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:26px;color:var(--ink-soft);font-family:var(--sans)">You've got this. The exam repeats itself — you now know the pattern. Good luck.</p>
+    </section>
+
+  </main>
+</div>
+<a href="#top" class="backtop">↑ Top</a>

@@ -1,0 +1,96 @@
+
+
+===== PAGE 1 =====
+DLS and IDS
+Shaikat Das Joy
+Lecturer, AIUB
+
+===== PAGE 2 =====
+DLS (Depth Limited Search)
+C
+A
+B
+D E F
+Level 0
+Level 1
+Level 2
+Same as DFS method with pre-determined limit. To solve the drawback 
+of infinite path in DFS
+
+===== PAGE 3 =====
+DLS (Depth Limited Search)
+A
+B C
+D E F
+Level 0
+Level 1
+Level 2
+Apply DFS till level 2:
+A C
+B
+C
+E
+D
+C
+E
+C F
+Frontier:
+Explored 
+List:
+Null                   A                        A,B                  A,B,D       A,B,D,E      A,B,D,E,C        A,B,D,E,C,F
+
+===== PAGE 4 =====
+DLS (Depth Limited Search)
+A
+B C
+D E F
+Level 0
+Level 1
+Level 2
+Apply DFS till level 1:
+A C
+BFrontier:
+Explored 
+List:
+Null                   A                        A,B                  A,B,C
+C
+Here, If I go till level 
+1 then I can not find 
+the goal node for 
+this problem.
+p
+
+===== PAGE 5 =====
+DLS can fail in two ways:
+1. Standard failure value : problem has no solution (Like if the Goal node is P)
+2. Cutoff Failure Value: No solution within the limit
+Incomplete
+Non-Optimal
+Time Complexity: O(bd)
+Space Complexity: O(bxd)
+
+===== PAGE 6 =====
+Iterative Depending Search (IDS)/ (IDDFS)
+A
+B
+D E F
+Level 0
+Level 1
+Level 2
+C
+Iteration Number -  Explored List
+1st iteration             -     A
+2nd iteration            -    A, B, C
+3rd iteration             -   A,B,D,E,C,F
+In 3rd iteration we are getting our result
+
+===== PAGE 7 =====
+Mixed of BFS and DFS because it is complete like BFS and less memory like DFS.
+Properties:
+Complete
+Optimal : if path cost if non decreasing (Depends)
+Time Complexity: O(bd)
+Space Complexity: O(bxd)
+
+===== PAGE 8 =====
+THANK YOU

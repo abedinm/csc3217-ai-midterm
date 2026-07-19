@@ -1,0 +1,767 @@
+<title>CSC 3217 — Exam War Room</title>
+<style>
+  :root{
+    --bg:#12151b; --panel:#1a1e26; --panel2:#20252f; --edge:#2c333f; --edge2:#242a35;
+    --ink:#e7eaef; --ink2:#9aa4b2; --ink3:#6b7686;
+    --acc:#e8a33d; --acc-bg:#2c2312; --acc-ink:#f0b555;
+    --ok:#4fc487; --ok-bg:#12271c; --bad:#e26d64; --bad-bg:#2c1815;
+    --blue:#6aa8e8; --blue-bg:#16202e;
+    --mono:"Cascadia Code",Consolas,"SF Mono",ui-monospace,monospace;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --bg:#eceef1; --panel:#ffffff; --panel2:#f2f4f7; --edge:#d4d9e0; --edge2:#e2e6ec;
+      --ink:#22262e; --ink2:#5a6472; --ink3:#8b95a4;
+      --acc:#b3761a; --acc-bg:#f7ecd8; --acc-ink:#96620f;
+      --ok:#25794f; --ok-bg:#e2f2e9; --bad:#bb3f36; --bad-bg:#f9e6e4;
+      --blue:#2166ad; --blue-bg:#e5eef8;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151b; --panel:#1a1e26; --panel2:#20252f; --edge:#2c333f; --edge2:#242a35;
+    --ink:#e7eaef; --ink2:#9aa4b2; --ink3:#6b7686;
+    --acc:#e8a33d; --acc-bg:#2c2312; --acc-ink:#f0b555;
+    --ok:#4fc487; --ok-bg:#12271c; --bad:#e26d64; --bad-bg:#2c1815;
+    --blue:#6aa8e8; --blue-bg:#16202e;
+  }
+  :root[data-theme="light"]{
+    --bg:#eceef1; --panel:#ffffff; --panel2:#f2f4f7; --edge:#d4d9e0; --edge2:#e2e6ec;
+    --ink:#22262e; --ink2:#5a6472; --ink3:#8b95a4;
+    --acc:#b3761a; --acc-bg:#f7ecd8; --acc-ink:#96620f;
+    --ok:#25794f; --ok-bg:#e2f2e9; --bad:#bb3f36; --bad-bg:#f9e6e4;
+    --blue:#2166ad; --blue-bg:#e5eef8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  button{font-family:var(--sans)}
+  button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+  header{position:sticky;top:0;z-index:30;background:var(--panel);border-bottom:1px solid var(--edge);padding:0 16px}
+  .hrow{max-width:1160px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 0}
+  .brand{font-weight:800;font-size:16px;letter-spacing:.02em;white-space:nowrap}
+  .brand small{display:block;font-weight:600;font-size:11px;color:var(--ink3);letter-spacing:.08em;text-transform:uppercase}
+  .cd{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:12.5px;background:var(--acc-bg);color:var(--acc-ink);border:1px solid var(--acc);border-radius:999px;padding:4px 12px;white-space:nowrap}
+  nav.tabs{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
+  nav.tabs button{background:none;border:1px solid transparent;color:var(--ink2);font-size:13.5px;font-weight:700;padding:7px 14px;border-radius:8px;cursor:pointer}
+  nav.tabs button:hover{color:var(--ink);background:var(--panel2)}
+  nav.tabs button.on{background:var(--acc-bg);color:var(--acc-ink);border-color:var(--acc)}
+
+  .wrap{max-width:1160px;margin:0 auto;padding:18px 16px 70px}
+  .view{display:none}
+  .view.on{display:block}
+
+  /* ------- drills layout ------- */
+  .drillgrid{display:grid;grid-template-columns:250px minmax(0,1fr);gap:18px}
+  @media (max-width:900px){.drillgrid{grid-template-columns:1fr}}
+  .dlist{align-self:start;position:sticky;top:64px;display:flex;flex-direction:column;gap:4px}
+  @media (max-width:900px){.dlist{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px}}
+  .dlist button{display:flex;align-items:center;gap:9px;text-align:left;background:var(--panel);border:1px solid var(--edge2);color:var(--ink2);border-radius:9px;padding:9px 11px;font-size:13px;cursor:pointer;white-space:nowrap}
+  .dlist button:hover{border-color:var(--edge);color:var(--ink)}
+  .dlist button.on{background:var(--panel2);border-color:var(--acc);color:var(--ink)}
+  .dlist .n{font-family:var(--mono);font-size:11px;color:var(--ink3);width:20px;flex:none}
+  .dlist .tick{margin-left:auto;width:14px;height:14px;border:1.5px solid var(--ink3);border-radius:4px;flex:none}
+  .dlist .tick.done{background:var(--ok);border-color:var(--ok)}
+
+  .card{background:var(--panel);border:1px solid var(--edge2);border-radius:12px;padding:18px 20px;margin:0 0 14px}
+  .card h2{margin:0 0 4px;font-size:20px;letter-spacing:-.01em}
+  .card h2 .marks{font-size:12px;color:var(--acc-ink);background:var(--acc-bg);border-radius:999px;padding:2px 10px;vertical-align:3px;margin-left:8px;font-weight:700}
+  .tagline{color:var(--ink2);font-size:13.5px;margin:0 0 10px}
+  .statement{background:var(--panel2);border:1px solid var(--edge2);border-radius:9px;padding:12px 14px;font-size:14px;color:var(--ink);margin:10px 0}
+  .statement b{color:var(--acc-ink)}
+  .figbox{background:var(--panel2);border:1px solid var(--edge2);border-radius:9px;padding:8px;margin:10px 0;overflow-x:auto}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+  .algotabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 10px}
+  .algotabs button{background:var(--panel2);border:1px solid var(--edge2);color:var(--ink2);font-weight:700;font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer}
+  .algotabs button.on{background:var(--blue-bg);border-color:var(--blue);color:var(--blue)}
+  .algotabs button .st{font-size:10px;margin-left:6px;color:var(--ok)}
+
+  .stepper{border:1px solid var(--edge2);border-radius:10px;overflow:hidden}
+  .stepbar{display:flex;align-items:center;gap:8px;background:var(--panel2);border-bottom:1px solid var(--edge2);padding:8px 12px;flex-wrap:wrap}
+  .stepbar .lbl{font-size:12.5px;color:var(--ink2);margin-right:auto}
+  .stepbar button{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:13px;font-weight:700;padding:6px 14px;border-radius:8px;cursor:pointer}
+  .stepbar button:hover{border-color:var(--acc)}
+  .stepbar button.primary{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-ink)}
+  .stepbar button:disabled{opacity:.35;cursor:default}
+  .steps{padding:6px 14px 12px;min-height:120px}
+  .step{border-left:2px solid var(--edge);padding:8px 0 8px 14px;margin:6px 0;opacity:1}
+  .step.latest{border-left-color:var(--acc)}
+  .step h5{margin:0 0 4px;font-size:13.5px;color:var(--ink)}
+  .step.latest h5{color:var(--acc-ink)}
+  .tl{font-family:var(--mono);font-size:12.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+  .tl.dim{color:var(--ink3)}
+  .tl.hot{color:var(--acc-ink);font-weight:600}
+  .tl.goal{color:var(--ok);font-weight:700}
+  .tl.cut{color:var(--bad);font-weight:700}
+  .hint{color:var(--ink3);font-size:13px;padding:18px 4px;font-style:italic}
+  .finalbox{margin-top:4px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:9px;padding:10px 14px;font-family:var(--mono);font-size:13px;display:none}
+  .finalbox.on{display:block}
+  .tip{margin-top:10px;background:var(--blue-bg);border-left:3px solid var(--blue);border-radius:6px;padding:9px 13px;font-size:13.5px;color:var(--ink)}
+  .tip b{color:var(--blue)}
+  .boards{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 2px}
+  .bwrap{text-align:center}
+  .bwrap .cap{font-family:var(--mono);font-size:10.5px;color:var(--ink2);margin-top:3px}
+  .pz{display:inline-grid;grid-template-columns:repeat(3,30px);gap:2px}
+  .pz span{width:30px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--panel);border:1px solid var(--edge);border-radius:4px;font-family:var(--mono);font-weight:700;font-size:13px}
+  .pz span.blank{background:transparent;border-style:dashed}
+  .donebar{display:flex;align-items:center;gap:10px;margin-top:14px}
+  .donebar label{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:8px;cursor:pointer}
+  .donebar input{accent-color:var(--ok);width:16px;height:16px}
+
+  details.conv{background:var(--panel);border:1px solid var(--edge2);border-radius:12px;padding:0;margin:0 0 14px}
+  details.conv summary{cursor:pointer;font-weight:700;padding:12px 18px;font-size:14px;color:var(--acc-ink)}
+  details.conv .inner{padding:0 20px 14px;font-size:13.5px}
+  details.conv ol{margin:4px 0;padding-left:20px}
+  details.conv li{margin:5px 0}
+  details.conv code{font-family:var(--mono);background:var(--panel2);padding:.1em .35em;border-radius:4px;font-size:.92em}
+
+  /* ------- flashcards ------- */
+  .fcbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+  .fcbar button,.fcbar select{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:13px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer}
+  .fcbar .count{font-family:var(--mono);font-size:12.5px;color:var(--ink2);margin-left:auto}
+  .fcard{background:var(--panel);border:1px solid var(--edge);border-radius:14px;min-height:260px;padding:26px 28px;cursor:pointer;display:flex;flex-direction:column;max-width:760px;margin:0 auto}
+  .fcard .tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--acc-ink)}
+  .fcard .q{font-size:19px;font-weight:700;margin:14px 0;flex:1}
+  .fcard .a{font-size:15px;color:var(--ink);display:none;border-top:1px dashed var(--edge);padding-top:14px;white-space:pre-wrap}
+  .fcard.flip .a{display:block}
+  .fcard .flip-hint{color:var(--ink3);font-size:12px}
+  .fcnav{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+  .fcnav button{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:13.5px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer}
+  .fcnav button.know{border-color:var(--ok);color:var(--ok)}
+  .fcnav button.dk{border-color:var(--bad);color:var(--bad)}
+
+  /* ------- mock ------- */
+  .mocktimer{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--edge);border-radius:12px;padding:14px 18px;margin-bottom:16px;flex-wrap:wrap}
+  .mocktimer .t{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:34px;font-weight:700}
+  .mocktimer .t.low{color:var(--bad)}
+  .mocktimer button{background:var(--acc-bg);border:1px solid var(--acc);color:var(--acc-ink);font-weight:700;font-size:13.5px;padding:8px 16px;border-radius:8px;cursor:pointer}
+  .mq{background:var(--panel);border:1px solid var(--edge2);border-radius:12px;padding:16px 20px;margin-bottom:12px}
+  .mq h3{margin:0 0 6px;font-size:16px}
+  .mq h3 .m{color:var(--acc-ink);font-size:12.5px;margin-left:8px}
+  .mq .body{font-size:14px;color:var(--ink)}
+  .mq details{margin-top:10px}
+  .mq summary{cursor:pointer;color:var(--blue);font-weight:700;font-size:13.5px}
+  .mq .ans{background:var(--panel2);border:1px solid var(--edge2);border-radius:8px;padding:12px 14px;margin-top:8px;font-size:13.5px}
+  .mq .ans .mono{font-family:var(--mono);font-size:12.5px}
+
+  /* ------- plan ------- */
+  .plan{max-width:700px}
+  .slot{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 4px;border-bottom:1px solid var(--edge2);font-size:14.5px}
+  .slot .t{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--acc-ink);font-weight:700;font-size:13px}
+  .slot.sleep{background:var(--ok-bg);border-radius:8px;padding:11px 10px}
+  .slot.sleep .t{color:var(--ok)}
+  .bignote{background:var(--acc-bg);border:1px solid var(--acc);border-radius:10px;padding:13px 16px;font-size:14px;margin:14px 0}
+
+  .gnode{fill:var(--panel);stroke:var(--ink2);stroke-width:2}
+  .gnode.start{fill:var(--blue-bg);stroke:var(--blue)}
+  .gnode.goal{fill:var(--ok-bg);stroke:var(--ok)}
+  .glabel{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:15px;text-anchor:middle;dominant-baseline:central}
+  .gedge{stroke:var(--ink3);stroke-width:1.7;fill:none}
+  .gcost{fill:var(--ink);font-family:var(--mono);font-size:12px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+  .gcost-bg{fill:var(--panel2);stroke:var(--edge);stroke-width:1;rx:3}
+  .gh{fill:var(--acc-ink);font-family:var(--mono);font-size:10.5px;font-weight:700;text-anchor:middle}
+  .kindlab{fill:var(--ink3);font-family:var(--sans);font-weight:800;font-size:12px;letter-spacing:.08em}
+  .leafval{fill:var(--ink);font-family:var(--mono);font-weight:700;font-size:13px;text-anchor:middle}
+  .abval{fill:var(--ok);font-family:var(--mono);font-weight:700;font-size:11px;text-anchor:middle}
+  .cutline{stroke:var(--bad);stroke-width:3;stroke-linecap:round}
+  .mzcell{fill:var(--panel);stroke:var(--edge)}
+  .mzwall{fill:var(--ink3);stroke:var(--edge)}
+  .mzlab{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:16px;text-anchor:middle;dominant-baseline:central}
+  .mzco{fill:var(--ink3);font-family:var(--mono);font-size:9px;text-anchor:middle}
+  .vroom{fill:var(--panel);stroke:var(--edge);stroke-width:1.2}
+  .vstate{fill:var(--panel);stroke:var(--ink3);stroke-width:1.4;rx:7}
+  .vstate.onpath{stroke:var(--acc);stroke-width:2.2}
+  .vcap{fill:var(--ink2);font-family:var(--mono);font-size:9.5px;text-anchor:middle}
+  .vcap.onpath{fill:var(--acc-ink);font-weight:700}
+  .vdirt{fill:var(--bad)}
+  .vbot{fill:none;stroke:var(--blue);stroke-width:2}
+  @media (prefers-reduced-motion:no-preference){
+    .step.latest{animation:pop .18s ease-out}
+    @keyframes pop{from{transform:translateX(-4px);opacity:.4}to{transform:none;opacity:1}}
+  }
+</style>
+
+<header>
+  <div class="hrow">
+    <div class="brand">Exam War Room<small>CSC 3217 Artificial Intelligence — Midterm</small></div>
+    <span class="cd" id="cd">--</span>
+    <nav class="tabs" id="tabs">
+      <button data-v="drills" class="on">Drills</button>
+      <button data-v="cards">Flashcards</button>
+      <button data-v="mock">Mock Exam</button>
+      <button data-v="plan">Battle Plan</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <!-- ================= DRILLS ================= -->
+  <div class="view on" id="view-drills">
+    <details class="conv">
+      <summary>Exam conventions — read once, they earn marks (click)</summary>
+      <div class="inner">
+        <ol>
+          <li><b>Frontier holds full paths</b> (write <code>S-A-C: 8</code>, not just <code>C</code>).</li>
+          <li><b>UCS / A* / GBFS:</b> goal-test when a node is <b>popped</b>, never when generated.</li>
+          <li><b>BFS / DFS:</b> stop as soon as the goal is <b>generated</b> (official script convention).</li>
+          <li><b>BFS:</b> FIFO queue, enqueue children alphabetically. <b>DFS:</b> stack — push children alphabetically, so the alphabetically <b>last</b> child pops first (this matches the official Fall 2024-25 answer script: from S with children A, C, D, node D was expanded first). If your section taught the other order, state your convention on the script and be consistent.</li>
+          <li><b>Duplicates:</b> keep the cheaper path — write "beats old, replace". Skip children already explored.</li>
+          <li><b>Ties</b> in priority: alphabetical order.</li>
+        </ol>
+      </div>
+    </details>
+    <div class="drillgrid">
+      <div class="dlist" id="dlist"></div>
+      <div id="dmain"></div>
+    </div>
+  </div>
+
+  <!-- ================= FLASHCARDS ================= -->
+  <div class="view" id="view-cards">
+    <div class="fcbar">
+      <select id="fcfilter"><option value="all">All topics</option></select>
+      <button id="fcshuffle">Shuffle</button>
+      <button id="fcunknown">Unknown only</button>
+      <span class="count" id="fccount"></span>
+    </div>
+    <div class="fcard" id="fcard" tabindex="0" role="button" aria-label="flashcard, click to flip">
+      <span class="tag" id="fctag"></span>
+      <div class="q" id="fcq"></div>
+      <div class="a" id="fca"></div>
+      <span class="flip-hint">click or press Space to flip</span>
+    </div>
+    <div class="fcnav">
+      <button id="fcprev">&#8592; Prev</button>
+      <button class="dk" id="fcdk">Didn't know</button>
+      <button class="know" id="fcknow">Knew it</button>
+      <button id="fcnext">Next &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ================= MOCK ================= -->
+  <div class="view" id="view-mock">
+    <div class="mocktimer">
+      <div>
+        <div style="font-size:12px;color:var(--ink2);font-weight:700;letter-spacing:.06em;text-transform:uppercase">Timed mock — 100 marks</div>
+        <div class="t" id="mt">2:00:00</div>
+      </div>
+      <button id="mtstart">Start</button>
+      <button id="mtreset">Reset</button>
+      <div style="font-size:13px;color:var(--ink2);max-width:380px">Real conditions: paper and pen, no peeking. Do Q5-style A* first. Reveal answers only when done.</div>
+    </div>
+    <div id="mockqs"></div>
+  </div>
+
+  <!-- ================= PLAN ================= -->
+  <div class="view" id="view-plan">
+    <div class="card plan">
+      <h2>Tonight's battle plan</h2>
+      <p class="tagline">Assumes ~11 PM start, exam 9 AM. Drills beat re-reading. Paper + pen for every trace.</p>
+      <div class="slot"><span class="t">11:15 - 12:15</span><span><b>Drill 1 (Anchor graph), all five algorithms.</b> This one figure is the whole exam's core. Redo any trace you miss.</span></div>
+      <div class="slot"><span class="t">12:15 - 1:00</span><span><b>Drill 2 (the real Q5)</b> then <b>Drill 3</b> (ties). A* and GBFS until automatic.</span></div>
+      <div class="slot"><span class="t">1:00 - 1:40</span><span><b>Drills 6-7 (8-puzzle)</b> + <b>Drill 4 (maze)</b>. Fast marks.</span></div>
+      <div class="slot"><span class="t">1:40 - 2:20</span><span><b>Drill 5 (vacuum UCS)</b> + <b>Drills 8-9 (alpha-beta)</b>.</span></div>
+      <div class="slot"><span class="t">2:20 - 2:50</span><span><b>Flashcards sweep.</b> Mark unknowns; repeat unknowns once.</span></div>
+      <div class="slot"><span class="t">2:50 - 4:20</span><span><b>Mock exam</b>, timed 90 minutes (compressed). Paper only.</span></div>
+      <div class="slot"><span class="t">4:20 - 4:45</span><span>Check answers. Redo the single worst question.</span></div>
+      <div class="slot sleep"><span class="t">4:45 - 7:30</span><span><b>Sleep. Non-negotiable.</b> 2.5-3 h of sleep consolidates tonight's practice and beats foggy extra cramming. Set two alarms.</span></div>
+      <div class="slot"><span class="t">7:30 - 8:00</span><span>Re-flip only the "didn't know" flashcards. One A* trace on paper to warm up.</span></div>
+      <div class="bignote"><b>In the room:</b> do the mandatory A*/GBFS question first; show the frontier at every step; state the admissibility caveat when asked if A* is optimal; write your DFS convention; goal-test on pop for UCS/A*.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TRACES = {"P1": {"tasks": {"UCS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:0   Explored: (empty)"}]}, {"title": "Pop S (0) \u2014 expand", "lines": [{"t": "A: 1 \u2014 add"}, {"t": "B: 4 \u2014 add"}, {"t": "Frontier: S-A:1 \u00b7 S-B:4"}, {"t": "Explored: S"}]}, {"title": "Pop A (1) \u2014 expand", "lines": [{"t": "B: 3 \u2014 beats 4, replace", "cls": "hot"}, {"t": "C: 6 \u2014 add"}, {"t": "Frontier: S-A-B:3 \u00b7 S-A-C:6"}, {"t": "Explored: S, A"}]}, {"title": "Pop B (3) \u2014 expand", "lines": [{"t": "C: 4 \u2014 beats 6, replace", "cls": "hot"}, {"t": "D: 8 \u2014 add"}, {"t": "Frontier: S-A-B-C:4 \u00b7 S-A-B-D:8"}, {"t": "Explored: S, A, B"}]}, {"title": "Pop C (4) \u2014 expand", "lines": [{"t": "D: 7 \u2014 beats 8, replace", "cls": "hot"}, {"t": "G: 11 \u2014 add"}, {"t": "Frontier: S-A-B-C-D:7 \u00b7 S-A-B-C-G:11"}, {"t": "Explored: S, A, B, C"}]}, {"title": "Pop D (7) \u2014 expand", "lines": [{"t": "G: 9 \u2014 beats 11, replace", "cls": "hot"}, {"t": "Frontier: S-A-B-C-D-G:9"}, {"t": "Explored: S, A, B, C, D"}]}, {"title": "Pop G (9) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-B-C-D-G, cost 9", "cls": "goal"}]}], "final": {"path": "S-A-B-C-D-G", "cost": 9, "explored": "S, A, B, C, D"}}, "BFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier (queue): S"}]}, {"title": "Expand S", "lines": [{"t": "A: add to back of queue"}, {"t": "B: add to back of queue"}, {"t": "Frontier: S-A \u00b7 S-B"}, {"t": "Explored: S"}]}, {"title": "Expand A", "lines": [{"t": "B: seen \u2014 skip", "cls": "dim"}, {"t": "C: add to back of queue"}, {"t": "Frontier: S-B \u00b7 S-A-C"}, {"t": "Explored: S, A"}]}, {"title": "Expand B", "lines": [{"t": "C: seen \u2014 skip", "cls": "dim"}, {"t": "D: add to back of queue"}, {"t": "Frontier: S-A-C \u00b7 S-B-D"}, {"t": "Explored: S, A, B"}]}, {"title": "Expand C", "lines": [{"t": "D: seen \u2014 skip", "cls": "dim"}, {"t": "G: GOAL generated \u2014 stop", "cls": "goal"}, {"t": "Path S-A-C-G, cost 13", "cls": "goal"}]}], "final": {"path": "S-A-C-G", "cost": 13, "explored": "S, A, B, C"}}, "DFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier (stack): S"}]}, {"title": "Pop S \u2014 expand", "lines": [{"t": "A: push"}, {"t": "B: push"}, {"t": "Stack (top first): S-B \u00b7 S-A"}, {"t": "Explored: S"}]}, {"title": "Pop B \u2014 expand", "lines": [{"t": "C: push"}, {"t": "D: push"}, {"t": "Stack (top first): S-B-D \u00b7 S-B-C \u00b7 S-A"}, {"t": "Explored: S, B"}]}, {"title": "Pop D \u2014 expand", "lines": [{"t": "G: GOAL generated \u2014 stop", "cls": "goal"}, {"t": "Path S-B-D-G, cost 11", "cls": "goal"}]}], "final": {"path": "S-B-D-G", "cost": 11, "explored": "S, B, D"}}, "GBFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:7   Explored: (empty)"}]}, {"title": "Pop S (h=7) \u2014 expand", "lines": [{"t": "A: h=6 \u2014 add"}, {"t": "B: h=4 \u2014 add"}, {"t": "Frontier: S-B:4 \u00b7 S-A:6"}, {"t": "Explored: S"}]}, {"title": "Pop B (h=4) \u2014 expand", "lines": [{"t": "C: h=4 \u2014 add"}, {"t": "D: h=2 \u2014 add"}, {"t": "Frontier: S-B-D:2 \u00b7 S-B-C:4 \u00b7 S-A:6"}, {"t": "Explored: S, B"}]}, {"title": "Pop D (h=2) \u2014 expand", "lines": [{"t": "G: h=0 \u2014 add"}, {"t": "Frontier: S-B-D-G:0 \u00b7 S-B-C:4 \u00b7 S-A:6"}, {"t": "Explored: S, B, D"}]}, {"title": "Pop G (h=0) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-B-D-G, cost 11", "cls": "goal"}]}], "final": {"path": "S-B-D-G", "cost": 11, "explored": "S, B, D"}}, "A*": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:7   Explored: (empty)"}]}, {"title": "Pop S (0+7=7) \u2014 expand", "lines": [{"t": "A: 1+6=7 \u2014 add"}, {"t": "B: 4+4=8 \u2014 add"}, {"t": "Frontier: S-A:7 \u00b7 S-B:8"}, {"t": "Explored: S"}]}, {"title": "Pop A (1+6=7) \u2014 expand", "lines": [{"t": "B: 3+4=7 \u2014 beats 8, replace", "cls": "hot"}, {"t": "C: 6+4=10 \u2014 add"}, {"t": "Frontier: S-A-B:7 \u00b7 S-A-C:10"}, {"t": "Explored: S, A"}]}, {"title": "Pop B (3+4=7) \u2014 expand", "lines": [{"t": "C: 4+4=8 \u2014 beats 10, replace", "cls": "hot"}, {"t": "D: 8+2=10 \u2014 add"}, {"t": "Frontier: S-A-B-C:8 \u00b7 S-A-B-D:10"}, {"t": "Explored: S, A, B"}]}, {"title": "Pop C (4+4=8) \u2014 expand", "lines": [{"t": "D: 7+2=9 \u2014 beats 10, replace", "cls": "hot"}, {"t": "G: 11+0=11 \u2014 add"}, {"t": "Frontier: S-A-B-C-D:9 \u00b7 S-A-B-C-G:11"}, {"t": "Explored: S, A, B, C"}]}, {"title": "Pop D (7+2=9) \u2014 expand", "lines": [{"t": "G: 9+0=9 \u2014 beats 11, replace", "cls": "hot"}, {"t": "Frontier: S-A-B-C-D-G:9"}, {"t": "Explored: S, A, B, C, D"}]}, {"title": "Pop G (9+0=9) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-B-C-D-G, cost 9", "cls": "goal"}]}], "final": {"path": "S-A-B-C-D-G", "cost": 9, "explored": "S, A, B, C, D"}}}}, "P2": {"tasks": {"A*": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:22   Explored: (empty)"}]}, {"title": "Pop S (0+22=22) \u2014 expand", "lines": [{"t": "A: 3+20=23 \u2014 add"}, {"t": "C: 8+14=22 \u2014 add"}, {"t": "G: 50+0=50 \u2014 add"}, {"t": "Frontier: S-C:22 \u00b7 S-A:23 \u00b7 S-G:50"}, {"t": "Explored: S"}]}, {"title": "Pop C (8+14=22) \u2014 expand", "lines": [{"t": "D: 11+11=22 \u2014 add"}, {"t": "Frontier: S-C-D:22 \u00b7 S-A:23 \u00b7 S-G:50"}, {"t": "Explored: S, C"}]}, {"title": "Pop D (11+11=22) \u2014 expand", "lines": [{"t": "B: 17+8=25 \u2014 add"}, {"t": "G: 27+0=27 \u2014 beats 50, replace", "cls": "hot"}, {"t": "Frontier: S-A:23 \u00b7 S-C-D-B:25 \u00b7 S-C-D-G:27"}, {"t": "Explored: S, C, D"}]}, {"title": "Pop A (3+20=23) \u2014 expand", "lines": [{"t": "B: 15+8=23 \u2014 beats 25, replace", "cls": "hot"}, {"t": "Frontier: S-A-B:23 \u00b7 S-C-D-G:27"}, {"t": "Explored: S, C, D, A"}]}, {"title": "Pop B (15+8=23) \u2014 expand", "lines": [{"t": "G: 26+0=26 \u2014 beats 27, replace", "cls": "hot"}, {"t": "Frontier: S-A-B-G:26"}, {"t": "Explored: S, C, D, A, B"}]}, {"title": "Pop G (26+0=26) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-B-G, cost 26", "cls": "goal"}]}], "final": {"path": "S-A-B-G", "cost": 26, "explored": "S, C, D, A, B"}}, "GBFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:22   Explored: (empty)"}]}, {"title": "Pop S (h=22) \u2014 expand", "lines": [{"t": "A: h=20 \u2014 add"}, {"t": "C: h=14 \u2014 add"}, {"t": "G: h=0 \u2014 add"}, {"t": "Frontier: S-G:0 \u00b7 S-C:14 \u00b7 S-A:20"}, {"t": "Explored: S"}]}, {"title": "Pop G (h=0) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-G, cost 50", "cls": "goal"}]}], "final": {"path": "S-G", "cost": 50, "explored": "S"}}, "UCS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:0   Explored: (empty)"}]}, {"title": "Pop S (0) \u2014 expand", "lines": [{"t": "A: 3 \u2014 add"}, {"t": "C: 8 \u2014 add"}, {"t": "G: 50 \u2014 add"}, {"t": "Frontier: S-A:3 \u00b7 S-C:8 \u00b7 S-G:50"}, {"t": "Explored: S"}]}, {"title": "Pop A (3) \u2014 expand", "lines": [{"t": "B: 15 \u2014 add"}, {"t": "Frontier: S-C:8 \u00b7 S-A-B:15 \u00b7 S-G:50"}, {"t": "Explored: S, A"}]}, {"title": "Pop C (8) \u2014 expand", "lines": [{"t": "D: 11 \u2014 add"}, {"t": "Frontier: S-C-D:11 \u00b7 S-A-B:15 \u00b7 S-G:50"}, {"t": "Explored: S, A, C"}]}, {"title": "Pop D (11) \u2014 expand", "lines": [{"t": "B: 17 \u2014 worse than 15, discard", "cls": "dim"}, {"t": "G: 27 \u2014 beats 50, replace", "cls": "hot"}, {"t": "Frontier: S-A-B:15 \u00b7 S-C-D-G:27"}, {"t": "Explored: S, A, C, D"}]}, {"title": "Pop B (15) \u2014 expand", "lines": [{"t": "G: 26 \u2014 beats 27, replace", "cls": "hot"}, {"t": "Frontier: S-A-B-G:26"}, {"t": "Explored: S, A, C, D, B"}]}, {"title": "Pop G (26) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-B-G, cost 26", "cls": "goal"}]}], "final": {"path": "S-A-B-G", "cost": 26, "explored": "S, A, C, D, B"}}}}, "P3": {"tasks": {"UCS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:0   Explored: (empty)"}]}, {"title": "Pop S (0) \u2014 expand", "lines": [{"t": "A: 2 \u2014 add"}, {"t": "B: 3 \u2014 add"}, {"t": "Frontier: S-A:2 \u00b7 S-B:3"}, {"t": "Explored: S"}]}, {"title": "Pop A (2) \u2014 expand", "lines": [{"t": "C: 6 \u2014 add"}, {"t": "D: 4 \u2014 add"}, {"t": "Frontier: S-B:3 \u00b7 S-A-D:4 \u00b7 S-A-C:6"}, {"t": "Explored: S, A"}]}, {"title": "Pop B (3) \u2014 expand", "lines": [{"t": "D: 7 \u2014 worse than 4, discard", "cls": "dim"}, {"t": "E: 9 \u2014 add"}, {"t": "Frontier: S-A-D:4 \u00b7 S-A-C:6 \u00b7 S-B-E:9"}, {"t": "Explored: S, A, B"}]}, {"title": "Pop D (4) \u2014 expand", "lines": [{"t": "C: 5 \u2014 beats 6, replace", "cls": "hot"}, {"t": "F: 7 \u2014 add"}, {"t": "Frontier: S-A-D-C:5 \u00b7 S-A-D-F:7 \u00b7 S-B-E:9"}, {"t": "Explored: S, A, B, D"}]}, {"title": "Pop C (5) \u2014 expand", "lines": [{"t": "G: 12 \u2014 add"}, {"t": "Frontier: S-A-D-F:7 \u00b7 S-B-E:9 \u00b7 S-A-D-C-G:12"}, {"t": "Explored: S, A, B, D, C"}]}, {"title": "Pop F (7) \u2014 expand", "lines": [{"t": "G: 11 \u2014 beats 12, replace", "cls": "hot"}, {"t": "Frontier: S-B-E:9 \u00b7 S-A-D-F-G:11"}, {"t": "Explored: S, A, B, D, C, F"}]}, {"title": "Pop E (9) \u2014 expand", "lines": [{"t": "F: already explored \u2014 skip", "cls": "dim"}, {"t": "G: 18 \u2014 worse than 11, discard", "cls": "dim"}, {"t": "Frontier: S-A-D-F-G:11"}, {"t": "Explored: S, A, B, D, C, F, E"}]}, {"title": "Pop G (11) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-D-F-G, cost 11", "cls": "goal"}]}], "final": {"path": "S-A-D-F-G", "cost": 11, "explored": "S, A, B, D, C, F, E"}}, "A*": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:8   Explored: (empty)"}]}, {"title": "Pop S (0+8=8) \u2014 expand", "lines": [{"t": "A: 2+7=9 \u2014 add"}, {"t": "B: 3+6=9 \u2014 add"}, {"t": "Frontier: S-A:9 \u00b7 S-B:9"}, {"t": "Explored: S"}]}, {"title": "Pop A (2+7=9) \u2014 expand", "lines": [{"t": "C: 6+5=11 \u2014 add"}, {"t": "D: 4+5=9 \u2014 add"}, {"t": "Frontier: S-B:9 \u00b7 S-A-D:9 \u00b7 S-A-C:11"}, {"t": "Explored: S, A"}]}, {"title": "Pop B (3+6=9) \u2014 expand", "lines": [{"t": "D: 7+5=12 \u2014 worse than 9, discard", "cls": "dim"}, {"t": "E: 9+4=13 \u2014 add"}, {"t": "Frontier: S-A-D:9 \u00b7 S-A-C:11 \u00b7 S-B-E:13"}, {"t": "Explored: S, A, B"}]}, {"title": "Pop D (4+5=9) \u2014 expand", "lines": [{"t": "C: 5+5=10 \u2014 beats 11, replace", "cls": "hot"}, {"t": "F: 7+3=10 \u2014 add"}, {"t": "Frontier: S-A-D-C:10 \u00b7 S-A-D-F:10 \u00b7 S-B-E:13"}, {"t": "Explored: S, A, B, D"}]}, {"title": "Pop C (5+5=10) \u2014 expand", "lines": [{"t": "G: 12+0=12 \u2014 add"}, {"t": "Frontier: S-A-D-F:10 \u00b7 S-A-D-C-G:12 \u00b7 S-B-E:13"}, {"t": "Explored: S, A, B, D, C"}]}, {"title": "Pop F (7+3=10) \u2014 expand", "lines": [{"t": "G: 11+0=11 \u2014 beats 12, replace", "cls": "hot"}, {"t": "Frontier: S-A-D-F-G:11 \u00b7 S-B-E:13"}, {"t": "Explored: S, A, B, D, C, F"}]}, {"title": "Pop G (11+0=11) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-A-D-F-G, cost 11", "cls": "goal"}]}], "final": {"path": "S-A-D-F-G", "cost": 11, "explored": "S, A, B, D, C, F"}}, "GBFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: S:8   Explored: (empty)"}]}, {"title": "Pop S (h=8) \u2014 expand", "lines": [{"t": "A: h=7 \u2014 add"}, {"t": "B: h=6 \u2014 add"}, {"t": "Frontier: S-B:6 \u00b7 S-A:7"}, {"t": "Explored: S"}]}, {"title": "Pop B (h=6) \u2014 expand", "lines": [{"t": "D: h=5 \u2014 add"}, {"t": "E: h=4 \u2014 add"}, {"t": "Frontier: S-B-E:4 \u00b7 S-B-D:5 \u00b7 S-A:7"}, {"t": "Explored: S, B"}]}, {"title": "Pop E (h=4) \u2014 expand", "lines": [{"t": "F: h=3 \u2014 add"}, {"t": "G: h=0 \u2014 add"}, {"t": "Frontier: S-B-E-G:0 \u00b7 S-B-E-F:3 \u00b7 S-B-D:5 \u00b7 S-A:7"}, {"t": "Explored: S, B, E"}]}, {"title": "Pop G (h=0) \u2014 GOAL", "lines": [{"t": "Goal popped. Path S-B-E-G, cost 18", "cls": "goal"}]}], "final": {"path": "S-B-E-G", "cost": 18, "explored": "S, B, E"}}}}, "P4": {"tasks": {"UCS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: M|DD:0 \u2014 state = robot position | dirt in L,R (D dirty, C clean)"}]}, {"title": "Pop M|DD (g=0) \u2014 expand", "lines": [{"t": "Left (+5) \u2192 L|DD: g=5 \u2014 add"}, {"t": "Right (+10) \u2192 R|DD: g=10 \u2014 add"}, {"t": "Frontier: L|DD:5 \u00b7 R|DD:10"}, {"t": "Explored: M|DD"}]}, {"title": "Pop L|DD (g=5) \u2014 expand", "lines": [{"t": "Right \u2192 M|DD: explored \u2014 skip", "cls": "dim"}, {"t": "Clean (+15) \u2192 L|CD: g=20 \u2014 add"}, {"t": "Frontier: R|DD:10 \u00b7 L|CD:20"}, {"t": "Explored: M|DD, L|DD"}]}, {"title": "Pop R|DD (g=10) \u2014 expand", "lines": [{"t": "Left \u2192 M|DD: explored \u2014 skip", "cls": "dim"}, {"t": "Clean (+15) \u2192 R|DC: g=25 \u2014 add"}, {"t": "Frontier: L|CD:20 \u00b7 R|DC:25"}, {"t": "Explored: M|DD, L|DD, R|DD"}]}, {"title": "Pop L|CD (g=20) \u2014 expand", "lines": [{"t": "Right (+10) \u2192 M|CD: g=30 \u2014 add"}, {"t": "Frontier: R|DC:25 \u00b7 M|CD:30"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD"}]}, {"title": "Pop R|DC (g=25) \u2014 expand", "lines": [{"t": "Left (+5) \u2192 M|DC: g=30 \u2014 add"}, {"t": "Frontier: M|CD:30 \u00b7 M|DC:30"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD, R|DC"}]}, {"title": "Pop M|CD (g=30) \u2014 expand", "lines": [{"t": "Left \u2192 L|CD: explored \u2014 skip", "cls": "dim"}, {"t": "Right (+10) \u2192 R|CD: g=40 \u2014 add"}, {"t": "Frontier: M|DC:30 \u00b7 R|CD:40"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD, R|DC, M|CD"}]}, {"title": "Pop M|DC (g=30) \u2014 expand", "lines": [{"t": "Left (+5) \u2192 L|DC: g=35 \u2014 add"}, {"t": "Right \u2192 R|DC: explored \u2014 skip", "cls": "dim"}, {"t": "Frontier: L|DC:35 \u00b7 R|CD:40"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD, R|DC, M|CD, M|DC"}]}, {"title": "Pop L|DC (g=35) \u2014 expand", "lines": [{"t": "Right \u2192 M|DC: explored \u2014 skip", "cls": "dim"}, {"t": "Clean (+15) \u2192 L|CC: g=50 \u2014 add"}, {"t": "Frontier: R|CD:40 \u00b7 L|CC:50"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD, R|DC, M|CD, M|DC, L|DC"}]}, {"title": "Pop R|CD (g=40) \u2014 expand", "lines": [{"t": "Left \u2192 M|CD: explored \u2014 skip", "cls": "dim"}, {"t": "Clean (+15) \u2192 R|CC: g=55 \u2014 add"}, {"t": "Frontier: L|CC:50 \u00b7 R|CC:55"}, {"t": "Explored: M|DD, L|DD, R|DD, L|CD, R|DC, M|CD, M|DC, L|DC, R|CD"}]}, {"title": "Pop L|CC (g=50) \u2014 GOAL (all clean)", "lines": [{"t": "Plan: Right \u2192 Clean \u2192 Left \u2192 Left \u2192 Clean", "cls": "goal"}, {"t": "Total cost = 10 + 15 + 5 + 5 + 15 = 50", "cls": "goal"}]}], "final": {"path": "Right \u2192 Clean \u2192 Left \u2192 Left \u2192 Clean", "cost": 50, "explored": "M|DD, L|DD, R|DD, L|CD, R|DC, M|CD, M|DC, L|DC, R|CD"}}}}, "P5": {"tasks": {"GBFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: start (h1=2). Moves are of the BLANK: Left / Right / Up / Down."}], "boards": [{"s": "3124_5678", "tag": "start \u00b7 h1=2"}]}, {"title": "Expand board (h1=2)", "lines": [{"t": "Left: h1=1"}, {"t": "Right: h1=3"}, {"t": "Up: h1=3"}, {"t": "Down: h1=3"}, {"t": "Lowest h1 in frontier = 1 \u2014 expand that next"}], "boards": [{"s": "3124_5678", "tag": "expand \u00b7 h1=2"}, {"s": "312_45678", "tag": "Left \u00b7 h1=1"}, {"s": "31245_678", "tag": "Right \u00b7 h1=3"}, {"s": "3_2415678", "tag": "Up \u00b7 h1=3"}, {"s": "3124756_8", "tag": "Down \u00b7 h1=3"}]}, {"title": "Expand board (h1=1)", "lines": [{"t": "Right: board already seen \u2014 skip", "cls": "dim"}, {"t": "Up: h1=0"}, {"t": "Down: h1=2"}, {"t": "Lowest h1 in frontier = 0 \u2014 expand that next"}], "boards": [{"s": "312_45678", "tag": "expand \u00b7 h1=1"}, {"s": "_12345678", "tag": "Up \u00b7 h1=0"}, {"s": "312645_78", "tag": "Down \u00b7 h1=2"}]}, {"title": "Pop board with h1=0 \u2014 GOAL", "lines": [{"t": "Moves: Left, Up", "cls": "goal"}, {"t": "Solution length 2", "cls": "goal"}], "boards": [{"s": "_12345678", "tag": "goal"}]}], "final": {"path": "Left, Up", "cost": 2, "explored": "2 boards expanded"}}}, "h": [2, 2]}, "P6": {"tasks": {"GBFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: start (h1=3). Moves are of the BLANK: Left / Right / Up / Down."}], "boards": [{"s": "123_46758", "tag": "start \u00b7 h1=3"}]}, {"title": "Expand board (h1=3)", "lines": [{"t": "Right: h1=2"}, {"t": "Up: h1=4"}, {"t": "Down: h1=4"}, {"t": "Lowest h1 in frontier = 2 \u2014 expand that next"}], "boards": [{"s": "123_46758", "tag": "expand \u00b7 h1=3"}, {"s": "1234_6758", "tag": "Right \u00b7 h1=2"}, {"s": "_23146758", "tag": "Up \u00b7 h1=4"}, {"s": "123746_58", "tag": "Down \u00b7 h1=4"}]}, {"title": "Expand board (h1=2)", "lines": [{"t": "Left: board already seen \u2014 skip", "cls": "dim"}, {"t": "Right: h1=3"}, {"t": "Up: h1=3"}, {"t": "Down: h1=1"}, {"t": "Lowest h1 in frontier = 1 \u2014 expand that next"}], "boards": [{"s": "1234_6758", "tag": "expand \u00b7 h1=2"}, {"s": "12346_758", "tag": "Right \u00b7 h1=3"}, {"s": "1_3426758", "tag": "Up \u00b7 h1=3"}, {"s": "1234567_8", "tag": "Down \u00b7 h1=1"}]}, {"title": "Expand board (h1=1)", "lines": [{"t": "Left: h1=2"}, {"t": "Right: h1=0"}, {"t": "Up: board already seen \u2014 skip", "cls": "dim"}, {"t": "Lowest h1 in frontier = 0 \u2014 expand that next"}], "boards": [{"s": "1234567_8", "tag": "expand \u00b7 h1=1"}, {"s": "123456_78", "tag": "Left \u00b7 h1=2"}, {"s": "12345678_", "tag": "Right \u00b7 h1=0"}]}, {"title": "Pop board with h1=0 \u2014 GOAL", "lines": [{"t": "Moves: Right, Down, Right", "cls": "goal"}, {"t": "Solution length 3", "cls": "goal"}], "boards": [{"s": "12345678_", "tag": "goal"}]}], "final": {"path": "Right, Down, Right", "cost": 3, "explored": "3 boards expanded"}}}, "h": [3, 3]}, "P7": {"tasks": {"AB": {"steps": [{"title": "Enter A (MAX)", "lines": [{"t": "alpha=-inf, beta=+inf"}]}, {"title": "Enter B (MIN)", "lines": [{"t": "alpha=-inf, beta=+inf"}]}, {"title": "Leaf b1 = 3", "lines": [{"t": "Return 3"}]}, {"title": "B: beta -> 3", "lines": [{"t": "MIN node lowers beta to 3 (alpha=-inf)"}]}, {"title": "Leaf b2 = 5", "lines": [{"t": "Return 5"}]}, {"title": "B returns 3", "lines": [{"t": "MIN value of B = 3"}]}, {"title": "A: alpha -> 3", "lines": [{"t": "MAX node raises alpha to 3 (beta=+inf)"}]}, {"title": "Enter C (MIN)", "lines": [{"t": "alpha=3, beta=+inf"}]}, {"title": "Leaf c1 = 2", "lines": [{"t": "Return 2"}]}, {"title": "C: beta -> 2", "lines": [{"t": "MIN node lowers beta to 2 (alpha=3)"}]}, {"title": "PRUNE at C: alpha(3) >= beta(2)", "lines": [{"t": "Cut children: c2 (never evaluated)", "cls": "cut"}]}, {"title": "C returns 2", "lines": [{"t": "MIN value of C = 2"}]}, {"title": "A returns 3", "lines": [{"t": "MAX value of A = 3"}]}], "final": {"path": "root value = 3", "cost": 3, "explored": "pruned edges: C-c2", "pruned": [["C", "c2"]], "vals": {"b1": 3, "b2": 5, "B": 3, "c1": 2, "C": 2, "A": 3}}}}}, "P8": {"tasks": {"AB": {"steps": [{"title": "Enter A (MAX)", "lines": [{"t": "alpha=-inf, beta=+inf"}]}, {"title": "Enter B (MIN)", "lines": [{"t": "alpha=-inf, beta=+inf"}]}, {"title": "Enter C (MAX)", "lines": [{"t": "alpha=-inf, beta=+inf"}]}, {"title": "Leaf D = 2", "lines": [{"t": "Return 2"}]}, {"title": "C: alpha -> 2", "lines": [{"t": "MAX node raises alpha to 2 (beta=+inf)"}]}, {"title": "Leaf E = 1", "lines": [{"t": "Return 1"}]}, {"title": "C returns 2", "lines": [{"t": "MAX value of C = 2"}]}, {"title": "B: beta -> 2", "lines": [{"t": "MIN node lowers beta to 2 (alpha=-inf)"}]}, {"title": "Enter F (MAX)", "lines": [{"t": "alpha=-inf, beta=2"}]}, {"title": "Leaf G = 6", "lines": [{"t": "Return 6"}]}, {"title": "F: alpha -> 6", "lines": [{"t": "MAX node raises alpha to 6 (beta=2)"}]}, {"title": "PRUNE at F: alpha(6) >= beta(2)", "lines": [{"t": "Cut children: H (never evaluated)", "cls": "cut"}]}, {"title": "F returns 6", "lines": [{"t": "MAX value of F = 6"}]}, {"title": "B returns 2", "lines": [{"t": "MIN value of B = 2"}]}, {"title": "A: alpha -> 2", "lines": [{"t": "MAX node raises alpha to 2 (beta=+inf)"}]}, {"title": "Enter I (MIN)", "lines": [{"t": "alpha=2, beta=+inf"}]}, {"title": "Enter J (MAX)", "lines": [{"t": "alpha=2, beta=+inf"}]}, {"title": "Leaf K = 8", "lines": [{"t": "Return 8"}]}, {"title": "J: alpha -> 8", "lines": [{"t": "MAX node raises alpha to 8 (beta=+inf)"}]}, {"title": "Leaf L = 3", "lines": [{"t": "Return 3"}]}, {"title": "J returns 8", "lines": [{"t": "MAX value of J = 8"}]}, {"title": "I: beta -> 8", "lines": [{"t": "MIN node lowers beta to 8 (alpha=2)"}]}, {"title": "Enter M (MAX)", "lines": [{"t": "alpha=2, beta=8"}]}, {"title": "Leaf N = 5", "lines": [{"t": "Return 5"}]}, {"title": "M: alpha -> 5", "lines": [{"t": "MAX node raises alpha to 5 (beta=8)"}]}, {"title": "Leaf O = 2", "lines": [{"t": "Return 2"}]}, {"title": "M returns 5", "lines": [{"t": "MAX value of M = 5"}]}, {"title": "I: beta -> 5", "lines": [{"t": "MIN node lowers beta to 5 (alpha=2)"}]}, {"title": "I returns 5", "lines": [{"t": "MIN value of I = 5"}]}, {"title": "A: alpha -> 5", "lines": [{"t": "MAX node raises alpha to 5 (beta=+inf)"}]}, {"title": "Enter P (MIN)", "lines": [{"t": "alpha=5, beta=+inf"}]}, {"title": "Enter Q (MAX)", "lines": [{"t": "alpha=5, beta=+inf"}]}, {"title": "Leaf R = 3", "lines": [{"t": "Return 3"}]}, {"title": "Leaf Sf = 4", "lines": [{"t": "Return 4"}]}, {"title": "Q returns 4", "lines": [{"t": "MAX value of Q = 4"}]}, {"title": "P: beta -> 4", "lines": [{"t": "MIN node lowers beta to 4 (alpha=5)"}]}, {"title": "PRUNE at P: alpha(5) >= beta(4)", "lines": [{"t": "Cut children: T (never evaluated)", "cls": "cut"}]}, {"title": "P returns 4", "lines": [{"t": "MIN value of P = 4"}]}, {"title": "A returns 5", "lines": [{"t": "MAX value of A = 5"}]}], "final": {"path": "root value = 5", "cost": 5, "explored": "pruned edges: F-H, P-T, T-U, T-V", "pruned": [["F", "H"], ["P", "T"], ["T", "U"], ["T", "V"]], "vals": {"D": 2, "E": 1, "C": 2, "G": 6, "F": 6, "B": 2, "K": 8, "L": 3, "J": 8, "N": 5, "O": 2, "M": 5, "I": 5, "R": 3, "Sf": 4, "Q": 4, "P": 4, "A": 5}}}}}, "PM": {"tasks": {"BFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: (2,1). Successor order: Left, Right, Up, Down."}]}, {"title": "Expand (2,1)", "lines": [{"t": "R \u2192 (2,2): enqueue"}, {"t": "U \u2192 (1,1): enqueue"}, {"t": "D \u2192 (3,1): enqueue"}, {"t": "Queue: (2,2) \u00b7 (1,1) \u00b7 (3,1)"}, {"t": "Explored: (2,1)"}]}, {"title": "Expand (2,2)", "lines": [{"t": "L \u2192 (2,1): seen \u2014 skip", "cls": "dim"}, {"t": "D \u2192 (3,2): enqueue"}, {"t": "Queue: (1,1) \u00b7 (3,1) \u00b7 (3,2)"}, {"t": "Explored: (2,1), (2,2)"}]}, {"title": "Expand (1,1)", "lines": [{"t": "D \u2192 (2,1): seen \u2014 skip", "cls": "dim"}, {"t": "Queue: (3,1) \u00b7 (3,2)"}, {"t": "Explored: (2,1), (2,2), (1,1)"}]}, {"title": "Expand (3,1)", "lines": [{"t": "R \u2192 (3,2): seen \u2014 skip", "cls": "dim"}, {"t": "U \u2192 (2,1): seen \u2014 skip", "cls": "dim"}, {"t": "Queue: (3,2)"}, {"t": "Explored: (2,1), (2,2), (1,1), (3,1)"}]}, {"title": "Expand (3,2)", "lines": [{"t": "L \u2192 (3,1): seen \u2014 skip", "cls": "dim"}, {"t": "R \u2192 (3,3): GOAL generated \u2014 stop", "cls": "goal"}, {"t": "Path: (2,1) \u2192 (2,2) \u2192 (3,2) \u2192 (3,3)  (3 moves)", "cls": "goal"}]}], "final": {"path": "(2,1) \u2192 (2,2) \u2192 (3,2) \u2192 (3,3)", "cost": 3, "explored": "(2,1), (2,2), (1,1), (3,1), (3,2)"}}, "DFS": {"steps": [{"title": "Initialise", "lines": [{"t": "Frontier: (2,1). Successor order: Left, Right, Up, Down."}]}, {"title": "Expand (2,1)", "lines": [{"t": "R \u2192 (2,2): push"}, {"t": "U \u2192 (1,1): push"}, {"t": "D \u2192 (3,1): push"}, {"t": "Stack (top first): (3,1) \u00b7 (1,1) \u00b7 (2,2)"}, {"t": "Explored: (2,1)"}]}, {"title": "Expand (3,1)", "lines": [{"t": "R \u2192 (3,2): push"}, {"t": "U \u2192 (2,1): seen \u2014 skip", "cls": "dim"}, {"t": "Stack (top first): (3,2) \u00b7 (1,1) \u00b7 (2,2)"}, {"t": "Explored: (2,1), (3,1)"}]}, {"title": "Expand (3,2)", "lines": [{"t": "L \u2192 (3,1): seen \u2014 skip", "cls": "dim"}, {"t": "R \u2192 (3,3): GOAL generated \u2014 stop", "cls": "goal"}, {"t": "Path: (2,1) \u2192 (3,1) \u2192 (3,2) \u2192 (3,3)  (3 moves)", "cls": "goal"}]}], "final": {"path": "(2,1) \u2192 (3,1) \u2192 (3,2) \u2192 (3,3)", "cost": 3, "explored": "(2,1), (3,1), (3,2)"}}}}, "P9": {"tasks": {"IDS": {"steps": [{"title": "Depth limit = 0", "lines": [{"t": "Visit order: S  \u2014 goal NOT found (cutoff)"}]}, {"title": "Depth limit = 1", "lines": [{"t": "Visit order: S \u2192 A \u2192 B  \u2014 goal NOT found (cutoff)"}]}, {"title": "Depth limit = 2", "lines": [{"t": "Visit order: S \u2192 A \u2192 C \u2192 D \u2192 B \u2192 E \u2192 F  \u2014 goal NOT found (cutoff)"}]}, {"title": "Depth limit = 3", "lines": [{"t": "Visit order: S \u2192 A \u2192 C \u2192 D \u2192 G  \u2014 GOAL found", "cls": "goal"}]}], "final": {"path": "IDS finds G at limit 3: S \u2192 A \u2192 C \u2192 D \u2192 G", "cost": 3, "explored": "DLS with limit 2 fails; IDS = run DLS with limit 0,1,2,3,\u2026"}}}}};
+
+/* ---------------- figure renderers ---------------- */
+function svgEl(w,h){ return `<svg viewBox="0 0 ${w} ${h}" role="img">`; }
+function shorten(x1,y1,x2,y2,r1,r2){
+  const dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy);
+  return [x1+dx/L*r1, y1+dy/L*r1, x2-dx/L*r2, y2-dy/L*r2];
+}
+function graphSVG(g){
+  const W=g.w||620, H=g.h||330, R=20;
+  let s = svgEl(W,H);
+  s += `<defs><marker id="ar${g.id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>`;
+  const pos = {}; g.nodes.forEach(n=>pos[n.id]=n);
+  for(const e of g.edges){
+    const a=pos[e.u], b=pos[e.v];
+    const [x1,y1,x2,y2]=shorten(a.x,a.y,b.x,b.y,R+2,R+4);
+    let mx,my;
+    if(e.c){ // quadratic control offset
+      const cx=(a.x+b.x)/2+e.c[0], cy=(a.y+b.y)/2+e.c[1];
+      s+=`<path class="gedge" d="M${x1},${y1} Q${cx},${cy} ${x2},${y2}" marker-end="url(#ar${g.id})"/>`;
+      mx=0.25*x1+0.5*cx+0.25*x2; my=0.25*y1+0.5*cy+0.25*y2;
+    }else{
+      s+=`<line class="gedge" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" marker-end="url(#ar${g.id})"/>`;
+      mx=(x1+x2)/2; my=(y1+y2)/2;
+    }
+    if(e.o){ mx+=e.o[0]; my+=e.o[1]; }
+    s+=`<rect class="gcost-bg" x="${mx-9}" y="${my-8}" width="18" height="16" rx="3"/><text class="gcost" x="${mx}" y="${my+0.5}">${e.w}</text>`;
+  }
+  for(const n of g.nodes){
+    const cls = n.id===g.start?'start':(n.id===g.goal?'goal':'');
+    s+=`<circle class="gnode ${cls}" cx="${n.x}" cy="${n.y}" r="${R}"/><text class="glabel" x="${n.x}" y="${n.y}">${n.id}</text>`;
+    if(n.h!==undefined){
+      const hy = n.hy||(n.y+R+13);
+      s+=`<text class="gh" x="${n.x}" y="${hy}">h=${n.h}</text>`;
+    }
+  }
+  return s+'</svg>';
+}
+function mazeSVG(){
+  const C=64, ox=40, oy=26;
+  let s=svgEl(300,250);
+  const walls=new Set(['1,2','2,3']);
+  for(let r=1;r<=3;r++)for(let c=1;c<=3;c++){
+    const x=ox+(c-1)*C, y=oy+(r-1)*C, w=walls.has(r+','+c);
+    s+=`<rect class="${w?'mzwall':'mzcell'}" x="${x}" y="${y}" width="${C}" height="${C}"/>`;
+    if(!w) s+=`<text class="mzco" x="${x+C-11}" y="${y+12}">${r},${c}</text>`;
+    if(r===2&&c===1) s+=`<text class="mzlab" x="${x+C/2}" y="${y+C/2}">S</text>`;
+    if(r===3&&c===3) s+=`<text class="mzlab" x="${x+C/2}" y="${y+C/2}">G</text>`;
+  }
+  for(let c=1;c<=3;c++) s+=`<text class="mzco" x="${ox+(c-1)*C+C/2}" y="${oy-8}">col ${c}</text>`;
+  for(let r=1;r<=3;r++) s+=`<text class="mzco" x="${ox-18}" y="${oy+(r-1)*C+C/2}">row ${r}</text>`;
+  return s+'</svg>';
+}
+function puzzleHTML(state,cap){
+  let cells='';
+  for(const ch of state) cells+= ch==='_' ? '<span class="blank"></span>' : `<span>${ch}</span>`;
+  return `<div class="bwrap"><div class="pz">${cells}</div>${cap?`<div class="cap">${cap}</div>`:''}</div>`;
+}
+function treeLayout(tree){
+  const root=Object.keys(tree).find(k=>tree[k].root);
+  let x=0; const pos={}, depth={};
+  (function walk(n,d){
+    depth[n]=d;
+    const node=tree[n];
+    if(node.kind==='leaf'){ pos[n]={x:x++}; return; }
+    node.children.forEach(c=>walk(c,d+1));
+    const xs=node.children.map(c=>pos[c].x);
+    pos[n]={x:(Math.min(...xs)+Math.max(...xs))/2};
+  })(root,0);
+  return {root,pos,depth,leaves:x};
+}
+function treeSVG(tree,opts){
+  const {root,pos,depth,leaves}=treeLayout(tree);
+  const maxd=Math.max(...Object.values(depth));
+  const W=Math.max(360,leaves*52+60), H=maxd*72+96;
+  const X=n=>36+pos[n].x*52+ (leaves>1?0:120), Y=n=>34+depth[n]*72;
+  let s=svgEl(W,H), cuts=opts&&opts.cuts?opts.cuts:[], showVals=opts&&opts.showVals, vals=opts&&opts.vals||{};
+  const cutSet=new Set(cuts.map(e=>e[0]+'>'+e[1]));
+  for(const k in tree){
+    const n=tree[k];
+    if(n.kind==='leaf') continue;
+    for(const c of n.children){
+      s+=`<line class="gedge" x1="${X(k)}" y1="${Y(k)+15}" x2="${X(c)}" y2="${Y(c)-15}"/>`;
+      if(cutSet.has(k+'>'+c)&&showVals){
+        const mx=(X(k)+X(c))/2, my=(Y(k)+15+Y(c)-15)/2;
+        s+=`<line class="cutline" x1="${mx-8}" y1="${my+7}" x2="${mx+8}" y2="${my-7}"/>`;
+      }
+    }
+  }
+  const kindsAtDepth={};
+  for(const k in tree){
+    const n=tree[k], disp=k.replace(/f$/,'');
+    if(n.kind!=='leaf') kindsAtDepth[depth[k]]=n.kind;
+    if(n.kind==='leaf'){
+      s+=`<circle class="gnode" cx="${X(k)}" cy="${Y(k)}" r="14"/><text class="glabel" style="font-size:12px" x="${X(k)}" y="${Y(k)}">${disp}</text>`;
+      s+=`<text class="leafval" x="${X(k)}" y="${Y(k)+30}">${n.val}</text>`;
+    }else{
+      const shape = n.kind==='MAX'
+        ? `<rect class="gnode" x="${X(k)-15}" y="${Y(k)-15}" width="30" height="30" rx="6"/>`
+        : `<circle class="gnode" cx="${X(k)}" cy="${Y(k)}" r="15"/>`;
+      s+=shape+`<text class="glabel" style="font-size:12.5px" x="${X(k)}" y="${Y(k)}">${disp}</text>`;
+      if(showVals&&vals[k]!==undefined) s+=`<text class="abval" x="${X(k)+24}" y="${Y(k)-10}">${vals[k]}</text>`;
+    }
+  }
+  for(const d in kindsAtDepth) s+=`<text class="kindlab" x="${W-8}" y="${34+d*72+4}" text-anchor="end">${kindsAtDepth[d]}</text>`;
+  if(kindsAtDepth[maxd-1]) s+=`<text class="kindlab" x="${W-8}" y="${34+maxd*72+4}" text-anchor="end">leaf</text>`;
+  return s+'</svg>';
+}
+function vacuumSVG(){
+  const combos=[['DD',0],['DC',1],['CD',2],['CC',3]]; // row order top->bottom
+  const posL=['L','M','R'];
+  const onPath=new Set(['M|DD','R|DD','R|DC','M|DC','L|DC','L|CC']);
+  const W=640,H=560, colX={L:120,M:320,R:520}, rowY={DD:60,DC:190,CD:320,CC:450};
+  let s=svgEl(W,H);
+  s+=`<defs><marker id="var2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>`;
+  const stX=(p,c)=>colX[p]-48, stY=(p,c)=>rowY[c]-22;
+  // movement arrows (double, between adjacent columns in each row)
+  for(const [c] of combos){
+    for(let i=0;i<2;i++){
+      const x1=colX[posL[i]]+50, x2=colX[posL[i+1]]-50, y=rowY[c];
+      s+=`<line class="gedge" x1="${x1}" y1="${y-7}" x2="${x2}" y2="${y-7}" marker-end="url(#var2)"/>`;
+      s+=`<line class="gedge" x1="${x2}" y1="${y+7}" x2="${x1}" y2="${y+7}" marker-end="url(#var2)"/>`;
+      s+=`<text class="vcap" x="${(x1+x2)/2}" y="${y-13}">R:10</text>`;
+      s+=`<text class="vcap" x="${(x1+x2)/2}" y="${y+21}">L:5</text>`;
+    }
+  }
+  // clean arrows
+  const cleans=[['L','DD','CD'],['R','DD','DC'],['L','DC','CC'],['R','CD','CC']];
+  for(const [p,c1,c2] of cleans){
+    const x=colX[p]+(p==='L'?-62:62);
+    const y1=rowY[c1]+24, y2=rowY[c2]-26;
+    s+=`<path class="gedge" d="M${colX[p]+(p==='L'?-30:30)},${y1} Q${x},${(y1+y2)/2} ${colX[p]+(p==='L'?-30:30)},${y2}" marker-end="url(#var2)"/>`;
+    s+=`<text class="vcap" x="${x+(p==='L'?-6:8)}" y="${(y1+y2)/2}">Clean:15</text>`;
+  }
+  // state icons
+  for(const [c] of combos){
+    for(const p of posL){
+      const name=`${p}|${c}`, x=stX(p,c), y=stY(p,c), on=onPath.has(name);
+      s+=`<rect class="vstate ${on?'onpath':''}" x="${x}" y="${y}" width="96" height="44" rx="7"/>`;
+      for(let i=0;i<3;i++){
+        const cx=x+16+i*32;
+        s+=`<line class="gedge" x1="${x+32*(i)}" y1="${y+4}" x2="${x+32*i}" y2="${y+40}" style="${i===0?'display:none':''};stroke:var(--edge)"/>`;
+        const room=posL[i];
+        const dirty=(room==='L'&&c[0]==='D')||(room==='R'&&c[1]==='D');
+        if(dirty){ s+=`<circle class="vdirt" cx="${cx-5}" cy="${y+33}" r="2.5"/><circle class="vdirt" cx="${cx+5}" cy="${y+33}" r="2.5"/>`; }
+        if(room===p) s+=`<circle class="vbot" cx="${cx}" cy="${y+16}" r="7"/>`;
+      }
+      s+=`<text class="vcap ${on?'onpath':''}" x="${x+48}" y="${y+58}">${name}</text>`;
+    }
+  }
+  return s+'</svg>';
+}
+
+/* ---------------- problem metadata ---------------- */
+const G1={id:'g1',w:620,h:330,start:'S',goal:'G',
+  nodes:[{id:'S',x:60,y:165,h:7},{id:'A',x:205,y:75,h:6,hy:45},{id:'B',x:205,y:255,h:4},{id:'C',x:365,y:120,h:4,hy:90},{id:'D',x:365,y:245,h:2},{id:'G',x:545,y:165,h:0}],
+  edges:[{u:'S',v:'A',w:1},{u:'S',v:'B',w:4},{u:'A',v:'B',w:2},{u:'A',v:'C',w:5},{u:'B',v:'C',w:1},{u:'B',v:'D',w:5},{u:'C',v:'D',w:3},{u:'C',v:'G',w:7},{u:'D',v:'G',w:2}]};
+const G2={id:'g2',w:620,h:320,start:'S',goal:'G',
+  nodes:[{id:'S',x:60,y:150,h:22},{id:'A',x:190,y:60,h:20,hy:30},{id:'B',x:360,y:60,h:8,hy:30},{id:'G',x:540,y:150,h:0},{id:'C',x:190,y:250,h:14},{id:'D',x:360,y:250,h:11}],
+  edges:[{u:'S',v:'A',w:3},{u:'A',v:'B',w:12},{u:'B',v:'G',w:11},{u:'S',v:'C',w:8},{u:'C',v:'D',w:3},{u:'D',v:'B',w:6},{u:'D',v:'G',w:16},{u:'S',v:'G',w:50,o:[0,-12]}]};
+const G3={id:'g3',w:640,h:340,start:'S',goal:'G',
+  nodes:[{id:'S',x:55,y:165,h:8},{id:'A',x:185,y:75,h:7,hy:45},{id:'B',x:185,y:260,h:6},{id:'C',x:345,y:60,h:5,hy:30},{id:'D',x:315,y:165,h:5,hy:196},{id:'E',x:345,y:270,h:4},{id:'F',x:470,y:200,h:3,hy:232},{id:'G',x:575,y:110,h:0,hy:80}],
+  edges:[{u:'S',v:'A',w:2},{u:'S',v:'B',w:3},{u:'A',v:'C',w:4},{u:'A',v:'D',w:2},{u:'B',v:'D',w:4},{u:'B',v:'E',w:6},{u:'C',v:'G',w:7},{u:'D',v:'C',w:1},{u:'D',v:'F',w:3},{u:'E',v:'F',w:2},{u:'E',v:'G',w:9,c:[60,60]},{u:'F',v:'G',w:4}]};
+const T7={"A":{kind:"MAX",children:["B","C"],root:true},"B":{kind:"MIN",children:["b1","b2"]},"C":{kind:"MIN",children:["c1","c2"]},"b1":{kind:"leaf",val:3},"b2":{kind:"leaf",val:5},"c1":{kind:"leaf",val:2},"c2":{kind:"leaf",val:9}};
+const T8={"A":{kind:"MAX",children:["B","I","P"],root:true},"B":{kind:"MIN",children:["C","F"]},"I":{kind:"MIN",children:["J","M"]},"P":{kind:"MIN",children:["Q","T"]},"C":{kind:"MAX",children:["D","E"]},"F":{kind:"MAX",children:["G","H"]},"J":{kind:"MAX",children:["K","L"]},"M":{kind:"MAX",children:["N","O"]},"Q":{kind:"MAX",children:["R","Sf"]},"T":{kind:"MAX",children:["U","V"]},"D":{kind:"leaf",val:2},"E":{kind:"leaf",val:1},"G":{kind:"leaf",val:6},"H":{kind:"leaf",val:1},"K":{kind:"leaf",val:8},"L":{kind:"leaf",val:3},"N":{kind:"leaf",val:5},"O":{kind:"leaf",val:2},"R":{kind:"leaf",val:3},"Sf":{kind:"leaf",val:4},"U":{kind:"leaf",val:2},"V":{kind:"leaf",val:6}};
+const T9={"S":{kind:"MAX",children:["A","B"],root:true},"A":{kind:"MAX",children:["C","D"]},"B":{kind:"MAX",children:["E","F"]},"C":{kind:"leaf",val:""},"D":{kind:"MAX",children:["Gg"]},"E":{kind:"leaf",val:""},"F":{kind:"leaf",val:""},"Gg":{kind:"leaf",val:"goal"}};
+
+const HSTEPS_P5=[
+ {title:"h1 — count misplaced tiles (never the blank)",lines:[
+   {t:"Compare every tile with the goal:"},
+   {t:"tile 3 at (0,0) — goal wants it at (1,0): misplaced",cls:"hot"},
+   {t:"tile 4 at (1,0) — goal wants it at (1,1): misplaced",cls:"hot"},
+   {t:"tiles 1,2,5,6,7,8: already in goal cells",cls:"dim"},
+   {t:"h1 = 2",cls:"goal"}]},
+ {title:"h2 — Manhattan distance per misplaced tile",lines:[
+   {t:"tile 3: |0-1| + |0-0| = 1"},
+   {t:"tile 4: |1-1| + |0-1| = 1"},
+   {t:"h2 = 1 + 1 = 2",cls:"goal"}]}];
+const HSTEPS_P6=[
+ {title:"h1 — count misplaced tiles",lines:[
+   {t:"tile 4 at (1,1) — goal (1,0): misplaced",cls:"hot"},
+   {t:"tile 5 at (2,1) — goal (1,1): misplaced",cls:"hot"},
+   {t:"tile 8 at (2,2) — goal (2,1): misplaced",cls:"hot"},
+   {t:"tiles 1,2,3,6,7 in place",cls:"dim"},
+   {t:"h1 = 3",cls:"goal"}]},
+ {title:"h2 — Manhattan distances",lines:[
+   {t:"tile 4: |1-1| + |1-0| = 1"},
+   {t:"tile 5: |2-1| + |1-1| = 1"},
+   {t:"tile 8: |2-2| + |2-1| = 1"},
+   {t:"h2 = 3",cls:"goal"}]}];
+
+const PROBLEMS=[
+ {id:'P1',name:'1 · Anchor graph',title:'The anchor graph — all five algorithms',marks:'core 60-mark skill',
+  tagline:'One graph, five traces. When you can do all five from a blank page, half the exam is yours.',
+  statement:'Directed graph, start <b>S</b>, goal <b>G</b>. Amber numbers are heuristic values h(n). For each algorithm: show <b>frontier and explored set at every step</b>, then final path and cost.',
+  fig:()=>graphSVG(G1),
+  tasks:[
+   {algo:'UCS',tip:'<b>Marker wants:</b> pop the cheapest g, "beats old, replace" bookkeeping, goal tested on POP (G:11 enters the frontier but is NOT the answer - it gets replaced by 9).'},
+   {algo:'BFS',tip:'<b>Marker wants:</b> level order, alphabetical insertion, stop when G is generated. BFS finds the fewest-edge path (13) - not the cheapest (9). Say that in part (b).'},
+   {algo:'DFS',tip:'<b>Marker wants:</b> stack behaviour. Push A,B - B pops first (last pushed). State the convention you use.'},
+   {algo:'GBFS',tip:'<b>Marker wants:</b> ranking by h only. Note it lands on cost 11, not optimal 9 - one line of "greedy ignores path cost" earns the explanation mark.'},
+   {algo:'A*',tip:'<b>Marker wants:</b> every node written as g+h=f. Same expansions as UCS here, but justified by f. h is admissible, so the answer is guaranteed optimal.'}]},
+ {id:'P2',name:'2 · The real Q5',title:'Fall 2024-25 mandatory Q5 — the actual exam graph',marks:'20 marks',
+  tagline:'This exact graph WAS the mandatory question. A* and GBFS give different answers on purpose.',
+  statement:'h(S)=22, h(A)=20, h(B)=8, h(C)=14, h(D)=11, h(G)=0. (a) Perform <b>A*</b>. (b) Perform <b>GBFS</b>. Show frontier, explored set, path, cost for each.',
+  fig:()=>graphSVG(G2),
+  tasks:[
+   {algo:'A*',tip:'<b>Official answer: S-A-B-G, cost 26.</b> The trap: S-C looks best first (f=22) and gets explored - but A* recovers via S-A-B. Show the replacement S-A-B:23 beating S-C-D-B:25.'},
+   {algo:'GBFS',tip:'<b>Official answer: S-G, cost 50.</b> G has h=0, the lowest possible, so the moment G is generated it wins the frontier. Greedy takes the 50-cost direct edge - massively suboptimal vs 26. That contrast IS the question.'},
+   {algo:'UCS',tip:'Bonus: UCS gives the same path as A* (26) - without needing h. If the paper asks "verify with UCS", this is it.'}]},
+ {id:'P3',name:'3 · Tie-breaker graph',title:'Bigger graph — ties broken alphabetically',marks:'15-20 marks',
+  tagline:'Two nodes hit the same f-value twice. Alphabetical order decides - exactly what examiners check.',
+  statement:'Start <b>S</b>, goal <b>G</b>. Run <b>UCS</b>, <b>A*</b> and <b>GBFS</b>. When two frontier nodes tie, expand the alphabetically first.',
+  fig:()=>graphSVG(G3),
+  tasks:[
+   {algo:'UCS',tip:'<b>Optimal: S-A-D-F-G = 11.</b> Watch C:5 replace C:6 via D - the "keep cheaper" rule in action.'},
+   {algo:'A*',tip:'Ties at f=9 (A vs B - take A) and f=10 (C vs F - take C). A* skips expanding E entirely; UCS could not. That saved work is the point of heuristics.'},
+   {algo:'GBFS',tip:'Greedy dives S-B-E-G for 18 - looks close, costs more. Perfect one-line contrast for "compare with UCS".'}]},
+ {id:'PM',name:'4 · Maze robot',title:'Maze robot — BFS and DFS on a grid',marks:'20 marks',
+  tagline:'Fall 2025-26 Q1 format. Cells are nodes; the wall cells do not exist.',
+  statement:'3x3 grid, robot starts at <b>S=(2,1)</b>, goal <b>G=(3,3)</b>. Black cells (1,2) and (2,3) are walls. Moves: <b>Left, Right, Up, Down</b> (that order), each cost 1. Show frontier updates, explored set, tree and final path for BFS and DFS.',
+  fig:()=>mazeSVG(),
+  tasks:[
+   {algo:'BFS',tip:'Generate successors in the order the paper lists moves: L, R, U, D. BFS path goes through (2,2).'},
+   {algo:'DFS',tip:'Stack: D was pushed last from S, so DFS dives DOWN first and reaches G via (3,1),(3,2). Different route, same length here - say "not guaranteed optimal in general".'}]},
+ {id:'P4',name:'5 · Vacuum world',title:'Vacuum-cleaner robot — UCS with action costs',marks:'20 marks',
+  tagline:'Fall 2025-26 Q2. The counter-intuitive one: going RIGHT first wins, because the way back is cheap.',
+  statement:'Three rooms in a row: L, M, R. Robot starts at <b>M</b>; L and R are <b>dirty</b>. Actions: <b>Left = 5</b>, <b>Right = 10</b>, <b>Clean = 15</b>. Goal: everything clean. (a) State-space graph (below - amber outline marks the optimal route). (b) Environment type. (c) UCS with stepwise costs.',
+  fig:()=>vacuumSVG(),
+  tasks:[
+   {algo:'UCS',tip:'<b>Optimal plan: Right, Clean, Left, Left, Clean = 50.</b> The tempting left-first plan costs 5+15+10+10+15 = 55 because you pay TWO Right moves coming back. UCS finds 50 automatically. (b) answer: single-agent, fully observable, deterministic, sequential, static, discrete.'}]},
+ {id:'P5',name:'6 · 8-puzzle warm-up',title:'8-puzzle — heuristics, then greedy',marks:'5 + 15 marks',
+  tagline:'The exact start/goal pair used in Fall 2025-26 and Summer 2024-25.',
+  statement:'Compute <b>h1</b> (misplaced tiles) and <b>h2</b> (sum of Manhattan distances) for the start state, then solve with <b>GBFS on h1</b>. Moves are moves of the blank.',
+  fig:()=>`<div class="boards" style="justify-content:center;padding:8px">${puzzleHTML('312/4_5/678'.replace(/\//g,''),'start')}<div style="align-self:center;color:var(--ink3);font-size:20px">&#8594;</div>${puzzleHTML('_12/345/678'.replace(/\//g,''),'goal')}</div>`,
+  tasks:[
+   {algo:'Heuristics',steps:HSTEPS_P5,final:{path:'h1 = 2 (tiles 3, 4) · h2 = 2',cost:null,explored:'blank never counted'},tip:'<b>Never count the blank.</b> Most dropped mark in this question across every semester.'},
+   {algo:'GBFS',tip:'Two moves: blank Left, blank Up. Show every candidate child with its h1 value - the rejected ones (h1=3) are where the marks are.'}]},
+ {id:'P6',name:'7 · 8-puzzle drill',title:'8-puzzle — second rep, three moves',marks:'5 + 15 marks',
+  tagline:'Same skill, slightly longer solution. If you can do this cold, the puzzle question is banked.',
+  statement:'Same task: <b>h1</b>, <b>h2</b>, then <b>GBFS on h1</b>.',
+  fig:()=>`<div class="boards" style="justify-content:center;padding:8px">${puzzleHTML('123/_46/758'.replace(/\//g,''),'start')}<div style="align-self:center;color:var(--ink3);font-size:20px">&#8594;</div>${puzzleHTML('123/456/78_'.replace(/\//g,''),'goal')}</div>`,
+  tasks:[
+   {algo:'Heuristics',steps:HSTEPS_P6,final:{path:'h1 = 3 (tiles 4, 5, 8) · h2 = 3',cost:null,explored:'blank never counted'},tip:'When h1 = h2, say why: every misplaced tile is exactly one step from home.'},
+   {algo:'GBFS',tip:'Three moves: Right, Down, Right. Greedy solves it without backtracking because h1 strictly decreases.'}]},
+ {id:'P7',name:'8 · Alpha-beta warm-up',title:'Alpha-beta pruning — the 30-second version',marks:'warm-up',
+  tagline:'Learn the cut condition on four leaves before the big tree.',
+  statement:'Root <b>A</b> is MAX; B and C are MIN. Leaves left to right: 3, 5 under B; 2, 9 under C. Apply alpha-beta left to right, show every alpha/beta update, mark the cut.',
+  fig:()=>treeSVG(T7,{showVals:false}),
+  figDone:()=>treeSVG(T7,{showVals:true,vals:{A:3,B:3,C:2,b1:'',b2:'',c1:'',c2:''},cuts:[['C','c2']]}),
+  tasks:[
+   {algo:'AB',tip:'<b>The cut fires on alpha >= beta - equality counts.</b> After C sees leaf 2: beta=2 <= alpha=3, so leaf 9 is never evaluated. Root = 3.'}]},
+ {id:'P8',name:'9 · Alpha-beta exam tree',title:'Alpha-beta — the actual Fall 2024-25 tree',marks:'20 marks',
+  tagline:'The real exam tree, with the official answer: root = 5, cuts under F and P.',
+  statement:'Root <b>A</b> MAX; B, I, P MIN; C,F,J,M,Q,T MAX; leaves: D=2 E=1 | G=6 H=1 | K=8 L=3 | N=5 O=2 | R=3 S=4 | U=2 V=6. Left to right. Show all alpha/beta updates and mark every pruned branch.',
+  fig:()=>treeSVG(T8,{showVals:false}),
+  figDone:()=>treeSVG(T8,{showVals:true,vals:{A:5,B:2,I:5,P:4,C:2,F:6,J:8,M:5,Q:4},cuts:[['F','H'],['P','T']]}),
+  tasks:[
+   {algo:'AB',tip:'<b>Official answer:</b> H pruned (at F, alpha 6 >= beta 2) and the whole T subtree pruned (at P, beta 4 <= alpha 5). Root value 5. Carry alpha/beta DOWN into each child - forgetting that is the classic lost mark.'}]},
+ {id:'P9',name:'10 · DLS and IDS',title:'Depth-limited and iterative deepening',marks:'short question',
+  tagline:'One tree, four depth limits. Know why limit 2 fails and limit 3 succeeds.',
+  statement:'Tree: S has children A, B; A has C, D; B has E, F; D has child <b>G (goal)</b>. Children visited left to right. List the visit order of <b>DLS</b> for limits 0-3, and show how <b>IDS</b> uses them.',
+  fig:()=>treeSVG(T9,{showVals:false}),
+  tasks:[
+   {algo:'IDS',tip:'DLS with limit smaller than the goal depth is INCOMPLETE - say it. IDS = DLS with limit 0,1,2,3... : complete like BFS, memory-light like DFS. Best uninformed choice when depth is unknown.'}]},
+];
+
+/* ---------------- state ---------------- */
+let store={};
+try{ store=JSON.parse(localStorage.getItem('aiwar')||'{}'); }catch(e){ store={}; }
+function save(){ try{ localStorage.setItem('aiwar',JSON.stringify(store)); }catch(e){} }
+
+/* ---------------- drills UI ---------------- */
+const dlist=document.getElementById('dlist'), dmain=document.getElementById('dmain');
+let curP=0, curT=0, curStep=0;
+function taskKey(p,t){ return 'done.'+PROBLEMS[p].id+'.'+PROBLEMS[p].tasks[t].algo; }
+function drillDone(p){ return PROBLEMS[p].tasks.every((_,t)=>store[taskKey(p,t)]); }
+function renderList(){
+  dlist.innerHTML='';
+  PROBLEMS.forEach((pr,i)=>{
+    const b=document.createElement('button');
+    b.innerHTML=`<span class="n">${String(i+1).padStart(2,'0')}</span> ${pr.name.replace(/^\d+ · /,'')} <span class="tick ${drillDone(i)?'done':''}"></span>`;
+    if(i===curP) b.classList.add('on');
+    b.onclick=()=>{curP=i;curT=0;curStep=0;renderList();renderProblem();};
+    dlist.appendChild(b);
+  });
+}
+function getTask(){
+  const pr=PROBLEMS[curP], t=pr.tasks[curT];
+  if(t.steps) return {steps:t.steps, final:t.final};
+  const tr=TRACES[pr.id].tasks[t.algo];
+  return {steps:tr.steps, final:tr.final};
+}
+function renderProblem(){
+  const pr=PROBLEMS[curP];
+  let algoBtns=pr.tasks.map((t,i)=>`<button class="${i===curT?'on':''}" data-t="${i}">${t.algo}${store[taskKey(curP,i)]?'<span class="st">&#10003;</span>':''}</button>`).join('');
+  dmain.innerHTML=`
+  <div class="card">
+    <h2>${pr.title}<span class="marks">${pr.marks}</span></h2>
+    <p class="tagline">${pr.tagline}</p>
+    <div class="statement">${pr.statement}</div>
+    <div class="figbox" id="figbox">${pr.fig()}</div>
+    <div class="algotabs" id="algotabs">${algoBtns}</div>
+    <div class="stepper">
+      <div class="stepbar">
+        <span class="lbl" id="steplbl"></span>
+        <button id="sback">&#8592; Back</button>
+        <button id="snext" class="primary">Next step &#8594;</button>
+        <button id="sall">Reveal all</button>
+        <button id="sreset">Reset</button>
+      </div>
+      <div class="steps" id="steps"></div>
+      <div style="padding:0 14px 14px"><div class="finalbox" id="finalbox"></div></div>
+    </div>
+    <div class="tip" id="tip"></div>
+    <div class="donebar">
+      <label><input type="checkbox" id="donechk"> I traced this correctly on paper</label>
+    </div>
+  </div>`;
+  document.getElementById('algotabs').querySelectorAll('button').forEach(b=>{
+    b.onclick=()=>{curT=+b.dataset.t;curStep=0;renderProblem();};
+  });
+  document.getElementById('sback').onclick=()=>{ if(curStep>0){curStep--; renderSteps();} };
+  document.getElementById('snext').onclick=nextStep;
+  document.getElementById('sall').onclick=()=>{curStep=getTask().steps.length; renderSteps();};
+  document.getElementById('sreset').onclick=()=>{curStep=0; renderSteps();};
+  const chk=document.getElementById('donechk');
+  chk.checked=!!store[taskKey(curP,curT)];
+  chk.onchange=()=>{ store[taskKey(curP,curT)]=chk.checked; save(); renderList(); renderProblem(); };
+  document.getElementById('tip').innerHTML=pr.tasks[curT].tip||'';
+  renderSteps();
+}
+function nextStep(){ const n=getTask().steps.length; if(curStep<n){curStep++; renderSteps();} }
+function renderSteps(){
+  const {steps,final}=getTask(), pr=PROBLEMS[curP];
+  const el=document.getElementById('steps');
+  const lbl=document.getElementById('steplbl');
+  lbl.textContent=curStep===0?`${steps.length} steps - work it on paper first, then check`:`step ${curStep} / ${steps.length}`;
+  if(curStep===0){
+    el.innerHTML='<div class="hint">Do the trace on paper. Then reveal step by step and compare against your working.</div>';
+  }else{
+    el.innerHTML=steps.slice(0,curStep).map((s,i)=>{
+      const latest=i===curStep-1;
+      let boards='';
+      if(s.boards) boards='<div class="boards">'+s.boards.map(b=>puzzleHTML(b.s,b.tag)).join('')+'</div>';
+      return `<div class="step ${latest?'latest':''}"><h5>${s.title}</h5>${boards}${s.lines.map(l=>`<div class="tl ${l.cls||''}">${l.t}</div>`).join('')}</div>`;
+    }).join('');
+    el.lastElementChild&&el.lastElementChild.scrollIntoView({block:'nearest'});
+  }
+  const fb=document.getElementById('finalbox');
+  const done=curStep>=steps.length;
+  fb.classList.toggle('on',done);
+  if(done&&final){
+    fb.innerHTML=`ANSWER  ${final.path}${final.cost!==null&&final.cost!==undefined?`   |   cost ${final.cost}`:''}${final.explored?`<br>explored: ${final.explored}`:''}`;
+    if(pr.figDone) document.getElementById('figbox').innerHTML=pr.figDone();
+  }else if(pr.figDone){
+    document.getElementById('figbox').innerHTML=pr.fig();
+  }
+  document.getElementById('sback').disabled=curStep===0;
+  document.getElementById('snext').disabled=done;
+}
+
+/* ---------------- flashcards ---------------- */
+const CARDS=[
+ {t:'PEAS',q:'PEAS for a candy / apple sorting robot',a:'P: percent sorted into correct jar, speed, few errors, no damage\nE: conveyor belt, jars, candies (colors/sizes), workshop\nA: robotic arm + gripper, belt motor, sorting flaps\nS: camera, color sensor, weight / barcode sensor'},
+ {t:'PEAS',q:'PEAS for a vacuum-cleaner robot',a:'P: cleanliness achieved, cells cleaned, energy used, time\nE: rooms, floor, dirt, walls, furniture\nA: wheels, suction motor, brushes\nS: dirt sensor, bump sensor, position sensor'},
+ {t:'PEAS',q:'PEAS for a water-purifying agent',a:'P: water purity, litres per hour, chemical waste kept low, safety\nE: water tank, pipes, filters, contaminants\nA: valves, pumps, filter controls, chemical dosers\nS: turbidity sensor, pH sensor, TDS sensor, flow and level sensors'},
+ {t:'PEAS',q:'PEAS for a garden-watering robot',a:'P: all plants watered, correct amount, water saved, time\nE: garden grid, plants, soil, weather\nA: wheels, water nozzle, arm\nS: soil-moisture sensor, camera, position sensor, rain sensor'},
+ {t:'Env',q:'The 7 environment dimensions',a:'Fully vs partially observable - can sensors see the whole state?\nSingle vs multi-agent - other agents acting?\nDeterministic vs stochastic - is the outcome of an action certain?\nEpisodic vs sequential - do past actions affect the future?\nStatic vs dynamic - does the world change while the agent thinks?\nDiscrete vs continuous - finite states and actions?\nKnown vs unknown - does the agent know the rules?'},
+ {t:'Env',q:'Classify: vacuum-cleaner world (exam answer)',a:'Single-agent, fully observable (the problem states all dirt positions), deterministic, sequential (cleaning changes the future), static, discrete.'},
+ {t:'Env',q:'Classify: candy sorting robot',a:'Single-agent, partially observable (sees one candy at a time), deterministic (mostly), EPISODIC - each candy is an independent decision, dynamic (belt moves), discrete.'},
+ {t:'Env',q:'When is an environment "uncertain"?',a:'If it is NOT fully observable or NOT deterministic. (True/False favorite.)'},
+ {t:'Search',q:'BFS - complete? optimal? complexity?',a:'Complete: YES (finite branching) - explores level by level.\nOptimal: only when every step costs the same (finds shallowest, not cheapest).\nTime O(b^d), Space O(b^d) - the huge frontier is its weakness.'},
+ {t:'Search',q:'DFS - complete? optimal? complexity?',a:'Complete: NO - can dive forever down an infinite branch.\nOptimal: NO - returns the first path it stumbles on.\nTime O(b^m), Space O(bm) - linear memory is its only virtue.'},
+ {t:'Search',q:'UCS - what does it expand, and the goal-test rule?',a:'Expands the frontier path with smallest cumulative cost g(n). Complete and optimal (positive step costs).\nGoal-test when POPPED, never when generated - stopping early gives the wrong answer.'},
+ {t:'Search',q:'DLS and IDS - properties',a:'DLS: DFS with hard depth limit L. Incomplete if goal deeper than L; not optimal.\nIDS: DLS with L = 0,1,2,... Complete, optimal for unit costs, time O(b^d), space O(bd). Best uninformed search when depth unknown.'},
+ {t:'Search',q:'GBFS - what does it expand and what does it sacrifice?',a:'Expands lowest h(n) only - pure guess toward goal.\nNot complete (can loop), not optimal (ignores cost already paid).\nFast and memory-hungry: O(b^m).'},
+ {t:'Search',q:'A* - the formula and the optimality condition',a:'f(n) = g(n) + h(n). Complete; optimal IF h is admissible (tree search) / consistent (graph search).\nAlways state the caveat - "yes it is optimal" alone loses the mark.'},
+ {t:'Heuristics',q:'Admissible heuristic - definition and test',a:'h(n) <= h*(n): never OVER-estimates the true cheapest cost to goal.\nTest: compare h(n) against actual cheapest path cost from n. Guarantees A* tree-search optimal.'},
+ {t:'Heuristics',q:'Consistent (monotone) heuristic - definition',a:'h(n) <= c(n,n\') + h(n\') for every edge - the triangle inequality.\nConsistent implies admissible. Guarantees A* graph-search optimal.\nCheck edge by edge: h(parent) minus h(child) must not exceed edge cost.'},
+ {t:'Heuristics',q:'8-puzzle h1 and h2',a:'h1 = number of misplaced tiles (NEVER count the blank).\nh2 = sum over tiles of |row - goal row| + |col - goal col|.\nh2 dominates h1 (h2 >= h1), both admissible; h2 usually expands fewer nodes.'},
+ {t:'Concepts',q:'f(n) = (2-w)g(n) + w·h(n) - what strategy at w = 0, 1, 2?',a:'w=0: f = 2g - ranks by g - Uniform Cost Search.\nw=1: f = g + h - A*.\nw=2: f = 2h - ranks by h - Greedy Best-First.\nMore weight on h = greedier; more on g = safer.'},
+ {t:'Concepts',q:'Tree search vs graph search',a:'Tree search: no memory of visited states - can revisit and loop forever.\nGraph search: keeps an explored (closed) set, never expands a state twice - needs memory, avoids cycles.'},
+ {t:'Concepts',q:'Branching factor vs state space (garden robot 4x5)',a:'Branching factor b = max actions from one state = 5 (Up, Down, Left, Right, Water).\nState space = robot positions x watered-or-not per square = 20 x 2^20 (about 21 million).\nDo not swap the two - the paper asks for both.'},
+ {t:'Concepts',q:'Well-defined problem - the components (8-puzzle)',a:'Initial state: the given board.\nActions: slide blank Up / Down / Left / Right.\nTransition model: the board after a slide.\nGoal test: board equals goal arrangement.\nPath cost: 1 per move.\nAll five are unambiguous, so the 8-puzzle is well defined.'},
+ {t:'Concepts',q:'Vacuum world, 2 cells - how many states? Formula?',a:'8 states: 2 robot positions x 2 x 2 dirt combinations.\nGeneral: n positions x 2^n dirt combos = n·2^n.'},
+ {t:'Concepts',q:'8-queens as a search problem',a:'States: any arrangement of 0-8 queens.\nOperators: add (or move) a queen on a square.\nGoal test: 8 queens, none attacked.\nPath cost: irrelevant - only the final state matters.'},
+ {t:'Agents',q:'Model-based reflex agent',a:'Keeps INTERNAL STATE plus a model of how the world evolves, to act under partial observability. Still rule-based: condition -> action.'},
+ {t:'Agents',q:'Goal-based agent',a:'Adds an explicit GOAL. Uses search / planning to pick actions that lead toward the goal. More flexible than reflex; no notion of "how good", just goal or not.'},
+ {t:'Agents',q:'Utility-based agent - procedure',a:'1. Sensors perceive.\n2. Internal state updated.\n3. Predicts "what will the world be if I do action X?"\n4. Utility function scores each resulting state.\n5. Picks the action with MAXIMUM EXPECTED UTILITY.\nHandles conflicting goals and uncertainty - better than goal-based when trade-offs exist.'},
+ {t:'Agents',q:'Turing Test - what it is, what it needs',a:'Interrogator chats by text with a hidden human and machine; the machine passes if it cannot be reliably identified.\nNeeds: NLP, knowledge representation, automated reasoning, machine learning.\nTOTAL Turing Test adds computer vision + robotics.'},
+ {t:'Agents',q:'The four approaches to AI (2x2)',a:'Acting humanly - Turing Test.\nThinking humanly - cognitive modeling.\nThinking rationally - laws of thought / logic.\nActing rationally - rational agent, maximize expected performance. Modern AI takes this one.'},
+ {t:'Concepts',q:'Hill climbing - idea and famous weakness',a:'Local search: keep moving to the neighbor with the best h; stop when no neighbor is better.\nWeakness: LOCAL MINIMA / plateaus - it halts at a state better than all neighbors but not the goal.\nFixes: random restart, simulated annealing.'},
+ {t:'Concepts',q:'Alpha-beta - what are alpha and beta, when do you cut?',a:'alpha = best value MAX can guarantee so far; beta = best value MIN can guarantee.\nMAX nodes raise alpha, MIN nodes lower beta; pass both down.\nPRUNE remaining children the moment alpha >= beta (equality counts).\nBest-case move ordering: O(b^(m/2)) - doubles searchable depth.'},
+];
+let fcOrder=CARDS.map((_,i)=>i), fcPos=0, fcFilterTag='all', fcUnknownOnly=false;
+const fcard=document.getElementById('fcard');
+function fcList(){
+  return fcOrder.filter(i=>{
+    if(fcFilterTag!=='all'&&CARDS[i].t!==fcFilterTag) return false;
+    if(fcUnknownOnly&&store['fc.'+i]!=='dk') return false;
+    return true;
+  });
+}
+function renderCard(){
+  const list=fcList();
+  document.getElementById('fccount').textContent=list.length?`${(fcPos%list.length)+1} / ${list.length}`:'0 cards';
+  if(!list.length){ document.getElementById('fcq').textContent='No cards match - clear the filter.'; document.getElementById('fca').textContent=''; document.getElementById('fctag').textContent=''; return; }
+  const c=CARDS[list[fcPos%list.length]];
+  fcard.classList.remove('flip');
+  document.getElementById('fctag').textContent=c.t;
+  document.getElementById('fcq').textContent=c.q;
+  document.getElementById('fca').textContent=c.a;
+}
+fcard.onclick=()=>fcard.classList.toggle('flip');
+document.getElementById('fcnext').onclick=()=>{fcPos++;renderCard();};
+document.getElementById('fcprev').onclick=()=>{fcPos=Math.max(0,fcPos-1);renderCard();};
+document.getElementById('fcknow').onclick=()=>{const l=fcList(); if(l.length){store['fc.'+l[fcPos%l.length]]='ok';save();} fcPos++;renderCard();};
+document.getElementById('fcdk').onclick=()=>{const l=fcList(); if(l.length){store['fc.'+l[fcPos%l.length]]='dk';save();} fcPos++;renderCard();};
+document.getElementById('fcshuffle').onclick=()=>{fcOrder.sort(()=>Math.random()-0.5);fcPos=0;renderCard();};
+document.getElementById('fcunknown').onclick=function(){fcUnknownOnly=!fcUnknownOnly;this.style.borderColor=fcUnknownOnly?'var(--bad)':'var(--edge)';fcPos=0;renderCard();};
+const sel=document.getElementById('fcfilter');
+[...new Set(CARDS.map(c=>c.t))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o);});
+sel.onchange=()=>{fcFilterTag=sel.value;fcPos=0;renderCard();};
+
+/* ---------------- mock exam ---------------- */
+const MOCK=[
+ {n:'Q1',m:20,body:'A robot must navigate the 3x3 maze of Drill 4 (S at (2,1), G at (3,3), walls at (1,2) and (2,3); moves Left, Right, Up, Down). Solve with BFS and DFS: frontier updates at each step, explored set, expanded tree, final path from S to G.',
+  ans:'BFS: expand (2,1),(2,2),(1,1),(3,1),(3,2) - goal generated from (3,2).\nPath (2,1)-(2,2)-(3,2)-(3,3), 3 moves.\nDFS (stack): (2,1) then (3,1) then (3,2) - path (2,1)-(3,1)-(3,2)-(3,3).\nFull step-by-step: Drill 4.'},
+ {n:'Q2',m:20,body:'Vacuum robot, rooms L M R in a row; robot at M; L and R dirty. Move Left 5, Move Right 10, Clean 15. (a) Draw the state-space graph [5]. (b) Classify the environment: single/multi-agent, observable, episodic/sequential, static/dynamic, deterministic/stochastic [5]. (c) Solve with UCS showing stepwise cost evaluation [10].',
+  ans:'(a) 12 states = 3 positions x 4 dirt combos - lattice in Drill 5.\n(b) Single-agent, fully observable, sequential, static, deterministic (discrete).\n(c) Optimal plan Right, Clean, Left, Left, Clean = 10+15+5+5+15 = 50. Left-first costs 55.\nFull UCS trace: Drill 5.'},
+ {n:'Q3',m:20,body:'(a) A garden-watering robot works a 4x5 grid (20 squares), waters one square per action, moves up/down/left/right. Give the formal problem description (initial state, actions, transition model, goal test, path cost) and the size of the branching factor and state space [10]. (b) "The A* algorithm is always complete and optimal." Explain, considering admissibility and consistency [10].',
+  ans:'(a) Initial: robot at start cell, all squares unwatered. Actions {Up,Down,Left,Right,Water}. Transition: moves change cell, Water marks cell. Goal: all 20 watered. Cost: 1 per action. b = 5, state space = 20 x 2^20 = 20,971,520.\n(b) A* is complete (finite b, positive costs). Optimal ONLY IF h is admissible - h(n) <= h*(n), never over-estimates (tree search) - and consistent - h(n) <= c(n,n\') + h(n\') (graph search). Consistent implies admissible. If h over-estimates, A* can return a suboptimal path.'},
+ {n:'Q4',m:20,body:'For the 8-puzzle of Drill 7 (start 123/_46/758, goal 123/456/78_): (a) compute h1 (misplaced tiles) and h2 (total Manhattan distance) [5]. (b) Solve with Greedy Best-First Search using h1; show the search tree and solution path [15].',
+  ans:'(a) h1 = 3 (tiles 4, 5, 8), h2 = 1+1+1 = 3.\n(b) GBFS: blank Right (h1 2), Down (h1 1), Right (h1 0). Three moves.\nFull tree with all rejected children: Drill 7.'},
+ {n:'Q5',m:20,body:'MANDATORY. Graph: S->A=3, S->C=8, S->G=50, A->B=12, C->D=3, D->B=6, D->G=16, B->G=11. h: S=22 A=20 B=8 C=14 D=11 G=0. (a) Perform A* from S to G [10]. (b) Perform GBFS on the same problem [5]. (c) Give the PEAS description of an apple-sorting robot (green and red apples) [5].',
+  ans:'(a) A*: pop S, C(f22), D(22), A(23), B(23), G(26). Path S-A-B-G, cost 26.\n(b) GBFS: G has h=0, wins immediately - path S-G, cost 50. Greedy ignores path cost.\n(c) P: apples sorted correctly by color, speed, no bruising. E: conveyor, apples, bins. A: arm, gripper, belt, flaps. S: camera / color sensor, weight sensor.\nFull traces: Drill 2.'},
+];
+document.getElementById('mockqs').innerHTML=MOCK.map(q=>`
+ <div class="mq"><h3>${q.n}<span class="m">[${q.m} marks]</span></h3>
+ <div class="body">${q.body}</div>
+ <details><summary>Reveal model answer</summary><div class="ans"><div class="mono" style="white-space:pre-wrap">${q.ans}</div></div></details>
+ </div>`).join('');
+let mtLeft=7200, mtRun=null;
+function mtShow(){
+  const h=Math.floor(mtLeft/3600), m=Math.floor(mtLeft%3600/60), s=mtLeft%60;
+  const el=document.getElementById('mt');
+  el.textContent=`${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.classList.toggle('low',mtLeft<900);
+}
+document.getElementById('mtstart').onclick=function(){
+  if(mtRun){clearInterval(mtRun);mtRun=null;this.textContent='Resume';return;}
+  this.textContent='Pause';
+  mtRun=setInterval(()=>{ if(mtLeft>0){mtLeft--;mtShow();} else {clearInterval(mtRun);} },1000);
+};
+document.getElementById('mtreset').onclick=()=>{ if(mtRun){clearInterval(mtRun);mtRun=null;} mtLeft=7200; document.getElementById('mtstart').textContent='Start'; mtShow(); };
+mtShow();
+
+/* ---------------- tabs / countdown / keys ---------------- */
+document.getElementById('tabs').querySelectorAll('button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('#tabs button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById('view-'+b.dataset.v).classList.add('on');
+  };
+});
+function cdTick(){
+  const now=new Date();
+  let t=new Date(now); t.setHours(9,0,0,0);
+  if(t<=now) t.setDate(t.getDate()+1);
+  const mins=Math.round((t-now)/60000), h=Math.floor(mins/60), m=mins%60;
+  document.getElementById('cd').textContent=`${h}h ${String(m).padStart(2,'0')}m to 9:00 AM`;
+}
+cdTick(); setInterval(cdTick,30000);
+document.addEventListener('keydown',e=>{
+  const v=document.querySelector('.view.on').id;
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  if(v==='view-drills'){
+    if(e.key==='ArrowRight'){nextStep();e.preventDefault();}
+    if(e.key==='ArrowLeft'&&curStep>0){curStep--;renderSteps();e.preventDefault();}
+  }
+  if(v==='view-cards'){
+    if(e.key===' '){fcard.classList.toggle('flip');e.preventDefault();}
+    if(e.key==='ArrowRight'){fcPos++;renderCard();}
+    if(e.key==='ArrowLeft'){fcPos=Math.max(0,fcPos-1);renderCard();}
+  }
+});
+renderList(); renderProblem(); renderCard();
+</script>

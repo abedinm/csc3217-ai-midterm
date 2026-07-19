@@ -1,0 +1,94 @@
+SETA
+AMERICANINTERNATIONAL UNIVERSITY-BANGLADESH
+Faculty of Science and Technology
+Department of Computer Science
+CSC3217ArifclIlignExeSSecton:ALL）
+Mid Term Examination
+Spring 2023-24
+Total Marks:100
+Moderator:Dr.Abdus Salam
+Time:
+2hours
+General Instructions:
+1.Allthe qtsare bed n E prgrutes
+InPart-B.Qusn1lapped to Co3
+Answerallqetonsin theAnswer orp
+p
+Maris on therght maninicatefumas.
+Usef clri
+Answers all questions.
+[20x1]=20
+Part-A
+Write Tre or Fase on the nswer script for Q 1-10.
+13.A pr cn e defined folly ing ih
+of the following component(s）
+1. Wek Al refers to a machne that has e degree o
+a.Actions
+Allofthem
+hGoal test
+2.Apgmhsasevific poseilenents 
+c.Tranition models
+14.nfinglsihtpf
+multi-finctioeal.
+3.An it is nfitist fully 
+a.Mode-hused
+utility-bsed
+r t diisic.
+c.Gioal-bsed
+IVP
+4.Tbe eative deepeing algoritm s a cominti f
+DFS and BFS algothms.
+searching the sttes?
+Gy BesFSehisnottbp
+c.Bred-fist seach
+.Bidirectional search
+De-fist sh
+b. Uniform-cost search
+6. Ais mlete and oiml if h（n） is adissile nd
+consistent.
+16.UCS expands te
+noden with the
+7.Heurifthdf
+Lowest pacost
+h.Heuristie cost
+cheapest path from a (current) state to the goal state.
+C.Highest path cost
+d.Average path cost
+.Deld schiss timl
+9.MinMax gritm prpag node lues fro the
+17. For a human ag
+which of te following is
+roo dowmward to all temina states,
+used asan actuatr?
+aEye
+b.Ear
+c.Nose
+dHand
+16.png gorimaways prunes onc cr more
+branches from the search space tree.
+18.TheThinking Ratonallybehaviour falls ude
+the citegory of:
+Write crrect optin n theerscript fo Q11-20.
+aCogitv snaph
+Laws ef thought approach
+I1.The main idea ef Bidirectionilsearch
+.Turing lest aproach
+d.Ratoal ageitpch
+Reducetime
+b.Reduce path cost
+19.napningnglid
+.Reduce heuristic cost d. None ofthe above
+.α=βBa≥
+cas8
+d.None
+I2.hichofthe evalution functions is used fr Greedy
+20.Which f te following is a ale f s
+Best Finst Search Algorith?
+.fn）=g(n）b.f(n）-g（n）h（）
+Crosword puzzle
+environmeer?
+b.Taxi driving
+）-b（c）d.None
+C.Pat-picking robot
+d.Nooe
+Spring202324CSC3217ArfillencendExertSyem

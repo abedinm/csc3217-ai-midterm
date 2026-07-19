@@ -1,0 +1,1529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Ai Midterm Visual Lab</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;max-width:736px;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+</head>
+<body>
+<iframe sandbox="allow-scripts" referrerpolicy="no-referrer" title="Ai Midterm Visual Lab" srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Ai Midterm Visual Lab&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(--background) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: light-dark(rgb(255 255 255), rgb(24 24 24));
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, &quot;Segoe UI&quot;, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 12.5px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--viz-font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: superellipse(1.5);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget &gt; :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: superellipse(1.5);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  corner-shape: superellipse(1.5);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  corner-shape: superellipse(1.5);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed=&quot;true&quot;],
+    [aria-selected=&quot;true&quot;],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;ai-midterm-visual-lab&quot;&gt;
+  &lt;nav class=&quot;lab-nav&quot; aria-label=&quot;Study sections&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;route&quot; aria-pressed=&quot;true&quot;&gt;&lt;i data-lucide=&quot;map&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Route&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;search&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;route&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Search&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;puzzle&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;grid-3x3&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; 8-puzzle&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;game&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;git-branch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; α–β&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;peas&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;bot&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; PEAS&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;theory&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;brain&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Theory&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-go=&quot;test&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;timer&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Test&lt;/button&gt;
+  &lt;/nav&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;route&quot;&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Start here&lt;/span&gt;&lt;span id=&quot;route-status&quot; class=&quot;text-muted&quot;&gt;120-minute sprint&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Follow the marks, not the slide count&lt;/h2&gt;
+    &lt;div class=&quot;time-track&quot; role=&quot;img&quot; aria-label=&quot;Recommended 120-minute study allocation&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;time-block s1&quot; data-route-target=&quot;search&quot;&gt;&lt;span&gt;Search&lt;/span&gt;&lt;strong&gt;53 min&lt;/strong&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;time-block s2&quot; data-route-target=&quot;puzzle&quot;&gt;&lt;span&gt;8-puzzle&lt;/span&gt;&lt;strong&gt;15 min&lt;/strong&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;time-block s3&quot; data-route-target=&quot;game&quot;&gt;&lt;span&gt;α–β&lt;/span&gt;&lt;strong&gt;20 min&lt;/strong&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;time-block s4&quot; data-route-target=&quot;peas&quot;&gt;&lt;span&gt;PEAS&lt;/span&gt;&lt;strong&gt;15 min&lt;/strong&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;time-block s5&quot; data-route-target=&quot;test&quot;&gt;&lt;span&gt;Test&lt;/span&gt;&lt;strong&gt;17 min&lt;/strong&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;pattern-grid&quot; aria-label=&quot;Past paper frequency&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;search&quot;&gt;&lt;span&gt;BFS · DFS · UCS&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Very frequent&quot;&gt;● ● ●&lt;/span&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;search&quot;&gt;&lt;span&gt;A* · GBFS&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Very frequent&quot;&gt;● ● ●&lt;/span&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;puzzle&quot;&gt;&lt;span&gt;8-puzzle&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Very frequent&quot;&gt;● ● ●&lt;/span&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;game&quot;&gt;&lt;span&gt;Alpha–beta&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Frequent&quot;&gt;● ● ○&lt;/span&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;peas&quot;&gt;&lt;span&gt;PEAS · environment&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Very frequent&quot;&gt;● ● ●&lt;/span&gt;&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;pattern-item&quot; data-route-target=&quot;theory&quot;&gt;&lt;span&gt;Short theory&lt;/span&gt;&lt;span class=&quot;frequency&quot; aria-label=&quot;Less frequent&quot;&gt;● ○ ○&lt;/span&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p class=&quot;live-line&quot;&gt;&lt;i data-lucide=&quot;mouse-pointer-click&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Select any block to jump straight into that drill.&lt;/p&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;search&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Highest yield&lt;/span&gt;&lt;span class=&quot;text-muted&quot;&gt;Predict before every expansion&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Search race&lt;/h2&gt;
+    &lt;div class=&quot;viz-controls&quot;&gt;
+      &lt;label class=&quot;form-label&quot; for=&quot;search-algorithm&quot;&gt;Algorithm
+        &lt;select id=&quot;search-algorithm&quot; class=&quot;form-select&quot;&gt;
+          &lt;option value=&quot;bfs&quot;&gt;BFS · shallowest&lt;/option&gt;
+          &lt;option value=&quot;dfs&quot;&gt;DFS · deepest&lt;/option&gt;
+          &lt;option value=&quot;ucs&quot;&gt;UCS · lowest g&lt;/option&gt;
+          &lt;option value=&quot;gbfs&quot;&gt;GBFS · lowest h&lt;/option&gt;
+          &lt;option value=&quot;astar&quot;&gt;A* · lowest g+h&lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/label&gt;
+      &lt;button id=&quot;search-next&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;&lt;i data-lucide=&quot;step-forward&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Expand next&lt;/button&gt;
+      &lt;button id=&quot;search-auto&quot; type=&quot;button&quot; class=&quot;btn&quot;&gt;&lt;i data-lucide=&quot;play&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Auto&lt;/button&gt;
+      &lt;button id=&quot;search-reset&quot; type=&quot;button&quot; class=&quot;btn btn-ghost&quot;&gt;&lt;i data-lucide=&quot;rotate-ccw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Reset&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;search-state&quot; aria-live=&quot;polite&quot;&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;Frontier&lt;/span&gt;&lt;div id=&quot;frontier-chips&quot; class=&quot;chip-row&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div&gt;&lt;span class=&quot;text-muted&quot;&gt;Explored&lt;/span&gt;&lt;div id=&quot;explored-chips&quot; class=&quot;chip-row&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;svg id=&quot;search-graph&quot; class=&quot;search-graph&quot; viewBox=&quot;0 0 720 300&quot; role=&quot;img&quot; aria-labelledby=&quot;search-title search-desc&quot;&gt;
+      &lt;title id=&quot;search-title&quot;&gt;Weighted heuristic search graph&lt;/title&gt;
+      &lt;desc id=&quot;search-desc&quot;&gt;Step through BFS, DFS, UCS, greedy best-first search, or A-star from S to G.&lt;/desc&gt;
+    &lt;/svg&gt;
+    &lt;div id=&quot;search-detail&quot; class=&quot;selected-line&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;legend-row text-small&quot;&gt;&lt;span&gt;&lt;i class=&quot;legend-dot current-dot&quot;&gt;&lt;/i&gt; next&lt;/span&gt;&lt;span&gt;&lt;i class=&quot;legend-dot explored-dot&quot;&gt;&lt;/i&gt; explored&lt;/span&gt;&lt;span&gt;Edges = cost&lt;/span&gt;&lt;span&gt;Nodes = h&lt;/span&gt;&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;puzzle&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Recurring 20 marks&lt;/span&gt;&lt;span class=&quot;text-muted&quot;&gt;Blank never counts&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;See the heuristic&lt;/h2&gt;
+    &lt;div class=&quot;viz-controls&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn btn-primary puzzle-mode&quot; data-mode=&quot;h1&quot; aria-pressed=&quot;true&quot;&gt;h₁ · misplaced&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn puzzle-mode&quot; data-mode=&quot;h2&quot; aria-pressed=&quot;false&quot;&gt;h₂ · Manhattan&lt;/button&gt;
+      &lt;button id=&quot;puzzle-best&quot; type=&quot;button&quot; class=&quot;btn&quot;&gt;&lt;i data-lucide=&quot;sparkles&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Best GBFS move&lt;/button&gt;
+      &lt;button id=&quot;puzzle-reset&quot; type=&quot;button&quot; class=&quot;btn btn-ghost&quot;&gt;Reset&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;puzzle-stage&quot;&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;text-muted&quot;&gt;Current state&lt;/span&gt;
+        &lt;div id=&quot;puzzle-board&quot; class=&quot;puzzle-board&quot; role=&quot;grid&quot; aria-label=&quot;Current 8-puzzle board&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;puzzle-arrow&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;arrow-right&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+      &lt;div&gt;
+        &lt;span class=&quot;text-muted&quot;&gt;Goal state&lt;/span&gt;
+        &lt;div id=&quot;goal-board&quot; class=&quot;puzzle-board goal-board&quot; role=&quot;grid&quot; aria-label=&quot;Goal 8-puzzle board&quot;&gt;&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;puzzle-score card viz-stat&quot;&gt;
+        &lt;span id=&quot;puzzle-score-label&quot;&gt;Misplaced tiles&lt;/span&gt;
+        &lt;span id=&quot;puzzle-score&quot; class=&quot;viz-stat-value&quot;&gt;4&lt;/span&gt;
+        &lt;span id=&quot;puzzle-score-note&quot; class=&quot;text-small&quot;&gt;tiles 1, 2, 6, 8&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;puzzle-detail&quot; class=&quot;selected-line&quot; aria-live=&quot;polite&quot;&gt;Select a numbered tile to see its contribution.&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;game&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Game search&lt;/span&gt;&lt;span class=&quot;text-muted&quot;&gt;MAX updates α · MIN updates β&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Watch branches disappear&lt;/h2&gt;
+    &lt;div class=&quot;viz-controls&quot;&gt;
+      &lt;button id=&quot;ab-next&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;&lt;i data-lucide=&quot;step-forward&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Next update&lt;/button&gt;
+      &lt;button id=&quot;ab-reset&quot; type=&quot;button&quot; class=&quot;btn btn-ghost&quot;&gt;&lt;i data-lucide=&quot;rotate-ccw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Reset&lt;/button&gt;
+      &lt;span id=&quot;ab-bounds&quot; class=&quot;viz-badge&quot;&gt;α = −∞ · β = +∞&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;svg id=&quot;ab-tree&quot; class=&quot;ab-tree&quot; viewBox=&quot;0 0 720 360&quot; role=&quot;img&quot; aria-labelledby=&quot;ab-title ab-desc&quot;&gt;
+      &lt;title id=&quot;ab-title&quot;&gt;Alpha-beta pruning tree&lt;/title&gt;
+      &lt;desc id=&quot;ab-desc&quot;&gt;A MAX root with three MIN children, explored from left to right. Pruned nodes are crossed out.&lt;/desc&gt;
+    &lt;/svg&gt;
+    &lt;div id=&quot;ab-detail&quot; class=&quot;selected-line&quot; aria-live=&quot;polite&quot;&gt;Start at MAX with α = −∞ and β = +∞.&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;peas&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Fast theory marks&lt;/span&gt;&lt;span class=&quot;text-muted&quot;&gt;Performance · Environment · Actuators · Sensors&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Build PEAS by sight&lt;/h2&gt;
+    &lt;div class=&quot;viz-controls&quot; aria-label=&quot;Select agent scenario&quot;&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn btn-primary peas-choice&quot; data-peas=&quot;candy&quot; aria-pressed=&quot;true&quot;&gt;Candy sorter&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn peas-choice&quot; data-peas=&quot;water&quot; aria-pressed=&quot;false&quot;&gt;Water purifier&lt;/button&gt;
+      &lt;button type=&quot;button&quot; class=&quot;btn peas-choice&quot; data-peas=&quot;vacuum&quot; aria-pressed=&quot;false&quot;&gt;Vacuum robot&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;peas-grid&quot; class=&quot;peas-grid&quot; aria-live=&quot;polite&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;environment-strip&quot;&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-agents&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-observe&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-determinism&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-sequence&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-change&quot;&gt;&lt;/span&gt;
+      &lt;span class=&quot;viz-badge&quot; id=&quot;env-values&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;peas-detail&quot; class=&quot;selected-line&quot;&gt;Tap another scenario and say each quadrant aloud before it appears.&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;theory&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;20% theory&lt;/span&gt;&lt;span class=&quot;text-muted&quot;&gt;Tap · recall · reveal&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Concept constellation&lt;/h2&gt;
+    &lt;div id=&quot;theory-summary&quot; class=&quot;card theory-summary&quot; aria-live=&quot;polite&quot;&gt;
+      &lt;span id=&quot;theory-name&quot; class=&quot;viz-badge&quot;&gt;Rational agent&lt;/span&gt;
+      &lt;span id=&quot;theory-definition&quot;&gt;Chooses the action expected to maximize its performance measure from its percept history and knowledge.&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;theory-grid&quot; class=&quot;theory-grid&quot;&gt;&lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class=&quot;lab-section&quot; data-section=&quot;test&quot; hidden&gt;
+    &lt;div class=&quot;section-kicker&quot;&gt;&lt;span class=&quot;viz-badge&quot;&gt;Exam mode&lt;/span&gt;&lt;span id=&quot;quiz-progress&quot; class=&quot;text-muted&quot;&gt;Question 1 of 10&lt;/span&gt;&lt;/div&gt;
+    &lt;h2&gt;Pressure test&lt;/h2&gt;
+    &lt;div class=&quot;quiz-meter&quot; role=&quot;progressbar&quot; aria-label=&quot;Quiz progress&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;10&quot; aria-valuenow=&quot;0&quot;&gt;&lt;span id=&quot;quiz-meter-fill&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;card quiz-card&quot;&gt;
+      &lt;span id=&quot;quiz-topic&quot; class=&quot;viz-badge&quot;&gt;Search&lt;/span&gt;
+      &lt;h3 id=&quot;quiz-question&quot;&gt;&lt;/h3&gt;
+      &lt;div id=&quot;quiz-options&quot; class=&quot;quiz-options&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;quiz-feedback&quot; class=&quot;selected-line&quot; aria-live=&quot;polite&quot;&gt;Choose one answer.&lt;/div&gt;
+    &lt;div class=&quot;viz-row&quot;&gt;
+      &lt;button id=&quot;quiz-next&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot; disabled&gt;Next question&lt;/button&gt;
+      &lt;button id=&quot;quiz-restart&quot; type=&quot;button&quot; class=&quot;btn btn-ghost&quot;&gt;Restart&lt;/button&gt;
+      &lt;span id=&quot;quiz-score&quot; class=&quot;viz-badge&quot;&gt;Score 0&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;div class=&quot;section-footer&quot;&gt;
+    &lt;button id=&quot;section-prev&quot; type=&quot;button&quot; class=&quot;btn btn-ghost&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; Previous&lt;/button&gt;
+    &lt;div id=&quot;section-dots&quot; class=&quot;section-dots&quot; aria-label=&quot;Section progress&quot;&gt;&lt;/div&gt;
+    &lt;button id=&quot;section-next&quot; type=&quot;button&quot; class=&quot;btn btn-primary&quot;&gt;Next section &lt;i data-lucide=&quot;arrow-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+#ai-midterm-visual-lab { --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; display:grid; gap:var(--space-5); color:var(--foreground); }
+#ai-midterm-visual-lab .lab-nav { display:flex; flex-wrap:wrap; gap:var(--space-2); }
+#ai-midterm-visual-lab .lab-nav .btn { flex:1 1 auto; }
+#ai-midterm-visual-lab .lab-nav .btn[data-done=&quot;true&quot;] { box-shadow:inset 0 -3px 0 color-mix(in srgb, var(--viz-series-1) 70%, transparent); }
+#ai-midterm-visual-lab .lab-section { display:grid; gap:var(--space-4); min-width:0; }
+#ai-midterm-visual-lab .lab-section[hidden] { display:none; }
+#ai-midterm-visual-lab .section-kicker { display:flex; flex-wrap:wrap; align-items:center; gap:var(--space-2); }
+#ai-midterm-visual-lab h2, #ai-midterm-visual-lab h3 { margin:0; }
+#ai-midterm-visual-lab .live-line, #ai-midterm-visual-lab .selected-line { margin:0; display:flex; align-items:center; gap:var(--space-2); min-height:2.5em; }
+#ai-midterm-visual-lab .selected-line { border-left:3px solid var(--viz-series-1); padding-left:var(--space-3); }
+#ai-midterm-visual-lab .time-track { display:flex; min-height:110px; gap:var(--space-1); }
+#ai-midterm-visual-lab .time-block { border:0; color:var(--foreground); display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; gap:var(--space-1); padding:var(--space-3); cursor:pointer; min-width:0; }
+#ai-midterm-visual-lab .time-block span, #ai-midterm-visual-lab .time-block strong { overflow-wrap:anywhere; }
+#ai-midterm-visual-lab .time-block.s1 { flex:53; background:color-mix(in srgb, var(--viz-series-1) 32%, var(--background)); }
+#ai-midterm-visual-lab .time-block.s2 { flex:15; background:color-mix(in srgb, var(--viz-series-2) 32%, var(--background)); }
+#ai-midterm-visual-lab .time-block.s3 { flex:20; background:color-mix(in srgb, var(--viz-series-3) 32%, var(--background)); }
+#ai-midterm-visual-lab .time-block.s4 { flex:15; background:color-mix(in srgb, var(--viz-series-4) 32%, var(--background)); }
+#ai-midterm-visual-lab .time-block.s5 { flex:17; background:color-mix(in srgb, var(--viz-series-5) 32%, var(--background)); }
+#ai-midterm-visual-lab .pattern-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--space-2); }
+#ai-midterm-visual-lab .pattern-item { appearance:none; border:0; border-bottom:1px solid var(--border); background:transparent; color:var(--foreground); padding:var(--space-3) 0; display:flex; justify-content:space-between; gap:var(--space-2); text-align:left; cursor:pointer; }
+#ai-midterm-visual-lab .frequency { color:var(--viz-series-1); white-space:nowrap; }
+#ai-midterm-visual-lab .search-state { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); }
+#ai-midterm-visual-lab .chip-row { display:flex; flex-wrap:wrap; gap:var(--space-2); min-height:2.2em; margin-top:var(--space-1); }
+#ai-midterm-visual-lab .state-chip { display:inline-flex; align-items:center; padding:var(--space-1) var(--space-2); background:var(--muted); color:var(--muted-foreground); border-radius:999px; }
+#ai-midterm-visual-lab .state-chip.next-chip { background:var(--primary); color:var(--primary-foreground); }
+#ai-midterm-visual-lab .search-graph, #ai-midterm-visual-lab .ab-tree { width:100%; height:auto; overflow:visible; }
+#ai-midterm-visual-lab .search-edge, #ai-midterm-visual-lab .tree-edge { stroke:var(--border); stroke-width:2; fill:none; }
+#ai-midterm-visual-lab .search-edge.active, #ai-midterm-visual-lab .tree-edge.visited { stroke:var(--viz-series-1); }
+#ai-midterm-visual-lab .graph-label, #ai-midterm-visual-lab .tree-label { fill:var(--muted-foreground); text-anchor:middle; }
+#ai-midterm-visual-lab .graph-node circle, #ai-midterm-visual-lab .tree-node circle { fill:var(--card); stroke:var(--border); stroke-width:2; transition:fill .25s,stroke .25s; }
+#ai-midterm-visual-lab .graph-node text, #ai-midterm-visual-lab .tree-node text { fill:var(--card-foreground); text-anchor:middle; dominant-baseline:middle; }
+#ai-midterm-visual-lab .graph-node.explored circle, #ai-midterm-visual-lab .tree-node.visited circle { fill:color-mix(in srgb, var(--viz-series-1) 24%, var(--card)); }
+#ai-midterm-visual-lab .graph-node.current circle { stroke:var(--viz-series-1); stroke-width:4; }
+#ai-midterm-visual-lab .graph-node.goal circle { stroke:var(--viz-series-3); }
+#ai-midterm-visual-lab .legend-row { display:flex; flex-wrap:wrap; gap:var(--space-4); color:var(--muted-foreground); }
+#ai-midterm-visual-lab .legend-dot { display:inline-block; width:.75em; height:.75em; border-radius:50%; margin-right:.35em; background:var(--muted); }
+#ai-midterm-visual-lab .current-dot { outline:2px solid var(--viz-series-1); }
+#ai-midterm-visual-lab .explored-dot { background:color-mix(in srgb, var(--viz-series-1) 40%, var(--card)); }
+#ai-midterm-visual-lab .puzzle-stage { display:grid; grid-template-columns:minmax(160px,1fr) auto minmax(160px,1fr) minmax(150px,.8fr); gap:var(--space-4); align-items:center; }
+#ai-midterm-visual-lab .puzzle-board { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-2); margin-top:var(--space-2); }
+#ai-midterm-visual-lab .puzzle-tile { aspect-ratio:1; display:grid; place-items:center; border:1px solid var(--border); background:var(--card); color:var(--card-foreground); position:relative; transition:transform .25s,background .25s; }
+#ai-midterm-visual-lab button.puzzle-tile { cursor:pointer; }
+#ai-midterm-visual-lab .puzzle-tile.contributes { background:color-mix(in srgb, var(--viz-series-2) 28%, var(--card)); }
+#ai-midterm-visual-lab .puzzle-tile.selected { outline:3px solid var(--ring); }
+#ai-midterm-visual-lab .puzzle-tile.blank { border-style:dashed; background:var(--muted); }
+#ai-midterm-visual-lab .tile-cost { position:absolute; right:var(--space-1); bottom:var(--space-1); color:var(--muted-foreground); }
+#ai-midterm-visual-lab .puzzle-arrow { color:var(--muted-foreground); }
+#ai-midterm-visual-lab .puzzle-score { min-width:0; }
+#ai-midterm-visual-lab .tree-node.pruned circle { fill:var(--muted); stroke:var(--destructive); }
+#ai-midterm-visual-lab .tree-node.pruned text { fill:var(--muted-foreground); text-decoration:line-through; }
+#ai-midterm-visual-lab .tree-edge.pruned { stroke:var(--destructive); stroke-dasharray:6 5; }
+#ai-midterm-visual-lab .tree-value { fill:var(--foreground); text-anchor:middle; }
+#ai-midterm-visual-lab .peas-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-3); }
+#ai-midterm-visual-lab .peas-card { min-width:0; }
+#ai-midterm-visual-lab .peas-letter { color:var(--viz-series-1); }
+#ai-midterm-visual-lab .peas-card ul { margin:var(--space-2) 0 0; padding-left:1.1em; }
+#ai-midterm-visual-lab .environment-strip { display:flex; flex-wrap:wrap; gap:var(--space-2); }
+#ai-midterm-visual-lab .theory-summary { display:flex; gap:var(--space-3); align-items:center; }
+#ai-midterm-visual-lab .theory-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--space-2); }
+#ai-midterm-visual-lab .theory-grid .btn { min-height:4em; white-space:normal; }
+#ai-midterm-visual-lab .quiz-meter { height:8px; background:var(--muted); overflow:hidden; }
+#ai-midterm-visual-lab .quiz-meter span { display:block; width:0; height:100%; background:var(--viz-series-1); transition:width .3s; }
+#ai-midterm-visual-lab .quiz-card { display:grid; gap:var(--space-3); }
+#ai-midterm-visual-lab .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2); }
+#ai-midterm-visual-lab .quiz-options .btn { white-space:normal; text-align:left; justify-content:flex-start; }
+#ai-midterm-visual-lab .quiz-options .correct { background:color-mix(in srgb, var(--viz-series-3) 24%, var(--card)); }
+#ai-midterm-visual-lab .quiz-options .incorrect { background:color-mix(in srgb, var(--destructive) 18%, var(--card)); }
+#ai-midterm-visual-lab .section-footer { display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:var(--space-3); border-top:1px solid var(--border); padding-top:var(--space-3); }
+#ai-midterm-visual-lab .section-dots { display:flex; justify-content:center; gap:var(--space-2); }
+#ai-midterm-visual-lab .section-dot { width:9px; height:9px; border-radius:50%; background:var(--muted); }
+#ai-midterm-visual-lab .section-dot.current { background:var(--primary); }
+#ai-midterm-visual-lab .section-dot.done { box-shadow:0 0 0 2px var(--viz-series-1); }
+@media (max-width:620px) {
+  #ai-midterm-visual-lab .pattern-grid { grid-template-columns:1fr 1fr; }
+  #ai-midterm-visual-lab .time-track { display:grid; grid-template-columns:1fr 1fr; min-height:0; }
+  #ai-midterm-visual-lab .time-block { min-height:76px; }
+  #ai-midterm-visual-lab .time-block.s1 { grid-column:1/-1; }
+  #ai-midterm-visual-lab .puzzle-stage { grid-template-columns:1fr 1fr; }
+  #ai-midterm-visual-lab .puzzle-arrow { display:none; }
+  #ai-midterm-visual-lab .puzzle-score { grid-column:1/-1; }
+  #ai-midterm-visual-lab .peas-grid, #ai-midterm-visual-lab .theory-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width:420px) {
+  #ai-midterm-visual-lab .pattern-grid, #ai-midterm-visual-lab .search-state, #ai-midterm-visual-lab .quiz-options { grid-template-columns:1fr; }
+  #ai-midterm-visual-lab .peas-grid, #ai-midterm-visual-lab .theory-grid { grid-template-columns:1fr; }
+  #ai-midterm-visual-lab .theory-summary { align-items:flex-start; flex-direction:column; }
+  #ai-midterm-visual-lab .section-footer { grid-template-columns:1fr 1fr; }
+  #ai-midterm-visual-lab .section-dots { grid-row:1; grid-column:1/-1; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #ai-midterm-visual-lab * { transition:none !important; }
+}
+&lt;/style&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;ai-midterm-visual-lab&#x27;);
+  const order = [&#x27;route&#x27;,&#x27;search&#x27;,&#x27;puzzle&#x27;,&#x27;game&#x27;,&#x27;peas&#x27;,&#x27;theory&#x27;,&#x27;test&#x27;];
+  let currentSection = &#x27;route&#x27;;
+  const completed = new Set();
+
+  const dots = root.querySelector(&#x27;#section-dots&#x27;);
+  order.forEach(name =&gt; dots.insertAdjacentHTML(&#x27;beforeend&#x27;, `&lt;span class=&quot;section-dot&quot; data-dot=&quot;${name}&quot;&gt;&lt;/span&gt;`));
+  function showSection(name, markCurrent = false) {
+    if (markCurrent) completed.add(currentSection);
+    currentSection = name;
+    root.querySelectorAll(&#x27;.lab-section&#x27;).forEach(section =&gt; section.hidden = section.dataset.section !== name);
+    root.querySelectorAll(&#x27;[data-go]&#x27;).forEach(button =&gt; {
+      const active = button.dataset.go === name;
+      button.setAttribute(&#x27;aria-pressed&#x27;, String(active));
+      button.dataset.done = String(completed.has(button.dataset.go));
+    });
+    root.querySelectorAll(&#x27;.section-dot&#x27;).forEach(dot =&gt; {
+      dot.classList.toggle(&#x27;current&#x27;, dot.dataset.dot === name);
+      dot.classList.toggle(&#x27;done&#x27;, completed.has(dot.dataset.dot));
+    });
+    const index = order.indexOf(name);
+    root.querySelector(&#x27;#section-prev&#x27;).disabled = index === 0;
+    root.querySelector(&#x27;#section-next&#x27;).textContent = index === order.length - 1 ? &#x27;Finish ✓&#x27; : &#x27;Next section →&#x27;;
+  }
+  root.querySelectorAll(&#x27;[data-go]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; showSection(button.dataset.go)));
+  root.querySelectorAll(&#x27;[data-route-target]&#x27;).forEach(button =&gt; button.addEventListener(&#x27;click&#x27;, () =&gt; showSection(button.dataset.routeTarget, true)));
+  root.querySelector(&#x27;#section-prev&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; showSection(order[Math.max(0, order.indexOf(currentSection)-1)]));
+  root.querySelector(&#x27;#section-next&#x27;).addEventListener(&#x27;click&#x27;, () =&gt; {
+    const index = order.indexOf(currentSection);
+    completed.add(currentSection);
+    if (index &lt; order.length-1) showSection(order[index+1]);
+    else {
+      showSection(&#x27;test&#x27;);
+      root.querySelector(&#x27;#quiz-feedback&#x27;).textContent = completed.size === order.length ? &#x27;Every section visited. Finish the test and review only your misses.&#x27; : &#x27;Complete the test, then revisit weak sections.&#x27;;
+    }
+  });
+
+  const positions = {S:[55,150],A:[205,55],B:[205,150],C:[205,245],D:[420,75],E:[420,195],G:[660,150]};
+  const heuristics = {S:6,A:5,B:4,C:1,D:3,E:2,G:0};
+  const edges = [[&#x27;S&#x27;,&#x27;A&#x27;,2],[&#x27;S&#x27;,&#x27;B&#x27;,5],[&#x27;S&#x27;,&#x27;C&#x27;,9],[&#x27;A&#x27;,&#x27;B&#x27;,1],[&#x27;A&#x27;,&#x27;D&#x27;,4],[&#x27;B&#x27;,&#x27;D&#x27;,1],[&#x27;B&#x27;,&#x27;E&#x27;,3],[&#x27;C&#x27;,&#x27;G&#x27;,1],[&#x27;D&#x27;,&#x27;G&#x27;,3],[&#x27;E&#x27;,&#x27;G&#x27;,2]];
+  const adjacency = {}; Object.keys(positions).forEach(node =&gt; adjacency[node]=[]); edges.forEach(([a,b,c]) =&gt; adjacency[a].push([b,c]));
+  const graph = root.querySelector(&#x27;#search-graph&#x27;);
+  graph.innerHTML = &#x27;&lt;defs&gt;&lt;marker id=&quot;lab-arrow&quot; viewBox=&quot;0 0 10 10&quot; refX=&quot;9&quot; refY=&quot;5&quot; markerWidth=&quot;7&quot; markerHeight=&quot;7&quot; orient=&quot;auto-start-reverse&quot;&gt;&lt;path d=&quot;M0 0 L10 5 L0 10z&quot; fill=&quot;var(--border)&quot;&gt;&lt;/path&gt;&lt;/marker&gt;&lt;/defs&gt;&#x27;;
+  edges.forEach(([a,b,c],i) =&gt; {
+    const [x1,y1]=positions[a], [x2,y2]=positions[b];
+    const curved=a===&#x27;C&#x27;&amp;&amp;b===&#x27;G&#x27;;
+    const path=curved?`M${x1+22} ${y1+9} Q450 306 ${x2-24} ${y2+13}`:`M${x1+25} ${y1} L${x2-27} ${y2}`;
+    const labelX=curved?455:(x1+x2)/2, labelY=curved?281:(y1+y2)/2-7;
+    graph.insertAdjacentHTML(&#x27;beforeend&#x27;, `&lt;path class=&quot;search-edge&quot; data-edge=&quot;${a}-${b}&quot; d=&quot;${path}&quot; marker-end=&quot;url(#lab-arrow)&quot;&gt;&lt;/path&gt;&lt;text class=&quot;graph-label text-small&quot; x=&quot;${labelX}&quot; y=&quot;${labelY}&quot;&gt;${c}&lt;/text&gt;`);
+  });
+  Object.entries(positions).forEach(([node,[x,y]]) =&gt; graph.insertAdjacentHTML(&#x27;beforeend&#x27;, `&lt;g class=&quot;graph-node${node===&#x27;G&#x27;?&#x27; goal&#x27;:&#x27;&#x27;}&quot; data-node=&quot;${node}&quot; transform=&quot;translate(${x},${y})&quot;&gt;&lt;circle r=&quot;27&quot;&gt;&lt;/circle&gt;&lt;text y=&quot;-5&quot;&gt;${node}&lt;/text&gt;&lt;text class=&quot;text-small&quot; y=&quot;13&quot;&gt;h=${heuristics[node]}&lt;/text&gt;&lt;/g&gt;`));
+  let searchState, autoTimer;
+  function searchPriority(item, alg) {
+    if (alg===&#x27;bfs&#x27;) return item.depth;
+    if (alg===&#x27;dfs&#x27;) return -item.depth;
+    if (alg===&#x27;ucs&#x27;) return item.g;
+    if (alg===&#x27;gbfs&#x27;) return heuristics[item.node];
+    return item.g + heuristics[item.node];
+  }
+  function sortSearch() {
+    const alg=root.querySelector(&#x27;#search-algorithm&#x27;).value;
+    searchState.frontier.sort((a,b) =&gt; searchPriority(a,alg)-searchPriority(b,alg) || a.node.localeCompare(b.node));
+  }
+  function searchLabel(item) {
+    const alg=root.querySelector(&#x27;#search-algorithm&#x27;).value;
+    if (alg===&#x27;ucs&#x27;) return `${item.node} · g${item.g}`;
+    if (alg===&#x27;gbfs&#x27;) return `${item.node} · h${heuristics[item.node]}`;
+    if (alg===&#x27;astar&#x27;) return `${item.node} · f${item.g+heuristics[item.node]}`;
+    return item.node;
+  }
+  function renderSearch(message) {
+    sortSearch();
+    const frontier=root.querySelector(&#x27;#frontier-chips&#x27;), explored=root.querySelector(&#x27;#explored-chips&#x27;);
+    frontier.innerHTML = searchState.frontier.length ? searchState.frontier.map((item,i)=&gt;`&lt;span class=&quot;state-chip${i===0?&#x27; next-chip&#x27;:&#x27;&#x27;}&quot;&gt;${searchLabel(item)}&lt;/span&gt;`).join(&#x27;&#x27;) : &#x27;&lt;span class=&quot;text-muted&quot;&gt;empty&lt;/span&gt;&#x27;;
+    explored.innerHTML = searchState.explored.size ? [...searchState.explored].map(node=&gt;`&lt;span class=&quot;state-chip&quot;&gt;${node}&lt;/span&gt;`).join(&#x27;&#x27;) : &#x27;&lt;span class=&quot;text-muted&quot;&gt;none&lt;/span&gt;&#x27;;
+    root.querySelectorAll(&#x27;.graph-node&#x27;).forEach(el =&gt; {
+      el.classList.toggle(&#x27;explored&#x27;,searchState.explored.has(el.dataset.node));
+      el.classList.toggle(&#x27;current&#x27;,el.dataset.node===searchState.frontier[0]?.node);
+    });
+    root.querySelectorAll(&#x27;.search-edge&#x27;).forEach(el =&gt; el.classList.toggle(&#x27;active&#x27;,searchState.pathEdges.has(el.dataset.edge)));
+    root.querySelector(&#x27;#search-detail&#x27;).textContent = message;
+  }
+  function resetSearch() {
+    clearInterval(autoTimer); autoTimer=null;
+    root.querySelector(&#x27;#search-auto&#x27;).textContent=&#x27;Auto&#x27;;
+    searchState={frontier:[{node:&#x27;S&#x27;,g:0,depth:0,path:[&#x27;S&#x27;]}],explored:new Set(),pathEdges:new Set(),finished:false};
+    renderSearch(&#x27;Predict the first node: every algorithm starts by popping S.&#x27;);
+  }
+  function searchStep() {
+    if (searchState.finished) return;
+    sortSearch(); const alg=root.querySelector(&#x27;#search-algorithm&#x27;).value; const current=searchState.frontier.shift();
+    if (!current) { searchState.finished=true; renderSearch(&#x27;Frontier empty: no solution.&#x27;); return; }
+    if (searchState.explored.has(current.node)) { searchStep(); return; }
+    searchState.explored.add(current.node);
+    if (current.path.length&gt;1) searchState.pathEdges.add(`${current.path.at(-2)}-${current.node}`);
+    if (current.node===&#x27;G&#x27;) {
+      searchState.finished=true; clearInterval(autoTimer); autoTimer=null;
+      renderSearch(`Goal popped · ${current.path.join(&#x27; → &#x27;)} · actual cost ${current.g}`); return;
+    }
+    adjacency[current.node].slice().sort((a,b)=&gt;a[0].localeCompare(b[0])).forEach(([node,cost]) =&gt; {
+      if (searchState.explored.has(node)) return;
+      const candidate={node,g:current.g+cost,depth:current.depth+1,path:[...current.path,node]};
+      const existing=searchState.frontier.find(item=&gt;item.node===node);
+      if (!existing) searchState.frontier.push(candidate);
+      else if ((alg===&#x27;ucs&#x27;||alg===&#x27;astar&#x27;) &amp;&amp; candidate.g&lt;existing.g) Object.assign(existing,candidate);
+    });
+    const rule={bfs:&#x27;shallowest depth&#x27;,dfs:&#x27;deepest depth&#x27;,ucs:&#x27;lowest g&#x27;,gbfs:&#x27;lowest h&#x27;,astar:&#x27;lowest g+h&#x27;}[alg];
+    renderSearch(`Expanded ${current.node} at g=${current.g}. Next = ${rule}.`);
+  }
+  root.querySelector(&#x27;#search-next&#x27;).addEventListener(&#x27;click&#x27;,searchStep);
+  root.querySelector(&#x27;#search-reset&#x27;).addEventListener(&#x27;click&#x27;,resetSearch);
+  root.querySelector(&#x27;#search-algorithm&#x27;).addEventListener(&#x27;change&#x27;,resetSearch);
+  root.querySelector(&#x27;#search-auto&#x27;).addEventListener(&#x27;click&#x27;,() =&gt; {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer=null; root.querySelector(&#x27;#search-auto&#x27;).textContent=&#x27;Auto&#x27;; }
+    else { autoTimer=setInterval(()=&gt;{searchStep();if(searchState.finished){clearInterval(autoTimer);autoTimer=null;}},700);root.querySelector(&#x27;#search-auto&#x27;).textContent=&#x27;Pause&#x27;; }
+  });
+  resetSearch();
+
+  const initialPuzzle=[2,8,3,1,6,4,7,0,5], goalPuzzle=[1,2,3,8,0,4,7,6,5];
+  let puzzleState=[...initialPuzzle], puzzleMode=&#x27;h1&#x27;, selectedTile=null;
+  function tileDistance(tile, state) {
+    if (!tile) return 0; const from=state.indexOf(tile), to=goalPuzzle.indexOf(tile);
+    return Math.abs(Math.floor(from/3)-Math.floor(to/3))+Math.abs(from%3-to%3);
+  }
+  function renderBoard(element,state,interactive) {
+    element.innerHTML=&#x27;&#x27;;
+    state.forEach(tile =&gt; {
+      if (!tile) { element.insertAdjacentHTML(&#x27;beforeend&#x27;,&#x27;&lt;span class=&quot;puzzle-tile blank&quot; role=&quot;gridcell&quot; aria-label=&quot;blank&quot;&gt;&lt;/span&gt;&#x27;); return; }
+      const contribution=puzzleMode===&#x27;h1&#x27; ? Number(state.indexOf(tile)!==goalPuzzle.indexOf(tile)) : tileDistance(tile,state);
+      const cls=`puzzle-tile${contribution?&#x27; contributes&#x27;:&#x27;&#x27;}${selectedTile===tile?&#x27; selected&#x27;:&#x27;&#x27;}`;
+      const content=`&lt;span&gt;${tile}&lt;/span&gt;&lt;span class=&quot;tile-cost text-small&quot;&gt;+${contribution}&lt;/span&gt;`;
+      element.insertAdjacentHTML(&#x27;beforeend&#x27;, interactive ? `&lt;button type=&quot;button&quot; class=&quot;${cls}&quot; data-tile=&quot;${tile}&quot; role=&quot;gridcell&quot; aria-label=&quot;Tile ${tile}, contribution ${contribution}&quot;&gt;${content}&lt;/button&gt;` : `&lt;span class=&quot;${cls}&quot; role=&quot;gridcell&quot;&gt;${content}&lt;/span&gt;`);
+    });
+  }
+  function renderPuzzle(message) {
+    renderBoard(root.querySelector(&#x27;#puzzle-board&#x27;),puzzleState,true); renderBoard(root.querySelector(&#x27;#goal-board&#x27;),goalPuzzle,false);
+    const contributions=puzzleState.filter(Boolean).map(tile=&gt;[tile,puzzleMode===&#x27;h1&#x27;?Number(puzzleState.indexOf(tile)!==goalPuzzle.indexOf(tile)):tileDistance(tile,puzzleState)]).filter(item=&gt;item[1]);
+    const total=contributions.reduce((sum,item)=&gt;sum+item[1],0);
+    root.querySelector(&#x27;#puzzle-score-label&#x27;).textContent=puzzleMode===&#x27;h1&#x27;?&#x27;Misplaced tiles&#x27;:&#x27;Manhattan sum&#x27;;
+    root.querySelector(&#x27;#puzzle-score&#x27;).textContent=total;
+    root.querySelector(&#x27;#puzzle-score-note&#x27;).textContent=contributions.length?contributions.map(([tile,cost])=&gt;`${tile}:${cost}`).join(&#x27; · &#x27;):&#x27;goal reached&#x27;;
+    root.querySelector(&#x27;#puzzle-detail&#x27;).textContent=message;
+    root.querySelectorAll(&#x27;#puzzle-board [data-tile]&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{selectedTile=Number(button.dataset.tile);const value=puzzleMode===&#x27;h1&#x27;?Number(puzzleState.indexOf(selectedTile)!==goalPuzzle.indexOf(selectedTile)):tileDistance(selectedTile,puzzleState);renderPuzzle(`Tile ${selectedTile} contributes ${value} to ${puzzleMode}.`)}));
+  }
+  root.querySelectorAll(&#x27;.puzzle-mode&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{puzzleMode=button.dataset.mode;selectedTile=null;root.querySelectorAll(&#x27;.puzzle-mode&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b===button)));renderPuzzle(puzzleMode===&#x27;h1&#x27;?&#x27;Highlighted = wrong position. Blank excluded.&#x27;:&#x27;Each label shows row moves + column moves. Blank excluded.&#x27;)}));
+  root.querySelector(&#x27;#puzzle-best&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{const blank=puzzleState.indexOf(0);const moves=[blank-3,blank+3,blank-1,blank+1].filter(i=&gt;i&gt;=0&amp;&amp;i&lt;9&amp;&amp;!(blank%3===0&amp;&amp;i===blank-1)&amp;&amp;!(blank%3===2&amp;&amp;i===blank+1));const candidates=moves.map(i=&gt;{const next=[...puzzleState];[next[blank],next[i]]=[next[i],next[blank]];return {next,score:next.filter(Boolean).reduce((sum,tile)=&gt;sum+tileDistance(tile,next),0),tile:puzzleState[i]}}).sort((a,b)=&gt;a.score-b.score||a.tile-b.tile);puzzleState=candidates[0].next;selectedTile=candidates[0].tile;renderPuzzle(`GBFS slides tile ${selectedTile}: smallest child h₂ = ${candidates[0].score}.`)});
+  root.querySelector(&#x27;#puzzle-reset&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{puzzleState=[...initialPuzzle];selectedTile=null;renderPuzzle(&#x27;Select a numbered tile to see its contribution.&#x27;)});
+  renderPuzzle(&#x27;Select a numbered tile to see its contribution.&#x27;);
+
+  const abSvg=root.querySelector(&#x27;#ab-tree&#x27;);
+  const abNodes={R:[360,35,&#x27;MAX&#x27;],A:[130,105,&#x27;MIN A&#x27;],B:[360,105,&#x27;MIN B&#x27;],C:[590,105,&#x27;MIN C&#x27;],A1:[75,180,&#x27;MAX&#x27;],A2:[185,180,&#x27;MAX&#x27;],B1:[305,180,&#x27;MAX&#x27;],B2:[415,180,&#x27;MAX&#x27;],C1:[535,180,&#x27;MAX&#x27;],C2:[645,180,&#x27;MAX&#x27;],L1:[45,270,&#x27;3&#x27;],L2:[95,270,&#x27;5&#x27;],L3:[155,270,&#x27;6&#x27;],L4:[205,270,&#x27;9&#x27;],L5:[275,270,&#x27;1&#x27;],L6:[325,270,&#x27;2&#x27;],L7:[395,270,&#x27;0&#x27;],L8:[445,270,&#x27;−1&#x27;],L9:[505,270,&#x27;7&#x27;],L10:[555,270,&#x27;4&#x27;],L11:[625,270,&#x27;5&#x27;],L12:[675,270,&#x27;8&#x27;]};
+  const abEdges=[[&#x27;R&#x27;,&#x27;A&#x27;],[&#x27;R&#x27;,&#x27;B&#x27;],[&#x27;R&#x27;,&#x27;C&#x27;],[&#x27;A&#x27;,&#x27;A1&#x27;],[&#x27;A&#x27;,&#x27;A2&#x27;],[&#x27;B&#x27;,&#x27;B1&#x27;],[&#x27;B&#x27;,&#x27;B2&#x27;],[&#x27;C&#x27;,&#x27;C1&#x27;],[&#x27;C&#x27;,&#x27;C2&#x27;],[&#x27;A1&#x27;,&#x27;L1&#x27;],[&#x27;A1&#x27;,&#x27;L2&#x27;],[&#x27;A2&#x27;,&#x27;L3&#x27;],[&#x27;A2&#x27;,&#x27;L4&#x27;],[&#x27;B1&#x27;,&#x27;L5&#x27;],[&#x27;B1&#x27;,&#x27;L6&#x27;],[&#x27;B2&#x27;,&#x27;L7&#x27;],[&#x27;B2&#x27;,&#x27;L8&#x27;],[&#x27;C1&#x27;,&#x27;L9&#x27;],[&#x27;C1&#x27;,&#x27;L10&#x27;],[&#x27;C2&#x27;,&#x27;L11&#x27;],[&#x27;C2&#x27;,&#x27;L12&#x27;]];
+  abEdges.forEach(([a,b])=&gt;{const [x1,y1]=abNodes[a],[x2,y2]=abNodes[b];abSvg.insertAdjacentHTML(&#x27;beforeend&#x27;,`&lt;path class=&quot;tree-edge&quot; data-tree-edge=&quot;${a}-${b}&quot; d=&quot;M${x1} ${y1+20} L${x2} ${y2-20}&quot;&gt;&lt;/path&gt;`)});
+  Object.entries(abNodes).forEach(([id,[x,y,label]])=&gt;abSvg.insertAdjacentHTML(&#x27;beforeend&#x27;,`&lt;g class=&quot;tree-node&quot; data-tree-node=&quot;${id}&quot; transform=&quot;translate(${x},${y})&quot;&gt;&lt;circle r=&quot;22&quot;&gt;&lt;/circle&gt;&lt;text class=&quot;text-small&quot;&gt;${label}&lt;/text&gt;&lt;text class=&quot;tree-value&quot; y=&quot;34&quot; data-value-for=&quot;${id}&quot;&gt;&lt;/text&gt;&lt;/g&gt;`));
+  let abStep=0;
+  const abStates=[
+    {visit:[],prune:[],values:{},bounds:&#x27;α = −∞ · β = +∞&#x27;,detail:&#x27;Start at MAX with α = −∞ and β = +∞.&#x27;},
+    {visit:[&#x27;R&#x27;,&#x27;A&#x27;,&#x27;A1&#x27;,&#x27;L1&#x27;,&#x27;L2&#x27;],prune:[],values:{A1:&#x27;5&#x27;},bounds:&#x27;A: β = 5&#x27;,detail:&#x27;A1 returns max(3,5) = 5. MIN A lowers β to 5.&#x27;},
+    {visit:[&#x27;R&#x27;,&#x27;A&#x27;,&#x27;A1&#x27;,&#x27;A2&#x27;,&#x27;L1&#x27;,&#x27;L2&#x27;,&#x27;L3&#x27;],prune:[&#x27;L4&#x27;],values:{A1:&#x27;5&#x27;,A2:&#x27;≥6&#x27;,A:&#x27;5&#x27;,R:&#x27;α 5&#x27;},bounds:&#x27;α = 5 · A β = 5&#x27;,detail:&#x27;A2 sees 6. Its α reaches 6 ≥ A’s β 5, so leaf 9 is pruned.&#x27;},
+    {visit:[&#x27;R&#x27;,&#x27;A&#x27;,&#x27;A1&#x27;,&#x27;A2&#x27;,&#x27;B&#x27;,&#x27;B1&#x27;,&#x27;L1&#x27;,&#x27;L2&#x27;,&#x27;L3&#x27;,&#x27;L5&#x27;,&#x27;L6&#x27;],prune:[&#x27;L4&#x27;,&#x27;B2&#x27;,&#x27;L7&#x27;,&#x27;L8&#x27;],values:{A:&#x27;5&#x27;,B1:&#x27;2&#x27;,B:&#x27;2&#x27;,R:&#x27;α 5&#x27;},bounds:&#x27;α = 5 · B β = 2&#x27;,detail:&#x27;B1 returns 2. At MIN B, β=2 ≤ root α=5, so all of B2 is pruned.&#x27;},
+    {visit:[&#x27;R&#x27;,&#x27;A&#x27;,&#x27;A1&#x27;,&#x27;A2&#x27;,&#x27;B&#x27;,&#x27;B1&#x27;,&#x27;C&#x27;,&#x27;C1&#x27;,&#x27;L1&#x27;,&#x27;L2&#x27;,&#x27;L3&#x27;,&#x27;L5&#x27;,&#x27;L6&#x27;,&#x27;L9&#x27;,&#x27;L10&#x27;],prune:[&#x27;L4&#x27;,&#x27;B2&#x27;,&#x27;L7&#x27;,&#x27;L8&#x27;],values:{A:&#x27;5&#x27;,B:&#x27;2&#x27;,C1:&#x27;7&#x27;,R:&#x27;α 5&#x27;},bounds:&#x27;α = 5 · C β = 7&#x27;,detail:&#x27;C1 returns max(7,4) = 7. MIN C sets β to 7.&#x27;},
+    {visit:[&#x27;R&#x27;,&#x27;A&#x27;,&#x27;A1&#x27;,&#x27;A2&#x27;,&#x27;B&#x27;,&#x27;B1&#x27;,&#x27;C&#x27;,&#x27;C1&#x27;,&#x27;C2&#x27;,&#x27;L1&#x27;,&#x27;L2&#x27;,&#x27;L3&#x27;,&#x27;L5&#x27;,&#x27;L6&#x27;,&#x27;L9&#x27;,&#x27;L10&#x27;,&#x27;L11&#x27;,&#x27;L12&#x27;],prune:[&#x27;L4&#x27;,&#x27;B2&#x27;,&#x27;L7&#x27;,&#x27;L8&#x27;],values:{A:&#x27;5&#x27;,B:&#x27;2&#x27;,C1:&#x27;7&#x27;,C2:&#x27;8&#x27;,C:&#x27;7&#x27;,R:&#x27;7&#x27;},bounds:&#x27;Root value = 7 · choose C&#x27;,detail:&#x27;C2 returns 8; C returns min(7,8)=7. Root chooses max(5,2,7)=7.&#x27;}
+  ];
+  function renderAb(){const state=abStates[abStep];root.querySelectorAll(&#x27;.tree-node&#x27;).forEach(el=&gt;{el.classList.toggle(&#x27;visited&#x27;,state.visit.includes(el.dataset.treeNode));el.classList.toggle(&#x27;pruned&#x27;,state.prune.includes(el.dataset.treeNode));});root.querySelectorAll(&#x27;.tree-edge&#x27;).forEach(el=&gt;{const child=el.dataset.treeEdge.split(&#x27;-&#x27;)[1];el.classList.toggle(&#x27;visited&#x27;,state.visit.includes(child));el.classList.toggle(&#x27;pruned&#x27;,state.prune.includes(child));});root.querySelectorAll(&#x27;[data-value-for]&#x27;).forEach(el=&gt;el.textContent=state.values[el.dataset.valueFor]||&#x27;&#x27;);root.querySelector(&#x27;#ab-bounds&#x27;).textContent=state.bounds;root.querySelector(&#x27;#ab-detail&#x27;).textContent=state.detail;}
+  root.querySelector(&#x27;#ab-next&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{abStep=Math.min(abStates.length-1,abStep+1);renderAb()});
+  root.querySelector(&#x27;#ab-reset&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{abStep=0;renderAb()}); renderAb();
+
+  const peasData={
+    candy:{items:{P:[&#x27;Correct jar&#x27;,&#x27;Fast sorting&#x27;,&#x27;No damage&#x27;],E:[&#x27;Mixed candies&#x27;,&#x27;Conveyor&#x27;,&#x27;Jars · workers&#x27;],A:[&#x27;Arm · gripper&#x27;,&#x27;Diverter&#x27;,&#x27;Conveyor control&#x27;],S:[&#x27;Color camera&#x27;,&#x27;Weight · shape&#x27;,&#x27;Position sensor&#x27;]},env:[&#x27;Single-agent&#x27;,&#x27;Partly observable&#x27;,&#x27;Stochastic&#x27;,&#x27;Sequential&#x27;,&#x27;Dynamic&#x27;,&#x27;Discrete&#x27;]},
+    water:{items:{P:[&#x27;Water purity&#x27;,&#x27;Safe output&#x27;,&#x27;Low waste&#x27;],E:[&#x27;Raw water&#x27;,&#x27;Tank · pipes&#x27;,&#x27;Contaminants&#x27;],A:[&#x27;Pumps · valves&#x27;,&#x27;Filter control&#x27;,&#x27;Alarm&#x27;],S:[&#x27;pH · TDS&#x27;,&#x27;Turbidity&#x27;,&#x27;Flow · level&#x27;]},env:[&#x27;Single-agent&#x27;,&#x27;Partly observable&#x27;,&#x27;Stochastic&#x27;,&#x27;Sequential&#x27;,&#x27;Dynamic&#x27;,&#x27;Continuous&#x27;]},
+    vacuum:{items:{P:[&#x27;All rooms clean&#x27;,&#x27;Low time/cost&#x27;,&#x27;No collision&#x27;],E:[&#x27;3 rooms&#x27;,&#x27;Dirt · walls&#x27;,&#x27;Furniture&#x27;],A:[&#x27;Left · right&#x27;,&#x27;Clean&#x27;,&#x27;Stop&#x27;],S:[&#x27;Dirt sensor&#x27;,&#x27;Position&#x27;,&#x27;Bump sensor&#x27;]},env:[&#x27;Single-agent&#x27;,&#x27;Partly observable&#x27;,&#x27;Deterministic*&#x27;,&#x27;Sequential&#x27;,&#x27;Static*&#x27;,&#x27;Discrete&#x27;]}
+  };
+  function renderPeas(key){const data=peasData[key], labels={P:&#x27;Performance&#x27;,E:&#x27;Environment&#x27;,A:&#x27;Actuators&#x27;,S:&#x27;Sensors&#x27;};root.querySelector(&#x27;#peas-grid&#x27;).innerHTML=Object.entries(data.items).map(([letter,items])=&gt;`&lt;div class=&quot;card peas-card&quot;&gt;&lt;span class=&quot;peas-letter&quot;&gt;${letter}&lt;/span&gt;&lt;strong&gt;${labels[letter]}&lt;/strong&gt;&lt;ul&gt;${items.map(item=&gt;`&lt;li&gt;${item}&lt;/li&gt;`).join(&#x27;&#x27;)}&lt;/ul&gt;&lt;/div&gt;`).join(&#x27;&#x27;);[&#x27;agents&#x27;,&#x27;observe&#x27;,&#x27;determinism&#x27;,&#x27;sequence&#x27;,&#x27;change&#x27;,&#x27;values&#x27;].forEach((id,i)=&gt;root.querySelector(`#env-${id}`).textContent=data.env[i]);root.querySelector(&#x27;#peas-detail&#x27;).textContent=data.env.some(x=&gt;x.includes(&#x27;*&#x27;))?&#x27;* State assumptions when classification could change.&#x27;:&#x27;Say one reason for every environment label.&#x27;;}
+  root.querySelectorAll(&#x27;.peas-choice&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{root.querySelectorAll(&#x27;.peas-choice&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b===button)));renderPeas(button.dataset.peas)})); renderPeas(&#x27;candy&#x27;);
+
+  const concepts=[
+    [&#x27;Rational agent&#x27;,&#x27;Chooses the action expected to maximize its performance measure from percept history and knowledge.&#x27;],
+    [&#x27;Act humanly&#x27;,&#x27;Turing Test: behavior should be indistinguishable from a human.&#x27;],
+    [&#x27;Think humanly&#x27;,&#x27;Cognitive modeling: reproduce how humans actually think.&#x27;],
+    [&#x27;Think rationally&#x27;,&#x27;Laws of thought: derive logically correct conclusions.&#x27;],
+    [&#x27;Act rationally&#x27;,&#x27;Rational-agent approach: choose actions that best achieve goals.&#x27;],
+    [&#x27;Simple reflex&#x27;,&#x27;Current percept → condition–action rule; no memory.&#x27;],
+    [&#x27;Model-based&#x27;,&#x27;Keeps internal state using a model of how the world changes.&#x27;],
+    [&#x27;Goal-based&#x27;,&#x27;Uses search or planning to select actions that reach a goal.&#x27;],
+    [&#x27;Utility-based&#x27;,&#x27;Maximizes expected utility when outcomes trade off or are uncertain.&#x27;],
+    [&#x27;Tree search&#x27;,&#x27;Can regenerate states and loop; stores no explored set.&#x27;],
+    [&#x27;Graph search&#x27;,&#x27;Uses an explored set to avoid cycles and repeated expansion.&#x27;],
+    [&#x27;Consistency&#x27;,&#x27;For every edge: h(n) ≤ cost(n,n′) + h(n′).&#x27;]
+  ];
+  const theoryGrid=root.querySelector(&#x27;#theory-grid&#x27;);
+  concepts.forEach(([name,definition],i)=&gt;theoryGrid.insertAdjacentHTML(&#x27;beforeend&#x27;,`&lt;button type=&quot;button&quot; class=&quot;btn viz-tile&quot; data-concept=&quot;${i}&quot; aria-pressed=&quot;${i===0}&quot;&gt;${name}&lt;/button&gt;`));
+  theoryGrid.querySelectorAll(&#x27;[data-concept]&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;{const [name,definition]=concepts[Number(button.dataset.concept)];theoryGrid.querySelectorAll(&#x27;[data-concept]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b===button)));root.querySelector(&#x27;#theory-name&#x27;).textContent=name;root.querySelector(&#x27;#theory-definition&#x27;).textContent=definition;}));
+
+  const quiz=[
+    {topic:&#x27;BFS&#x27;,q:&#x27;What does BFS minimize?&#x27;,options:[&#x27;Cumulative edge cost&#x27;,&#x27;Solution depth&#x27;,&#x27;Heuristic value&#x27;,&#x27;Memory&#x27;],answer:1,why:&#x27;BFS pops the shallowest node; it is cost-optimal only when step costs are equal.&#x27;},
+    {topic:&#x27;UCS&#x27;,q:&#x27;When should UCS accept a goal?&#x27;,options:[&#x27;When generated&#x27;,&#x27;When popped at lowest g&#x27;,&#x27;After DFS checks it&#x27;,&#x27;When h=0&#x27;],answer:1,why:&#x27;Popping the goal proves no cheaper frontier path remains.&#x27;},
+    {topic:&#x27;A*&#x27;,q:&#x27;A( g=5,h=4 ), B(6,1), C(3,5). Which is popped?&#x27;,options:[&#x27;A&#x27;,&#x27;B&#x27;,&#x27;C&#x27;,&#x27;Tie&#x27;],answer:1,why:&#x27;f values are 9, 7, and 8; B is smallest.&#x27;},
+    {topic:&#x27;GBFS&#x27;,q:&#x27;Which value orders the GBFS frontier?&#x27;,options:[&#x27;g&#x27;,&#x27;h&#x27;,&#x27;g+h&#x27;,&#x27;depth&#x27;],answer:1,why:&#x27;GBFS uses only h and can therefore return a costly path.&#x27;},
+    {topic:&#x27;8-puzzle&#x27;,q:&#x27;What is excluded from both standard puzzle heuristics?&#x27;,options:[&#x27;Tile 1&#x27;,&#x27;Corner tiles&#x27;,&#x27;Blank&#x27;,&#x27;Goal row&#x27;],answer:2,why:&#x27;Never count the blank in misplaced tiles or Manhattan distance.&#x27;},
+    {topic:&#x27;Heuristic&#x27;,q:&#x27;h(X)=8, edge X→Y costs 3, h(Y)=4. Consistent?&#x27;,options:[&#x27;Yes&#x27;,&#x27;No&#x27;,&#x27;Only for GBFS&#x27;,&#x27;Cannot know&#x27;],answer:1,why:&#x27;8 ≤ 3+4 is false, so consistency fails on this edge.&#x27;},
+    {topic:&#x27;Alpha–beta&#x27;,q:&#x27;At any node, when may the remaining branch be cut?&#x27;,options:[&#x27;α &lt; β&#x27;,&#x27;α ≥ β&#x27;,&#x27;α = −∞&#x27;,&#x27;β = +∞&#x27;],answer:1,why:&#x27;Once α ≥ β, the branch cannot affect an ancestor’s choice.&#x27;},
+    {topic:&#x27;PEAS&#x27;,q:&#x27;A camera belongs to which PEAS category?&#x27;,options:[&#x27;Performance&#x27;,&#x27;Environment&#x27;,&#x27;Actuator&#x27;,&#x27;Sensor&#x27;],answer:3,why:&#x27;A camera perceives the environment, so it is a sensor.&#x27;},
+    {topic:&#x27;Agents&#x27;,q:&#x27;Which agent handles partial observability with internal state?&#x27;,options:[&#x27;Simple reflex&#x27;,&#x27;Model-based&#x27;,&#x27;Goal test&#x27;,&#x27;Minimax&#x27;],answer:1,why:&#x27;A model-based agent tracks unobserved aspects of the world.&#x27;},
+    {topic:&#x27;DFS&#x27;,q:&#x27;Which guarantee does ordinary DFS lack?&#x27;,options:[&#x27;Uses a stack&#x27;,&#x27;Expands deep nodes&#x27;,&#x27;Completeness in infinite spaces and optimality&#x27;,&#x27;Low memory&#x27;],answer:2,why:&#x27;DFS can follow an infinite branch and does not guarantee the cheapest path.&#x27;}
+  ];
+  let quizIndex=0, quizScore=0, quizAnswered=false;
+  function renderQuiz(){const item=quiz[quizIndex];root.querySelector(&#x27;#quiz-progress&#x27;).textContent=`Question ${quizIndex+1} of ${quiz.length}`;root.querySelector(&#x27;#quiz-topic&#x27;).textContent=item.topic;root.querySelector(&#x27;#quiz-question&#x27;).textContent=item.q;root.querySelector(&#x27;#quiz-options&#x27;).innerHTML=item.options.map((option,i)=&gt;`&lt;button type=&quot;button&quot; class=&quot;btn&quot; data-answer=&quot;${i}&quot;&gt;${option}&lt;/button&gt;`).join(&#x27;&#x27;);root.querySelector(&#x27;#quiz-feedback&#x27;).textContent=&#x27;Choose one answer.&#x27;;root.querySelector(&#x27;#quiz-next&#x27;).disabled=true;root.querySelector(&#x27;#quiz-next&#x27;).textContent=quizIndex===quiz.length-1?&#x27;See result&#x27;:&#x27;Next question&#x27;;root.querySelector(&#x27;#quiz-meter-fill&#x27;).style.width=`${quizIndex/quiz.length*100}%`;root.querySelector(&#x27;.quiz-meter&#x27;).setAttribute(&#x27;aria-valuenow&#x27;,String(quizIndex));quizAnswered=false;root.querySelectorAll(&#x27;[data-answer]&#x27;).forEach(button=&gt;button.addEventListener(&#x27;click&#x27;,()=&gt;answerQuiz(Number(button.dataset.answer))));}
+  function answerQuiz(choice){if(quizAnswered)return;quizAnswered=true;const item=quiz[quizIndex],correct=choice===item.answer;if(correct)quizScore++;root.querySelectorAll(&#x27;[data-answer]&#x27;).forEach(button=&gt;{button.disabled=true;const value=Number(button.dataset.answer);if(value===item.answer)button.classList.add(&#x27;correct&#x27;);else if(value===choice)button.classList.add(&#x27;incorrect&#x27;)});root.querySelector(&#x27;#quiz-feedback&#x27;).textContent=`${correct?&#x27;Correct&#x27;:&#x27;Not quite&#x27;} · ${item.why}`;root.querySelector(&#x27;#quiz-score&#x27;).textContent=`Score ${quizScore}`;root.querySelector(&#x27;#quiz-next&#x27;).disabled=false;}
+  root.querySelector(&#x27;#quiz-next&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{if(quizIndex&lt;quiz.length-1){quizIndex++;renderQuiz()}else{completed.add(&#x27;test&#x27;);root.querySelector(&#x27;#quiz-meter-fill&#x27;).style.width=&#x27;100%&#x27;;root.querySelector(&#x27;.quiz-meter&#x27;).setAttribute(&#x27;aria-valuenow&#x27;,String(quiz.length));root.querySelector(&#x27;#quiz-question&#x27;).textContent=quizScore&gt;=8?&#x27;Exam-ready signal&#x27;:&#x27;Target the misses&#x27;;root.querySelector(&#x27;#quiz-options&#x27;).innerHTML=&#x27;&#x27;;root.querySelector(&#x27;#quiz-feedback&#x27;).textContent=`Final score ${quizScore}/${quiz.length}. ${quizScore&gt;=8?&#x27;Do one handwritten simulation, then stop cramming.&#x27;:&#x27;Revisit Search, 8-puzzle, and α–β, then retry.&#x27;}`;root.querySelector(&#x27;#quiz-next&#x27;).disabled=true;showSection(&#x27;test&#x27;)}});
+  root.querySelector(&#x27;#quiz-restart&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;{quizIndex=0;quizScore=0;root.querySelector(&#x27;#quiz-score&#x27;).textContent=&#x27;Score 0&#x27;;renderQuiz()}); renderQuiz();
+
+  showSection(&#x27;route&#x27;);
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =&gt;
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest(&quot;[data-tooltip]&quot;)
+      : null;
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    document.removeEventListener(&quot;pointerover&quot;, handlePointerOpen);
+    document.removeEventListener(&quot;pointerout&quot;, handleLeave);
+    document.removeEventListener(&quot;focusin&quot;, handleFocusIn);
+    document.removeEventListener(&quot;focusout&quot;, handleLeave);
+    document.removeEventListener(&quot;keydown&quot;, handleKeyDown);
+    document.removeEventListener(&quot;contextmenu&quot;, handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener(&quot;pointerover&quot;, handlePointerOpen);
+  document.addEventListener(&quot;pointerout&quot;, handleLeave);
+  document.addEventListener(&quot;focusin&quot;, handleFocusIn);
+  document.addEventListener(&quot;focusout&quot;, handleLeave);
+  document.addEventListener(&quot;keydown&quot;, handleKeyDown);
+  document.addEventListener(&quot;contextmenu&quot;, handleContextMenu);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+</body>
+</html>

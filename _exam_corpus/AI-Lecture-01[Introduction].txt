@@ -1,0 +1,320 @@
+
+
+===== SLIDE 1 =====
+AI: Introduction
+Course Code:  CSC4226
+Dept. of Computer Science
+Faculty of Science and Technology
+Lecture No: | Theory-01 | Week No: | 1 | Semester: | Fall 24-25
+Lecturer: | Shaikat Das Joy |  |  |  | 
+Course Title:  Artificial Intelligence and Expert System
+
+===== SLIDE 2 =====
+Lecture Outline
+Vision and Mission
+Course Evaluation
+Class Policies
+About the Course
+What is AI?
+The Foundations of AI.
+Brief History of AI
+Course Outline by Topics and Weeks.
+
+===== SLIDE 3 =====
+Vision & Mission of AIUB
+Vision
+AMERICAN INTERNATIONAL UNIVERSITY-BANGLADESH (AIUB) envisions promoting professionals and excellent leadership catering to the technological progress and development needs of the country.
+
+Mission
+AMERICAN INTERNATIONAL UNIVERSITY-BANGLADESH (AIUB) is committed to provide quality and excellent computer-based academic programs responsive to the emerging challenges of the time. It is dedicated to nurture and produce competent world class professional imbued with strong sense of ethical values ready to face the competitive world of arts, business, science, social science and technology.
+
+===== SLIDE 4 =====
+Goals of AIUB
+Sustain development and progress of the university 
+
+Continue to upgrade educational services and facilities responsive of the demands for change and needs of the society 
+
+Inculcate professional culture among management, faculty and personnel in the attainment of the institution's vision, mission and goals 
+
+Enhance research consciousness in discovering new dimensions for curriculum development and enrichment 
+
+Implement meaningful and relevant community outreach programs reflective of the available resources and expertise of the university 
+
+Establish strong networking of programs, sharing of resources and expertise with local and international educational institutions and organizations 
+
+Accelerate the participation of alumni, students and professionals in the implementation of educational programs and development of projects designed to expand and improve global academic standards
+
+===== SLIDE 5 =====
+Vision & Mission of Computer Science Department
+Vision 
+Provides leadership in the pursuit of quality and excellent computer education and produce highly skilled and globally competitive IT professionals.
+
+Mission
+Committed to educate students to think analytically and communicate effectively; train them to acquire technological, industry and research-oriented accepted skills; keep them abreast of the new trends and progress in the world of information communication technology; and inculcate in them the value of professional ethics.
+
+===== SLIDE 6 =====
+Goals of Computer Science Department
+Enrich the computer education curriculum to suit the needs of the industry-   wide standards for both domestic and international markets
+
+Equip the faculty and staff with professional, modern technological and research skills
+
+Upgrade continuously computer hardware's, facilities and instructional materials to cope with the challenges of the information technology age
+
+Initiate and conduct relevant research, software development and outreach services.
+
+Establish linkage with industry and other IT-based organizations/institutions for sharing of resources and expertise, and better job opportunities for students
+
+===== SLIDE 7 =====
+Course Evaluation
+Mid Term | Class Quizzes | 20 | 
+ | Laboratory Performance/Viva/Exam | 30 | 
+ | Class Attendance/Performance | 10 | 
+ | Midterm Written Exam | 40 | 
+ | Mid Term Total | 100 | 40%
+Final Term | Class Quizzes | 20 | 
+ | Laboratory Performance/Viva/Exam | 30 | 
+ | Class Attendance/Performance | 10 | 
+ | Midterm Written Exam | 40 | 
+ | Final Term Total | 100 | 60%
+Grand Total | Final Grade of the Course |  | 100
+
+===== SLIDE 8 =====
+Classroom Policies
+Must be present inside the class in due time.
+
+Class Break: I would prefer to start the class in due time and leave the class in 5/10 minutes early for theory/Laboratory class respectively, instead of giving a break.
+
+Every class will start with a question-answer session about the last lecture. So, students must be prepared with the contents and exercises from the last lecture.
+
+Students are suggested to ask questions during or after the lecture.
+
+Additional/bonus marks may be given to any good performances during the class.
+
+Late in Class: 
+Student coming after 5 minutes of due time is considered late. 
+2 late attendances are considered as one absent.
+Late during quiz is not given additional time.
+Students who are regularly late might have additional deduction of marks.
+A late student will be allowed to enter the class. Don’t ask permission to enter the class, just get in slowly and silently.
+
+===== SLIDE 9 =====
+Laboratory Policies
+Laboratory Classes:
+First 0.5 – 1 hour will be spent explaining the problems/task/experiment to be performed.
+Next 1 – 1.5 hour(s) will be spent by the students to complete the experiment.
+Next 0.5 – 1 hour will be spent in checking, marking, and discussing the solution.
+Students are allowed to discuss with each other (unless instructed not to) in solving problems.
+But the checking (executing/viva) & marking will be with individual students only.
+Laboratory Exam: 
+Laboratory exams are scheduled in the week before the major exams during the normal laboratory hours.
+Generally, students are given one/more problems to be solved of which at least one part is solved using computers.
+One hour is given to the students to solve the problem.
+
+===== SLIDE 10 =====
+Attendance
+At least 80% presence is required by the student. Absent classes must be defended by the student through application and proper documentation to the course teacher. 
+
+Long absences/irregular presence/absences out of 25% range must go through application procedures via department Head (+ probation office, if student is in probation) to attend the following classes.
+
+Acceptance of an application for absence only gives permission to attend the following classes. This might still result in deduction of marks (for attendance) which will be judged by the course teacher.
+
+===== SLIDE 11 =====
+Makeup Evaluation
+Makeup for missing evaluations like quizzes/assignment submission date/presentation date/viva date/etc., must go through valid application procedure with supporting document within the deadline of the actual evaluation date. 
+
+Makeup for missing Midterm/Final term must go through Set B form along with the supporting document within the 1st working day after exam week. The set B exam is generally scheduled from the 2nd working day after the exam week. Must get signature and exam date from the course teacher and get it approved by the department Head (monetary penalty might be imposed).
+
+The course teacher will be the judge of accepting/rejecting the request for makeup.
+
+===== SLIDE 12 =====
+Grading Policies
+All the evaluation categories & marks will be uploaded to the VUES within one week of the evaluation process except the attendance & performance, which will be uploaded along with the major (mid/final term) written exam marks. 
+Letter grades ‘A+’ through ‘F’ is counted as grades. Other grades ‘I’ and ‘UW’ are considered as temporary grades which are counted/calculated as ‘F’ grade in the CGPA. These grades must/will be converted to the actual grades, i.e. ‘A+’ through ‘F’. 
+‘I: INCOMPLETE’ is given to students who have missed at most 30% of evaluation categories (quiz/assignment/etc.).  Students must contact the course teacher for makeup, through valid application procedures immediately after grade release.
+‘UW: UNOFFICIAL WITHDRAW’ is given when the missing evaluation categories are too high (more than 30%) to makeup. A student getting ‘UW’ has no option but to drop the course immediately after grade release
+
+===== SLIDE 13 =====
+Grading Policies…
+Once a student’s gets ‘I’ or ‘UW’ and unable to fulfill the requirements with the course teacher for makeup, must drop the course within officially mentioned time period from the registration department. 
+Students in probation or falls into the probation due to ‘I’/’UW’ grade are not allowed to drop the course.
+Unable to do so will result in the automatic conversion of the grades ‘I’/’UW’ to ‘F’ grade after the 4th week of the following semester.
+Any problem with the mark/grade must be consulted with the course teacher within one week of the release of grades.
+
+===== SLIDE 14 =====
+Dropping a Course
+Must fill up the drop form and get it signed by the course teacher, write an application to the vice chancellor and get it signed by the department Head, and finally submit the form & application to the registration department.
+
+The course teacher must write down the grades (if any) obtained in midterm, final, and grand total on the drop form.
+
+No drop is accepted during the following periods:
+One week before midterm exam – grade release date of midterm exam.
+One week before final term exam – grade release date of final grade.
+
+Student with ‘F’ grades in midterm, final term, or grand total cannot drop.
+Probation student are not allowed to drop any course.
+
+===== SLIDE 15 =====
+Contacts
+Contact information (email, office phone extension, office location, consulting hours, etc.) of the course teacher must be stored by the students.
+
+It is mandatory to contact/notify (preferably consulting hour/email) the course teacher for/of any problems/difficulties at the earliest possible. Late notification might not be considered.
+
+Update & correct your email address & phone number at VUES, as the teacher will contact/notify you of anything regarding the course through these information in VUES.
+
+===== SLIDE 16 =====
+Finally
+For any problems that could not be solved/understood during the lecture,  students are advised to contact during the consultation hours and solve the problem.
+
+For any missing evaluation (quiz, assignment, etc.), classes, deadlines, etc. must contact/inform/notify the teacher immediately after missing in the consulting hour, via email, or in unavoidable circumstances – through the guardian or friend.
+
+Probation students must meet the course teacher once a week. So, schedule your time with the teacher.
+
+Any kind of dishonesty, plagiarism, misbehavior, misconduct, etc. will not be tolerated. Might result in deduction of marks, ‘F’ grade, or reported to the AIUB Disciplinary Committee for drastic punishment.
+
+Always check/visit the AIUB home page for notices, rules & regulations of academic/university policies and important announcement for deadlines (Course drop, Exam permit, Exam Schedule, etc.).
+
+===== SLIDE 17 =====
+Course Prerequisite
+Representing information in computers, Binary Number Systems, Conversions.
+
+Programming Languages (C/C++/Python)
+
+Using C/C++/Python editors, debugging
+
+Data Storage Concept & Data types in Programming languages, 
+
+Variable, Array (single & multidimensional), Pointers, String
+
+Functions, Recursion, Scope of variable & function
+
+Design and Analysis of Algorithms
+
+===== SLIDE 18 =====
+Course Objectives
+Get an overview of artificial intelligence (AI) principles and approaches.
+
+Develop a basic understanding of the building blocks of AI as presented in terms of intelligent agents: Search, Knowledge representation, inference, logic, learning.
+
+Develop a brief overview of AI applications: Expert Systems and Planners.
+
+Follow AI literature with the ability to go on to independent work in the field.
+
+===== SLIDE 19 =====
+Importance of the course
+Studying artificial intelligence opens a world of opportunities.
+
+At a basic level, you’ll better understand the systems and tools that you interact with daily. And if you stick with the subject and study more, you can help create cutting edge AI applications, like the Google Self Driving Car, or IBM’s Watson.
+
+In the field of artificial intelligence, the possibilities are truly endless.
+
+Studying AI now can prepare you for a job as a researching neural networks, human-machine interfaces, and quantum artificial intelligence.
+
+Or you could work as a software engineer in industry working for companies like Amazon to shopping list recommendation engines or Facebook analyzing and processing big data.
+ 
+You could also work as a hardware engineer developing electronic parking assistants or home assistant robots.
+
+===== SLIDE 20 =====
+Course Contents
+Introduction to  Artificial Intelligence
+Intelligent Agent
+Problem Solving, Search and Control Strategies
+Knowledge Representation Issues, Predicate Logic, Rules
+Reasoning System: Symbolic, Statistical
+Learning Systems
+Expert System
+Neural Networks: Fundamental 
+Genetic Algorithms: Fundamental
+
+===== SLIDE 21 =====
+What is Artificial Intelligence ?
+
+===== SLIDE 22 =====
+Definitions of AI
+
+===== SLIDE 23 =====
+Types of AI
+Hard or Strong AI
+
+===== SLIDE 24 =====
+Types of AI
+Soft or Weak AI
+
+===== SLIDE 25 =====
+Goals of AI
+
+===== SLIDE 26 =====
+Goal of AI
+Continued…
+
+===== SLIDE 27 =====
+AI Approaches
+Cognitive Science : Think Humanly
+
+===== SLIDE 28 =====
+AI Approaches
+Laws of Thought: Think Rationally
+
+===== SLIDE 29 =====
+AI Approaches
+Turing Test: Act Humanly
+
+===== SLIDE 30 =====
+AI Approaches
+Turing Test
+
+===== SLIDE 31 =====
+AI Approaches
+Turing Test : Capabilities  Required to Pass Complete Turing Test
+
+===== SLIDE 32 =====
+AI Approaches
+Rational Agent: Act Rationally
+
+===== SLIDE 33 =====
+Summary Table of the Four Goals
+
+===== SLIDE 34 =====
+The Foundations of AI
+Philosophy
+Mathematics
+Economics
+Neuroscience
+Psychology
+Computer engineering
+Control theory and cybernetics
+Linguistics
+
+===== SLIDE 35 =====
+The History of AI
+The inception of artificial intelligence (1943-1956)- Artificial Neuron, Hebbian Learning
+Early enthusiasm, great expectations (1952-1969)- Physical Symbol System, Lisp
+A dose of reality (1966-1973)
+Expert systems (1969-1986)
+The return of neural networks (1986-present)
+Probabilistic reasoning and machine learning (1987-present)- HMM, Bayesian Network
+Big data (2001-present)
+Deep learning (2011-present)
+
+===== SLIDE 36 =====
+Course Outline
+A separate pdf file has been shared on Google Drive:
+https://drive.google.com/drive/folders/1tiFcbxGpnrHLi12huLjJEIx5hmKtZ_Mg
+
+===== SLIDE 37 =====
+References
+Chapter 1: Introduction ,  Pages 1-29
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig,
+
+===== SLIDE 38 =====
+Books
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig.
+"Artificial Intelligence: Structures and Strategies for Complex Problem Solving", by George F. Luger, (2002) 
+"Artificial Intelligence: Theory and Practice", by Thomas Dean.
+"AI: A New Synthesis", by Nils J. Nilsson.
+“Programming for machine learning,” by J. Ross Quinlan, 
+“Neural Computing Theory and Practice,” by Philip D. Wasserman, .
+“Neural Network Design,” by Martin T. Hagan, Howard B. Demuth, Mark H. Beale, .
+“Practical Genetic Algorithms,” by Randy L. Haupt and Sue Ellen Haupt.
+“Genetic Algorithms in Search, optimization and Machine learning,” by David E. Goldberg.
+"Computational Intelligence: A Logical Approach", by David Poole, Alan Mackworth, and Randy Goebel.
+“Introduction to Turbo Prolog”,  by Carl Townsend.

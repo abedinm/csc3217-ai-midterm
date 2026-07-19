@@ -1,0 +1,21 @@
+Name:
+ld:
+ARTIFICIALINTELIGENCE(SECTION-Q)
+A.Write the PEAS description abouta Water purifying agent.
+8Marks
+Inthisgraph,
+12Marks
+ApplyDFS algorithminAlphabetic
+ordertofind thepathfrom sourceA
+toDestination'E.Show all the steps
+3
+withFrontirxoredtandFin
+path cost.Checktheresult is optimal
+ornot.
+Explored
+PauGnd
+Frow
+A
+0
+A
+M

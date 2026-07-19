@@ -1,0 +1,454 @@
+
+
+===== PAGE 1 =====
+Artiﬁcial Intelligence
+Lecture 2, Chapter 3
+Solving Problems by Searching
+Supta Richard Philip
+Department of CS
+AIUB
+AIUB, January 2025
+Richard, Philip (AIUB) AI AIUB 2024 1 / 44
+
+===== PAGE 2 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 2 / 44
+
+===== PAGE 3 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 3 / 44
+
+===== PAGE 4 =====
+Problem Solving Agent
+A problem-solving agent is one kind of goal-based agent.
+Lets consider, the route-ﬁnding problem in the cities of Romania.
+This problem can be solved by searching.
+Richard, Philip (AIUB) AI AIUB 2024 4 / 44
+
+===== PAGE 5 =====
+Problem formulation
+Intelligent agents are supposed to act in such a way that the
+environment goes through a sequence of states that maximizes
+the performance measure .
+We will consider a goal to be a set of states - just those
+states in which the goal is satisﬁed.
+Actions can be viewed as causing transitions between states .
+Problem formulation is the process of deciding what actions and
+states to consider.
+Richard, Philip (AIUB) AI AIUB 2024 5 / 44
+
+===== PAGE 6 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 6 / 44
+
+===== PAGE 7 =====
+Search Problem formulation
+A search problem consists of:
+A state space
+A successor function(with action, cost)
+A start state and a goal test
+A solution is a sequence of actions (a plan) which transforms the
+start state to a goal state
+Richard, Philip (AIUB) AI AIUB 2024 7 / 44
+
+===== PAGE 8 =====
+Example- Vacuum World
+In this case there are eight possible world states.
+There are three possible actions: left, right, and suck.
+The goal is to clean up all the dirt, i.e., the goal is equivalent to
+the set of states 7,8.
+Richard, Philip (AIUB) AI AIUB 2024 8 / 44
+
+===== PAGE 9 =====
+Search Problem formulation for vacuum world
+This can be formulated as a problem as follows:
+States: The state is determined by both the agent location and
+the dirt locations. Thus, there are 2 .22 = 8 possible world
+states. A larger environment with n locations has n.2n states.
+Initial state: Any state can be the initial state.
+Actions: In this simple environment, each state has just three
+actions: Left, Right, and Suck . Larger environments might
+also include Up and Down .
+Transition model: The actions have their expected eﬀects,
+except that moving Left in the leftmost square, moving Right in
+the rightmost square, and sucking in a clean square have no
+eﬀect.
+Goal test: This checks whether all the squares are clean.
+Path cost: Each step costs 1, so the path cost is the number of
+steps on the path.
+Richard, Philip (AIUB) AI AIUB 2024 9 / 44
+
+===== PAGE 10 =====
+Example - Route-Finding in Romania
+initial states: Arad
+goal state: Bucharest
+operators: successor function S(x) set of possible actions
+path cost: a function that assigns a cost to a path.
+Richard, Philip (AIUB) AI AIUB 2024 10 / 44
+
+===== PAGE 11 =====
+Example - The 8-puzzle problem
+states: a state description speciﬁes the location of each of the
+eight tiles in one of the nine squares. For eﬃciency, it is also
+useful to include a location for the blank.
+operators: blank moves left, right, up, or down.
+goal test: as in ﬁgure
+path cost: length of path
+Richard, Philip (AIUB) AI AIUB 2024 11 / 44
+
+===== PAGE 12 =====
+Example - The 8-queens problem
+The goal of this problem is to place 8 queens on the board so that
+none can attack the others. The following is not a solution!
+goal test: 8 queens on board, none attacked
+path cost: irrelevant
+states: any arrangement of 0-8 queens on the board
+operators: add or remove a queen to/from any square
+Richard, Philip (AIUB) AI AIUB 2024 12 / 44
+
+===== PAGE 13 =====
+Search Problem formulation Exercise
+Formulate the following problem as the search problem.
+The 8-puzzle: The 8-puzzle has 9! /2 = 181, 440 reachable
+states and is easily solved. Why?. Please ﬁnd the mathematics
+behind this.
+8-queens problem: Initial state-empty board then possible
+world states (64
+8
+)
+= 64!
+8!(64− 8)!
+Figure: 8-puzzle problem
+Figure: 8-Queen Goal State
+Richard, Philip (AIUB) AI AIUB 2024 13 / 44
+
+===== PAGE 14 =====
+8-queens problem formulation
+A better formulation
+Initial state: the queens are already placed on the chessboard
+so that each column has exactly one queen.
+Actions: a queen can be moved anywhere in its same column.
+How many successors does a state have?(Branching
+factor)
+What is the size of the state-space?
+Richard, Philip (AIUB) AI AIUB 2024 14 / 44
+
+===== PAGE 15 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 15 / 44
+
+===== PAGE 16 =====
+State space graph
+A state space graph is a mathematical representation of a search
+problem.
+Nodes are (abstracted) world conﬁgurations
+Arcs represent transitions resulting from actions
+The goal test is a set of goal nodes
+Each state occurs only once
+Richard, Philip (AIUB) AI AIUB 2024 16 / 44
+
+===== PAGE 17 =====
+The state space for the vacuum world.
+Richard, Philip (AIUB) AI AIUB 2024 17 / 44
+
+===== PAGE 18 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 18 / 44
+
+===== PAGE 19 =====
+Searching for Solutions
+We can use a search algorithms to ﬁnd a solution to a search
+problem.
+In particular, we can ﬁnd a path (i.e., sequence of actions)
+from the start state to the goal state in the state space
+graph.
+Search algorithms can be uninformed search methods or
+informed search methods.
+A solution is an action sequence , so search algorithms work by
+considering various possible action sequences.
+The SEARCH TREE possible action sequences starting at the
+initial state form a search tree with the initial state at the root;
+the branches are actions, and the nodes correspond to states in
+the state space of the problem.
+Richard, Philip (AIUB) AI AIUB 2024 19 / 44
+
+===== PAGE 20 =====
+Searching for Solutions-cont
+By expanding the current state; that is, applying each legal
+action to the current state, thereby generating a new set
+of states .
+After expanding Arad, add three branches from the parent node,
+leading to three new child nodes
+After expanding Sibiu these six nodes is a leaf node, The set of
+all leaf nodes available for expansion at any given point is called
+the frontier. (Many authors call it the open list)
+The process of expanding nodes on the frontier continues until
+either a solution is found or there are no more states to expand.
+Richard, Philip (AIUB) AI AIUB 2024 20 / 44
+
+===== PAGE 21 =====
+Searching for Solutions-cont
+The way to avoid exploring redundant paths is to remember,
+TREE-SEARCH algorithm with a data structure called the
+explored set (also known as the closed list), which remembers
+every expanded node(visited). The new algorithm, called
+GRAPH-SEARCH.
+Newly generated nodes that match previously generated
+nodes—ones in the explored set or the frontier—can be
+discarded instead of being added to the frontier.
+Search algorithms all share this basic structure; they vary
+primarily according to how they choose which state to expand
+next—the so-called search strategy.
+The frontier needs to be stored in such a way that the search
+algorithm can easily choose the next node to expand according
+to its preferred strategy.
+Richard, Philip (AIUB) AI AIUB 2024 21 / 44
+
+===== PAGE 22 =====
+Search strategy and Data Structure
+The appropriate data structure for the search strategy is a
+queue. Three common variants are:
+the ﬁrst-in, ﬁrst-out or FIFO queue, which pops the oldest
+element of the queue;
+the last-in, ﬁrst-out or LIFO queue (also known as a stack),
+which pops the newest element of the queue;
+the priority queue, which pops the element of the queue with
+the highest priority according to some ordering function.
+Richard, Philip (AIUB) AI AIUB 2024 22 / 44
+
+===== PAGE 23 =====
+General tree-search and graph-search algorithms
+Richard, Philip (AIUB) AI AIUB 2024 23 / 44
+
+===== PAGE 24 =====
+Partial search trees for ﬁnding a route
+Richard, Philip (AIUB) AI AIUB 2024 24 / 44
+
+===== PAGE 25 =====
+Exercise: Apply Tree Search and Graph Search for
+DFS and BFS
+Initial state: A
+Goal state: E
+Richard, Philip (AIUB) AI AIUB 2024 25 / 44
+
+===== PAGE 26 =====
+Measuring problem-solving performance
+completeness: is the strategy guaranteed to ﬁnd a solution
+when there is one?
+optimality: does the search strategy ﬁnd the highest quality
+solution when there are multiple solutions?
+time complexity: how long does it take to ﬁnd a solution?
+space complexity: how much memory is required to perform
+the search?
+Richard, Philip (AIUB) AI AIUB 2024 26 / 44
+
+===== PAGE 27 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 27 / 44
+
+===== PAGE 28 =====
+Breadth-ﬁrst search
+Strategy: expand shallowest node ﬁrst
+Implementation: The frontier is a queue of FIFO
+Richard, Philip (AIUB) AI AIUB 2024 28 / 44
+
+===== PAGE 29 =====
+Properties of Breadth-ﬁrst search
+Complete: Guaranteed to ﬁnd a solution if one exists?
+Yes (if b is ﬁnite)
+Optimal: Guaranteed to ﬁnd the least cost path?
+Yes (if cost = 1 per step); not optimal in general
+Time: 1 + b + b2 + b3 + . . . + bd = O(bd), i.e., exponential in d
+Space: O(bd) (keeps every node in memory)
+Space is the big problem; can easily generate nodes at 1MB/sec
+so 24hrs = 86GB.
+Richard, Philip (AIUB) AI AIUB 2024 29 / 44
+
+===== PAGE 30 =====
+Uniform-cost search
+Instead of expanding the shallowest node, uniform-cost search
+expands the node n with the lowest path cost g(n)
+Richard, Philip (AIUB) AI AIUB 2024 30 / 44
+
+===== PAGE 31 =====
+Depth-ﬁrst search
+Strategy: expand deepest node ﬁrst
+Implementation: Fringe is a LIFO queue (a stack)
+Richard, Philip (AIUB) AI AIUB 2024 31 / 44
+
+===== PAGE 32 =====
+Properties of Depth-ﬁrst search
+Complete: No. fails in inﬁnite-depth spaces, spaces with loops
+Modify to avoid repeated states along path
+⇒ complete in ﬁnite spaces
+Optimal: No
+Time: O(bm): terrible if m is much larger than d
+but if solutions are dense, may be much faster than breadth-ﬁrst
+Space: O(bm), i.e., linear space!
+Richard, Philip (AIUB) AI AIUB 2024 32 / 44
+
+===== PAGE 33 =====
+Depth-limited search
+depth-ﬁrst search with depth limit L
+Implementation: Nodes at depth L have no successors
+Richard, Philip (AIUB) AI AIUB 2024 33 / 44
+
+===== PAGE 34 =====
+Iterative deepening search
+Iterative deepening search (or iterative deepening depth-ﬁrst
+search) is a general strategy, often used in combination with
+depth-ﬁrst tree search, which ﬁnds the best depth limit.
+It does this by gradually increasing the limit—ﬁrst 0, then 1,
+then 2, and so on—until a goal is found
+Richard, Philip (AIUB) AI AIUB 2024 34 / 44
+
+===== PAGE 35 =====
+Bidirectional search
+Richard, Philip (AIUB) AI AIUB 2024 35 / 44
+
+===== PAGE 36 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 36 / 44
+
+===== PAGE 37 =====
+Comparing uninformed search
+Richard, Philip (AIUB) AI AIUB 2024 37 / 44
+
+===== PAGE 38 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 38 / 44
+
+===== PAGE 39 =====
+Exercise 1
+You are tasked with designing a robot navigation system where
+the robot can move up, down, left, or right, if there are no walls
+blocking its way. The goal is to reach the bottom right corner of
+the room. The robot can only see its immediate next squares,
+but not anything else. Blocks can appear randomly anywhere at
+the room, at any time. There is also an opposing robot whose
+objective is to damage your robot. Determine whether this
+agent’s environment is single- or multi-agent, fully or partially
+observable, episodic or sequential, static or dynamic, and
+deterministic or stochastic.
+Richard, Philip (AIUB) AI AIUB 2024 39 / 44
+
+===== PAGE 40 =====
+Exercise
+2
+Supp
+ose that you are designing an artiﬁcially intelligent wall
+painting robot. The wall is divided into 144 squares in a 12 x 12
+grid design. The robot can paint a single square in a singular
+action. It then moves the hand to the next square and paints.
+The job is ﬁnished when the entire wall is painted. Give a formal
+description of this problem as a search problem. What is the size
+of the state space?
+Richa rd, Philip (AIUB) AI AIUB 2024 40 / 44
+Number of states=(possible positions)×(possible paint configurations)
+= 144 * 2^144
+
+===== PAGE 41 =====
+Exercise 3
+Simulate BFS,DFS,UCS,DLS using the graph algorithm. Show
+the expand tree, explored set(visited), frontier, and path cost
+Richard, Philip (AIUB) AI AIUB 2024 41 / 44
+
+===== PAGE 42 =====
+Exercise 4
+Suppose that you have to design a vacuum-cleaner robot, which
+will operate in an apartment with 3 rooms in a row. It has the
+following allowed actions with the associated costs: move left (L
+: 5), moveright (R : 20), and clean (C : 25). Initially, only the
+middle room is clean, the robot is there, and the other rooms
+are dirty. The goal of the agent is to keep all the rooms clean.
+Representing the state space graph of the problem.
+Determine the plan (solution path) for the robot using the BFS,
+DFS, Uniform-cost search algorithm.
+Richard, Philip (AIUB) AI AIUB 2024 42 / 44
+
+===== PAGE 43 =====
+Table of Contents
+1 Problem-Solving Agents
+2 Search Problem formulation
+3 State space graph
+4 Searching for Solutions
+5 Uninformed Search
+6 Comparing uninformed search
+7 Exercise
+8 References
+Richard, Philip (AIUB) AI AIUB 2024 43 / 44
+
+===== PAGE 44 =====
+References
+Stuart Russell and Peter Norvig. 2021. Artiﬁcial Intelligence: A
+Modern Approach (4th ed.). Pearson Education Inc., Boston,
+MA.
+Stuart Russell and Peter Norvig. 2009. Artiﬁcial Intelligence: A
+Modern Approach (3rd ed.). Prentice Hall.
+https://www.cs.cmu.edu/ 15281/coursenotes/search/
+https://www.baeldung.com/cs/graph-search-vs-tree-like-search
+Richard, Philip (AIUB) AI AIUB 2024 44 / 44

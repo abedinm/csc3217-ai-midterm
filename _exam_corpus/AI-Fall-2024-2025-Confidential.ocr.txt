@@ -1,0 +1,241 @@
+
+
+===== PAGE 1 =====
+SETA
+AMERICANINTERNATIONALUNIVERSITY-BANGLADESH
+Faculty of Science andTechnology
+DepartmentofComputerScience
+CSC3217Artificial Intelligence and Expert System(Section:ALL)
+MidTerm Examination
+Fall2024-25
+TotalMarls:100
+Moderator:SuptaRichard Philip
+Time:
+2hours
+GeneralInstructions:
+1.Allthequestions arebased onOBEprogram outcomes.Question5ismapped to CO3.
+2.
+Question 5 is mandatory.Answer all Questions.
+3.
+Answerquestion5in thequestionpaper(onPage 2)and therest of thequestions in theAnswer Script.
+4.Retun thequestionpaperwiththeanswerscript.
+1.(a)Consider thegivengraphwhereyou need to
+20
+reach any of the destination nodes {G1,GZ,
+G3}startingfromnodeS.Find thepathfromS
+to any of the destination nodes with the least
+cumulative costusing a UniformCostSearch.
+Isit possible to find the solution for the
+given graph using A*search? Explain your
+answer.
+Applythea-βpruningalgorithmtothesearch
+MAX
+20
+treegivenin therightand showeachupdateof
+a-βvalues clearly.Make sure that you show
+where theaandβcuts are applied,andwhich
+MIN
+parts of the search tree are pruned as aresult.
+Max
+2
+M
+G
+5
+3
+4
+8
+3.(a)A problem,8-puzzle consists of a 3x3boardwith eight numbered tiles and ablank space.A tile20
+adjacenttotheblankspacecanslideintothespace.Theobjectiveistoreachthegoalstate.Isthisproblem
+well defined?If yes,then explain thefour basiccomponentsofwell-defjnedproblem according to the8-
+valwp
+mve
+(b)DevelopPEASdescription of the taskenvironmentfor a CandySortingRobot that can sortcandies to
+the appropriate jars.
+(a)Show the simulation[frontier,explored set,
+20
+path(solution),Path Cost,Tree]using BFS and
+DFS.StartnodeSand goalnode G.Insert the
+node in the frontier in alphabetic order.
+(b)Explain the completeness and optimality of
+BFS andDFS.
+8
+Page1
+worshop
+sersn.
+Robhy
+corero,
+voncode
+
+===== PAGE 2 =====
+anduncertaintyetc.tosolvedifferentreal-lifeproblems.
+Name:MohammadRakibulHosonR:fo
+MarksObtained
+Invigilator'sSignature
+D:22-47371-2
+Section:H
+5.(a)Suppose we have a graph withnodes S,A,B,C,D and G,wherSisthe
+20
+startandGthegoalnode.Perform anA*searchforthisproblem.Recall that
+f(n)=g(n)+h(n).Theheuristicestimates of the distance toGare:
+h（S)=22,h（A）=20,h(B)=8,h(C）=14,h(D）=11andh（G)=0
+(b)Apply the GreedyBestFirstSearch(GBFS)algorithmtosolvetheabove
+50
+problem(Question5a).
+Fnmtiergs22,s-b3+20:s-8+14=22S-C50+0=52
+D-C
+：27
+S-A-/B15+8=23,5-A-B-C26+0
+3+20
+20-09
+Explone:.S,C;D
+11+11=22
+Pa+hS-A-B-C.Cost26(Acualcos+)
+27+0=
+'GBFS:
+Fronhiers=/22, S-A 20,S-C:1S-G50
+S.C.n
+22
+ExplreS,A,
+20
+PaHhS-G
+Fall2024-25CSC3217ArtificialIntelligenceandExpertSystem
+Page2
+
+===== PAGE 3 =====
+Stnn+rode
+Fronten<%0,S-A5,s-9,S-D6,s-A-Cn4
+S-A-B8,S-
+ExporeS,A,BD,C
+SA-G1
+CosXe14
+
+===== PAGE 4 =====
+woy
+So, Lf we can take heurisic value in  ophma)
+Hher i+ is poss) ble omake 
+h(n)≤g(n)+h(n)
+So, herze
+Like Pon, S node,
+15≤6+9
+15≤5+10
+15≤9+12
+Sane dso dbnefon nestof node.
+FronhenS%15,S-A5+10=15,≤-B9+12=21,S-D
+6+9=15，S-A-CeA+1=15-,
+Explone S, A,B D,
+po+h:SA-C,.
+ost4(Actuacos+)
+
+===== PAGE 5 =====
+C
+2+6=15
+同
+DD
+A
+5+10=15
+3
+14+1=15
+2H2=
+
+===== PAGE 6 =====
+aL=
+B
+May
+5
+.8
+85
+Min
+β=4
+B=2
+87=0
+25
+0=-q62
+B=2
+W
+5
+6
+aSiSF→a(6)B（2)
+get
+So, ④
+and
+P→α(5)2B(4)
+
+===== PAGE 7 =====
+@BFS
+S-D-B
+S-D
+S-C-F
+Fronherc,
+S,S-A
+--
+ExploreS,A,C,D
+Pa+S-D-C
+Dcos+：10
+DFS:
+--s--S-A-s
+Frorteng
+$),S-AS-C
+ExploneS,D
+Pafh:S-D-G
+Cost:40
+BFS is Complete ard ophmal
+Complotee
+level.so even
+level
+-BFsexplorre
+everly
+hee
+is
+g0a
+Arereis
+infinite
+level will
+reachiha+deshination
+in
+
+===== PAGE 8 =====
+way，So+isophimal
+Jfhe
+given.Arophis complole and.ophima/.
+Dsisr
+completeandrotophiwal
+Not complete:
+Jreo
+Dfswillone
+inPnite
+JPherre
+'s
+ +ha+level ,hen ohher. So i will rot
+Rom
+deep
+finitsetree
+deshinadionJphereisro+
+pird
+Not
+ophimal!
+woy.so he path eol mgh
+one
+AsDFSa°
+rot . be 
+ophimal.
+complele, but rot ophinal.
+:n hisgnoph ifis
+
+===== PAGE 9 =====
+cordies t。 4ke
+Sorcing
+Robo+ha
+Cand
+ap pro priato
+efficient, Post,
+ernonprone
+Performarce:
+Workshop,
+Environmerlg
+velt,
+Robotic hand.
+convey.r
+Actuator
+Comerro,
+Vorccode,
+Senson

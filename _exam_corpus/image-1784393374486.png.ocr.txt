@@ -1,0 +1,31 @@
+updowndrtkiscetwntegred
+initialstateactionsrnsitonodlgoaltestadpatcost
+11.
+Determine the.size of branching factor and the state space.
+consisteney.
+a)Find the beuristics for the 8-puzzle problem
+using the initial state sbown in Figure 2.
+h:The number of misplaced tiles (i.e., the number
+oftiles that are not in their goal positions).
+h:The sum of the Manhattan distances of cach tle
+fromits goal position.
+b）Apply Greedy Best-First Search(GBFS）using
+Sran State
+the hheuristic to find a solution.Show the
+Figure 2:8 Puzzle problem
+search tree and solution path.
+a）Consider the following directed search
+space.S is the inital state.Gis a state
+that satisfies the goal test. Find out the
+solution paths and costs retumed by A*
+search algorithm.
+（The values next to the nodes denote
+their co-ordinate values.Use Euelidean
+Distance as the Heuristic value for th
+(10,2)
+nodes.
+Euclidean Distance
+h=√（x-x）²+（-y）
+environment fheapple srting robot
+(Green and Red Apple).
+Figure 3:state space

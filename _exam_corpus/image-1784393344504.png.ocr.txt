@@ -1,0 +1,19 @@
+ISLAM
+ld:93-50434-1
+ARTIFICIALINTELIGENCE(SECTION-Q)
+A.Write thePEAS description abouta Water purifyingagent.
+8Marks
+In thisgraph,
+12Marks
+ApplyDFSalgorithminAlphabetic
+ordertofind thepath fromsourceA
+toDestination'E.Show all the steps
+D
+withFrontier,ExploredSet,andFinal
+path cost.Check the result isoptimal
+ornot.
+Explored
+PaJuG
+Frowder
+C3
+A

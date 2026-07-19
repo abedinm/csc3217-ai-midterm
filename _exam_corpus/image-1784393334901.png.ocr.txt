@@ -1,0 +1,32 @@
+nitial staectinsnsindgolttadpat
+ii.
+Determine thesize ofbranching factor and the state space
+consisteney.
+I0
+a)Find the heuristics for the 8-puzzle problem
+using the initial state sbown in Figure 2.
+h:The number of misplaced tiles (i.e., the number
+of tiles that are not in their goal positions).
+h:The sum of the Manhattan distances of cach tile
+from its goal position.
+b)Apply Greedy Best-First Search (GBFS） using
+Stan Statc
+Gol S
+the h,heuristic to finda solution. Show the
+Fgure2:8Puzle problem
+search tree and solution path.
+a)Consider the following directed search
+space.S is the initl state.Gisa state
+that satisfies the goal test Find out the
+solution paths and costs retumed by A*
+search algorithm.
+（The values next to the nodes denote
+their co-ordinatevalues.Use Elidean
+Distance as the Heuristic value for the
+401
+nodes.
+Euclidean Distance
+h=√（x-x）²+(-y）.
+environment of the apple soring robot
+Figure 3:state space
+(Green andRed Apple)

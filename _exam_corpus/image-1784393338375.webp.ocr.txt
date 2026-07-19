@@ -1,0 +1,38 @@
+AMERICANINTERNATIONALUNIVERSITY-BANGLADESH
+SETA
+FacultyofScienceandTechnology
+Department of Computer Science
+CSC3217Artificial ltelligenceandExperSysten（Section:ALL)
+MUia Tecn Examiation
+Fall 2025-26
+Totat Marks: 100
+Moderator:Supta Richard Philip
+Time:2hours
+Convenor: Shakila Rahman
+LAllquestiosarealged with teOBEprgmoucc
+il.Roure thequestionpaperalongwith theanswer snipt
+Supposeyou are designing a robothichmustmaviate through amaze t
+reacha peciflc destintion.ln the3x3gridthe obot canmove left,right,
+20
+up.and down and start in location S (2,l) and the goal is location G (3,3）
+The black loeation indicates there isa wall and obot carnot move in that
+location. Solve the problem using Breadth-First Search (BFS）and Depth-
+First Seareh(DFS)
+Clearly how the following:Frontier updates at eachstep,explored set,
+Expande tree structre,Finalpahfrom StG
+G
+Figure 1:3x3Maze
+hermanedinrowrobtcnprf thfollwnactionchwithnascid
+CONTI
+ove Lef:Cost=5
+Move Right:Cost=10
+Clean:Cost=15
+Ohemidlleroom isclean（Clenrooms are dentedas blank）
+Throbo(Ris psitioned in the middleroom
+The leit and night rooms are dirty (D)
+Thgrulof the agent is to clean all rooms.
+aDew the state space gaph
+b）Deinewhether isagensenvironment is singleormulti-agentfullyorparially obseryable
+iliddis
+Usngfrm Cas earchUCs）findasolton(isquencofactons）ifneexistShow0
+theexpanded ree with stepwise cost evaluation.

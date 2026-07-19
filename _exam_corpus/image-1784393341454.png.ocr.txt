@@ -1,0 +1,46 @@
+state,actions,ransition model, goal test,and path cost.
+Determine the size of the state space.
+Paialdiqst
+b)What isthe difference between a Tree Seareh algorithm and a Graph Search algorithm?
+a) Find the heuristics for the 8-puzzle problem using
+b
+the initial state shown in Figure 3.
+20
+h: The number of misplaced tiles (i.e., the number
+3
+2
+of tiles that are not in their goal positions).
+h: The sum of the Manhattan distances of each tile
+5
+3
+from its goal position.
+8
+b)Apply Greedy Best-First Search(GBFS)using
+the hheuristic to find a solution.Show the search
+Stan State
+Gel Stute
+tree only.
+Figure 3: SPuzzle problem
+a) Consider the state-space graph in Figure 4.
+Using the A*algorithm, determine the solution
+path and cost to the goal (terminate the
+12
+20
+algorithm upon reaching any goal state)
+Assutme S is the initial state, and G and G are
+goal states.
+b) Consider a heuristic-based search algorithm
+where the evaluation function is defined as:
+f（n）=(2-w).g（n）+w.h（n）.
+where:
+Figure 4: State Space graph
+6
+g(n) is the path cost from the start node to
+node n and h（n） is the heuristic estimate of the
+cost from node nto the goal.
+Determine which search strategy this function
+correspondstounderthefollowingvaluesofw
+·W=0
+W=1
+W=2
+Page2

@@ -1,0 +1,571 @@
+<title>CSC 3217 — Past Papers, Retyped</title>
+<style>
+  :root{
+    --paper:#e9ecef; --card:#ffffff; --card2:#f4f6f8;
+    --ink:#20242c; --ink-soft:#586172; --ink-faint:#8b94a3;
+    --line:#d3d9e0; --line-soft:#e4e8ee;
+    --blue:#1668b3; --blue-bg:#e7f0fa;
+    --red:#c8382f; --red-bg:#fbe9e7;
+    --green:#2c8656; --green-bg:#e6f4ec;
+    --amber:#c07d12; --amber-bg:#faf0dc;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+    --mono:"Cascadia Code",Consolas,ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#14171c; --card:#1c2027; --card2:#22272f;
+      --ink:#e8eaee; --ink-soft:#a2abb8; --ink-faint:#727b8a;
+      --line:#2d333d; --line-soft:#262b33;
+      --blue:#5aa2e6; --blue-bg:#15263a;
+      --red:#eb7168; --red-bg:#331a18;
+      --green:#5cc78a; --green-bg:#152b20;
+      --amber:#e0a844; --amber-bg:#2e2410;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171c; --card:#1c2027; --card2:#22272f;
+    --ink:#e8eaee; --ink-soft:#a2abb8; --ink-faint:#727b8a;
+    --line:#2d333d; --line-soft:#262b33;
+    --blue:#5aa2e6; --blue-bg:#15263a;
+    --red:#eb7168; --red-bg:#331a18;
+    --green:#5cc78a; --green-bg:#152b20;
+    --amber:#e0a844; --amber-bg:#2e2410;
+  }
+  :root[data-theme="light"]{
+    --paper:#e9ecef; --card:#ffffff; --card2:#f4f6f8;
+    --ink:#20242c; --ink-soft:#586172; --ink-faint:#8b94a3;
+    --line:#d3d9e0; --line-soft:#e4e8ee;
+    --blue:#1668b3; --blue-bg:#e7f0fa;
+    --red:#c8382f; --red-bg:#fbe9e7;
+    --green:#2c8656; --green-bg:#e6f4ec;
+    --amber:#c07d12; --amber-bg:#faf0dc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 80px}
+  header{padding:42px 0 20px;border-bottom:1px solid var(--line);margin-bottom:8px}
+  .kicker{font-family:var(--sans);font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  h1{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,40px);letter-spacing:-.02em;margin:10px 0 8px;text-wrap:balance}
+  .sub{color:var(--ink-soft);font-size:16px;max-width:64ch}
+  .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;font-family:var(--sans);font-size:12.5px}
+  .legend span{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--ink-soft)}
+  .legend .u{color:var(--red);font-weight:700}
+  .toc{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px;font-family:var(--sans)}
+  .toc a{font-size:13px;font-weight:700;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue);border-radius:999px;padding:5px 14px;text-decoration:none}
+
+  section.paper{margin:34px 0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .phead{background:var(--card2);border-bottom:1px solid var(--line);padding:18px 26px}
+  .phead h2{font-family:var(--sans);font-weight:800;font-size:21px;margin:0;scroll-margin-top:20px}
+  .phead .meta{font-family:var(--sans);font-size:13px;color:var(--ink-soft);margin-top:3px}
+  .pbody{padding:8px 26px 24px}
+  .q{border-bottom:1px dashed var(--line);padding:18px 0}
+  .q:last-child{border-bottom:none}
+  .q h3{font-family:var(--sans);font-size:15.5px;font-weight:800;margin:0 0 8px;display:flex;gap:10px;align-items:baseline}
+  .q h3 .mk{font-size:12px;color:var(--amber);font-weight:700;margin-left:auto;white-space:nowrap}
+  .q p{margin:7px 0;font-size:15.5px}
+  .q ul,.q ol{margin:6px 0;padding-left:24px;font-size:15.5px}
+  .q li{margin:4px 0}
+  .q b{font-family:var(--sans);font-size:.95em}
+  code{font-family:var(--mono);font-size:.88em;background:var(--card2);padding:.1em .4em;border-radius:4px}
+  .figwrap{background:var(--card2);border:1px solid var(--line-soft);border-radius:10px;padding:10px;margin:12px 0;overflow-x:auto}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  .fig-cap{font-family:var(--sans);font-size:12.5px;color:var(--ink-faint);text-align:center;margin-top:6px}
+  .unc{background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:6px;padding:9px 14px;font-family:var(--sans);font-size:13px;margin:10px 0;color:var(--ink)}
+  .unc b{color:var(--amber)}
+  .drill{font-family:var(--sans);font-size:13px;background:var(--green-bg);border-left:3px solid var(--green);border-radius:6px;padding:8px 13px;margin:10px 0}
+  .drill a{color:var(--green);font-weight:700}
+  details{font-family:var(--sans);font-size:14px;margin:8px 0}
+  summary{cursor:pointer;color:var(--blue);font-weight:700}
+  details .ans{background:var(--card2);border:1px solid var(--line-soft);border-radius:8px;padding:10px 14px;margin-top:6px}
+  table.plain{border-collapse:collapse;font-family:var(--sans);font-size:14px;margin:10px 0}
+  table.plain th,table.plain td{border:1px solid var(--line);padding:7px 12px;text-align:left}
+  table.plain th{background:var(--card2)}
+  .mono{font-family:var(--mono);font-size:.92em}
+  .puzzle{display:inline-grid;grid-template-columns:repeat(3,36px);gap:3px;margin:4px 14px 4px 0;vertical-align:middle}
+  .puzzle span{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--card2);border:1px solid var(--line);border-radius:5px;font-family:var(--mono);font-weight:700;font-size:15px}
+  .puzzle span.blank{background:transparent;border-style:dashed}
+  .pzrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}
+  .arrowc{font-family:var(--sans);font-size:20px;color:var(--ink-faint)}
+  .gnode{fill:var(--card2);stroke:var(--ink-soft);stroke-width:2}
+  .gnode.start{fill:var(--blue-bg);stroke:var(--blue)}
+  .gnode.goal{fill:var(--green-bg);stroke:var(--green)}
+  .glabel{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:central}
+  .gedge{stroke:var(--ink-soft);stroke-width:1.7;fill:none}
+  .gedge.unce{stroke-dasharray:5 4;stroke:var(--ink-faint)}
+  .gcost{fill:var(--ink);font-family:var(--mono);font-size:12px;font-weight:700;text-anchor:middle;dominant-baseline:central}
+  .gcost.unc-w{fill:var(--red)}
+  .gcost-bg{fill:var(--card);stroke:var(--line-soft)}
+  .gh{fill:var(--amber);font-family:var(--mono);font-size:10.5px;font-weight:700;text-anchor:middle}
+  .kindlab{fill:var(--ink-faint);font-family:var(--sans);font-weight:800;font-size:11.5px;letter-spacing:.08em}
+  .leafval{fill:var(--ink);font-family:var(--mono);font-weight:700;font-size:12.5px;text-anchor:middle}
+  .mzcell{fill:var(--card);stroke:var(--line)}
+  .mzwall{fill:var(--ink-faint)}
+  .mzlab{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:15px;text-anchor:middle;dominant-baseline:central}
+  .mzco{fill:var(--ink-faint);font-family:var(--mono);font-size:9px;text-anchor:middle}
+  .backtop{position:fixed;right:18px;bottom:18px;background:var(--blue);color:#fff;font-family:var(--sans);font-size:13px;font-weight:700;text-decoration:none;padding:9px 14px;border-radius:999px;opacity:.92}
+</style>
+
+<div class="wrap">
+<header id="top">
+  <div class="kicker">CSC 3217 · Artificial Intelligence &amp; Expert System</div>
+  <h1>Past papers, retyped and readable</h1>
+  <p class="sub">Every question from your photos, transcribed into clean text with redrawn figures. A photo can't be enhanced beyond what the camera captured — so instead, here is what the papers actually say.</p>
+  <div class="legend">
+    <span>Redrawn figures are exact where the photo was legible</span>
+    <span class="u">? = value not legible in your photo — do not trust a guess, check the original</span>
+  </div>
+  <div class="toc">
+    <a href="#f26">Fall 2025-26</a>
+    <a href="#f25">Fall 2024-25</a>
+    <a href="#s24">Spring 2023-24</a>
+    <a href="#su23">Summer 2023-24</a>
+    <a href="#su24">Summer 2024-25</a>
+    <a href="#quiz">Quiz + Part A</a>
+  </div>
+</header>
+
+<!-- ================= FALL 2025-26 ================= -->
+<section class="paper" id="f26">
+  <div class="phead">
+    <h2>Fall 2025-26 · Set A — most recent, your likeliest format</h2>
+    <div class="meta">Mid Term · 100 marks · 2 hours · Moderator: Supta Richard Philip</div>
+  </div>
+  <div class="pbody">
+
+    <div class="q">
+      <h3>Q1 — Maze robot: BFS and DFS <span class="mk">20 marks</span></h3>
+      <p>You are designing a robot which must navigate through a <b>maze</b> to reach a specific destination. In the <b>3&times;3 grid</b>, the robot can move <b>left, right, up, and down</b> and starts in location <b>S (2,1)</b>; the goal is location <b>G (3,3)</b>. The <b>black locations</b> are walls — the robot cannot move there.</p>
+      <p>Solve the problem using <b>Breadth-First Search</b> and <b>Depth-First Search</b>. Clearly show: <b>frontier updates at each step, explored set, expanded tree structure, final path from S to G</b>.</p>
+      <div class="figwrap" id="fig-maze"></div>
+      <div class="fig-cap">Figure 1: 3&times;3 maze — walls at (1,2) and (2,3)</div>
+      <div class="drill">Full worked answer: Drill 4 in the <a href="https://claude.ai/code/artifact/d3d187d7-9f97-4425-bd9b-ca7cf126ebcb">trainer</a>. BFS path (2,1)-(2,2)-(3,2)-(3,3); DFS dives via (3,1).</div>
+    </div>
+
+    <div class="q">
+      <h3>Q2 — Vacuum-cleaner robot: UCS <span class="mk">5 + 5 + 10 marks</span></h3>
+      <p>A vacuum-cleaner robot operates in an apartment of <b>three rooms in a row</b>. Actions and costs: <b>Move Left = 5</b>, <b>Move Right = 10</b>, <b>Clean = 15</b>.</p>
+      <p>Initially: only the middle room is clean; the robot <b>R</b> is in the middle room; the left and right rooms are dirty (D). Goal: all rooms clean.</p>
+      <ol type="a">
+        <li>Draw the <b>state-space graph</b>. [5]</li>
+        <li>Is this environment <b>single or multi-agent, fully or partially observable, episodic or sequential, static or dynamic, deterministic or stochastic</b>? [5]</li>
+        <li>Using <b>Uniform Cost Search</b>, find a solution (a sequence of actions) if one exists. Show the expanded tree with <b>stepwise cost evaluation</b>. [10]</li>
+      </ol>
+      <div class="drill">Full state-space lattice + UCS trace: Drill 5 in the trainer. Optimal: <span class="mono">Right, Clean, Left, Left, Clean = 50</span>. Environment: single-agent, fully observable, sequential, static, deterministic.</div>
+    </div>
+
+    <div class="q">
+      <h3>Q3 — Garden-watering robot + A* theory <span class="mk">10 + 10 marks</span></h3>
+      <ol type="a">
+        <li>An artificially intelligent garden watering robot works a garden divided into <b>20 squares (4&times;5 grid)</b>. It can water one square per action and can move up, down, left, right. The task is complete when the entire garden is watered.
+          <ol type="i">
+            <li>Provide a <b>formal description</b> of this task as a search problem: initial state, actions, transition model, goal test, path cost.</li>
+            <li>Determine the size of the <b>branching factor</b> and the <b>state space</b>.</li>
+          </ol>
+        </li>
+        <li>"The A* algorithm is always <b>complete</b> and <b>optimal</b>." Explain, considering <b>admissibility</b> and <b>consistency</b>. [10]</li>
+      </ol>
+      <details><summary>Model answer sketch</summary><div class="ans">
+        (a) Initial: robot at start cell, all 20 squares unwatered. Actions {Up, Down, Left, Right, Water}. Transition: moves change position (blocked at edges); Water marks current square. Goal test: all 20 watered. Path cost: 1 per action. Branching factor b = 5. State space = 20 &times; 2<sup>20</sup> = 20,971,520.<br>
+        (b) A* is complete (finite branching, positive step costs). It is optimal <b>if</b> h is admissible — h(n) &le; h*(n), never over-estimates (tree search) — and <b>consistent</b> — h(n) &le; c(n,n') + h(n') (graph search). Consistent implies admissible. Without admissibility, A* may return a suboptimal path, so "always optimal" holds only under these conditions.
+      </div></details>
+    </div>
+
+    <div class="q">
+      <h3>Q4 — 8-puzzle: heuristics + GBFS <span class="mk">5 + 15 marks</span></h3>
+      <ol type="a">
+        <li>Find the heuristics for the 8-puzzle using the initial state shown:<br>
+        <b>h<sub>1</sub></b>: number of misplaced tiles (not in their goal positions).<br>
+        <b>h<sub>2</sub></b>: sum of Manhattan distances of each tile from its goal position. [5]</li>
+        <li>Apply <b>Greedy Best-First Search</b> using the <b>h<sub>1</sub></b> heuristic to find a solution. Show the search tree and solution path. [15]</li>
+      </ol>
+      <div class="pzrow">
+        <div class="puzzle"><span>3</span><span>1</span><span>2</span><span>4</span><span class="blank"></span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+        <span class="arrowc">&#8594;</span>
+        <div class="puzzle"><span class="blank"></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+      </div>
+      <div class="fig-cap" style="text-align:left">Figure 2: start state and goal state</div>
+      <div class="drill">Drill 6 in the trainer. h1 = 2 (tiles 3, 4), h2 = 2. GBFS: blank Left, then Up.</div>
+    </div>
+
+    <div class="q">
+      <h3>Q5 — A* with Euclidean heuristic + PEAS <span class="mk">15 + 5 marks</span></h3>
+      <ol type="a">
+        <li>Consider the directed search space below. <b>S</b> is the initial state, <b>G</b> satisfies the goal test. Find the solution paths and costs returned by the <b>A* search algorithm</b>. The values next to the nodes are their <b>(x, y) co-ordinates</b>. Use <b>Euclidean distance</b> to G as the heuristic:<br>
+        <code>h = &radic;((x2&minus;x1)&sup2; + (y2&minus;y1)&sup2;)</code> [15]</li>
+        <li>Give the <b>PEAS description</b> of the apple sorting robot (Green and Red apples). [5]</li>
+      </ol>
+      <div class="figwrap" id="fig-f26q5"></div>
+      <div class="fig-cap">Figure 3: state space — node co-ordinates were legible; edge costs were not</div>
+      <div class="unc"><b>Not fully legible:</b> the edge costs (and one or two edges) in your photo are too blurry to read reliably. The dashed edges with <b>?</b> reflect the visible topology only — check the original paper for the costs. The co-ordinates and therefore the heuristic values below are solid.</div>
+      <table class="plain">
+        <tr><th>Node</th><td>S (2,0)</td><td>A (1,4)</td><td>B (5,6)</td><td>C (6,2)</td><td>D (9,5)</td><td>E (9,0)</td><td>G (10,2)</td></tr>
+        <tr><th>h = distance to G</th><td class="mono">&radic;68 &asymp; 8.25</td><td class="mono">&radic;85 &asymp; 9.22</td><td class="mono">&radic;41 &asymp; 6.40</td><td class="mono">4.00</td><td class="mono">&radic;10 &asymp; 3.16</td><td class="mono">&radic;5 &asymp; 2.24</td><td class="mono">0</td></tr>
+      </table>
+      <details><summary>PEAS: apple sorting robot</summary><div class="ans">
+        <b>P:</b> apples sorted correctly by colour (green vs red), sorting speed, no bruising, low error rate.<br>
+        <b>E:</b> conveyor belt, apples, sorting bins, workshop.<br>
+        <b>A:</b> robotic arm, gripper, belt motor, sorting flaps.<br>
+        <b>S:</b> camera / colour sensor, weight sensor, position sensor.
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FALL 2024-25 ================= -->
+<section class="paper" id="f25">
+  <div class="phead">
+    <h2>Fall 2024-25 · Set A — you have the solved answer script for this one</h2>
+    <div class="meta">Mid Term · 100 marks · 2 hours · Q5 mandatory, answered on the question paper</div>
+  </div>
+  <div class="pbody">
+
+    <div class="q">
+      <h3>Q1 — UCS to multiple goals + A* feasibility <span class="mk">20 marks</span></h3>
+      <ol type="a">
+        <li>Consider the given graph where you need to reach <b>any</b> of the destination nodes <b>{G1, G2, G3}</b> starting from node <b>S</b>. Find the path from S to any destination with the <b>least cumulative cost using Uniform Cost Search</b>.</li>
+        <li>Is it possible to find the solution for the given graph using <b>A* search</b>? Explain your answer.</li>
+      </ol>
+      <div class="figwrap" id="fig-f25q1"></div>
+      <div class="fig-cap">Known-for-certain part of the figure (from your solved script): S&rarr;A=5, S&rarr;B=9, S&rarr;D=6, A&rarr;G1=9; h(S)=15, h(A)=10, h(B)=12, h(D)=9, h(G1)=1</div>
+      <div class="unc"><b>Partially legible:</b> the full graph has more nodes (C, E, F, G2, G3) and edges that are too blurry to transcribe. The official answer from the script: <b>UCS path S&ndash;A&ndash;G1, cost 14</b>. (b): Yes — A* works whenever a heuristic is defined; with an admissible h it is also optimal (h(n) &le; true cost at every node here).</div>
+    </div>
+
+    <div class="q">
+      <h3>Q2 — Alpha-beta pruning <span class="mk">20 marks</span></h3>
+      <p>Apply the <b>&alpha;-&beta; pruning algorithm</b> to the search tree on the right and show each update of &alpha;-&beta; values clearly. Show <b>where the &alpha; and &beta; cuts are applied</b> and which parts of the tree are <b>pruned</b> as a result.</p>
+      <div class="figwrap" id="fig-f25q2"></div>
+      <div class="fig-cap">Root A is MAX; B, I, P are MIN; C, F, J, M, Q, T are MAX; leaf values below</div>
+      <div class="drill">Drill 9 in the trainer — this exact tree. Official result: root = 5; H pruned (&alpha;=6 &ge; &beta;=2 at F), T subtree pruned (&beta;=4 &le; &alpha;=5 at P).</div>
+    </div>
+
+    <div class="q">
+      <h3>Q3 — Well-defined problem + PEAS <span class="mk">20 marks</span></h3>
+      <ol type="a">
+        <li>An 8-puzzle consists of a 3&times;3 board with eight numbered tiles and a blank space. A tile adjacent to the blank can slide into it; the objective is the goal state. <b>Is this problem well defined?</b> If yes, explain the <b>four basic components</b> of a well-defined problem according to the 8-puzzle.</li>
+        <li>Develop the <b>PEAS description</b> for a <b>Candy Sorting Robot</b> that can sort candies to the appropriate jars.</li>
+      </ol>
+      <details><summary>Model answer sketch</summary><div class="ans">
+        (a) Yes. Initial state: the given board. Actions: slide blank Up/Down/Left/Right. Goal test: board equals goal arrangement. Path cost: 1 per move. All are unambiguous, so the problem is well defined.<br>
+        (b) P: % sorted into correct jar, speed, few errors. E: conveyor, jars, candies, workshop. A: robotic hand, conveyor belt, flaps. S: camera, colour/barcode sensor.
+      </div></details>
+    </div>
+
+    <div class="q">
+      <h3>Q4 — BFS and DFS simulation <span class="mk">20 marks</span></h3>
+      <ol type="a">
+        <li>Show the simulation — <b>frontier, explored set, path (solution), path cost, tree</b> — using <b>BFS</b> and <b>DFS</b>. Start node <b>S</b>, goal node <b>G</b>. <b>Insert nodes into the frontier in alphabetic order.</b></li>
+        <li>Explain the <b>completeness and optimality</b> of BFS and DFS.</li>
+      </ol>
+      <div class="figwrap" id="fig-f25q4"></div>
+      <div class="fig-cap">Edges as legible in the paper; one edge near E/G was unclear (dashed)</div>
+      <div class="drill">Official script answers: BFS — explored S, A, C, D; path <span class="mono">S-D-G</span>, cost 10. DFS — explored S, D; path <span class="mono">S-D-G</span>. Note D expanded first in DFS: children pushed alphabetically, last pushed pops first.</div>
+    </div>
+
+    <div class="q">
+      <h3>Q5 (mandatory) — A* + GBFS <span class="mk">20 marks</span></h3>
+      <ol type="a">
+        <li>Graph with nodes S, A, B, C, D and G, where <b>S</b> is start and <b>G</b> is goal. Perform an <b>A* search</b>. Recall <code>f(n) = g(n) + h(n)</code>. Heuristic estimates: <b>h(S)=22, h(A)=20, h(B)=8, h(C)=14, h(D)=11, h(G)=0</b>.</li>
+        <li>Apply the <b>Greedy Best First Search (GBFS)</b> algorithm to the same problem.</li>
+      </ol>
+      <div class="figwrap" id="fig-f25q5"></div>
+      <div class="fig-cap">Figure: exact reconstruction — S&rarr;A=3, S&rarr;C=8, S&rarr;G=50, A&rarr;B=12, C&rarr;D=3, D&rarr;B=6, D&rarr;G=16, B&rarr;G=11</div>
+      <div class="drill">Drill 2 in the trainer — this exact question. Official answers: A* &rarr; <span class="mono">S-A-B-G, cost 26</span>; GBFS &rarr; <span class="mono">S-G, cost 50</span>.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SPRING 2023-24 ================= -->
+<section class="paper" id="s24">
+  <div class="phead">
+    <h2>Spring 2023-24 · Set A — has a 20-mark objective Part A</h2>
+    <div class="meta">Mid Term · 100 marks · 2 hours · Moderator: Dr. Abdus Salam · Part A [20&times;1] + Part B</div>
+  </div>
+  <div class="pbody">
+
+    <div class="q">
+      <h3>Part A — True/False (Q1-10) <span class="mk">10 &times; 1</span></h3>
+      <ol>
+        <li>Weak AI refers to a machine that has the same degree of self-consciousness. <details><summary>answer</summary><div class="ans">False — weak AI simulates intelligence without consciousness.</div></details></li>
+        <li>A program has a specific purpose while agents are multi-functional. <details><summary>answer</summary><div class="ans">True (as taught in this course).</div></details></li>
+        <li>An environment is uncertain if it is not fully observable or not deterministic. <details><summary>answer</summary><div class="ans">True.</div></details></li>
+        <li>The iterative deepening algorithm is a combination of DFS and BFS algorithms. <details><summary>answer</summary><div class="ans">True — DFS memory, BFS completeness.</div></details></li>
+        <li>Greedy Best First Search is not complete but optimal. <details><summary>answer</summary><div class="ans">False — it is neither complete nor optimal.</div></details></li>
+        <li>A* is complete and optimal if h(n) is admissible and consistent. <details><summary>answer</summary><div class="ans">True.</div></details></li>
+        <li>Heuristic function represents the estimated cost of the cheapest path from the (current) state to the goal state. <details><summary>answer</summary><div class="ans">True.</div></details></li>
+        <li>Depth limited search is always optimal. <details><summary>answer</summary><div class="ans">False.</div></details></li>
+        <li>MiniMax algorithm propagates node values from the root to all terminal states. <details><summary>answer</summary><div class="ans">False — values propagate from the leaves up to the root.</div></details></li>
+        <li>&alpha;-&beta; pruning always prunes one or more branches from the search-space tree. <details><summary>answer</summary><div class="ans">False — with unlucky ordering it may prune nothing.</div></details></li>
+      </ol>
+    </div>
+
+    <div class="q">
+      <h3>Part A — MCQ (Q11-20) <span class="mk">10 &times; 1</span></h3>
+      <ol start="11">
+        <li>The main idea of Bidirectional search is to ____. (a) Reduce time (b) Reduce path cost (c) Reduce heuristic cost (d) None <details><summary>answer</summary><div class="ans">(a) — two half-depth searches meet in the middle.</div></details></li>
+        <li>Which evaluation function is used for Greedy Best First Search? (a) f(n)=g(n) (b) f(n)=g(n)+h(n) (c) f(n)=h(n) (d) None <details><summary>answer</summary><div class="ans">(c).</div></details></li>
+        <li>A problem can be defined formally using which components? (a) Actions (b) Goal test (c) Transition models (d) All of them <details><summary>answer</summary><div class="ans">(d).</div></details></li>
+        <li>In case of conflicting goals, which type of agent can make rational decisions? (a) Model-based (b) Utility-based (c) Goal-based (d) All <details><summary>answer</summary><div class="ans">(b).</div></details></li>
+        <li>Which search implements stack operation for searching the states? (a) Bidirectional (b) Uniform-cost (c) Breadth-first (d) Depth-first <details><summary>answer</summary><div class="ans">(d).</div></details></li>
+        <li>UCS expands the node n with the ____. (a) Lowest path cost (b) Heuristic cost (c) Highest path cost (d) Average path cost <details><summary>answer</summary><div class="ans">(a).</div></details></li>
+        <li>For a human agent, which of the following is used as an actuator? (a) Eye (b) Ear (c) Nose (d) Hand <details><summary>answer</summary><div class="ans">(d) — eyes/ears/nose are sensors.</div></details></li>
+        <li>The "Thinking Rationally" behaviour falls under: (a) Cognitive science approach (b) Laws of thought approach (c) Turing test approach (d) Rational agent approach <details><summary>answer</summary><div class="ans">(b).</div></details></li>
+        <li>In &alpha;-&beta; pruning, pruning is applied when ____. (a) &alpha;=&beta; (b) &alpha;&ge;&beta; (c) &alpha;&le;&beta; (d) None <details><summary>answer</summary><div class="ans">(b).</div></details></li>
+        <li>Which of the following is an example of a static environment? (a) Crossword puzzle (b) Taxi driving (c) Part-picking robot (d) None <details><summary>answer</summary><div class="ans">(a).</div></details></li>
+      </ol>
+    </div>
+
+    <div class="q">
+      <h3>Part B, Q1 — UCS, then BFS/DFS <span class="mk">10 + 10</span></h3>
+      <ol type="a">
+        <li>Consider the graph on the right where you need to reach destination node <b>G</b> starting from node <b>S</b>. Nodes {A, B, C, D, E} are intermediate. Find the path from S to G with the <b>least cumulative cost using Uniform Cost Search</b>. Show the steps of searching the best path.</li>
+        <li>For the same problem (S start, G goal; <b>edges are directed</b>), find the goal node using <b>Breadth-First</b> and <b>Depth-First</b> strategies.</li>
+      </ol>
+      <div class="unc"><b>Figure not fully legible:</b> the graph (S at top; A, B, C middle; D, E, G below; edge weights that appear to include 1, 8, 5, 9, 7, 4, 5) is too blurry in your photo to transcribe reliably. The skill is identical to Drills 1-3 in the trainer.</div>
+    </div>
+
+    <div class="q">
+      <h3>Part B, Q2 — answer any four <span class="mk">4 &times; 15</span></h3>
+      <ol type="a">
+        <li><b>A* by hand:</b> S is the start, G the goal; h(n) is given in square boxes, step costs on the edges. Construct the search tree, find the least-cost path using A*, clearly showing expand sequence and path with cost. <span style="color:var(--ink-faint)">(figure too blurry to transcribe — same skill as Drills 2-3)</span></li>
+        <li>Explain the <b>"Completeness"</b> and <b>"Optimality"</b> properties of the <b>Iterative Deepening Search</b> algorithm.
+          <details><summary>answer sketch</summary><div class="ans">Complete: yes for finite branching — it eventually reaches every depth. Optimal: yes when step costs are equal (finds the shallowest goal, like BFS). Time O(b^d), space O(bd).</div></details></li>
+        <li>Describe the working procedure of a <b>Utility-Based Agent</b> and draw its schematic diagram.
+          <details><summary>answer sketch</summary><div class="ans">Sensors perceive; internal state updated; the agent asks "what will the world be like if I do action X?"; a utility function scores each predicted state; the agent picks the action with maximum expected utility. Diagram: sensors &rarr; state + model &rarr; predicted outcomes &rarr; utility function &rarr; action choice &rarr; actuators.</div></details></li>
+        <li>Apply the <b>alpha-beta pruning</b> algorithm to the game tree given (root A, two levels below, leaves at the bottom). Show where alpha and beta cuts are applied and which parts are pruned.
+          <div class="unc"><b>Leaf values partially legible</b> (appear to be 3, 6, 7, 4, 8, 2, 12, and 8 or 9). Practice the identical mechanics on Drills 8-9.</div></li>
+        <li>(i) Describe the <b>Turing Test</b> used to test the "Acting humanly" perspective. (ii) Develop the <b>PEAS description</b> of the task environment for a Candy Sorting Robot.
+          <details><summary>answer sketch</summary><div class="ans">(i) An interrogator converses by text with a hidden human and machine; if the machine cannot be reliably distinguished, it passes. Requires NLP, knowledge representation, automated reasoning, learning. (ii) See the PEAS card in the trainer flashcards.</div></details></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUMMER 2023-24 ================= -->
+<section class="paper" id="su23">
+  <div class="phead">
+    <h2>Summer 2023-24 · Set A</h2>
+    <div class="meta">Mid Term · 100 marks · 2 hours · Moderator: Dr. Abdus Salam</div>
+  </div>
+  <div class="pbody">
+    <div class="q">
+      <h3>Q1 — UCS + A* feasibility <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>Consider the given graph with edge costs. Find the best route from <b>A to G</b> using <b>Uniform Cost Search</b>.</li>
+        <li>Is it possible to find the solution for the given graph using <b>A* search</b>? Explain your answer.</li>
+      </ol>
+      <div class="figwrap" id="fig-su23q1"></div>
+      <div class="fig-cap">Approximate reconstruction — several weights uncertain (marked ?)</div>
+      <div class="unc"><b>Partially legible.</b> Visible: B&ndash;E 6 across the top; A on the left with edges toward B and D; D in the centre connecting to E and G; C and F along the bottom (C&ndash;F 5). Use it as practice shape only; verify weights against the original.</div>
+    </div>
+    <div class="q">
+      <h3>Q2 — DLS + task environments <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>List the <b>order in which the nodes are evaluated</b> in <b>Depth-Limited Search</b> (DLS) to traverse from source <b>S</b> to goal <b>F</b>, when the <b>depth limit is 3</b>. (Tree: S at top; A, B below; C, D, E, F, G at the next levels; H, I, J at the bottom.)</li>
+        <li>Define the <b>dynamic task environment</b> with an example.</li>
+      </ol>
+      <details><summary>answer sketch (b)</summary><div class="ans">Dynamic: the environment can change while the agent is deliberating — e.g. taxi driving: other cars move whether or not the taxi acts. Contrast: a crossword puzzle is static.</div></details>
+      <div class="drill">DLS/IDS mechanics: Drill 10 in the trainer.</div>
+    </div>
+    <div class="q">
+      <h3>Q3 — DFS properties + IDS <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>Explain the <b>"Optimality"</b> properties of the <b>Depth-First Search</b> algorithm.</li>
+        <li>Find the solution for the problem given in Question 2(a) using the <b>Iterative Deepening Search (IDS)</b> algorithm, where Source: S and Goal: F.</li>
+      </ol>
+      <details><summary>answer sketch (a)</summary><div class="ans">DFS is not optimal: it commits to one deep branch and returns the first goal found, which may be far more expensive/deeper than the best solution. (It is also incomplete on infinite-depth spaces.)</div></details>
+    </div>
+    <div class="q">
+      <h3>Q4 — BFS and DFS on the right-side graph <span class="mk">20</span></h3>
+      <p>Consider the right-side graph to solve this problem, where <b>S</b> is the start node and <b>G</b> is the goal node. Note that the edges in this graph are <b>directed</b>. Find the goal node using <b>Breadth-First Search</b> and <b>Depth-First Search</b> strategies. At the end of each search, show the path found by the algorithm to reach the goal node.</p>
+      <div class="figwrap" id="fig-su23q4"></div>
+      <div class="fig-cap">Reconstruction — the two dashed links were unclear in the photo</div>
+    </div>
+    <div class="q">
+      <h3>Q5 — Acting humanly + goal-based agent <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>Describe the <b>"Acting Humanly"</b> perspective for defining Artificial Intelligence.</li>
+        <li>Describe the working procedure of a <b>Goal-Based Agent</b> and draw its schematic diagram.</li>
+      </ol>
+      <details><summary>answer sketch</summary><div class="ans">(a) The Turing Test approach: intelligence = behaving indistinguishably from a human in conversation; requires NLP, knowledge representation, reasoning, learning (Total TT adds vision + robotics). (b) Sensors &rarr; state; combine with explicit goal; search/planning selects an action sequence that reaches the goal; actuators execute. More flexible than reflex agents but no notion of degrees of "goodness" — that needs utility.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SUMMER 2024-25 ================= -->
+<section class="paper" id="su24">
+  <div class="phead">
+    <h2>Summer 2024-25 · page 2 (photo covered Q3-Q5)</h2>
+    <div class="meta">Wall-painting robot · 8-puzzle · weighted evaluation function</div>
+  </div>
+  <div class="pbody">
+    <div class="q">
+      <h3>Q3 — Wall-painting robot <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>An artificially intelligent <b>wall-painting robot</b>: the wall is divided into <b>144 squares (12&times;12 grid)</b>. The robot can paint one square per action and then move its arm to the next square. Task complete when the entire wall is painted.
+        <ul>
+          <li>Provide a formal description as a search problem (initial state, actions, transition model, goal test, path cost).</li>
+          <li>Determine the size of the <b>state space</b>.</li>
+          <li>Identify whether the environment is: Single/Multi-agent, Fully/Partially observable, Episodic/Sequential, Static/Dynamic, Deterministic/Stochastic.</li>
+        </ul></li>
+        <li>What is the difference between a <b>Tree Search</b> algorithm and a <b>Graph Search</b> algorithm?</li>
+      </ol>
+      <details><summary>answer sketch</summary><div class="ans">
+        (a) Same template as the garden robot; state space = 144 &times; 2<sup>144</sup>. Environment: single-agent, fully observable, sequential, static, deterministic.<br>
+        (b) Tree search keeps no record of visited states (can loop); graph search keeps an explored set and never expands a state twice.
+      </div></details>
+    </div>
+    <div class="q">
+      <h3>Q4 — 8-puzzle heuristics + GBFS <span class="mk">20</span></h3>
+      <p>Same start/goal as Fall 2025-26 Q4 above (start 3 1 2 / 4 _ 5 / 6 7 8, goal _ 1 2 / 3 4 5 / 6 7 8): find <b>h<sub>1</sub></b>, <b>h<sub>2</sub></b> [same definitions], then apply <b>GBFS</b> with h<sub>1</sub>; show the search <b>tree only</b>.</p>
+      <div class="drill">Drill 6 in the trainer.</div>
+    </div>
+    <div class="q">
+      <h3>Q5 — A* on a state-space graph + weighted f(n) <span class="mk">20</span></h3>
+      <ol type="a">
+        <li>Using the <b>A*</b> algorithm on the state-space graph of Figure 4, determine the solution path and cost to the goal (<b>terminate upon reaching any goal state</b>). S is the initial state; <b>G1 and G2 are both goal states</b>; heuristic values are in boxes next to the nodes (S=12, others include 9, 11, 6, 8, 5, 0).</li>
+        <li>Consider a heuristic-based search algorithm with evaluation function
+        <code>f(n) = (2 &minus; w) &middot; g(n) + w &middot; h(n)</code>,
+        where g(n) is path cost from start to n and h(n) the heuristic estimate from n to goal. <b>Determine which search strategy this corresponds to for w = 0, w = 1, w = 2.</b></li>
+      </ol>
+      <div class="unc"><b>Figure 4 not legible</b> in your photo (nodes C, A, B, R?, E, D, G1, G2 with several edge weights). The (b) part needs no figure.</div>
+      <details><summary>answer (b)</summary><div class="ans">
+        w = 0: f = 2g(n) — ranks by path cost only &rarr; <b>Uniform Cost Search</b>.<br>
+        w = 1: f = g + h &rarr; <b>A*</b>.<br>
+        w = 2: f = 2h(n) — ranks by heuristic only &rarr; <b>Greedy Best-First Search</b>.
+      </div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="paper" id="quiz">
+  <div class="phead">
+    <h2>Section quiz + Part A sheet</h2>
+    <div class="meta">Short assessments from your photos</div>
+  </div>
+  <div class="pbody">
+    <div class="q">
+      <h3>Quiz (Section Q) — PEAS + DFS <span class="mk">8 + 12</span></h3>
+      <ol type="A">
+        <li>Write the <b>PEAS description</b> for a <b>Water purifying agent</b>. [8]
+          <details><summary>answer sketch</summary><div class="ans">P: water purity, litres/hour, low chemical waste, safety. E: water tank, pipes, filters, contaminants. A: valves, pumps, filter controls, dosers. S: turbidity / pH / TDS / flow / level sensors.</div></details></li>
+        <li>In the given graph, apply the <b>DFS algorithm in Alphabetic order</b> to find the path from source <b>A</b> to destination <b>E</b>. Show all steps with <b>Frontier, Explored Set, and Final path cost</b>. Check whether the result is <b>optimal or not</b>. [12]
+          <div class="unc"><b>Figure partially legible:</b> nodes A, B, C, D, K, L, M, N, P, E with weights including 8, 7, 5, 1, 2, 3, 10. The mechanics are Drill 1's DFS; the expected closing line is "DFS is not optimal — it returns the first path found, not the cheapest."</div></li>
+      </ol>
+    </div>
+    <div class="q">
+      <h3>Part A sheet — UCS A to J <span class="mk">20</span></h3>
+      <p><b>1. (a)</b> Perform <b>Uniform Cost Search</b> starting from node <b>A</b> with the goal of reaching node <b>J</b>. If priority is the same for different nodes, <b>tie-break using alphabetical order</b>. <b>(b)</b> Draw the schematic diagram of a <b>Utility-Based Agent</b> and describe its working procedure.</p>
+      <div class="unc"><b>Figure partially legible:</b> ten nodes A-J; visible weights include A-B 6, B-D 2, D-E 8, B-C 3, C-E 5, A-F 3, F-H 7, H-I 2, I-J 3, E-J 5, and 1, 4 near G. Tie-breaking rule is the teaching point — practice it on Drill 3.</div>
+    </div>
+  </div>
+</section>
+
+</div>
+<a class="backtop" href="#top">&#8593; Top</a>
+
+<script>
+function shorten(x1,y1,x2,y2,r1,r2){const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy);return [x1+dx/L*r1,y1+dy/L*r1,x2-dx/L*r2,y2-dy/L*r2];}
+function graphSVG(g){
+  const W=g.w||620,H=g.h||330,R=g.r||18;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  s+=`<defs><marker id="ar-${g.id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-soft)"/></marker></defs>`;
+  const pos={};g.nodes.forEach(n=>pos[n.id]=n);
+  for(const e of g.edges){
+    const a=pos[e.u],b=pos[e.v];
+    const [x1,y1,x2,y2]=shorten(a.x,a.y,b.x,b.y,R+2,R+4);
+    const unc=e.w==='?';
+    const mark=g.undirected?'':` marker-end="url(#ar-${g.id})"`;
+    let mx,my;
+    if(e.c){const cx=(a.x+b.x)/2+e.c[0],cy=(a.y+b.y)/2+e.c[1];
+      s+=`<path class="gedge ${unc?'unce':''}" d="M${x1},${y1} Q${cx},${cy} ${x2},${y2}"${mark}/>`;
+      mx=.25*x1+.5*cx+.25*x2;my=.25*y1+.5*cy+.25*y2;
+    }else{
+      s+=`<line class="gedge ${unc?'unce':''}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}"${mark}/>`;
+      mx=(x1+x2)/2;my=(y1+y2)/2;
+    }
+    if(e.o){mx+=e.o[0];my+=e.o[1];}
+    s+=`<rect class="gcost-bg" x="${mx-9}" y="${my-8}" width="18" height="16" rx="3"/><text class="gcost ${unc?'unc-w':''}" x="${mx}" y="${my+.5}">${e.w}</text>`;
+  }
+  for(const n of g.nodes){
+    const cls=n.id===g.start?'start':(g.goals&&g.goals.includes(n.id)?'goal':(n.id===g.goal?'goal':''));
+    s+=`<circle class="gnode ${cls}" cx="${n.x}" cy="${n.y}" r="${R}"/><text class="glabel" x="${n.x}" y="${n.y}">${n.lbl||n.id}</text>`;
+    if(n.h!==undefined){const hy=n.hy||(n.y+R+12);s+=`<text class="gh" x="${n.x}" y="${hy}">h=${n.h}</text>`;}
+    if(n.co){const hy=n.hy||(n.y+R+12);s+=`<text class="gh" x="${n.x}" y="${hy}">(${n.co})</text>`;}
+  }
+  return s+'</svg>';
+}
+function mazeSVG(){
+  const C=58,ox=42,oy=24;let s=`<svg viewBox="0 0 280 230" role="img">`;
+  const walls=new Set(['1,2','2,3']);
+  for(let r=1;r<=3;r++)for(let c=1;c<=3;c++){
+    const x=ox+(c-1)*C,y=oy+(r-1)*C,w=walls.has(r+','+c);
+    s+=`<rect class="${w?'mzwall':'mzcell'}" x="${x}" y="${y}" width="${C}" height="${C}"/>`;
+    if(!w)s+=`<text class="mzco" x="${x+C-10}" y="${y+11}">${r},${c}</text>`;
+    if(r===2&&c===1)s+=`<text class="mzlab" x="${x+C/2}" y="${y+C/2}">S</text>`;
+    if(r===3&&c===3)s+=`<text class="mzlab" x="${x+C/2}" y="${y+C/2}">G</text>`;
+  }
+  for(let c=1;c<=3;c++)s+=`<text class="mzco" x="${ox+(c-1)*C+C/2}" y="${oy-7}">${c}</text>`;
+  for(let r=1;r<=3;r++)s+=`<text class="mzco" x="${ox-14}" y="${oy+(r-1)*C+C/2}">${r}</text>`;
+  return s+'</svg>';
+}
+function treeLayout(t){
+  const root=Object.keys(t).find(k=>t[k].root);let x=0;const pos={},depth={};
+  (function w(n,d){depth[n]=d;const nd=t[n];
+    if(nd.kind==='leaf'){pos[n]={x:x++};return;}
+    nd.children.forEach(c=>w(c,d+1));
+    const xs=nd.children.map(c=>pos[c].x);pos[n]={x:(Math.min(...xs)+Math.max(...xs))/2};
+  })(root,0);
+  return {root,pos,depth,leaves:x};
+}
+function treeSVG(t){
+  const {pos,depth,leaves}=treeLayout(t);
+  const maxd=Math.max(...Object.values(depth));
+  const W=Math.max(360,leaves*50+70),H=maxd*66+80;
+  const X=n=>32+pos[n].x*50,Y=n=>30+depth[n]*66;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img">`;
+  for(const k in t){const n=t[k];if(n.kind==='leaf')continue;
+    for(const c of n.children)s+=`<line class="gedge" x1="${X(k)}" y1="${Y(k)+14}" x2="${X(c)}" y2="${Y(c)-14}"/>`;}
+  const kd={};
+  for(const k in t){const n=t[k],disp=k.replace(/f$/,'');
+    if(n.kind!=='leaf')kd[depth[k]]=n.kind;
+    if(n.kind==='leaf'){
+      s+=`<circle class="gnode" cx="${X(k)}" cy="${Y(k)}" r="13"/><text class="glabel" style="font-size:11.5px" x="${X(k)}" y="${Y(k)}">${disp}</text>`;
+      s+=`<text class="leafval" x="${X(k)}" y="${Y(k)+28}">${n.val}</text>`;
+    }else{
+      const sh=n.kind==='MAX'?`<rect class="gnode" x="${X(k)-14}" y="${Y(k)-14}" width="28" height="28" rx="6"/>`:`<circle class="gnode" cx="${X(k)}" cy="${Y(k)}" r="14"/>`;
+      s+=sh+`<text class="glabel" style="font-size:12px" x="${X(k)}" y="${Y(k)}">${disp}</text>`;
+    }}
+  for(const d in kd)s+=`<text class="kindlab" x="${W-6}" y="${30+d*66+4}" text-anchor="end">${kd[d]}</text>`;
+  return s+'</svg>';
+}
+document.getElementById('fig-maze').innerHTML=mazeSVG();
+document.getElementById('fig-f26q5').innerHTML=graphSVG({id:'f26q5',w:620,h:380,start:'S',goal:'G',
+ nodes:[{id:'S',x:145,y:330,co:'2,0',hy:362},{id:'A',x:95,y:140,co:'1,4',hy:112},{id:'B',x:295,y:50,co:'5,6',hy:22},
+        {id:'C',x:345,y:238,co:'6,2',hy:270},{id:'D',x:495,y:95,co:'9,5',hy:67},{id:'E',x:495,y:330,co:'9,0',hy:362},
+        {id:'G',x:565,y:238,co:'10,2',hy:270}],
+ edges:[{u:'S',v:'A',w:'?'},{u:'A',v:'B',w:'?'},{u:'B',v:'D',w:'?'},{u:'D',v:'G',w:'?'},{u:'A',v:'C',w:'?'},
+        {u:'C',v:'D',w:'?'},{u:'C',v:'G',w:'?'},{u:'S',v:'E',w:'?'},{u:'E',v:'G',w:'?'},{u:'S',v:'C',w:'?'}]});
+document.getElementById('fig-f25q1').innerHTML=graphSVG({id:'f25q1',w:560,h:300,start:'S',goals:['G1'],
+ nodes:[{id:'S',x:280,y:50,h:15,hy:20},{id:'A',x:120,y:140,h:10},{id:'B',x:280,y:160,h:12},{id:'D',x:440,y:140,h:9},
+        {id:'G1',x:120,y:255,h:1,lbl:'G1'}],
+ edges:[{u:'S',v:'A',w:5},{u:'S',v:'B',w:9},{u:'S',v:'D',w:6},{u:'A',v:'G1',w:9}]});
+document.getElementById('fig-f25q2').innerHTML=treeSVG({
+ A:{kind:'MAX',children:['B','I','P'],root:true},B:{kind:'MIN',children:['C','F']},I:{kind:'MIN',children:['J','M']},P:{kind:'MIN',children:['Q','T']},
+ C:{kind:'MAX',children:['D','E']},F:{kind:'MAX',children:['G','H']},J:{kind:'MAX',children:['K','L']},M:{kind:'MAX',children:['N','O']},Q:{kind:'MAX',children:['R','Sf']},T:{kind:'MAX',children:['U','V']},
+ D:{kind:'leaf',val:2},E:{kind:'leaf',val:1},G:{kind:'leaf',val:6},H:{kind:'leaf',val:1},K:{kind:'leaf',val:8},L:{kind:'leaf',val:3},
+ N:{kind:'leaf',val:5},O:{kind:'leaf',val:2},R:{kind:'leaf',val:3},Sf:{kind:'leaf',val:4},U:{kind:'leaf',val:2},V:{kind:'leaf',val:6}});
+document.getElementById('fig-f25q4').innerHTML=graphSVG({id:'f25q4',w:560,h:300,start:'S',goal:'G',
+ nodes:[{id:'S',x:70,y:80},{id:'C',x:220,y:52},{id:'F',x:400,y:52},{id:'A',x:70,y:215},{id:'B',x:225,y:215},{id:'E',x:340,y:140},{id:'D',x:165,y:140},{id:'G',x:430,y:235}],
+ edges:[{u:'S',v:'C',w:2},{u:'S',v:'A',w:3},{u:'S',v:'D',w:2},{u:'C',v:'F',w:1},{u:'A',v:'B',w:2},{u:'D',v:'B',w:3},{u:'D',v:'G',w:8,c:[30,30]},{u:'B',v:'E',w:2},{u:'F',v:'E',w:1},{u:'E',v:'G',w:'?'}]});
+document.getElementById('fig-f25q5').innerHTML=graphSVG({id:'f25q5',w:620,h:320,start:'S',goal:'G',
+ nodes:[{id:'S',x:60,y:150,h:22},{id:'A',x:190,y:60,h:20,hy:32},{id:'B',x:360,y:60,h:8,hy:32},{id:'G',x:540,y:150,h:0},{id:'C',x:190,y:250,h:14},{id:'D',x:360,y:250,h:11}],
+ edges:[{u:'S',v:'A',w:3},{u:'A',v:'B',w:12},{u:'B',v:'G',w:11},{u:'S',v:'C',w:8},{u:'C',v:'D',w:3},{u:'D',v:'B',w:6},{u:'D',v:'G',w:16},{u:'S',v:'G',w:50,o:[0,-12]}]});
+document.getElementById('fig-su23q1').innerHTML=graphSVG({id:'su23q1',w:600,h:320,undirected:true,start:'A',goal:'G',
+ nodes:[{id:'B',x:170,y:60},{id:'E',x:430,y:60},{id:'A',x:60,y:170},{id:'D',x:300,y:160},{id:'G',x:540,y:170},{id:'C',x:170,y:280},{id:'F',x:430,y:280}],
+ edges:[{u:'B',v:'E',w:6},{u:'A',v:'B',w:'?'},{u:'A',v:'D',w:3},{u:'D',v:'E',w:2},{u:'D',v:'G',w:'?'},{u:'A',v:'C',w:2},{u:'C',v:'F',w:5},{u:'F',v:'G',w:'?'},{u:'E',v:'G',w:7}]});
+document.getElementById('fig-su23q4').innerHTML=graphSVG({id:'su23q4',w:620,h:300,start:'S',goal:'G',
+ nodes:[{id:'S',x:60,y:150},{id:'A',x:180,y:60},{id:'C',x:320,y:60},{id:'E',x:460,y:60},{id:'B',x:180,y:240},{id:'D',x:320,y:240},{id:'F',x:460,y:240},{id:'G',x:565,y:150}],
+ edges:[{u:'S',v:'A',w:2},{u:'S',v:'B',w:3},{u:'A',v:'C',w:3},{u:'C',v:'E',w:3},{u:'E',v:'G',w:2},{u:'B',v:'D',w:3},{u:'D',v:'F',w:2},{u:'F',v:'G',w:1},{u:'C',v:'D',w:'?'},{u:'E',v:'F',w:'?'}]});
+</script>

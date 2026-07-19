@@ -1,0 +1,329 @@
+
+
+===== SLIDE 1 =====
+Solving Problem by Searching :Uninformed Search
+Course Code:  CSC4226
+Dept. of Computer Science
+Faculty of Science and Technology
+Lecture No: | Three (3) | Week No: | Three (3) | Semester: | 
+Lecturer: | Shaikat Das Joy |  |  |  | 
+Course Title:  Artificial Intelligence and Expert System
+
+===== SLIDE 2 =====
+Lecture Outline
+Problem-Solving Agents
+
+Example Problems
+
+Searching for Solutions
+
+Uninformed Search Strategies
+
+===== SLIDE 3 =====
+PROBLEM SOLVING AGENTS
+Simple Reflexive Agent
+Base their action on a direct mapping from STATEs to ACTIONsUses Rule
+
+Goal Based Agent
+Consider future Actions and the desirability of their outcomes
+
+Problem Solving Agent
+Goal based Agent
+Use Atomic representation of Environment
+
+===== SLIDE 4 =====
+Steps in problem solving
+Goal Formulation
+Problem Formulation
+Search
+Solution
+Execution
+
+===== SLIDE 5 =====
+GOAL FORMULATION
+Goals help organize behavior by limiting the objectives that the agent is trying to achieve and hence the actions it needs to consider.
+Goal formulation is the first step in problem solving. It is based on the current situation and the agent’s performance measure,
+Goal: A set of world states—exactly those states in which the goal is satisfied.
+The agent’s task is to find out how to act, now and in the future, so that it reaches a goal state.
+
+===== SLIDE 6 =====
+PROBLEM FORMULATION:BASED ON ENVIRONMENT
+Problem formulation is the process of deciding what actions  and states to consider, given a goal.
+In an Unknown environment the agent will not know which of its possible actions is best, because it does not yet know enough about the state that results from taking each action. 
+
+If the agent has no additional information—i.e., if the environment is unknown in the sense defined in Section 2.3—then it is having no choice but to try one of the actions at random.
+an agent with several immediate options of unknown value can decide what to do by first examining future actions that eventually lead to states of known value.
+
+===== SLIDE 7 =====
+SEARCH-SOLUTION-EXECUTE:OPEN LOOP SYSTEM
+The process of looking for a sequence of actions that reaches the goal is called search.
+Solution is the sequence of actions that takes any agent to the goal state, exactly those state the agent is satisfied.
+
+A search algorithm takes a problem as input and returns a solution in the form of an action sequence.
+While the agent is executing the solution sequence it ignores its percepts when choosing an action because it knows in advance what they will be.  An agent that carries out its plans with its eyes closed must be quite certain of what is going on.
+
+Control theorists call this an open-loop system, because ignoring the percepts breaks the loop between agent and environment.
+
+===== SLIDE 8 =====
+ROMANIAN MAP
+
+===== SLIDE 9 =====
+WELL-DEFINED PROBLEMS
+A problem can be defined formally by five components:
+1. The initial state that the agent starts in. For example, the initial state for our agent in Romania might be described as In(Arad).
+2. A description of the possible actions available to the agent. Given a particular state s,  ACTIONS(s) returns the set of actions that can be executed in s. We say that each of these actions is applicable in s. For example, from the state In(Arad), the applicable actions are {Go(Sibiu), Go(Timisoara), Go(Zerind)}.
+3. A description of what each action does; the formal name for this is the transition model, specified by a function RESULT(s, a) that returns the state that results from doing action a in state s. We also use the term successor to refer to any state reachable from a given state by a single action.2 For example, we have RESULT(In(Arad),Go(Zerind)) = In(Zerind) .
+4. The goal test, which determines whether a given state is a goal state.
+5. A path  cost function that assigns a numeric cost to each path.
+
+===== SLIDE 10 =====
+Vacuum World Problem
+
+===== SLIDE 11 =====
+VACUUM WORLD:PROBLEM FORMULATION
+
+===== SLIDE 12 =====
+8-PUZZLE:PROBLEM FORMULATION
+
+===== SLIDE 13 =====
+8-PUZZLE:PROBLEM FORMULATION
+
+===== SLIDE 14 =====
+SEARCHING FOR SOLUTIONS
+A solution is an action sequence, so search algorithms work by considering various possible action sequences
+The possible action sequences starting at the initial state form a search tree with the initial state at the root; the branches are actions, and the nodes correspond to states in the state space of the problem.
+Expanding the current state is, applying each legal action to the current state, thereby generating a new set of states
+
+===== SLIDE 15 =====
+SEARCH TREE
+
+===== SLIDE 16 =====
+SEARCH TREE
+
+===== SLIDE 17 =====
+SEARCH STRATEGY
+the essence of search—following up one option now and putting the others aside for later, in case the first choice does not lead to a solution.
+The set of all leaf nodes available for expansion at any given point is called the frontier.
+The process of expanding nodes on the frontier continues until either a solution is found or there are no more states to expand.
+Search algorithms all share this basic structure; they vary primarily according to how they choose which state to expand next    —the so-called search strategy.
+
+===== SLIDE 18 =====
+TREE SEARCH / GRAPH SEARCH
+
+===== SLIDE 19 =====
+INFRASTRUCTURE FOR SEARCH ALGORITHMS
+
+===== SLIDE 20 =====
+FRONTIER [FRINGE]
+The frontier needs to be stored in such a way that the search algorithm can easily choose the next node to expand according to its preferred strategy. The appropriate data structure for this is a queue.
+Queues are characterized by the order in which they store the inserted nodes. Three common variants are - 
+the first-in, first-out For FIFO queue, which pops the oldest element of the queue; 
+the last-in, first-out or LIFO queue (also known as a stack), which pops the newest element of the queue; and 
+the priority queue,
+The operations on a queue are as follows:
+• EMPTY(queue) returns true only if there are no more elements in the queue.
+• POP(queue) removes the first element of the queue and returns it.
+• INSERT(element, queue) inserts an element and returns the resulting queue.
+
+===== SLIDE 21 =====
+MEASURING PROBLEM-SOLVING PERFORMANCE
+
+===== SLIDE 22 =====
+SEARCH ALGORITHMS
+
+===== SLIDE 23 =====
+UNINFORMED SEARCH STRATEGIES
+
+===== SLIDE 24 =====
+BREADTH-FIRST SEARCH
+Breadth-first search is a simple strategy in which the root node is expanded first, then all the successors of the root node are expanded next, then their successors, and so on.
+In general, all the nodes are expanded at a given depth in the search tree before any nodes at the next level are expanded.
+Breadth-first search is an instance of the general graph-search algorithm (Figure 3.7) in which the shallowest unexpanded node is chosen for expansion.
+This is achieved very simply by using a FIFO queue for the frontier.
+Thus, new nodes (which are always deeper than their parents) go to the back of the queue, and old nodes, which are shallower than the new nodes, get expanded first.
+The goal test is applied to each node when it is generated rather than when it is selected for expansion.
+Following the general template for graph search, discards any new path to a state already in the frontier or explored set
+
+===== SLIDE 25 =====
+BREADTH-FIRST SEARCH: PSEUDOCODE
+
+===== SLIDE 26 =====
+BREADTH-FIRST SEARCH: FOUR CRITERIA
+complete—if the shallowest goal node is at some finite depth d, breadth-first search will eventually find it after generating all shallower nodes.
+Breadth-first search is optimal if the path cost is a non-decreasing function of the depth of the node.
+The time complexity would be O(bd+1), The space complexity is O(bd)
+For uniform tree, the total number of nodes generated is
+
+===== SLIDE 27 =====
+BREADTH-FIRST SEARCH:MEMORY REQUIREMENTS
+
+===== SLIDE 28 =====
+UNIFORM-COST SEARCH
+Instead of expanding the shallowest node, uniform-cost search expands the node n with the lowest path cost g(n).
+This is done by storing the frontier as a priority queue ordered by g
+Two other significant differences from breadth-first search are
+The goal test is applied to a node when it is selected for expansion rather than when it is first generated
+A test is added in case a better path is found to a node currently on the frontier.
+
+===== SLIDE 29 =====
+UNIFORM-COST SEARCH:PSEUDOCODE
+
+===== SLIDE 30 =====
+0
+UNIFORM-COST SEARCH:Arad  Bucharest
+486
+418
+455
+374
+450
+118
+299
+317
+366
+220
+239
+291
+229
+146
+75
+140
+Arad
+Sibiu
+Zerind
+Timisoara
+Oradea
+Lugoj
+Oradea
+Fagaras
+Rimnicu
+Craiova
+Pitestic
+Mehadia
+Bucharest
+Drobeta
+Craiova
+Bucharest
+Drobeta
+Arad
+Sibiu
+Zerind
+Timisoara
+Oradea
+Lugoj
+Oradea
+Fagaras
+Rimnicu
+Craiova
+Pitesti
+Mehadia
+Drobeta
+Bucharest
+
+===== SLIDE 31 =====
+UNIFORM-COST SEARCH:ILLUSTRATION
+
+===== SLIDE 32 =====
+UNIFORM-COST SEARCH:OPTIMALITY
+Observe that whenever uniform-cost search selects a node n for expansion, the optimal path to that node has been found.
+Were this not the case, there would have to be another frontier node n’  on the optimal path from the start node to n, n’ would have lower g-cost than n and would have been selected first
+Then, because step costs are nonnegative, paths never get shorter as nodes are added
+These two facts together imply that 
+uniform-cost search expands nodes in order of their optimal path cost. 
+Hence, the first goal node selected for expansion must be the optimal solution.
+
+===== SLIDE 33 =====
+UNIFORM-COST SEARCH:COMPLETENESS & COMPLEXITY
+Completeness is guaranteed provided the cost of every step exceeds some small positive constant ε.
+Uniform-cost search is guided by path costs rather than depths, so its complexity is not easily characterized in terms of b and d.
+Instead, let C* be the cost of the optimal solution, and assume that every action costs at least ε .
+Then the algorithm’s worst-case time and space complexity is O(b 1+[C*/ε]), which can be much greater than bd.
+When all step costs are equal, b 1+ [C∗/ε] is just bd+1.
+
+===== SLIDE 34 =====
+DEPTH-FIRST SEARCH
+Depth-first search always expands the deepest node in the current frontier of the search tree.
+The search proceeds immediately to the deepest level of the search tree, where the nodes have no successors
+As those nodes are expanded, they are dropped from the frontier, so then the search “backs up” to the next deepest node that still has unexplored successors.
+The depth-first search algorithm is an instance of the graph-search algorithm, where it uses a LIFO queue
+
+===== SLIDE 35 =====
+DEPTH-FIRST SEARCH:SEARCH TREE
+
+===== SLIDE 36 =====
+DEPTH-FIRST SEARCH:SEARCH TREE
+
+===== SLIDE 37 =====
+DEPTH-FIRST SEARCH:Optimality, Complexity, Completeness
+The graph-search version is complete in finite state spaces because it will eventually expand every node. The tree-search version, on the other hand, is not complete
+Both versions are nonoptimal. For example, in Figure 3.16, depth first search will explore the entire left subtree even if node C is a goal node. If node J were also a goal node, then depth-first search would return it as a solution instead of C, which would be a better solution; hence, depth-first search is not optimal.
+A depth-first tree search, may generate all of the O(bm) nodes in the search tree, where m is the maximum depth of any node; this can be much greater than the size of the state space.
+For a state space with branching factor b and maximum depth m, depth-first search requires storage of only O(bm) nodes.
+
+===== SLIDE 38 =====
+DFS v/s BFS
+
+===== SLIDE 39 =====
+DFS v/s BFS
+
+===== SLIDE 40 =====
+DEPTH-LIMITED SEARCH
+The embarrassing failure of depth-first search in infinite state spaces can be alleviated by supplying depth-first search with a predetermined depth limit .
+That is, nodes at depth  are treated as if they have no successors.
+This approach is called depth-limited search
+Depth-limited search will also be nonoptimal if we choose  l> d. Its time complexity is O(bl) and its space complexity is O(bl). 
+
+Depth-first search can be viewed as a special case of depth-limited search with l=∞.
+
+===== SLIDE 41 =====
+DEPTH-LIMITED SEARCH:PSEUDOCODE
+
+===== SLIDE 42 =====
+ITERATIVE DEEPENING DEPTH-FIRST SEARCH
+Iterative deepening search (or iterative deepening depth-first search) is a general strategy, often used in combination with depth-first tree search, that finds the best depth limit.
+It does this by gradually increasing the limit—first 0, then 1, then 2, and so on—until a goal is found
+Iterative deepening combines the benefits of depth-first and breadth-first search. 
+Like depth-first search, its memory requirements are modest: O(bd) to be precise.
+Like breadth-first search, it is complete when the branching factor is finite and optimal when the path cost is a nondecreasing function of the depth of the node
+
+===== SLIDE 43 =====
+ITERATIVE DEEPENING DEPTH-FIRST SEARCH TREE
+
+===== SLIDE 44 =====
+ITERATIVE DEEPENING DEPTH-FIRST SEARCH TREE
+
+===== SLIDE 45 =====
+IDP: COMPLEXITY
+Iterative deepening search may seem wasteful because states are generated multiple times. It turns out this is not too costly.
+The reason is that in a search tree with the same (or nearly the same) branching factor at each level, most of the nodes are in the bottom level, so it does not matter much that the upper levels are generated multiple times.
+In an iterative deepening search, the nodes on the bottom level (depth d) are generated once, those on the next-to-bottom level are generated twice, and so on, up to the children of the root, which are generated d times.
+So the total number of nodes generated in the worst case is
+
+===== SLIDE 46 =====
+BIDIRECTIONAL SEARCH
+The idea behind bidirectional search is to run two simultaneous searches—one forward from the initial state and the other backward from the goal—hoping that the two searches meet in the middle
+Bidirectional search is implemented by replacing the goal test with a check to see whether the frontiers of the two searches intersect;
+
+===== SLIDE 47 =====
+BIDIRECTIONAL SEARCH
+
+===== SLIDE 48 =====
+COMPARING UNINFORMED SEARCH STRATEGIES
+
+===== SLIDE 49 =====
+References
+Chapter 3: Solving Problem by Searching ,  Pages 64-91
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig,
+
+===== SLIDE 50 =====
+Books
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig.
+"Artificial Intelligence: Structures and Strategies for Complex Problem Solving", by George F. Luger, (2002) 
+"Artificial Intelligence: Theory and Practice", by Thomas Dean.
+"AI: A New Synthesis", by Nils J. Nilsson.
+“Programming for machine learning,” by J. Ross Quinlan, 
+“Neural Computing Theory and Practice,” by Philip D. Wasserman, .
+“Neural Network Design,” by Martin T. Hagan, Howard B. Demuth, Mark H. Beale, .
+“Practical Genetic Algorithms,” by Randy L. Haupt and Sue Ellen Haupt.
+“Genetic Algorithms in Search, optimization and Machine learning,” by David E. Goldberg.
+"Computational Intelligence: A Logical Approach", by David Poole, Alan Mackworth, and Randy Goebel.
+“Introduction to Turbo Prolog”,  by Carl Townsend.

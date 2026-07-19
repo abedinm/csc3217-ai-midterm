@@ -1,0 +1,383 @@
+
+
+===== SLIDE 1 =====
+ADVERSARIAL SEARCH
+Course Code:  CSC4226
+Dept. of Computer Science
+Faculty of Science and Technology
+Lecture No: | Six (6) | Week No: | Six(6) | Semester: | 
+Lecturer: | Shaikat Das Joy |  |  |  | 
+Course Title:  Artificial Intelligence and Expert System
+
+===== SLIDE 2 =====
+Lecture Outline
+Game and Its Components
+Game as a Search Problem
+Perfect Decision in Two Players Games
+MiniMax Algorithm
+Imperfect Decision
+Cutoff Search
+Alpha-Beta Pruning
+
+===== SLIDE 3 =====
+Game Playing: Introduction
+Competitive environments, in which the agents’ goals are in conflict, giving rise to adversarial search problems—often known as games.
+Mathematical game theory, a branch of economics, views any multiagent environment as a game, provided that the impact of each agent on the others is “significant,” regardless of whether the agents are cooperative or competitive
+In AI, the most common games are of a rather specialized kind—what game theorists call deterministic, turn-taking, two-player, zero-sum games of perfect information (such as chess).
+This means deterministic, fully observable environments in which two agents act alternately and in which the utility values at the end of the game are always equal and opposite.
+
+===== SLIDE 4 =====
+Games a Search Problem
+Some games can normally be defined in the form of a tree.
+
+Branching factor is usually an average of the possible number of moves at each node.
+
+This is a simple search problem: a player must search this search tree and reach a leaf node with a favorable outcome.
+
+===== SLIDE 5 =====
+Tic-Tac-Toe
+
+===== SLIDE 6 =====
+Components of a Game
+Initial state: Set-up specified by the rules, e.g., initial board configuration of chess.
+Player(s): Defines which player has the move in a state.
+Actions(s): Returns the set of legal moves in a state.
+Result(s , a): Transition model defines the result of a move.
+(2nd ed.: Successor function: list of (move , state) pairs specifying legal moves.)
+Terminal-Test(s): Is the game finished?  True if finished, false otherwise.
+Utility function(s , p): Gives numerical value of terminal state s for player p.
+E.g., win (+1), lose (-1), and draw (0) in tic-tac-toe.
+E.g., win (+1), lose (0), and draw (1/2) in  chess.
+
+===== SLIDE 7 =====
+Two Player Game
+Two players: Max and Min
+
+Objective of both Max and Min to optimize winnings
+Max must reach a terminal state with the highest utility
+Min must reach a terminal state with the lowest utility
+
+Game ends when either Max and Min have reached a terminal state
+
+upon reaching a terminal state points maybe awarded or sometimes deducted
+
+===== SLIDE 8 =====
+Search Problem Revisited
+Simple problem is to reach a favorable terminal state 
+
+Problem Not so simple...
+Max must reach a terminal state with as high a utility as possible regardless of Min’s moves
+
+Max must develop a strategy that determines best possible move for each move Min makes.
+
+===== SLIDE 9 =====
+Tic-Tac-Toe Revisited
+
+===== SLIDE 10 =====
+Example: Two-Ply Game
+Minimax Decision - maximizes the utility for Max based on the assumption that Min will attempt to Minimize this utility.
+
+===== SLIDE 11 =====
+Minimax  Algorithm
+Minimax Algorithm determines optimum strategy for Max:
+1. Generate the whole game tree, down to the leaves.
+2. Apply utility (payoff) function to each leaf.
+3. Use the utility of the terminal states to determine the utility of the nodes one level higher up in the search tree. Back-up values from leaves through branch nodes:
+a Max node computes the Max of its child values
+a Min node computes the Min of its child values
+4. At root: choose the move leading to the child of highest value.
+
+===== SLIDE 12 =====
+MiniMax Pseudocode
+
+===== SLIDE 13 =====
+Two-Ply Game Tree
+
+===== SLIDE 14 =====
+Two-Ply Game Tree
+
+===== SLIDE 15 =====
+Two-Ply Game Tree
+
+===== SLIDE 16 =====
+Two-Ply Game Tree
+
+===== SLIDE 17 =====
+Properties of minimax
+Complete?   
+Yes (if tree is finite).
+
+Optimal? 
+Yes (against an optimal opponent).
+
+Time complexity?
+O(bm)
+
+Space complexity?
+O(bm)   (depth-first search, generate all actions at once)
+O(m)   (backtracking search, generate actions one at a time)
+
+===== SLIDE 18 =====
+Game Tree Size
+Tic-Tac-Toe
+b ≈ 5 legal actions per state on average, total of 9 plies in game.
+“ply” = one action by one player, “move” = two plies.
+59 = 1,953,125
+9! = 362,880  
+ exact solution quite reasonable
+
+===== SLIDE 19 =====
+Is There Another Way?
+Take Chess on average has:
+ 35 branches and 
+usually at least 100 moves
+so game space is: 35100 
+
+Is this a realistic game space to search?
+
+Since time is important factor in gaming searching this game space is highly undesirable.
+
+===== SLIDE 20 =====
+Imperfect Decisions
+Many game produce very large search trees.
+
+
+
+Cutoffs must be implemented due to time restrictions,
+
+===== SLIDE 21 =====
+Evaluation Functions
+A function that returns an estimate of the expected utility of the game from a given position.
+
+Given the present situation give an estimate as to the value of the next move.
+
+The performance of a game-playing program is dependant on the quality of the evaluation functions.
+
+===== SLIDE 22 =====
+How to Judge Quality
+Evaluation functions must agree with the utility functions on the terminal states.
+
+It must not take too long ( trade off between accuracy and time cost).
+
+Should reflect actual chance of winning.
+
+===== SLIDE 23 =====
+Design of Evaluation Function
+Different evaluation functions must depend on the nature of the game.
+
+Encode the quality of a position in a number that is representable within the framework of the given language.
+
+Design a heuristic for value to the given position of any object in the game.
+
+===== SLIDE 24 =====
+Material Advantage Evaluation Functions
+Values of the pieces are judge independent of other pieces on the board. A value is returned based on the material value of the computer minus the material value of the player.
+
+Weighted Linear Functions
+
+w1f1+w2f2+……wnfn
+
+w’s are weight of the pieces
+f’s are features of the particular positions
+
+===== SLIDE 25 =====
+Heuristic Evaluation Functions
+An Evaluation Function:
+Estimates how good the current board configuration is for a player.
+Typically, evaluate how good it is for the player, 
+                       how good it is for the opponent, 
+                       then subtract the opponent’s score from the players.
+Often called “static” because it is called on a static board position.
+Othello: Number of white pieces - Number of black pieces
+Chess:  Value of all white pieces - Value of all black pieces
+Typical values from -infinity (loss) to +infinity (win) or [-1, +1].
+If the board evaluation  is X for a player, it’s -X for the opponent “Zero-sum game”
+
+===== SLIDE 26 =====
+Evaluation Function
+
+===== SLIDE 27 =====
+Heuristic evaluation function fortic-tac-toe
+
+===== SLIDE 28 =====
+Cutoff Search
+Cutting of searches at a fixed depth dependent on time
+
+The deeper the search the more information is available to the program the more accurate the evaluation functions
+
+Iterative deepening – when time runs out the program returns the deepest completed search.
+
+Is searching a node deeper better than searching more nodes?
+
+===== SLIDE 29 =====
+Consequences
+Evaluation function might return an incorrect value.
+
+If the search in cutoff and the next move results involves a capture, then the value that is return maybe incorrect.
+
+Horizon problem:
+Moves that are pushed deeper into the search trees may result in an oversight by the evaluation function.
+
+===== SLIDE 30 =====
+Pruning
+What is pruning?
+The process of eliminating a branch of the search tree from consideration without examining it.
+
+Why prune?
+To eliminate searching nodes that are potentially unreachable.
+To speedup the search process.
+
+===== SLIDE 31 =====
+Alpha-Beta Pruning
+A technique to find the optimal solution according to a limited depth search using evaluation functions.
+
+Returns the same choice as minimax cutoff decisions but examines fewer nodes.
+
+Gets its name from the two variables that are passed along during the search which restrict the set of possible solutions.
+
+===== SLIDE 32 =====
+Alpha-beta: Definitions
+Alpha – 
+the value of the best choice so far along the path for MAX.
+
+Beta – 
+the value of the best choice (lowest value) so far along the path for MIN.
+
+===== SLIDE 33 =====
+Implementation
+Set root node alpha to negative infinity and beta to positive infinity.
+
+Search depth first, propagating alpha and beta values down to all nodes visited until reaching desired depth.
+
+Apply evaluation function to get the utility of this node.
+
+===== SLIDE 34 =====
+Implementation (Cont’d)
+The Max player will only update the value of alpha.
+
+The Min player will only update the value of beta.
+
+While backtracking the tree, the node values will be passed to upper nodes instead of values of alpha and beta.
+
+We will only pass the alpha, beta values to the child nodes.
+
+Prune whenever  ≥ .
+
+===== SLIDE 35 =====
+Alpha-Beta Example
+α= -∞
+β= ∞
+α= -∞
+β= ∞
+α= -∞
+β= ∞
+α= 2
+β= ∞
+α= 3
+β= ∞
+3
+α= -∞
+β= 3
+3
+α= -∞
+β= 3
+α= 5
+β= 3
+5
+α= 3
+β= ∞
+α= 3
+β= ∞
+α= 3
+β= ∞
+1
+α= 3
+β= 1
+1
+3
+
+===== SLIDE 36 =====
+General alpha-beta pruning
+Consider a node n in the tree ---
+
+If player has a better choice at:
+
+	Parent node of n
+	Or any choice point further up
+
+Then n will never be reached in play.
+
+Hence, when that much is known about n, it can be pruned.
+
+===== SLIDE 37 =====
+Alpha-Beta Search Algorithm
+
+===== SLIDE 38 =====
+Effectiveness of Alpha-Beta Search
+Worst-Case
+branches are ordered so that no pruning takes place. In this case alpha-beta gives no improvement over exhaustive search
+Best-Case
+each player’s best move is the left-most child (i.e., evaluated first)
+in practice, performance is closer to best rather than worst-case
+E.g., sort moves by the remembered move values found last time.
+E.g., expand captures first, then threats, then forward moves, etc.
+E.g., run Iterative Deepening search, sort by value last iteration.
+In practice often get O(b(d/2)) rather than O(bd) 
+this is the same as having a branching factor of sqrt(b), 
+(sqrt(b))d =  b(d/2),i.e., we effectively go from b to square root of b
+e.g., in chess go from b ~ 35  to  b ~ 6
+this permits much deeper search in the same amount of time
+
+===== SLIDE 39 =====
+Example
+
+===== SLIDE 40 =====
+Answer to Example
+
+===== SLIDE 41 =====
+Second Example
+
+===== SLIDE 42 =====
+Answer
+
+===== SLIDE 43 =====
+Final Comments about Alpha-Beta Pruning
+Pruning does not affect final results
+
+Entire subtrees can be pruned.
+
+Good move ordering improves effectiveness of pruning
+
+Repeated states are again possible.
+Store them in memory = transposition table
+
+===== SLIDE 44 =====
+Problems
+If there is only one legal move, this algorithm will still generate an entire search tree.
+
+Designed to identify a “best” move, not to differentiate between other moves.
+
+Overlooks moves that forfeit something early for a better position later.
+
+Evaluation of utility usually not exact.
+
+Assumes opponent will always choose the best possible move.
+
+===== SLIDE 45 =====
+References
+Chapter 5: Adversarial Search ,  Pages 161-176
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig,
+
+===== SLIDE 46 =====
+Books
+“Artificial Intelligence: A Modern Approach,” by Stuart J. Russell and Peter Norvig.
+"Artificial Intelligence: Structures and Strategies for Complex Problem Solving", by George F. Luger, (2002) 
+"Artificial Intelligence: Theory and Practice", by Thomas Dean.
+"AI: A New Synthesis", by Nils J. Nilsson.
+“Programming for machine learning,” by J. Ross Quinlan, 
+“Neural Computing Theory and Practice,” by Philip D. Wasserman, .
+“Neural Network Design,” by Martin T. Hagan, Howard B. Demuth, Mark H. Beale, .
+“Practical Genetic Algorithms,” by Randy L. Haupt and Sue Ellen Haupt.
+“Genetic Algorithms in Search, optimization and Machine learning,” by David E. Goldberg.
+"Computational Intelligence: A Logical Approach", by David Poole, Alan Mackworth, and Randy Goebel.
+“Introduction to Turbo Prolog”,  by Carl Townsend.

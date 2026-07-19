@@ -1,0 +1,342 @@
+
+
+===== PAGE 1 =====
+Uniform Cost Search
+SHAIKAT DAS JOY
+LECTURER - AIUB
+
+===== PAGE 2 =====
+S
+A
+B
+C
+D
+E
+F
+G1
+G2
+G3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+From Source S to reach any of the destination among G1, G2, and G3 by using UCS
+
+===== PAGE 3 =====
+Step 1
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+5
+9
+6
+B
+D
+5
+9
+6
+Open: A(5), D(6), B(9)
+Close: S
+
+===== PAGE 4 =====
+Step 2
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+B
+D
+9
+6
+Open: D(6), B(8), G1(14)
+Close: S, A
+G1 B
+14 8
+Cancelling  B(9) because B(8) 
+has lower value
+Death 
+End
+5
+
+===== PAGE 5 =====
+Step 3
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+D
+Open: B(8), C(8), E(8), G1(14)
+Close: S, A,D
+G1 B
+14 8
+C E
+8 8
+6
+
+===== PAGE 6 =====
+Step 4
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+D
+Open: C(8), E(8), G1(14)
+Close: S, A,D, B
+G1 B
+14
+C E
+8 8
+A C
+9
+Here A is already explored so we are 
+not visiting A again. Cancelling  C(9) 
+because C(8) has lower value
+8
+
+===== PAGE 7 =====
+Step 5
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+D
+Open: E(8), G2(13), G1(14), F(15)
+Close: S, A,D, B,C
+G1 B
+14
+C E
+8
+S F
+G2
+8
+13
+15
+
+===== PAGE 8 =====
+Step 6
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+S
+A
+D
+Open: G2(13), G1(14), F(15), G3(15)
+Close: S, A,D, B,C, E
+G1 B
+14
+C E
+8
+F
+G2
+13
+15
+G3
+15
+
+===== PAGE 9 =====
+Step 7
+S
+A
+B
+C
+D
+E
+F
+G
+1 G
+2
+G
+3
+5
+9 2
+3
+9
+6
+1
+5
+6
+2 2
+2
+7
+8
+7
+Open: G2(13), G1(14), F(15), G3(15)
+Close: S, A,D, B,C, E, G2
+S
+A D
+G
+1 B
+14
+C E
+8
+FG
+2
+13
+15
+G
+3
+15
+When we explored 
+any of our goal 
+node first, we can 
+stop there. This will 
+be our answer.
+Ans: G2 cost 13
+Path: S-D-C-G2
+
+===== PAGE 10 =====
+Thank you
+Properties
+Complete
+Optimal
+Time Complexity = O(b 1+[c*/ ɛ])
+Space Complexity = O(b 1+[c*/ ɛ])
+C* = The Answer or the minimum cost to reach the goal node
+ɛ = Minimum edge value in the graph

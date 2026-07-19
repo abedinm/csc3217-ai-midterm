@@ -1,0 +1,47 @@
+AMERICANINTERNATIONALUNIVERSITY-BANGLADESH
+SETA
+Facultyof Scienc andTechnology
+CSC3217Artifieial Ielligence and Expert System （SectionALL)
+Departnent of Computer Science
+Mid Term Examination
+Total Marks:100
+Moderator: Supa Richard Philip
+Fall 2024-25
+General Instructions:
+Time:
+2homs
+Allthequionsare basni on OBE ptogramoutcomeQuestion 5 ismapped toCO3.
+Question5 is mandatory.Answer all Questions.
+Answerquestion5 in the queionpaper (onPage 2）nnd therest of thquestionsin the Anwer Soript
+Retuhequenpaer withenswer scrit
+（a) Consider the given gtaph where you need to
+reach any of the destination nodes (G1,GZ
+20
+G3} starting from node S.Find the path from S
+to any of the destination nodes with the least
+cuimulative cost using a Unifom Cost Search.
+(b）Is it possible to find the solution for tho
+answer.
+Apply the a-βpruning algorithm to the search
+MAX
+20
+ 
+where handβctsaealiedandhich
+parts of the sesrch tree are prumed asn result.
+MIN
+523426
+3.（a）A problem,8-puzzle consists of a3x3 board with cight numbered tiles and a blanlc space.A tile
+adjacent to theblankspace canslideinto hespacThobctive istoreachhcgoal staeIthisproblm
+2
+well defined?If yes,then explain the fourbasic componeitsof welldefined problem nocrding to th 8
+puzzle problem.
+(b）DevelopPEAS description of the task environment for n Candy SoringRobot that can sort candies to
+the approptintajars.
+（a） Show the siltionrotier,exploredt
+path(solution),Path Cost,Trcc]using BFS and
+DFS.Start node S and goal ode G.Insert the
+node in the frontier in alphabetic order.
+(b）Explain the cotmpletoness und optimality of
+BFSandDFS.
+Fall 2024-25CSC3217ArtificalIntellgenceandExpert5ystem
+Page1
