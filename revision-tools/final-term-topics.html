@@ -1,0 +1,400 @@
+<title>CSC 3217 Final Term Map</title>
+<style>
+  :root{
+    --bg:#eef0f3; --card:#fff; --card2:#f5f7f9; --sunk:#e8ebef;
+    --ink:#1e232b; --ink2:#5b6674; --ink3:#8d97a5;
+    --rule:#d5dae1; --rule2:#e6eaef;
+    --teal:#0f7b74; --teal-bg:#e2f2f0;
+    --plum:#7a3f8f; --plum-bg:#f1e8f5;
+    --rust:#b0492c; --rust-bg:#fbe9e3;
+    --gold:#a8790d; --gold-bg:#faf1da;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+    --mono:"Cascadia Code",Consolas,ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#13161b; --card:#1b1f26; --card2:#21262e; --sunk:#171b21;
+      --ink:#e6e9ee; --ink2:#a0aab7; --ink3:#6f7987;
+      --rule:#2c323c; --rule2:#242a32;
+      --teal:#4cc2b6; --teal-bg:#0f2c29;
+      --plum:#bf8fd4; --plum-bg:#2a1b31;
+      --rust:#e58a69; --rust-bg:#331d14;
+      --gold:#dfae40; --gold-bg:#2e2611;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#13161b; --card:#1b1f26; --card2:#21262e; --sunk:#171b21;
+    --ink:#e6e9ee; --ink2:#a0aab7; --ink3:#6f7987;
+    --rule:#2c323c; --rule2:#242a32;
+    --teal:#4cc2b6; --teal-bg:#0f2c29;
+    --plum:#bf8fd4; --plum-bg:#2a1b31;
+    --rust:#e58a69; --rust-bg:#331d14;
+    --gold:#dfae40; --gold-bg:#2e2611;
+  }
+  :root[data-theme="light"]{
+    --bg:#eef0f3; --card:#fff; --card2:#f5f7f9; --sunk:#e8ebef;
+    --ink:#1e232b; --ink2:#5b6674; --ink3:#8d97a5;
+    --rule:#d5dae1; --rule2:#e6eaef;
+    --teal:#0f7b74; --teal-bg:#e2f2f0;
+    --plum:#7a3f8f; --plum-bg:#f1e8f5;
+    --rust:#b0492c; --rust-bg:#fbe9e3;
+    --gold:#a8790d; --gold-bg:#faf1da;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px 80px}
+
+  header{padding:46px 0 20px}
+  .kicker{font-family:var(--sans);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);font-weight:800}
+  h1{font-family:var(--sans);font-weight:800;font-size:clamp(29px,5vw,42px);letter-spacing:-.022em;line-height:1.05;margin:12px 0 12px;text-wrap:balance}
+  .sub{font-size:17px;color:var(--ink2);max-width:63ch}
+  .srcbar{margin-top:20px;background:var(--teal-bg);border:1px solid var(--teal);border-radius:10px;padding:13px 17px;font-family:var(--sans);font-size:13.5px;color:var(--ink)}
+  .srcbar b{color:var(--teal)}
+
+  h2{font-family:var(--sans);font-weight:800;font-size:clamp(20px,3vw,25px);letter-spacing:-.012em;margin:46px 0 6px;scroll-margin-top:16px;text-wrap:balance}
+  h2 .pre{display:block;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);font-weight:800;margin-bottom:5px}
+  .lead{color:var(--ink2);font-size:16px;max-width:68ch;margin:6px 0 4px}
+  p{margin:11px 0}
+
+  /* week timeline */
+  .weeks{margin:22px 0;border-left:2px solid var(--rule);padding-left:0}
+  .wk{display:grid;grid-template-columns:76px 1fr;gap:16px;padding:11px 0 11px 18px;margin-left:-2px;border-left:2px solid transparent}
+  .wk.pre{color:var(--ink3);border-left-color:var(--rule2)}
+  .wk.exam{border-left-color:var(--rust);background:var(--rust-bg);border-radius:0 8px 8px 0}
+  .wk.post{border-left-color:var(--teal)}
+  .wk .wn{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink3);padding-top:2px;font-variant-numeric:tabular-nums}
+  .wk.post .wn{color:var(--teal)}
+  .wk.exam .wn{color:var(--rust)}
+  .wk .wt{font-family:var(--sans);font-size:14.5px}
+  .wk.post .wt{font-weight:600}
+  .wk.exam .wt{font-weight:800;color:var(--rust);font-family:var(--sans);letter-spacing:.04em}
+  .wk.pre .wt{text-decoration:line-through;text-decoration-color:var(--rule)}
+
+  /* topic entries */
+  .topic{background:var(--card);border:1px solid var(--rule);border-radius:13px;margin:16px 0;overflow:hidden}
+  .thead{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap;padding:15px 20px 11px;border-bottom:1px solid var(--rule2)}
+  .tname{font-family:var(--sans);font-weight:800;font-size:17.5px;letter-spacing:-.01em;flex:1;min-width:190px}
+  .chip{font-family:var(--sans);font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:3px 10px;border-radius:999px;white-space:nowrap}
+  .chip.wk2{background:var(--rust-bg);color:var(--rust);border:1px solid var(--rust)}
+  .chip.wk1{background:var(--card2);color:var(--ink2);border:1px solid var(--rule)}
+  .chip.co{background:var(--plum-bg);color:var(--plum);border:1px solid var(--plum);text-transform:none;letter-spacing:0;font-family:var(--mono)}
+  .tbody{padding:14px 20px 18px}
+  .tbody p{margin:8px 0;font-size:15.5px}
+  .tbody ul{margin:8px 0;padding-left:22px;font-size:15px}
+  .tbody li{margin:5px 0}
+  .verbatim{background:var(--sunk);border-left:3px solid var(--ink3);border-radius:0 7px 7px 0;padding:9px 14px;font-family:var(--mono);font-size:12.5px;line-height:1.6;color:var(--ink2);margin:4px 0 12px}
+  .simulate{margin-top:10px;background:var(--rust-bg);border-left:3px solid var(--rust);border-radius:0 7px 7px 0;padding:10px 15px;font-family:var(--sans);font-size:13.5px}
+  .simulate b{color:var(--rust)}
+  .ask{margin-top:9px;background:var(--gold-bg);border-left:3px solid var(--gold);border-radius:0 7px 7px 0;padding:10px 15px;font-family:var(--sans);font-size:13.5px}
+  .ask b{color:var(--gold)}
+  .link{margin-top:9px;background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:0 7px 7px 0;padding:10px 15px;font-family:var(--sans);font-size:13.5px}
+  .link b{color:var(--teal)}
+
+  table.g{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14px;margin:14px 0}
+  table.g th,table.g td{border:1px solid var(--rule);padding:9px 12px;text-align:left;vertical-align:top}
+  table.g th{background:var(--card2);font-size:12.5px;font-weight:800;letter-spacing:.02em}
+  table.g td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tblwrap{overflow-x:auto}
+  .em{color:var(--rust);font-weight:700}
+
+  .honest{background:var(--card);border:2px dashed var(--rule);border-radius:13px;padding:18px 22px;margin:22px 0}
+  .honest h3{font-family:var(--sans);font-size:15px;margin:0 0 8px;color:var(--rust)}
+  .honest ul{margin:8px 0;padding-left:20px;font-family:var(--sans);font-size:14.5px}
+  .honest li{margin:6px 0}
+  code{font-family:var(--mono);font-size:.88em;background:var(--card2);padding:.1em .4em;border-radius:4px}
+  a{color:var(--teal)}
+  .foot{margin-top:34px;padding-top:18px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:13.5px;color:var(--ink2)}
+</style>
+
+<div class="wrap">
+<header>
+  <div class="kicker">CSC 3217 · Artificial Intelligence &amp; Expert System · AIUB</div>
+  <h1>The final term is weeks 8&ndash;14</h1>
+  <p class="sub">I found the official CSC 3217 course outline with the week-by-week lecture plan. Your midterm was week 7. Everything after it is exactly seven topics — no guessing required.</p>
+  <div class="srcbar"><b>Authenticated two ways.</b> The outline's CO3 reads <i>"…search algorithms, genetic algorithm, CSP and uncertainty…"</i> — word for word what is printed on your own Fall 2024-25 exam paper, and its weeks 1&ndash;6 match exactly what your midterm tested. Separately, <b>Supta Richard Philip</b> — the moderator named on your own paper — publishes his own lecture list with literal "Mid Term" and "Final Term" headings. Both are used below.</div>
+</header>
+
+<h2><span class="pre">The shape of the course</span>Where the line falls</h2>
+<div class="weeks">
+  <div class="wk pre"><span class="wn">Week 1</span><span class="wt">Introduction to AI: definitions, approaches, Turing Test, foundations</span></div>
+  <div class="wk pre"><span class="wn">Week 2</span><span class="wt">Intelligent Agent: agent &amp; environment, types of agents, rationality</span></div>
+  <div class="wk pre"><span class="wn">Week 3</span><span class="wt">Uninformed Search: problem formulation, BFS, DFS, IDS, DLS, bi-directional</span></div>
+  <div class="wk pre"><span class="wn">Week 4</span><span class="wt">Informed Search: best-first, heuristics, greedy, A*</span></div>
+  <div class="wk pre"><span class="wn">Week 5</span><span class="wt">Adversarial search: games, optimal strategies, evaluation functions, minimax</span></div>
+  <div class="wk pre"><span class="wn">Week 6</span><span class="wt">Adversarial search: alpha-beta pruning, cutting off search. Midterm revision</span></div>
+  <div class="wk exam"><span class="wn">Week 7</span><span class="wt">Midterm exam &mdash; the one you sat</span></div>
+  <div class="wk post"><span class="wn">Week 8</span><span class="wt">Local Search: hill-climbing, simulated annealing, local beam. Genetic Algorithm: background, encoding, crossover, mutation, selection</span></div>
+  <div class="wk post"><span class="wn">Week 9</span><span class="wt">Genetic Algorithm: solving example problems using GA</span></div>
+  <div class="wk post"><span class="wn">Week 10</span><span class="wt">Constraint Satisfaction Problems: define CSPs, backtracking search</span></div>
+  <div class="wk post"><span class="wn">Week 11</span><span class="wt">Improving backtracking: MRV, variable/value ordering, forward checking, arc consistency</span></div>
+  <div class="wk post"><span class="wn">Week 12</span><span class="wt">Statistical Reasoning: probability, Bayes theorem, Bayesian network, inference</span></div>
+  <div class="wk post"><span class="wn">Week 13</span><span class="wt">Artificial Neural Networks: architecture, backpropagation, learning</span></div>
+  <div class="wk post"><span class="wn">Week 14</span><span class="wt">Expert System: introduction, architecture, participants, components</span></div>
+  <div class="wk exam"><span class="wn">Week 15</span><span class="wt">Final term exam</span></div>
+</div>
+
+<p><b>Read the week counts as a mark forecast.</b> Genetic algorithms get two weeks. CSP gets two weeks. Everything else gets one. In a 5-question, 100-mark paper that almost certainly means GA and CSP each carry a full question, with Bayes, neural networks and expert systems taking the rest.</p>
+
+<h2><span class="pre">Second source</span>Your moderator's own lecture list</h2>
+<p class="lead">Supta Richard Philip — moderator on both your Fall 2024-25 and Fall 2025-26 papers — publishes a course page that splits the lectures explicitly. His midterm block is Lectures 1&ndash;6, matching your own file numbering exactly. His final block:</p>
+<div class="tblwrap">
+<table class="g">
+  <thead><tr><th>Lecture</th><th>Topic (verbatim)</th><th>AIMA chapter</th></tr></thead>
+  <tbody>
+    <tr><td class="n">7</td><td>Beyond Classical Search: Local Search Algorithms and Optimization Problems</td><td class="n">4.1</td></tr>
+    <tr><td class="n">8</td><td>Beyond Classical Search: Genetic algorithms</td><td class="n">4.1.4</td></tr>
+    <tr><td class="n">9</td><td>Constraint Satisfaction Problems</td><td class="n">6</td></tr>
+    <tr><td class="n">10</td><td>Quantifying Uncertainty, Probabilistic Reasoning</td><td class="n">13, 14</td></tr>
+    <tr><td class="n">11</td><td>Probabilistic Reasoning over Time: time and uncertainty, inference in temporal models, <b>Hidden Markov Models</b></td><td class="n">15</td></tr>
+    <tr><td class="n">12</td><td>Learning from Examples: forms of learning, <b>supervised learning</b>, regression and classification with <b>linear models</b>, Artificial Neural Networks</td><td class="n">18</td></tr>
+  </tbody>
+</table>
+</div>
+<p><b>The two sources agree on five topics and differ on two.</b> Both list local search, GA, CSP, probability/Bayes, and neural networks — treat those as certain. The lecturer adds <b>Hidden Markov Models</b> and a broader <b>machine-learning</b> block; the semester outline instead ends with <b>Expert Systems</b>. Study the five certainties first, then the three edge topics in whatever time remains.</p>
+
+<h2><span class="pre">Topic by topic</span>The seven topics and what gets asked</h2>
+<p class="lead">Same 80/20 split you saw at midterm: most of these are traceable procedures, not essays. That plays to what you already trained.</p>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Local Search</span>
+    <span class="chip wk1">Week 8 · shared</span>
+    <span class="chip co">CO1-CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Local Search Algorithms: Hill-climbing Search, Simulated Annealing, Local Beam Search."</div>
+    <p>The bridge topic — still search, but you keep only the current state and move to a better neighbour instead of building a tree.</p>
+    <ul>
+      <li><b>Hill climbing</b>: move to the best-scoring neighbour; stop when none is better</li>
+      <li>Its failure modes: <b>local maximum/minimum, plateau, ridge</b></li>
+      <li><b>Simulated annealing</b>: sometimes accept a worse move, with probability falling as "temperature" drops — escapes local optima</li>
+      <li><b>Local beam search</b>: keep k states at once instead of one</li>
+    </ul>
+    <div class="link"><b>You have a head start:</b> the "Hill-climbing in Local Minima" slide in your 77-page note is this exact topic. It was final-term material sitting in your midterm note all along.</div>
+    <div class="simulate"><b>Simulation-style:</b> run hill climbing on an 8-puzzle or a small state space, show h at each step, and identify where it gets stuck.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Genetic Algorithms</span>
+    <span class="chip wk2">Weeks 8 + 9 · double</span>
+    <span class="chip co">CO1-CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">Wk 8: "Genetic Algorithm: Biological Background, Basic Outline, Encoding system, Crossover, Mutation, Selection"
+Wk 9: "Genetic Algorithm: Solving Example Problems using GA"</div>
+    <p><b>Your single biggest topic.</b> Two weeks, and an entire week devoted to worked problems — which is the course telling you a numerical GA question is coming.</p>
+    <ul>
+      <li>Population, chromosome, gene, <b>encoding</b> (binary, permutation, value)</li>
+      <li><b>Fitness function</b> and fitness evaluation</li>
+      <li><b>Selection</b>: roulette wheel, tournament, rank</li>
+      <li><b>Crossover</b>: single-point, two-point, uniform</li>
+      <li><b>Mutation</b>: bit flip, mutation rate</li>
+      <li>The full generational cycle; elitism; termination</li>
+    </ul>
+    <div class="simulate"><b>Simulation-style — expect this as a 20-mark question:</b> "Given this initial population and fitness function, perform two generations. Show fitness values, selection probabilities, the crossover at point k, the mutation, and the new population." It is a step-by-step trace exactly like UCS — same marks, same discipline of showing every intermediate table.</div>
+    <div class="ask"><b>The two problems AIUB actually uses.</b> Both recur in the department's own GA materials, so practise these exact shapes: <b>(1)</b> maximise <code>f(x) = x²/2 − 3x</code> for <code>x ∈ [0,31]</code> with 5-bit binary encoding; <b>(2)</b> 8-queens with fitness = number of non-attacking pairs, maximum <code>28 = n(n−1)/2</code>. A real final-term GA 8-queens question with the instructor's own solution exists in a student lab repo.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Constraint Satisfaction Problems</span>
+    <span class="chip wk2">Weeks 10 + 11 · double</span>
+    <span class="chip co">CO3, CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">Wk 10: "Constraint Satisfaction Problems: Define CSPs, Backtracking search for CSPs"
+Wk 11: "Improving backtracking efficiency: Most constrained variable- minimum remaining values (MRV), Variable and value ordering, Forward checking, constraints propagation-Arc consistency"</div>
+    <p>The other double-week topic, and the "CSP" named in CO3 that your midterm never touched.</p>
+    <ul>
+      <li>Formulating a problem as a CSP: <b>variables, domains, constraints</b>; constraint graph</li>
+      <li>Standard examples: <b>map colouring</b>, N-queens, cryptarithmetic, Sudoku</li>
+      <li><b>Backtracking search</b> — the base algorithm</li>
+      <li><b>MRV</b> (most-constrained variable) and degree heuristic; least-constraining-value ordering</li>
+      <li><b>Forward checking</b> — prune neighbours' domains on each assignment</li>
+      <li><b>Arc consistency / AC-3</b> — constraint propagation</li>
+    </ul>
+    <div class="simulate"><b>Simulation-style — the classic:</b> "Colour this map with 3 colours using backtracking with forward checking and MRV. Show the domain of every variable after each assignment, and where backtracking occurs." Domain tables are the equivalent of the frontier table — that is where the marks live.</div>
+    <div class="ask"><b>Know the Australia map by heart.</b> AIUB's own 49-slide CSP deck traces arc consistency on the Australia map-colouring problem across roughly 18 slides, ending with South Australia's domain wiped out to <code>{ }</code>. That trace is the single most likely CSP exam question.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Statistical Reasoning &mdash; Probability and Bayes</span>
+    <span class="chip wk1">Week 12</span>
+    <span class="chip co">CO3, CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Statistical Reasoning: Probability, Bayes Theorem, Bayesian Network, Application of Bayes Theorem, Bayes network inference problem"</div>
+    <p>The "uncertainty" of CO3. Note the outline explicitly names <i>application</i> and <i>inference problem</i> — numerical, not descriptive.</p>
+    <ul>
+      <li>Probability basics: joint, marginal, <b>conditional probability</b>, product rule</li>
+      <li><b>Bayes' theorem</b>: <code>P(A|B) = P(B|A)·P(A) / P(B)</code></li>
+      <li>Classic application: disease-test problems (true positive vs base rate)</li>
+      <li><b>Bayesian networks</b>: nodes, directed edges, conditional probability tables</li>
+      <li>Reading independence off the graph; computing a joint probability by multiplying CPT entries</li>
+    </ul>
+    <div class="simulate"><b>Simulation-style:</b> "Given this Bayesian network and its CPTs, compute P(Alarm | Burglary), or the probability of a full assignment." Pure arithmetic with an unambiguous answer — the easiest marks on the paper once you have done five of them.</div>
+    <div class="ask"><b>AIUB's own Bayes exercise set</b> (from the department's Statistical Reasoning deck): meningitis and stiff neck; two bags of green and blue balls; 90% flu vs 10% measles with rash probabilities 0.08 and 0.95; three job applicants in ratio 1:2:4; a clinical-trial calculation. Work these five and you have seen every variation they ask.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Hidden Markov Models</span>
+    <span class="chip wk1">Lecturer's list only</span>
+    <span class="chip co">AIMA 15.1-15.3</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Lecture 11: Chapter 15 — Probabilistic Reasoning over Time: 15.1 Time and Uncertainty, 15.2 Inference in Temporal Models, 15.3 Hidden Markov Models"</div>
+    <p>On your moderator's lecture list but <b>absent from the semester week-plan</b>. It follows naturally from Bayesian networks, so it may be taught briefly or skipped entirely.</p>
+    <ul>
+      <li>Why time changes probabilistic reasoning; the Markov assumption</li>
+      <li>Transition model and sensor (observation) model</li>
+      <li>Filtering, prediction, smoothing, most-likely explanation</li>
+    </ul>
+    <div class="ask"><b>Treat as low priority</b> until confirmed — most likely a conceptual question if it appears at all. Ask your teacher directly whether HMMs are examinable.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Learning from Examples</span>
+    <span class="chip wk1">Lecturer's list only</span>
+    <span class="chip co">AIMA 18.1-18.7</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Lecture 12: Chapter 18 — Learning from Examples: 18.1 Forms of Learning, 18.2 Supervised Learning, 18.6 Regression and Classification with Linear Models, 18.7 Artificial Neural Networks"</div>
+    <p>The lecturer's list wraps neural networks inside a wider machine-learning lecture. The extra material beyond ANN:</p>
+    <ul>
+      <li><b>Forms of learning</b>: supervised, unsupervised, reinforcement</li>
+      <li>Supervised learning setup: training set, hypothesis, generalisation, overfitting</li>
+      <li><b>Linear regression</b> and linear classification; the decision boundary</li>
+    </ul>
+    <div class="ask">Cheap insurance: the definitions here take fifteen minutes and cover you if the paper opens the ANN question with "define supervised learning."</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Artificial Neural Networks</span>
+    <span class="chip wk1">Week 13</span>
+    <span class="chip co">CO3, CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Introduction to Artificial Neural Networks: Objectives, History, Applications and Biological Inspiration of Artificial Neural Networks (ANN), ANN Architecture. Backpropagation Algorithm, Learning using Backpropagation"</div>
+    <p>Half descriptive (history, inspiration, applications), half arithmetic (architecture, backprop). AIUB's official catalog also lists "solve problems using <b>perceptron learning rules</b>" as a course objective, so expect perceptron arithmetic too.</p>
+    <ul>
+      <li>Biological neuron → artificial neuron; why ANNs</li>
+      <li>Weights, bias, weighted sum, <b>activation functions</b> (step, sigmoid, ReLU, tanh)</li>
+      <li><b>ANN architecture</b>: input / hidden / output layers, feed-forward computation</li>
+      <li><b>Perceptron learning rule</b>: <code>w ← w + η(target − output)·x</code>; AND/OR solvable, XOR not</li>
+      <li><b>Backpropagation</b>: forward pass, error at output, propagate backward, update weights</li>
+    </ul>
+    <div class="simulate"><b>Simulation-style:</b> "Given these inputs, weights and bias, compute the network output", and "perform one iteration of the perceptron learning rule / one backpropagation weight update showing each calculation."</div>
+    <div class="ask"><b>Theory half:</b> draw and label an ANN architecture; explain biological inspiration; list applications.</div>
+  </div>
+</div>
+
+<div class="topic">
+  <div class="thead">
+    <span class="tname">Expert Systems</span>
+    <span class="chip wk1">Week 14</span>
+    <span class="chip co">CO3, CO4</span>
+  </div>
+  <div class="tbody">
+    <div class="verbatim">"Expert System: Introduction, Architecture, Participants, and Components of Expert System. Review, Discussion, Open problems, and Brainstorming"</div>
+    <p>The course's namesake topic, taught last, and almost entirely descriptive. Note that week 14 doubles as revision — so this is a light week, likely a smaller question.</p>
+    <ul>
+      <li>What an expert system is; why and when to use one</li>
+      <li><b>Architecture</b>: knowledge base, inference engine, working memory, explanation facility, user interface, knowledge-acquisition module</li>
+      <li><b>Participants</b>: domain expert, knowledge engineer, end user</li>
+      <li>Forward vs backward chaining in the inference engine</li>
+      <li>Advantages, limitations, classic systems (MYCIN, DENDRAL)</li>
+    </ul>
+    <div class="ask"><b>Likely question if it appears:</b> "Draw the architecture of an expert system and describe each component / the participants." The direct analogue of the midterm's "draw a utility-based agent" — pure memorisation, twenty minutes of work.</div>
+    <div class="simulate"><b>One caution:</b> Expert Systems sits in the <b>last teaching week</b>, in a row that also reads "Review, Discussion, Open problems, and Brainstorming" — the week most often eaten by revision. It also does <b>not</b> appear on your moderator's own lecture list. Learn it (it is cheap), but do not build your revision around it.</div>
+  </div>
+</div>
+
+<h2><span class="pre">A correction worth knowing</span>What is NOT on the final</h2>
+<p class="lead">Your Lecture 1 slide has a "Course Contents" list that is broader than what is actually taught. Three items on it do <b>not</b> appear anywhere in the week-by-week plan.</p>
+<div class="tblwrap">
+<table class="g">
+  <thead><tr><th>On the Lecture 1 "Course Contents" slide</th><th>In the weekly lecture plan?</th></tr></thead>
+  <tbody>
+    <tr><td>Knowledge Representation, Predicate Logic, Rules</td><td class="em">Not scheduled in any week</td></tr>
+    <tr><td>Reasoning System: Symbolic, Statistical</td><td>Only the <b>Statistical</b> half — week 12</td></tr>
+    <tr><td>Learning Systems (decision trees, ID3)</td><td class="em">Not scheduled in any week</td></tr>
+    <tr><td>Expert System</td><td>Yes — week 14</td></tr>
+    <tr><td>Neural Networks: Fundamental</td><td>Yes — week 13</td></tr>
+    <tr><td>Genetic Algorithms: Fundamental</td><td>Yes — weeks 8&ndash;9</td></tr>
+  </tbody>
+</table>
+</div>
+<p>So <b>first-order logic, resolution, and decision-tree learning are very likely not examinable</b> — they are catalog aspirations that the semester plan drops. Confirm with your teacher before ignoring them entirely, but do not spend your first hours there.</p>
+
+<h2><span class="pre">Weighting</span>The final term is worth 60% of the course</h2>
+<div class="tblwrap">
+<table class="g">
+  <thead><tr><th>Component</th><th>Midterm</th><th>Final term</th></tr></thead>
+  <tbody>
+    <tr><td>Class quizzes</td><td class="n">20</td><td class="n">20</td></tr>
+    <tr><td>Laboratory performance / viva / exam</td><td class="n">30</td><td class="n">30</td></tr>
+    <tr><td>Class attendance / performance</td><td class="n">10</td><td class="n">10</td></tr>
+    <tr><td>Written exam</td><td class="n">40</td><td class="n">40</td></tr>
+    <tr><td><b>Total</b></td><td class="n"><b>100</b></td><td class="n"><b>100</b></td></tr>
+    <tr><td><b>Weight in final grade</b></td><td class="n"><b>40%</b></td><td class="n"><b>60%</b></td></tr>
+  </tbody>
+</table>
+</div>
+<p>The written exam is only <b>40 of 100</b> term marks — quizzes and lab carry half. Since these topics start in week 8, the quizzes begin counting straight away. And at <b>60% of the course grade</b>, this term outweighs the one you just finished by half again.</p>
+
+<h2><span class="pre">Where to start</span>The order that pays</h2>
+<ol>
+  <li><b>Genetic algorithms</b> — two weeks, one of them pure worked problems. Highest expected marks, and it is a mechanical trace like UCS.</li>
+  <li><b>CSP with forward checking and MRV</b> — the other double week. Domain tables are your new frontier tables.</li>
+  <li><b>Bayes theorem</b> — small, self-contained, unambiguous arithmetic.</li>
+  <li><b>Perceptron and backprop arithmetic</b> — practise two or three by hand.</li>
+  <li><b>Expert system architecture</b> and <b>local search definitions</b> — memorisation; save for last.</li>
+</ol>
+
+<h2><span class="pre">Materials that exist</span>The lectures you are missing</h2>
+<p class="lead">Your folder stops at Lecture 6. The post-midterm decks and practice sets are published in student mirrors of AIUB course material — I found them but have not downloaded anything.</p>
+<div class="tblwrap">
+<table class="g">
+  <thead><tr><th>File</th><th>Covers</th></tr></thead>
+  <tbody>
+    <tr><td class="n">AI-Lecture-04 Local Search and Genetic Algorithm.pptx</td><td>Week 8 — hill climbing, annealing, GA intro</td></tr>
+    <tr><td class="n">AI-Lecture-05[Genetic Algorithm].pptx</td><td>Weeks 8&ndash;9 — encoding, crossover, roulette wheel</td></tr>
+    <tr><td class="n">AI-Lecture-07[CSP].pptx</td><td>Weeks 10&ndash;11 — 49 slides incl. the Australia arc-consistency trace</td></tr>
+    <tr><td class="n">AI-Lecture-10[Statistical Reasoning] updated 2.pptx</td><td>Week 12 — 46 slides, Bayes + Bayesian networks</td></tr>
+    <tr><td class="n">GA example.docx · CSP Problems.docx</td><td>Worked practice problems</td></tr>
+    <tr><td class="n">Bayes' Rule.docx · Bayesian Network.docx · Bayes Net Solution.pdf</td><td>Practice problems with solutions</td></tr>
+    <tr><td class="n">Practise Problem 1&ndash;3</td><td>Mixed final-term practice sets</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Say the word and I will pull these into your <code>csc3217-ai-midterm</code> repo alongside the midterm material. Two blind spots remain even there: no <b>ANN</b> deck and no <b>Expert Systems</b> deck were in the mirror — ask your class representative for those two.</p>
+
+<div class="honest">
+  <h3>What is solid, and what to still check</h3>
+  <ul>
+    <li><b>Solid — five topics.</b> Local search, genetic algorithms, CSP, probability/Bayes/Bayesian networks, and neural networks appear in <b>both</b> the official semester outline <b>and</b> your moderator's own lecture list. Study these without hesitation.</li>
+    <li><b>Genuinely uncertain — three topics.</b> <b>Hidden Markov Models</b> and the wider <b>machine-learning</b> block appear only on the lecturer's list; <b>Expert Systems</b> appears only on the semester outline. One of the two sources is out of date and I cannot tell which.</li>
+    <li><b>Semester caveat:</b> the week plan is the <b>Fall 2024-2025</b> edition. Topic content is very unlikely to have changed, but week numbering or emphasis might.</li>
+    <li><b>Probably dead:</b> first-order logic, resolution, and decision-tree learning appear in the AIUB catalog text but in <i>no</i> schedule from any semester I checked.</li>
+    <li><b>Not verified at all:</b> the per-question mark split. I could find no past CSC 3217 <i>final</i> paper online — only midterms. My GA-and-CSP-carry-a-question forecast is inference from the two-week allocations.</li>
+  </ul>
+  <p style="font-family:var(--sans);font-size:14.5px;margin-bottom:0"><b>Three questions that close every gap.</b> Ask your section teacher: <i>"Does the final cover only the post-midterm weeks, or is it comprehensive?"</i> · <i>"Are Hidden Markov Models and Expert Systems examinable?"</i> · <i>"Is the neural-network question numerical or descriptive?"</i> Then pull your own semester's outline PDF from VUES (Section IX, "Topics to be covered in Theory class") — it has the literal Midterm and Final Term divider rows.</p>
+</div>
+
+<div class="foot">
+<b>Sources.</b> Primary: the CSC 3217 course outline, Fall 2024-2025, week-by-week lecture plan (verified by fetching twice); and <a href="https://suptaphilip.github.io/Artificial-Intelligence-and-Expert-System/">Supta Richard Philip's course page</a> with its explicit Mid Term / Final Term split — he is the moderator named on your own exam papers. Corroborated by an official AIUB OBE course plan (Spring 2024-25, prepared by Dr. Abdus Salam) and <a href="https://www.aiub.edu/faculties/fst/ug-course-catalog">AIUB's UG course catalog</a>. Cross-checked against your own <code>AI-Lecture-01[Introduction].pptx</code>, <code>AI-Lecture-06[Adversarial Search]_ori.pptx</code>, and the CO3 statement printed on <code>AI-Fall-2024-2025-Confidential.pdf</code>.
+<br><br>Note that the lecture decks and the course-plan document reached me through <b>student-uploaded mirrors</b>, not AIUB-published pages. Their content is consistent across independent sources, so confidence is high — but not certain.
+</div>
+</div>
