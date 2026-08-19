@@ -1,0 +1,499 @@
+<title>Local Search &amp; GA — Quiz Trainer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1512; --panel:#151f1b; --panel2:#1c2823; --edge:#28362f; --edge2:#212d27;
+    --ink:#e8ece9; --ink2:#9aa8a1; --ink3:#697a72;
+    --acc:#dc9436; --acc-ink:#eda94a; --acc-bg:#2a2011;
+    --teal:#45b0a6; --teal-bg:#11292a;
+    --ok:#5fc07f; --ok-bg:#122417; --bad:#dd6b58; --bad-bg:#2a1512;
+    --disp:'Chivo',"Segoe UI",system-ui,sans-serif;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"Cascadia Code",Consolas,"SF Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --bg:#eceae2; --panel:#fbfaf6; --panel2:#f1efe7; --edge:#d8d5c9; --edge2:#e5e2d8;
+      --ink:#1d2622; --ink2:#5b6862; --ink3:#8a958f;
+      --acc:#a5661a; --acc-ink:#8a5412; --acc-bg:#f6ecda;
+      --teal:#1f7a72; --teal-bg:#e0efed;
+      --ok:#2c7a4d; --ok-bg:#e3f1e7; --bad:#b8442f; --bad-bg:#f8e6e2;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1512; --panel:#151f1b; --panel2:#1c2823; --edge:#28362f; --edge2:#212d27;
+    --ink:#e8ece9; --ink2:#9aa8a1; --ink3:#697a72;
+    --acc:#dc9436; --acc-ink:#eda94a; --acc-bg:#2a2011;
+    --teal:#45b0a6; --teal-bg:#11292a;
+    --ok:#5fc07f; --ok-bg:#122417; --bad:#dd6b58; --bad-bg:#2a1512;
+  }
+  :root[data-theme="light"]{
+    --bg:#eceae2; --panel:#fbfaf6; --panel2:#f1efe7; --edge:#d8d5c9; --edge2:#e5e2d8;
+    --ink:#1d2622; --ink2:#5b6862; --ink3:#8a958f;
+    --acc:#a5661a; --acc-ink:#8a5412; --acc-bg:#f6ecda;
+    --teal:#1f7a72; --teal-bg:#e0efed;
+    --ok:#2c7a4d; --ok-bg:#e3f1e7; --bad:#b8442f; --bad-bg:#f8e6e2;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  button{font-family:var(--sans)}
+  button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+  header{border-bottom:1px solid var(--edge);background:var(--panel);position:relative;overflow:hidden}
+  .contour{position:absolute;inset:0;opacity:.5;pointer-events:none}
+  .hin{max-width:1120px;margin:0 auto;padding:22px 18px 16px;position:relative}
+  .eyebrow{font-family:var(--disp);font-size:11.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acc-ink)}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(25px,4.4vw,38px);letter-spacing:-.025em;margin:7px 0 5px;line-height:1.04}
+  .tag{color:var(--ink2);font-size:14.5px;max-width:60ch;margin:0}
+  nav{display:flex;gap:5px;margin-top:16px;flex-wrap:wrap}
+  nav button{background:none;border:1px solid transparent;color:var(--ink2);font-family:var(--disp);font-size:13px;font-weight:700;padding:7px 15px;border-radius:8px;cursor:pointer}
+  nav button:hover{color:var(--ink);background:var(--panel2)}
+  nav button.on{background:var(--acc-bg);color:var(--acc-ink);border-color:var(--acc)}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:20px 18px 70px}
+  .view{display:none}.view.on{display:block}
+
+  .grid{display:grid;grid-template-columns:232px minmax(0,1fr);gap:20px}
+  @media (max-width:880px){.grid{grid-template-columns:1fr}}
+  .side{align-self:start;position:sticky;top:14px;display:flex;flex-direction:column;gap:5px}
+  @media (max-width:880px){.side{position:static;flex-direction:row;overflow-x:auto;padding-bottom:6px}}
+  .side button{display:flex;align-items:center;gap:9px;text-align:left;background:var(--panel);border:1px solid var(--edge2);color:var(--ink2);border-radius:9px;padding:9px 11px;font-size:13px;cursor:pointer;white-space:nowrap}
+  .side button:hover{border-color:var(--edge);color:var(--ink)}
+  .side button.on{background:var(--panel2);border-color:var(--acc);color:var(--ink)}
+  .side .n{font-family:var(--mono);font-size:10.5px;color:var(--ink3);flex:none}
+  .side .tick{margin-left:auto;width:13px;height:13px;border:1.5px solid var(--ink3);border-radius:4px;flex:none}
+  .side .tick.done{background:var(--ok);border-color:var(--ok)}
+
+  .card{background:var(--panel);border:1px solid var(--edge2);border-radius:13px;padding:19px 21px;margin-bottom:14px}
+  .card h2{font-family:var(--disp);font-weight:800;font-size:20px;letter-spacing:-.01em;margin:0 0 3px}
+  .card h2 .mk{font-family:var(--sans);font-size:11.5px;font-weight:700;color:var(--acc-ink);background:var(--acc-bg);border-radius:999px;padding:2px 10px;vertical-align:3px;margin-left:8px}
+  .sub{color:var(--ink2);font-size:13.5px;margin:0 0 11px}
+  .qbox{background:var(--panel2);border:1px solid var(--edge2);border-left:3px solid var(--teal);border-radius:8px;padding:12px 15px;margin:11px 0;font-size:14.5px}
+  .qbox .lbl{font-family:var(--disp);font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:5px}
+  .figbox{background:var(--panel2);border:1px solid var(--edge2);border-radius:9px;padding:9px;margin:11px 0;overflow-x:auto}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+  .stepper{border:1px solid var(--edge2);border-radius:10px;overflow:hidden;margin-top:13px}
+  .bar{display:flex;align-items:center;gap:7px;background:var(--panel2);border-bottom:1px solid var(--edge2);padding:8px 12px;flex-wrap:wrap}
+  .bar .lbl{font-size:12.5px;color:var(--ink2);margin-right:auto}
+  .bar button{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:7px;cursor:pointer}
+  .bar button:hover{border-color:var(--acc)}
+  .bar button.pri{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-ink)}
+  .bar button:disabled{opacity:.32;cursor:default}
+  .steps{padding:5px 14px 11px;min-height:110px}
+  .step{border-left:2px solid var(--edge);padding:8px 0 8px 13px;margin:5px 0}
+  .step.cur{border-left-color:var(--acc)}
+  .step h5{font-family:var(--disp);margin:0 0 4px;font-size:13.5px;font-weight:700;color:var(--ink)}
+  .step.cur h5{color:var(--acc-ink)}
+  .tl{font-family:var(--mono);font-size:12.5px;line-height:1.72;white-space:pre-wrap;word-break:break-word}
+  .tl.dim{color:var(--ink3)}.tl.hot{color:var(--acc-ink);font-weight:600}
+  .tl.goal{color:var(--ok);font-weight:700}.tl.cut{color:var(--bad)}
+  .hint{color:var(--ink3);font-size:13px;padding:17px 3px;font-style:italic}
+  .fin{margin:0 14px 13px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:12.5px;display:none}
+  .fin.on{display:block}
+  .tip{margin-top:11px;background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:6px;padding:9px 13px;font-size:13.5px}
+  .tip b{color:var(--teal)}
+  .warn{margin-top:9px;background:var(--bad-bg);border-left:3px solid var(--bad);border-radius:6px;padding:9px 13px;font-size:13.5px}
+  .warn b{color:var(--bad)}
+  .done{display:flex;align-items:center;gap:9px;margin-top:12px}
+  .done label{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:8px;cursor:pointer}
+  .done input{accent-color:var(--ok);width:16px;height:16px}
+
+  .tnode{fill:var(--panel);stroke:var(--ink3);stroke-width:1.8}
+  .tnode.start{fill:var(--teal-bg);stroke:var(--teal);stroke-width:2.2}
+  .tlab{fill:var(--ink);font-family:var(--disp);font-weight:800;font-size:13px;text-anchor:middle;dominant-baseline:central}
+  .tval{fill:var(--ink);font-family:var(--mono);font-weight:700;font-size:11px;text-anchor:middle;dominant-baseline:central}
+  .tvalbg{fill:var(--panel2);stroke:var(--edge);stroke-width:1}
+  .tedge{stroke:var(--ink3);stroke-width:1.6;fill:none}
+
+  .fcbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:13px}
+  .fcbar button,.fcbar select{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:13px;font-weight:600;padding:7px 13px;border-radius:8px;cursor:pointer}
+  .fcbar .ct{font-family:var(--mono);font-size:12.5px;color:var(--ink2);margin-left:auto}
+  .fcard{background:var(--panel);border:1px solid var(--edge);border-radius:14px;min-height:250px;padding:25px 27px;cursor:pointer;display:flex;flex-direction:column;max-width:740px;margin:0 auto}
+  .fcard .tg{font-family:var(--disp);font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--acc-ink)}
+  .fcard .q{font-family:var(--disp);font-size:19px;font-weight:700;margin:13px 0;flex:1;line-height:1.35}
+  .fcard .a{font-size:14.5px;display:none;border-top:1px dashed var(--edge);padding-top:13px;white-space:pre-wrap;line-height:1.65}
+  .fcard.flip .a{display:block}
+  .fcard .fh{color:var(--ink3);font-size:12px}
+  .fcnav{display:flex;gap:8px;justify-content:center;margin-top:13px;flex-wrap:wrap}
+  .fcnav button{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:13px;font-weight:700;padding:9px 17px;border-radius:8px;cursor:pointer}
+  .fcnav button.k{border-color:var(--ok);color:var(--ok)}
+  .fcnav button.d{border-color:var(--bad);color:var(--bad)}
+
+  .cheat{max-width:820px}
+  .cheat h3{font-family:var(--disp);font-size:16px;font-weight:800;margin:20px 0 7px;color:var(--acc-ink)}
+  .cheat h3:first-child{margin-top:0}
+  .cheat ul{padding-left:20px;margin:7px 0}
+  .cheat li{margin:5px 0;font-size:14.5px}
+  .cheat code{font-family:var(--mono);font-size:.9em;background:var(--panel2);padding:.1em .4em;border-radius:4px}
+  table.g{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+  table.g th,table.g td{border:1px solid var(--edge);padding:7px 10px;text-align:left;vertical-align:top}
+  table.g th{background:var(--panel2);font-family:var(--disp);font-weight:700;font-size:12px}
+  .tblwrap{overflow-x:auto}
+  @media (prefers-reduced-motion:no-preference){
+    .step.cur{animation:sl .18s ease-out}
+    @keyframes sl{from{transform:translateX(-4px);opacity:.45}to{transform:none;opacity:1}}
+  }
+</style>
+
+<header>
+  <svg class="contour" viewBox="0 0 1200 190" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="var(--acc)" stroke-width="1" opacity="0.16">
+      <path d="M0,170 C120,150 180,90 300,96 C420,102 470,160 600,150 C730,140 780,52 900,44 C1020,36 1090,96 1200,88"/>
+      <path d="M0,182 C120,164 190,110 310,116 C430,122 480,172 600,163 C720,154 790,74 910,66 C1030,58 1095,112 1200,104"/>
+      <path d="M0,158 C120,136 172,70 292,76 C412,82 462,148 590,138 C718,128 772,32 892,24 C1012,16 1088,82 1200,72"/>
+      <path d="M0,146 C118,122 164,50 284,56 C404,62 452,136 580,126 C708,116 764,14 884,6"/>
+    </g>
+  </svg>
+  <div class="hin">
+    <div class="eyebrow">CSC 3217 &middot; Quiz Trainer</div>
+    <h1>Local Search &amp; Genetic Algorithms</h1>
+    <p class="tag">Every exercise below is taken verbatim from your own Lecture 4 deck. Work each one on paper, then step through the solution line by line.</p>
+    <nav id="nav">
+      <button data-v="drills" class="on">Drills</button>
+      <button data-v="cards">Flashcards</button>
+      <button data-v="cheat">Cheat Sheet</button>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="view on" id="v-drills">
+    <div class="grid">
+      <div class="side" id="side"></div>
+      <div id="main"></div>
+    </div>
+  </div>
+
+  <div class="view" id="v-cards">
+    <div class="fcbar">
+      <select id="fcf"><option value="all">All topics</option></select>
+      <button id="fcs">Shuffle</button>
+      <button id="fcu">Unknown only</button>
+      <span class="ct" id="fcc"></span>
+    </div>
+    <div class="fcard" id="fcard" tabindex="0" role="button" aria-label="Flashcard, click to flip">
+      <span class="tg" id="fctg"></span>
+      <div class="q" id="fcq"></div>
+      <div class="a" id="fca"></div>
+      <span class="fh">click or press Space to flip</span>
+    </div>
+    <div class="fcnav">
+      <button id="fcp">&#8592; Prev</button>
+      <button class="d" id="fcd">Didn't know</button>
+      <button class="k" id="fck">Knew it</button>
+      <button id="fcn">Next &#8594;</button>
+    </div>
+  </div>
+
+  <div class="view" id="v-cheat">
+    <div class="card cheat">
+      <h3>The one idea behind all of it</h3>
+      <p>Classical search (BFS, UCS, A*) returns a <b>path</b>. Local search doesn't care about the path — only the <b>final state</b>. So it keeps just the current state (or a few), looks at neighbours, and moves. Constant memory, works in huge or infinite spaces, but gives up completeness and optimality.</p>
+      <p>Your deck's phrasing: <i>"in many problems the path to the goal is irrelevant"</i> — 8-queens, circuit layout, job-shop scheduling, vehicle routing, portfolio management.</p>
+
+      <h3>State-space landscape vocabulary</h3>
+      <ul>
+        <li><b>Objective function</b> &rarr; you want the highest peak (<b>global maximum</b>).</li>
+        <li><b>Cost function</b> &rarr; you want the lowest valley (<b>global minimum</b>). Convert between them with a minus sign.</li>
+        <li><b>Complete</b> algorithm always finds a goal if one exists; <b>optimal</b> always finds the global best.</li>
+      </ul>
+
+      <h3>Hill climbing and its three failure modes</h3>
+      <p>Steepest-ascent hill climbing loops: move to the best neighbour; stop at a peak where no neighbour is better. It keeps no search tree — only the current state and its value. It gets stuck on:</p>
+      <ul>
+        <li><b>Local maxima</b> — a peak lower than the global one, but every neighbour is worse.</li>
+        <li><b>Ridges</b> — a sequence of local maxima that's hard to navigate with single moves.</li>
+        <li><b>Plateaux</b> — a flat area where no neighbour improves, so there's no direction to go.</li>
+      </ul>
+      <div class="tblwrap">
+      <table class="g">
+        <thead><tr><th>Variant</th><th>What it changes</th></tr></thead>
+        <tbody>
+          <tr><td><b>Steepest-ascent</b></td><td>Always takes the best neighbour.</td></tr>
+          <tr><td><b>Stochastic</b></td><td>Picks at random among the uphill moves; probability can vary with steepness. Converges slower but sometimes finds better solutions.</td></tr>
+          <tr><td><b>First-choice</b></td><td>Generates successors randomly until one is better. Good when a state has thousands of successors.</td></tr>
+          <tr><td><b>Random-restart</b></td><td>"If at first you don't succeed, try, try again." Repeats hill climbing from random starts until a goal is found. Very effective for 8-queens.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>All plain hill-climbing variants are <b>incomplete</b>. NP-hard problems typically have exponentially many local maxima.</p>
+
+      <h3>Simulated annealing</h3>
+      <p>Hill climbing never goes downhill, so it gets stuck; a pure random walk is complete but hopeless. SA combines both. Your deck's algorithm:</p>
+      <p><code>if (&Delta; &lt; 0) or (e^(&minus;&Delta;/T) &gt; u) then accept</code></p>
+      <ul>
+        <li>Good move &rarr; always accept.</li>
+        <li>Bad move &rarr; accept with probability <code>e^(&Delta;E/T)</code>. Compare against a random <code>u</code>.</li>
+        <li><b>High T</b> &rarr; almost any bad move accepted (wild exploration). <b>Low T</b> &rarr; behaves like plain hill climbing. T is <b>reduced</b> over time.</li>
+        <li>The worse the move, the smaller the acceptance probability.</li>
+      </ul>
+
+      <h3>Local beam search</h3>
+      <ul>
+        <li>Keeps <b>k</b> states, not one. Starts with k random states.</li>
+        <li>Each step: generate <b>all</b> successors of <b>all</b> k states. If any is a goal, halt. Otherwise keep the <b>k best</b> from the whole pool.</li>
+        <li>Not the same as k parallel restarts — useful information passes between the threads, so search effort concentrates where progress is being made.</li>
+        <li><b>Stochastic beam search</b> picks k successors at random (weighted by value) instead of the strict best k — keeps diversity.</li>
+      </ul>
+
+      <h3>Genetic algorithms</h3>
+      <p>Your deck's definition: <i>"a variant of stochastic beam search in which successor states are generated by combining two parent states rather than by modifying a single state."</i></p>
+      <ul>
+        <li><b>Encoding</b> — chromosome as a string (binary, value, permutation).</li>
+        <li><b>Fitness function</b> — scores each individual. For n-queens: number of <b>non-attacking pairs</b>, max <code>n(n&minus;1)/2</code> = <b>28</b> for 8 queens.</li>
+        <li><b>Selection</b> — roulette wheel: probability proportional to fitness.</li>
+        <li><b>Crossover</b> — pick a point, swap the tails of two parents.</li>
+        <li><b>Mutation</b> — flip a bit with small probability. This is what injects genuinely new material.</li>
+        <li><b>Survival / update</b> — form the new population, repeat.</li>
+      </ul>
+
+      <h3>Continuous spaces</h3>
+      <ul>
+        <li>Most real environments are continuous; only first-choice hill climbing and SA cope directly, because branching factor is infinite.</li>
+        <li>Easiest fix: <b>discretize</b> the neighbourhood of each state.</li>
+        <li><b>Gradient</b> <code>&nabla;f</code> gives magnitude and direction of steepest slope; maxima solve <code>&nabla;f = 0</code>.</li>
+        <li>Steepest-ascent update: <code>x &larr; x + &alpha;&nabla;f(x)</code>. If <b>&alpha;</b> too small &rarr; too many steps; too large &rarr; overshoots.</li>
+        <li><b>Newton&ndash;Raphson</b>: <code>x &larr; x &minus; H&#8315;&sup1;f(x) &nabla;f(x)</code>, where H is the Hessian of second derivatives.</li>
+      </ul>
+
+      <h3>Marks discipline</h3>
+      <ul>
+        <li>Say which direction you're optimising <b>before</b> you start — half the lost marks are minimisation solved as maximisation.</li>
+        <li>Generate successors in <b>alphabetical order</b>; the question says so explicitly.</li>
+        <li>For SA show <code>&Delta;E</code>, the probability, the comparison with <code>u</code>, and the verdict for <b>every</b> successor — including the rejected ones.</li>
+        <li>For GA show the fitness table, total, probability, and bins before you touch crossover.</li>
+        <li>State the stopping condition in words: "no neighbour is better, so it terminates here."</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const T = {"HC": {"steps": [{"title": "Start at S", "lines": [{"t": "Current = S, value 100"}, {"t": "Minimisation: move to the neighbour with the LOWEST value."}, {"t": "Stop as soon as no neighbour is lower than the current state."}]}, {"title": "Expand S (100)", "lines": [{"t": "Successors of S (alphabetical): A(95), B(90), C(105)"}, {"t": "Lowest is B(90) and 90 < 100, so move to B.", "cls": "hot"}]}, {"title": "Expand B (90) - no successors", "lines": [{"t": "B is a leaf: it has no neighbours at all."}, {"t": "No neighbour is better, so hill climbing TERMINATES at B = 90.", "cls": "goal"}]}], "final": {"path": "S -> B", "cost": 90, "explored": "stuck at B=90; the true minimum in the tree is H = 80"}}, "BEAM": {"steps": [{"title": "Start - beam = [S], k = 2", "lines": [{"t": "Maximisation. Keep the 2 BEST states at every level."}, {"t": "Generate all successors of every state in the beam, pool them, keep the best k."}]}, {"title": "Level 1 - expand beam [S]", "lines": [{"t": "Pool of all successors: A(95), B(90), C(105)"}, {"t": "Keep best 2: C(105), A(95)", "cls": "hot"}, {"t": "Discard: B(90)", "cls": "dim"}, {"t": "New beam: [C, A]"}]}, {"title": "Level 2 - expand beam [C, A]", "lines": [{"t": "Pool of all successors: D(110), E(85), F(96), G(84)"}, {"t": "Keep best 2: D(110), F(96)", "cls": "hot"}, {"t": "Discard: E(85), G(84)", "cls": "dim"}, {"t": "New beam: [D, F]"}]}, {"title": "Level 3 - expand beam [D, F]", "lines": [{"t": "Pool of all successors: I(109), J(128)"}, {"t": "Keep best 2: J(128), I(109)", "cls": "hot"}, {"t": "New beam: [J, I]"}]}, {"title": "Level 4 - no successors", "lines": [{"t": "Every state in the beam is a leaf. Search terminates."}, {"t": "Best state found: J = 128", "cls": "goal"}]}], "final": {"path": "best state J", "cost": 128, "explored": "the beam never held more than k = 2 states"}}, "SA": {"steps": [{"title": "Setup", "lines": [{"t": "Maximisation. Current state S has E(S) = 100, temperature T = 10."}, {"t": "Uphill move (dE > 0): ACCEPT always."}, {"t": "Downhill move (dE < 0): accept only if u < e^(dE/T)."}, {"t": "Successors are considered one at a time, in the order given."}]}, {"title": "Successor A (95, u=0.65)", "lines": [{"t": "E(A) = 95,  dE = 95 - 100 = -5,  random u = 0.65"}, {"t": "Downhill. P = e^(-5/10) = e^(-0.5) = 0.6065"}, {"t": "u = 0.65 >= P = 0.6065  ->  reject.", "cls": "dim"}, {"t": "A is NOT selected.", "cls": "dim"}]}, {"title": "Successor B (105, u=0.8)", "lines": [{"t": "E(B) = 105,  dE = 105 - 100 = +5,  random u = 0.8"}, {"t": "dE > 0 - this is an UPHILL move, accept unconditionally.", "cls": "hot"}, {"t": "B is SELECTED.", "cls": "goal"}]}, {"title": "Successor C (90, u=0.5)", "lines": [{"t": "E(C) = 90,  dE = 90 - 100 = -10,  random u = 0.5"}, {"t": "Downhill. P = e^(-10/10) = e^(-1) = 0.3679"}, {"t": "u = 0.5 >= P = 0.3679  ->  reject.", "cls": "dim"}, {"t": "C is NOT selected.", "cls": "dim"}]}, {"title": "Successor D (85, u=0.2)", "lines": [{"t": "E(D) = 85,  dE = 85 - 100 = -15,  random u = 0.2"}, {"t": "Downhill. P = e^(-15/10) = e^(-1.5) = 0.2231"}, {"t": "u = 0.2 < P = 0.2231  ->  accept the bad move.", "cls": "hot"}, {"t": "D is SELECTED.", "cls": "goal"}]}], "final": {"path": "Selected: B, D", "cost": null, "explored": "D is accepted despite being the WORST successor - that is the whole point of annealing"}}, "GA": {"steps": [{"title": "1. Evaluate fitness, build roulette-wheel bins", "lines": [{"t": "f(x) = x^2/2 - 3x,   x in [0,31],   5-bit binary encoding"}, {"t": ""}, {"t": "No  chromosome    x     f(x)      prob    bin"}, {"t": "1   [1,0,0,1,0]   18   108       0.212   0.001-0.213"}, {"t": "2   [1,0,0,1,1]   19   123.5     0.242   0.213-0.454"}, {"t": "3   [1,0,1,1,1]   23   195.5     0.383   0.454-0.837"}, {"t": "4   [0,1,1,1,0]   14   56        0.110   0.837-0.947"}, {"t": "5   [0,0,1,0,1]    5   0 (was -2.5)  0.000   ---  never selected", "cls": "dim"}, {"t": "6   [0,1,0,1,1]   11   27.5      0.054   0.947-1.001"}, {"t": ""}, {"t": "Total fitness = 510.5"}, {"t": "Chromosome 5 gives f(5) = -2.5, CLAMPED to 0 - so it gets no bin and can never be picked.", "cls": "hot"}]}, {"title": "2. Selection - 4 parents", "lines": [{"t": "Spin the wheel 4 times; each random number lands in one bin."}, {"t": "u = 0.54  ->  bin 3  ->  parent [1,0,1,1,1]"}, {"t": "u = 0.88  ->  bin 4  ->  parent [0,1,1,1,0]"}, {"t": "u = 0.45  ->  bin 2  ->  parent [1,0,0,1,1]"}, {"t": "u = 0.2  ->  bin 1  ->  parent [1,0,0,1,0]"}]}, {"title": "3. Crossover", "lines": [{"t": "Pair them up and swap the tail after the crossover point."}, {"t": "[1,0,1,1,1] x [0,1,1,1,0]   crossover after bit 4"}, {"t": "   ->  [1,0,1,1,0]  and  [0,1,1,1,1]", "cls": "hot"}, {"t": "[1,0,0,1,1] x [1,0,0,1,0]   crossover after bit 4"}, {"t": "   ->  [1,0,0,1,0]  and  [1,0,0,1,1]", "cls": "hot"}]}, {"title": "4. Mutation", "lines": [{"t": "Mutation rate 1% - a single bit flips."}, {"t": "Offspring 1 [1,0,1,1,0]  ->  bit 2 flips 0 to 1  ->  [1,1,1,1,0]", "cls": "hot"}, {"t": "The other three offspring are unchanged.", "cls": "dim"}]}, {"title": "5. Accept / survival", "lines": [{"t": "offspring        x     f(x)"}, {"t": "[1,1,1,1,0]   30   360"}, {"t": "[0,1,1,1,1]   15   67.5"}, {"t": "[1,0,0,1,0]   18   108"}, {"t": "[1,0,0,1,1]   19   123.5"}, {"t": ""}, {"t": "Best offspring [1,1,1,1,0] = 30 with fitness 360", "cls": "goal"}, {"t": "The MUTATION created it - crossover alone would never have reached 30.", "cls": "hot"}]}, {"title": "6. Update population", "lines": [{"t": "Add the winner to the population -> 7 chromosomes:"}, {"t": "1  [1,0,0,1,0]"}, {"t": "2  [1,0,0,1,1]"}, {"t": "3  [1,0,1,1,1]"}, {"t": "4  [0,1,1,1,0]"}, {"t": "5  [0,0,1,0,1]"}, {"t": "6  [0,1,0,1,1]"}, {"t": "7  [1,1,1,1,0]   <- new", "cls": "hot"}]}], "final": {"path": "best chromosome [1,1,1,1,0] = 30", "cost": 360, "explored": "total fitness 510.5 -> best offspring fitness 360"}}, "Q8": {"steps": [{"title": "Chromosome 1: 76012345", "lines": [{"t": "Chromosome 76012345: column i holds a queen in row board[i] = [7, 6, 0, 1, 2, 3, 4, 5]"}, {"t": "Total pairs = 8*7/2 = 28"}, {"t": "Two queens attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "Attacking pairs:"}, {"t": "  col 0 (row 7) and col 1 (row 6) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 0) and col 3 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 0) and col 4 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 0) and col 5 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 0) and col 6 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 0) and col 7 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 1) and col 4 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 1) and col 5 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 1) and col 6 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 1) and col 7 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 2) and col 5 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 2) and col 6 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 2) and col 7 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 5 (row 3) and col 6 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 5 (row 3) and col 7 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 6 (row 4) and col 7 (row 5) - diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacks = 16", "cls": "hot"}, {"t": "Fitness = non-attacking pairs = 28 - 16 = 12", "cls": "goal"}]}, {"title": "Chromosome 2: 66743210", "lines": [{"t": "Chromosome 66743210: column i holds a queen in row board[i] = [6, 6, 7, 4, 3, 2, 1, 0]"}, {"t": "Total pairs = 8*7/2 = 28"}, {"t": "Two queens attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "Attacking pairs:"}, {"t": "  col 0 (row 6) and col 1 (row 6) - same row", "cls": "cut"}, {"t": "  col 1 (row 6) and col 2 (row 7) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 6) and col 3 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 6) and col 4 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 6) and col 5 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 6) and col 6 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 6) and col 7 (row 0) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 4) and col 4 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 4) and col 5 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 4) and col 6 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 4) and col 7 (row 0) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 3) and col 5 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 3) and col 6 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 3) and col 7 (row 0) - diagonal", "cls": "cut"}, {"t": "  col 5 (row 2) and col 6 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 5 (row 2) and col 7 (row 0) - diagonal", "cls": "cut"}, {"t": "  col 6 (row 1) and col 7 (row 0) - diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacks = 17", "cls": "hot"}, {"t": "Fitness = non-attacking pairs = 28 - 17 = 11", "cls": "goal"}]}], "final": {"path": "76012345 -> 16 attacks, fitness 12   |   66743210 -> 17 attacks, fitness 11", "cost": null, "explored": "max fitness for 8-queens = 8*7/2 = 28"}}, "Q6": {"steps": [{"title": "Chromosome 211345", "lines": [{"t": "Chromosome 211345: column i holds a queen in row board[i] = [2, 1, 1, 3, 4, 5]"}, {"t": "Total pairs = 6*5/2 = 15"}, {"t": "Two queens attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "Attacking pairs:"}, {"t": "  col 0 (row 2) and col 1 (row 1) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 1) and col 2 (row 1) - same row", "cls": "cut"}, {"t": "  col 1 (row 1) and col 3 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 1) and col 4 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 1) and col 5 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 3) and col 4 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 3) and col 5 (row 5) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 4) and col 5 (row 5) - diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacks = 8", "cls": "hot"}, {"t": "Fitness = non-attacking pairs = 15 - 8 = 7", "cls": "goal"}]}, {"title": "Chromosome 403234", "lines": [{"t": "Chromosome 403234: column i holds a queen in row board[i] = [4, 0, 3, 2, 3, 4]"}, {"t": "Total pairs = 6*5/2 = 15"}, {"t": "Two queens attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "Attacking pairs:"}, {"t": "  col 0 (row 4) and col 5 (row 4) - same row", "cls": "cut"}, {"t": "  col 1 (row 0) and col 3 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 0) and col 4 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 1 (row 0) and col 5 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 3) and col 3 (row 2) - diagonal", "cls": "cut"}, {"t": "  col 2 (row 3) and col 4 (row 3) - same row", "cls": "cut"}, {"t": "  col 3 (row 2) and col 4 (row 3) - diagonal", "cls": "cut"}, {"t": "  col 3 (row 2) and col 5 (row 4) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 3) and col 5 (row 4) - diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacks = 9", "cls": "hot"}, {"t": "Fitness = non-attacking pairs = 15 - 9 = 6", "cls": "goal"}]}, {"title": "Chromosome 511023", "lines": [{"t": "Chromosome 511023: column i holds a queen in row board[i] = [5, 1, 1, 0, 2, 3]"}, {"t": "Total pairs = 6*5/2 = 15"}, {"t": "Two queens attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "Attacking pairs:"}, {"t": "  col 1 (row 1) and col 2 (row 1) - same row", "cls": "cut"}, {"t": "  col 2 (row 1) and col 3 (row 0) - diagonal", "cls": "cut"}, {"t": "  col 4 (row 2) and col 5 (row 3) - diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacks = 3", "cls": "hot"}, {"t": "Fitness = non-attacking pairs = 15 - 3 = 12", "cls": "goal"}]}], "final": {"path": "211345: 8 attacks, fitness 7  |  403234: 9 attacks, fitness 6  |  511023: 3 attacks, fitness 12", "cost": null, "explored": "max fitness for 6-queens = 6*5/2 = 15"}}};
+
+/* ---------- tree figure ---------- */
+const TREE={S:['A','B','C'],A:['F','G'],B:[],C:['D','E'],F:[],G:['H'],D:['I','J'],E:[],H:[],I:[],J:[]};
+const HV={S:100,A:95,B:90,C:105,F:96,G:84,D:110,E:85,H:80,I:109,J:128};
+const POS={S:[300,34],A:[150,110],B:[300,110],C:[430,110],F:[70,186],G:[196,186],D:[380,186],E:[510,186],H:[150,262],I:[330,262],J:[452,262]};
+function treeSVG(){
+  let s='<svg viewBox="0 0 600 305" role="img" aria-label="Search tree with heuristic values">';
+  for(const p in TREE) for(const c of TREE[p]){
+    const [x1,y1]=POS[p],[x2,y2]=POS[c];
+    const dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),r=19;
+    s+=`<line class="tedge" x1="${x1+dx/L*r}" y1="${y1+dy/L*r}" x2="${x2-dx/L*r}" y2="${y2-dy/L*r}"/>`;
+  }
+  for(const n in POS){
+    const [x,y]=POS[n];
+    s+=`<circle class="tnode ${n==='S'?'start':''}" cx="${x}" cy="${y}" r="19"/><text class="tlab" x="${x}" y="${y}">${n}</text>`;
+    s+=`<rect class="tvalbg" x="${x+16}" y="${y-27}" width="30" height="17" rx="3"/><text class="tval" x="${x+31}" y="${y-18}">${HV[n]}</text>`;
+  }
+  return s+'</svg>';
+}
+function flatSVG(){
+  const N=[['S',300,40,100],['A',120,160,95],['B',240,160,105],['C',360,160,90],['D',480,160,85]];
+  let s='<svg viewBox="0 0 600 215" role="img" aria-label="S with four successors">';
+  for(let i=1;i<N.length;i++){
+    const [,x2,y2]=N[i],x1=300,y1=40,dx=x2-x1,dy=y2-y1,L=Math.hypot(dx,dy),r=19;
+    s+=`<line class="tedge" x1="${x1+dx/L*r}" y1="${y1+dy/L*r}" x2="${x2-dx/L*r}" y2="${y2-dy/L*r}"/>`;
+  }
+  const U={A:0.65,B:0.8,C:0.5,D:0.2};
+  for(const [n,x,y,v] of N){
+    s+=`<circle class="tnode ${n==='S'?'start':''}" cx="${x}" cy="${y}" r="19"/><text class="tlab" x="${x}" y="${y}">${n}</text>`;
+    s+=`<rect class="tvalbg" x="${x+16}" y="${y-27}" width="30" height="17" rx="3"/><text class="tval" x="${x+31}" y="${y-18}">${v}</text>`;
+    if(U[n]!==undefined) s+=`<text class="tval" x="${x}" y="${y+34}" style="fill:var(--ink3)">u=${U[n]}</text>`;
+  }
+  return s+'</svg>';
+}
+function landscapeSVG(){
+  return `<svg viewBox="0 0 600 210" role="img" aria-label="State space landscape showing local and global maximum">
+  <path d="M20,180 C80,178 100,96 150,96 C200,96 214,150 260,154 C320,159 350,42 420,42 C480,42 500,140 560,168"
+        fill="none" stroke="var(--ink2)" stroke-width="2.2"/>
+  <circle cx="150" cy="96" r="5" fill="var(--bad)"/>
+  <text x="150" y="82" text-anchor="middle" style="fill:var(--bad);font-family:var(--mono);font-size:11px;font-weight:700">local max</text>
+  <circle cx="420" cy="42" r="5" fill="var(--ok)"/>
+  <text x="420" y="28" text-anchor="middle" style="fill:var(--ok);font-family:var(--mono);font-size:11px;font-weight:700">global max</text>
+  <circle cx="260" cy="154" r="4.5" fill="var(--ink3)"/>
+  <text x="260" y="176" text-anchor="middle" style="fill:var(--ink3);font-family:var(--mono);font-size:10.5px">valley</text>
+  <path d="M70,178 L128,104" stroke="var(--acc)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#hm)"/>
+  <defs><marker id="hm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--acc)"/></marker></defs>
+  <text x="46" y="196" style="fill:var(--acc);font-family:var(--mono);font-size:10.5px">hill climbing stops here</text>
+  </svg>`;
+}
+
+/* ---------- drills ---------- */
+const D=[
+ {id:'HC',n:'Hill Climbing',t:'Hill climbing on a search tree',mk:'minimisation',
+  sub:'The exact exercise from slide 16 of your deck.',
+  q:'There is a search tree where the states carry evaluation (heuristic) values. Apply the <b>Hill climbing</b> algorithm where the initial state is <b>S</b>. Show the expanded tree (sequence of states) that will be visited if the problem is a <b>Minimisation</b> problem. Generate successors in <b>alphabetic order</b>.',
+  fig:treeSVG,
+  tip:'<b>Write this sentence to earn the explanation mark:</b> "Hill climbing terminates at B because B has no successor that is lower, even though H = 80 exists elsewhere in the tree — B is a local minimum."',
+  warn:'<b>The trap:</b> it is a MINIMISATION problem. C = 105 is the highest value and is <i>never</i> a candidate. Many students climb instead of descend and lose the whole question.'},
+ {id:'BEAM',n:'Local Beam k=2',t:'Local beam search, k = 2',mk:'maximisation',
+  sub:'Same tree as drill 1 — slide 22.',
+  q:'Generate successors in <b>alphabetic order</b>. If the problem is a <b>Maximisation</b> problem, apply <b>Local Beam Search</b> where the initial state is <b>S</b> and the beam size <b>k = 2</b>. Show the expanded tree and the frontier.',
+  fig:treeSVG,
+  tip:'<b>The distinction they want:</b> local beam search is not k independent restarts. All successors go into <i>one</i> shared pool, so a beam slot can be taken over by children of the other thread — effort concentrates where progress is happening.'},
+ {id:'SA',n:'Simulated Annealing',t:'Simulated annealing — accept or reject',mk:'maximisation',
+  sub:'Slide 20, with the deck’s own numbers.',
+  q:'For a <b>maximisation</b> problem, <b>S</b> is the current state with evaluation value <b>100</b> and temperature <b>T = 10</b>. The current state generates successors with (evaluation, random value): <b>A(95, 0.65), B(105, 0.8), C(90, 0.5), D(85, 0.2)</b> sequentially. Find which neighbours will be selected. The probability of taking a bad move is <code>e^(&Delta;E/T)</code> where <code>&Delta;E = E(A) &minus; E(S)</code>. Accept a bad move only if the random value is <b>less than</b> the calculated probability.',
+  fig:flatSVG,
+  tip:'<b>Show all four rows even for rejects.</b> The marks are in the &Delta;E, the probability, and the comparison — not in the final answer.',
+  warn:'<b>D is the punchline.</b> It is the worst successor (85) yet it gets accepted, because its random number 0.2 fell just under e^(&minus;1.5) = 0.2231. That is exactly what simulated annealing is for: escaping a local optimum by occasionally going downhill.'},
+ {id:'GA',n:'GA numerical',t:'Genetic algorithm — full generation',mk:'20 marks',
+  sub:'The worked example on slides 38–42. Learn this one cold.',
+  q:'<b>Maximise f(x) = x&sup2;/2 &minus; 3x</b>, where x is in <b>[0, 31]</b>. Binary encoding, 5 digits. Carry out: initialisation, selection, crossover, mutation, survival, and update of the population.',
+  fig:null,
+  tip:'<b>Two things the marker looks for.</b> (1) Negative fitness is clamped to <b>0</b>, and a zero-fitness chromosome gets <b>no bin</b> — it can never be selected. (2) The bins are <b>cumulative</b>: each one starts where the last ended.'},
+ {id:'Q8',n:'8-queens fitness',t:'8-queens — count the attacks',mk:'5 marks',
+  sub:'Slide 28.',
+  q:'Find the number of attacks on the chromosomes: <b>chromosome 1: 76012345</b>, <b>chromosome 2: 66743210</b>.',
+  fig:null,
+  tip:'<b>Method:</b> compare every pair of columns once. They attack if the rows are equal, or if <code>|row difference| = |column difference|</code> (diagonal). Fitness = <code>28 &minus; attacks</code>.'},
+ {id:'Q6',n:'6-queens fitness',t:'6-queens — fitness of three chromosomes',mk:'5 marks',
+  sub:'Slide 37.',
+  q:'Calculate the fitness value (the number of <b>non-attacking pairs</b>) for each of the following in the <b>6-Queens</b> problem. Assume column indices start from <b>0</b>. Chromosomes: <b>211345</b>, <b>403234</b>, <b>511023</b>.',
+  fig:null,
+  tip:'<b>Max fitness is 6&times;5/2 = 15.</b> Work column pair by column pair and tick them off — going by eye on the diagonals is where errors creep in.'},
+];
+
+let store={};try{store=JSON.parse(localStorage.getItem('lsga')||'{}')}catch(e){store={}}
+const save=()=>{try{localStorage.setItem('lsga',JSON.stringify(store))}catch(e){}};
+let ci=0,cs=0;
+const side=document.getElementById('side'),main=document.getElementById('main');
+const key=i=>'d.'+D[i].id;
+
+function renderSide(){
+  side.innerHTML='';
+  D.forEach((d,i)=>{
+    const b=document.createElement('button');
+    b.innerHTML=`<span class="n">${String(i+1).padStart(2,'0')}</span> ${d.n} <span class="tick ${store[key(i)]?'done':''}"></span>`;
+    if(i===ci)b.classList.add('on');
+    b.onclick=()=>{ci=i;cs=0;renderSide();renderMain()};
+    side.appendChild(b);
+  });
+}
+function renderMain(){
+  const d=D[ci];
+  main.innerHTML=`<div class="card">
+    <h2>${d.t}<span class="mk">${d.mk}</span></h2>
+    <p class="sub">${d.sub}</p>
+    <div class="qbox"><span class="lbl">Question</span>${d.q}</div>
+    ${d.fig?`<div class="figbox">${d.fig()}</div>`:''}
+    <div class="stepper">
+      <div class="bar">
+        <span class="lbl" id="sl"></span>
+        <button id="bk">&#8592; Back</button>
+        <button id="nx" class="pri">Next step &#8594;</button>
+        <button id="al">Reveal all</button>
+        <button id="rs">Reset</button>
+      </div>
+      <div class="steps" id="st"></div>
+      <div class="fin" id="fin"></div>
+    </div>
+    ${d.warn?`<div class="warn">${d.warn}</div>`:''}
+    <div class="tip">${d.tip}</div>
+    <div class="done"><label><input type="checkbox" id="ck"> I solved this on paper first</label></div>
+  </div>`;
+  document.getElementById('bk').onclick=()=>{if(cs>0){cs--;renderSteps()}};
+  document.getElementById('nx').onclick=next;
+  document.getElementById('al').onclick=()=>{cs=T[d.id].steps.length;renderSteps()};
+  document.getElementById('rs').onclick=()=>{cs=0;renderSteps()};
+  const ck=document.getElementById('ck');
+  ck.checked=!!store[key(ci)];
+  ck.onchange=()=>{store[key(ci)]=ck.checked;save();renderSide()};
+  renderSteps();
+}
+function next(){const n=T[D[ci].id].steps.length;if(cs<n){cs++;renderSteps()}}
+function renderSteps(){
+  const d=D[ci],tr=T[d.id],el=document.getElementById('st');
+  document.getElementById('sl').textContent=cs===0?`${tr.steps.length} steps — solve it on paper first`:`step ${cs} / ${tr.steps.length}`;
+  if(cs===0){el.innerHTML='<div class="hint">Work the whole thing out on paper. Then reveal one step at a time and check yourself against each line.</div>'}
+  else{
+    el.innerHTML=tr.steps.slice(0,cs).map((s,i)=>
+      `<div class="step ${i===cs-1?'cur':''}"><h5>${s.title}</h5>${s.lines.map(l=>`<div class="tl ${l.cls||''}">${l.t||'&nbsp;'}</div>`).join('')}</div>`).join('');
+    const last=el.lastElementChild; if(last) last.scrollIntoView({block:'nearest'});
+  }
+  const done=cs>=tr.steps.length,f=document.getElementById('fin');
+  f.classList.toggle('on',done);
+  if(done)f.innerHTML='ANSWER &nbsp; '+tr.final.path+(tr.final.cost!==null&&tr.final.cost!==undefined?'  |  value '+tr.final.cost:'')+(tr.final.explored?'<br>'+tr.final.explored:'');
+  document.getElementById('bk').disabled=cs===0;
+  document.getElementById('nx').disabled=done;
+}
+
+/* ---------- flashcards ---------- */
+const C=[
+ {t:'Concept',q:'What makes local search different from BFS / UCS / A*?',a:'Classical search returns a PATH and keeps paths in memory. Local search keeps only the current state (or k states) and moves to neighbours — the path is not retained.\n\nUse it when only the final state matters: 8-queens, circuit layout, job-shop scheduling, vehicle routing, portfolio management.\n\nTwo advantages: constant memory, and it works in very large or infinite (continuous) spaces.'},
+ {t:'Concept',q:'Objective function vs cost function on the landscape',a:'Objective function -> find the highest peak = GLOBAL MAXIMUM.\nCost function -> find the lowest valley = GLOBAL MINIMUM.\nYou convert one to the other just by inserting a minus sign.'},
+ {t:'Concept',q:'Define complete and optimal for a local search algorithm',a:'COMPLETE: always finds a goal if one exists.\nOPTIMAL: always finds the global minimum/maximum.\n\nPlain hill climbing is neither. Simulated annealing is complete in the limit of slow cooling.'},
+ {t:'Hill climbing',q:'How does steepest-ascent hill climbing work, and when does it stop?',a:'A loop that continually moves in the direction of increasing value — uphill. It terminates on reaching a peak where NO neighbour has a higher value.\n\nIt maintains no search tree: the current node records only the state and its objective-function value.'},
+ {t:'Hill climbing',q:'The three ways hill climbing gets stuck',a:'1. LOCAL MAXIMA — a peak lower than the global maximum, but every neighbour is worse, so it halts.\n2. RIDGES — a sequence of local maxima that single moves navigate badly.\n3. PLATEAUX — a flat region where no neighbour improves, so there is no direction to move.'},
+ {t:'Hill climbing',q:'Stochastic vs first-choice vs random-restart hill climbing',a:'STOCHASTIC: chooses at random among the UPHILL moves; probability can vary with steepness. Converges more slowly, but sometimes finds better solutions.\n\nFIRST-CHOICE: generates successors randomly until one is better than the current state. Good when a state has thousands of successors.\n\nRANDOM-RESTART: repeats hill climbing from randomly generated initial states until a goal is found. "If at first you do not succeed, try, try again." Very effective for 8-queens.'},
+ {t:'Hill climbing',q:'Why are the hill-climbing variants called incomplete?',a:'They often fail to find a goal even when one exists, because they get stuck on local maxima (or ridges/plateaux) and terminate there.\n\nNP-hard problems typically have an exponential number of local maxima to get stuck on.'},
+ {t:'Annealing',q:'Why simulated annealing exists',a:'Hill climbing never makes a downhill move, so it gets trapped. A purely random walk is complete but extremely inefficient.\n\nSimulated annealing COMBINES the two: mostly uphill, but with a controlled chance of going downhill — giving both efficiency and completeness.'},
+ {t:'Annealing',q:'The simulated annealing acceptance rule',a:'Compute delta = f(neighbour) - f(current), draw a uniform random u.\n\nAccept if the move is good, OR with probability e^(deltaE / T) if it is bad.\n\nDeck form: if (delta < 0) or (e^(-delta/T) > u) then accept.\nThe worse the move, the lower the acceptance probability.'},
+ {t:'Annealing',q:'What does the temperature T control?',a:'HIGH T: the exponent is near zero, so probability is near 1 — almost any bad move is accepted (wide exploration).\nLOW T: probability collapses toward 0 — behaves like plain hill climbing (exploitation).\n\nT is REDUCED over time (the cooling schedule) — the outer loop of the algorithm.'},
+ {t:'Beam',q:'How does local beam search work?',a:'Keeps track of k states rather than one. Begins with k randomly generated states.\n\nEach step: generate ALL the successors of ALL k states. If any one is a goal, halt. Otherwise select the k BEST successors from the complete list and repeat.'},
+ {t:'Beam',q:'Why is local beam search NOT the same as k random restarts?',a:'In k parallel restarts each search runs independently. In local beam search all successors go into one shared pool, so useful information passes between threads — the algorithm abandons unfruitful searches and concentrates effort where the most progress is being made.'},
+ {t:'Beam',q:'What is stochastic beam search and why use it?',a:'Instead of choosing the strictly best k from the pool of candidate successors, it chooses k successors at random (weighted by value).\n\nThis maintains DIVERSITY — the plain version can end up with k nearly identical states, losing the benefit of the beam.'},
+ {t:'GA',q:'Define a genetic algorithm (your deck’s exact wording)',a:'"A genetic algorithm is a variant of STOCHASTIC BEAM SEARCH in which successor states are generated by combining TWO PARENT states rather than by modifying a single state."'},
+ {t:'GA',q:'The six steps of a GA generation',a:'1. Initialise population (encoded chromosomes)\n2. Selection — fitness-proportional, e.g. roulette wheel\n3. Crossover / recombination — swap tails at a crossover point\n4. Mutation — flip bits with small probability\n5. Survival / accept — evaluate the offspring\n6. Update population — repeat until a stopping condition'},
+ {t:'GA',q:'Fitness function for the n-queens problem',a:'Fitness = the number of NON-ATTACKING pairs of queens.\n\nFor 8 queens: min 0, max 8*7/2 = 28.\nFor n queens: max = n(n-1)/2 = C(n,2) = n! / (2!(n-2)!).\n\nCompute it as (total pairs - attacking pairs).'},
+ {t:'GA',q:'How do you decide whether two queens attack?',a:'Represent the board as a string where index = column and value = row.\n\nQueens in columns i and j attack if:\n  board[i] == board[j]            (same row), or\n  |board[i]-board[j]| == |i-j|    (same diagonal)\n\nCompare each pair ONCE — that is why the instructor’s code divides the double-loop count by 2.'},
+ {t:'GA',q:'How does roulette-wheel selection work?',a:'Fitness proportional. Probability for an individual = its fitness / total fitness.\n\nLay the probabilities out as CUMULATIVE bins spanning 0 to 1. Draw a random number, see which bin it falls in, and that chromosome becomes a parent.\n\nA chromosome with fitness 0 gets NO bin at all and can never be selected.'},
+ {t:'GA',q:'What does mutation contribute that crossover cannot?',a:'Crossover only recombines material already present in the population. If every parent has a 0 in some position, no amount of crossover will produce a 1 there.\n\nMutation injects genuinely NEW genetic material and is what lets the search escape a converged population. In the deck’s worked example the winning chromosome (fitness 360) was created by the mutation, not by crossover.'},
+ {t:'Continuous',q:'Why do most local search algorithms fail in continuous spaces?',a:'They have an INFINITE branching factor — you cannot enumerate the neighbours.\n\nOnly first-choice hill climbing and simulated annealing handle continuous state and action spaces directly. The simplest fix for the others is to DISCRETIZE the neighbourhood of each state.'},
+ {t:'Continuous',q:'Gradient descent / steepest-ascent update rule',a:'The gradient of f gives the magnitude and direction of the steepest slope. A maximum solves grad f = 0.\n\nUpdate: x <- x + alpha * grad f(x), where alpha is the STEP SIZE.\n\nIf alpha is too small, too many steps are needed; if too large, the search overshoots the maximum.'},
+ {t:'Continuous',q:'The Newton–Raphson method for optimisation',a:'A general technique for finding roots, g(x) = 0, by x <- x - g(x)/g’(x).\n\nTo optimise f we need grad f(x) = 0, so g becomes grad f, giving:\n  x <- x - H⁻¹f(x) * grad f(x)\n\nwhere H is the HESSIAN matrix of second derivatives, H_ij = d²f / dx_i dx_j.'},
+];
+let ord=C.map((_,i)=>i),fp=0,ftag='all',fonly=false;
+const fc=document.getElementById('fcard');
+const flist=()=>ord.filter(i=>(ftag==='all'||C[i].t===ftag)&&(!fonly||store['f.'+i]==='d'));
+function rc(){
+  const l=flist();
+  document.getElementById('fcc').textContent=l.length?`${(fp%l.length)+1} / ${l.length}`:'0 cards';
+  if(!l.length){document.getElementById('fcq').textContent='No cards match — clear the filter.';document.getElementById('fca').textContent='';document.getElementById('fctg').textContent='';return}
+  const c=C[l[fp%l.length]];
+  fc.classList.remove('flip');
+  document.getElementById('fctg').textContent=c.t;
+  document.getElementById('fcq').textContent=c.q;
+  document.getElementById('fca').textContent=c.a;
+}
+fc.onclick=()=>fc.classList.toggle('flip');
+document.getElementById('fcn').onclick=()=>{fp++;rc()};
+document.getElementById('fcp').onclick=()=>{fp=Math.max(0,fp-1);rc()};
+document.getElementById('fck').onclick=()=>{const l=flist();if(l.length){store['f.'+l[fp%l.length]]='k';save()}fp++;rc()};
+document.getElementById('fcd').onclick=()=>{const l=flist();if(l.length){store['f.'+l[fp%l.length]]='d';save()}fp++;rc()};
+document.getElementById('fcs').onclick=()=>{ord.sort(()=>Math.random()-.5);fp=0;rc()};
+document.getElementById('fcu').onclick=function(){fonly=!fonly;this.style.borderColor=fonly?'var(--bad)':'var(--edge)';fp=0;rc()};
+const sel=document.getElementById('fcf');
+[...new Set(C.map(c=>c.t))].forEach(t=>{const o=document.createElement('option');o.value=t;o.textContent=t;sel.appendChild(o)});
+sel.onchange=()=>{ftag=sel.value;fp=0;rc()};
+
+/* ---------- tabs + keys ---------- */
+document.getElementById('nav').querySelectorAll('button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');document.getElementById('v-'+b.dataset.v).classList.add('on');
+  };
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
+  const v=document.querySelector('.view.on').id;
+  if(v==='v-drills'){
+    if(e.key==='ArrowRight'){next();e.preventDefault()}
+    if(e.key==='ArrowLeft'&&cs>0){cs--;renderSteps();e.preventDefault()}
+  }
+  if(v==='v-cards'){
+    if(e.key===' '){fc.classList.toggle('flip');e.preventDefault()}
+    if(e.key==='ArrowRight'){fp++;rc()}
+    if(e.key==='ArrowLeft'){fp=Math.max(0,fp-1);rc()}
+  }
+});
+document.querySelector('#v-cheat .cheat').insertAdjacentHTML('afterbegin','<div class="figbox">'+landscapeSVG()+'</div>');
+renderSide();renderMain();rc();
+</script>
