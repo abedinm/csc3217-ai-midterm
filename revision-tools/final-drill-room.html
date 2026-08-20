@@ -1,0 +1,388 @@
+<title>CSC 3217 Final &#8212; Drill Room</title>
+<style>
+  :root{
+    --bg:#0d1117; --panel:#151b24; --panel2:#1c2430; --edge:#2a3442; --edge2:#222b37;
+    --ink:#e6eaf0; --ink2:#95a3b6; --ink3:#647287;
+    --acc:#e0674f; --acc-ink:#ef8069; --acc-bg:#2c1713;
+    --cy:#43a7c4; --cy-bg:#0f242c;
+    --ok:#54c08a; --ok-bg:#0f2419; --bad:#dd6b58; --bad-bg:#2a1512;
+    --vi:#8b7ad6; --vi-bg:#1d1830;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:"Cascadia Code",Consolas,"SF Mono",ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:light){
+    :root{
+      --bg:#eceef2; --panel:#ffffff; --panel2:#f3f5f8; --edge:#d5dae2; --edge2:#e4e8ee;
+      --ink:#1a212b; --ink2:#576273; --ink3:#8590a1;
+      --acc:#b8452c; --acc-ink:#9c3922; --acc-bg:#faeae6;
+      --cy:#1a6d86; --cy-bg:#e2eff3;
+      --ok:#26794f; --ok-bg:#e3f1e9; --bad:#b8442f; --bad-bg:#f9e7e3;
+      --vi:#5a49a8; --vi-bg:#eceaf7;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1117; --panel:#151b24; --panel2:#1c2430; --edge:#2a3442; --edge2:#222b37;
+    --ink:#e6eaf0; --ink2:#95a3b6; --ink3:#647287;
+    --acc:#e0674f; --acc-ink:#ef8069; --acc-bg:#2c1713;
+    --cy:#43a7c4; --cy-bg:#0f242c;
+    --ok:#54c08a; --ok-bg:#0f2419; --bad:#dd6b58; --bad-bg:#2a1512;
+    --vi:#8b7ad6; --vi-bg:#1d1830;
+  }
+  :root[data-theme="light"]{
+    --bg:#eceef2; --panel:#ffffff; --panel2:#f3f5f8; --edge:#d5dae2; --edge2:#e4e8ee;
+    --ink:#1a212b; --ink2:#576273; --ink3:#8590a1;
+    --acc:#b8452c; --acc-ink:#9c3922; --acc-bg:#faeae6;
+    --cy:#1a6d86; --cy-bg:#e2eff3;
+    --ok:#26794f; --ok-bg:#e3f1e9; --bad:#b8442f; --bad-bg:#f9e7e3;
+    --vi:#5a49a8; --vi-bg:#eceaf7;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  button{font-family:var(--sans)}
+  button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+  header{border-bottom:1px solid var(--edge);background:var(--panel)}
+  .hin{max-width:1140px;margin:0 auto;padding:22px 18px 15px}
+  .eye{font-size:11.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--acc-ink)}
+  h1{font-weight:800;font-size:clamp(25px,4.3vw,36px);letter-spacing:-.025em;margin:7px 0 5px;line-height:1.05}
+  .tag{color:var(--ink2);font-size:14.5px;max-width:66ch;margin:0}
+  nav{display:flex;gap:5px;margin-top:15px;flex-wrap:wrap}
+  nav button{background:none;border:1px solid transparent;color:var(--ink2);font-size:13px;font-weight:700;padding:7px 15px;border-radius:8px;cursor:pointer}
+  nav button:hover{color:var(--ink);background:var(--panel2)}
+  nav button.on{background:var(--acc-bg);color:var(--acc-ink);border-color:var(--acc)}
+
+  .wrap{max-width:1140px;margin:0 auto;padding:20px 18px 70px}
+  .view{display:none}.view.on{display:block}
+  .grid{display:grid;grid-template-columns:246px minmax(0,1fr);gap:20px}
+  @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  .side{align-self:start;position:sticky;top:14px;display:flex;flex-direction:column;gap:4px;max-height:calc(100vh - 28px);overflow-y:auto}
+  @media (max-width:900px){.side{position:static;flex-direction:row;overflow-x:auto;max-height:none;padding-bottom:6px}}
+  .side .grp{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);padding:11px 4px 3px}
+  @media (max-width:900px){.side .grp{display:none}}
+  .side button{display:flex;align-items:center;gap:8px;text-align:left;background:var(--panel);border:1px solid var(--edge2);color:var(--ink2);border-radius:9px;padding:8px 11px;font-size:12.5px;cursor:pointer;white-space:nowrap}
+  .side button:hover{border-color:var(--edge);color:var(--ink)}
+  .side button.on{background:var(--panel2);border-color:var(--acc);color:var(--ink)}
+  .side .tick{margin-left:auto;width:13px;height:13px;border:1.5px solid var(--ink3);border-radius:4px;flex:none}
+  .side .tick.done{background:var(--ok);border-color:var(--ok)}
+  .side .star{color:var(--acc);font-size:11px;flex:none}
+
+  .card{background:var(--panel);border:1px solid var(--edge2);border-radius:13px;padding:19px 21px;margin-bottom:14px}
+  .card h2{font-weight:800;font-size:20px;letter-spacing:-.01em;margin:0 0 3px}
+  .card h2 .mk{font-size:11.5px;font-weight:700;color:var(--acc-ink);background:var(--acc-bg);border-radius:999px;padding:2px 10px;vertical-align:3px;margin-left:8px}
+  .sub{color:var(--ink2);font-size:13.5px;margin:0 0 11px}
+  .qbox{background:var(--panel2);border:1px solid var(--edge2);border-left:3px solid var(--cy);border-radius:8px;padding:12px 15px;margin:11px 0;font-size:14.5px}
+  .qbox .lbl{font-size:10.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--cy);display:block;margin-bottom:5px}
+  .qbox ol{margin:7px 0;padding-left:20px}
+  .qbox li{margin:3px 0}
+  .figbox{background:var(--panel2);border:1px solid var(--edge2);border-radius:9px;padding:10px;margin:11px 0;overflow-x:auto}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+
+  .stepper{border:1px solid var(--edge2);border-radius:10px;overflow:hidden;margin-top:13px}
+  .bar{display:flex;align-items:center;gap:7px;background:var(--panel2);border-bottom:1px solid var(--edge2);padding:8px 12px;flex-wrap:wrap}
+  .bar .lbl{font-size:12.5px;color:var(--ink2);margin-right:auto}
+  .bar button{background:var(--panel);border:1px solid var(--edge);color:var(--ink);font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:7px;cursor:pointer}
+  .bar button:hover{border-color:var(--acc)}
+  .bar button.pri{background:var(--acc-bg);border-color:var(--acc);color:var(--acc-ink)}
+  .bar button:disabled{opacity:.32;cursor:default}
+  .steps{padding:5px 14px 11px;min-height:110px}
+  .step{border-left:2px solid var(--edge);padding:8px 0 8px 13px;margin:5px 0}
+  .step.cur{border-left-color:var(--acc)}
+  .step h5{margin:0 0 4px;font-size:13.5px;font-weight:700;color:var(--ink)}
+  .step.cur h5{color:var(--acc-ink)}
+  .tl{font-family:var(--mono);font-size:12.5px;line-height:1.72;white-space:pre-wrap;word-break:break-word}
+  .tl.dim{color:var(--ink3)}.tl.hot{color:var(--acc-ink);font-weight:600}
+  .tl.goal{color:var(--ok);font-weight:700}.tl.cut{color:var(--bad)}
+  .hint{color:var(--ink3);font-size:13px;padding:17px 3px;font-style:italic}
+  .fin{margin:0 14px 13px;background:var(--ok-bg);border:1px solid var(--ok);border-radius:8px;padding:10px 14px;font-family:var(--mono);font-size:12.5px;display:none}
+  .fin.on{display:block}
+  .tip{margin-top:11px;background:var(--cy-bg);border-left:3px solid var(--cy);border-radius:6px;padding:9px 13px;font-size:13.5px}
+  .tip b{color:var(--cy)}
+  .warn{margin-top:9px;background:var(--bad-bg);border-left:3px solid var(--bad);border-radius:6px;padding:9px 13px;font-size:13.5px}
+  .warn b{color:var(--bad)}
+  .note{margin-top:9px;background:var(--vi-bg);border-left:3px solid var(--vi);border-radius:6px;padding:9px 13px;font-size:13.5px}
+  .note b{color:var(--vi)}
+  .done{display:flex;align-items:center;gap:9px;margin-top:12px}
+  .done label{font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:8px;cursor:pointer}
+  .done input{accent-color:var(--ok);width:16px;height:16px}
+
+  .bn{fill:var(--panel);stroke:var(--ink2);stroke-width:1.8}
+  .bl{fill:var(--ink);font-weight:800;font-size:14px;text-anchor:middle;dominant-baseline:central}
+  .be{stroke:var(--ink3);stroke-width:1.7;fill:none}
+  .bq{fill:var(--acc-ink);font-family:var(--mono);font-size:10.5px;text-anchor:middle}
+
+  .cheat{max-width:830px}
+  .cheat h3{font-size:16px;font-weight:800;margin:20px 0 7px;color:var(--acc-ink)}
+  .cheat h3:first-child{margin-top:0}
+  .cheat ul{padding-left:20px;margin:7px 0}
+  .cheat li{margin:5px 0;font-size:14.5px}
+  .cheat code{font-family:var(--mono);font-size:.9em;background:var(--panel2);padding:.1em .4em;border-radius:4px}
+  table.g{width:100%;border-collapse:collapse;font-size:13.5px;margin:10px 0}
+  table.g th,table.g td{border:1px solid var(--edge);padding:7px 10px;text-align:left;vertical-align:top}
+  table.g th{background:var(--panel2);font-weight:700;font-size:12px}
+  .tblwrap{overflow-x:auto}
+  @media (prefers-reduced-motion:no-preference){
+    .step.cur{animation:sl .18s ease-out}
+    @keyframes sl{from{transform:translateX(-4px);opacity:.45}to{transform:none;opacity:1}}
+  }
+</style>
+
+<header><div class="hin">
+  <div class="eye">CSC 3217 &middot; Final Term</div>
+  <h1>Drill Room</h1>
+  <p class="tag">Every problem here comes from your suggestion sheet or the Fall 2024-25 final paper. Question&nbsp;5 is mandatory and it is a genetic-algorithm numerical &mdash; drill&nbsp;1 is that exact question.</p>
+  <nav id="nav">
+    <button data-v="drills" class="on">Drills</button>
+    <button data-v="cheat">Cheat Sheet</button>
+    <button data-v="paper">The Paper</button>
+  </nav>
+</div></header>
+
+<div class="wrap">
+  <div class="view on" id="v-drills">
+    <div class="grid"><div class="side" id="side"></div><div id="main"></div></div>
+  </div>
+
+  <div class="view" id="v-cheat">
+    <div class="card cheat">
+      <h3>Genetic algorithm &mdash; the marks checklist</h3>
+      <p>Q5 is mandatory, 20 marks, split <b>Methodology 10 / Justification 10</b>. The justification half is parts (d) and (e) &mdash; words, not arithmetic. Do not skip them.</p>
+      <ul>
+        <li><b>(a)</b> Table: chromosome, x, f(x), probability = f(x) / sum. Show the <b>Total</b> row.</li>
+        <li><b>(b)</b> Crossover at bit k = swap everything from position k+1 onward.</li>
+        <li><b>(c)</b> Mutation at bit position p = flip that one bit. Draw before and after.</li>
+        <li><b>(d)</b> An offspring is accepted if its fitness beats the member it replaces &mdash; that is what raises the population's average fitness.</li>
+        <li><b>(e)</b> Compare best-before with best-after and say plainly whether it improved. <b>"No" is often the correct answer</b> &mdash; a single GA iteration is not guaranteed to improve anything.</li>
+      </ul>
+
+      <h3>N-Queens fitness</h3>
+      <ul>
+        <li>Chromosome index = <b>column</b>, value = <b>row</b>.</li>
+        <li>Attack if <b>same row</b>, or <code>|row diff| = |col diff|</code> (diagonal).</li>
+        <li>Fitness = non-attacking pairs = <code>n(n&minus;1)/2 &minus; attacks</code>. For 5 queens the max is <b>10</b>; for 8 queens, <b>28</b>.</li>
+        <li>Compare each pair of columns exactly once.</li>
+      </ul>
+
+      <h3>CSP</h3>
+      <ul>
+        <li><b>Represent</b> = variables, domains, constraints. Then draw the <b>constraint graph</b>: one node per variable, an edge for every binary constraint.</li>
+        <li><b>MRV</b> (minimum remaining values) &mdash; assign the variable with the <b>fewest legal values</b> left. Ties broken by the <b>degree heuristic</b> (most constraints on unassigned variables).</li>
+        <li><b>Least-constraining value</b> &mdash; among values, choose the one that rules out fewest options for the neighbours.</li>
+        <li><b>Forward checking</b> &mdash; after each assignment, delete now-impossible values from unassigned neighbours' domains. <b>Empty domain = backtrack immediately</b>, which is the whole point: it fails earlier than plain backtracking.</li>
+      </ul>
+
+      <h3>Bayesian networks</h3>
+      <ul>
+        <li>Joint = product over nodes of <code>P(node | its parents)</code>. Write that product before plugging numbers in.</li>
+        <li>Any variable <b>not</b> in the query gets <b>summed out</b>.</li>
+        <li>Conditional = joint / marginal. Compute the marginal once and reuse it.</li>
+        <li>Check: <code>P(+q | e) + P(&minus;q | e) = 1</code>. State it &mdash; free marks.</li>
+        <li>Bayes' rule: <code>P(A|B) = P(B|A) P(A) / P(B)</code>.</li>
+      </ul>
+
+      <h3>Neural network (Fall 2024-25 Q2)</h3>
+      <p>Forward pass, then total error. The paper's setup: <b>ReLU</b> <code>f(x) = max(0, x)</code> on the hidden layer, <b>sigmoid</b> <code>f(x) = 1/(1 + e^&minus;x)</code> on the output layer. <b>Hidden nodes share one bias; output nodes have no bias.</b></p>
+      <ol>
+        <li>For each hidden node: <code>net = sum(w &times; input) + bias</code>, then apply ReLU (negative becomes 0).</li>
+        <li>For each output node: <code>net = sum(w &times; hidden)</code>, no bias, then apply sigmoid.</li>
+        <li>Total error <code>E = sum of &frac12;(target &minus; output)&sup2;</code> over the output nodes.</li>
+      </ol>
+      <p>Read the weights straight off your figure and keep 3-4 decimals throughout.</p>
+
+      <h3>Alpha-beta</h3>
+      <p>Also on the suggestion sheet, and mechanically identical to the midterm question: pass &alpha;/&beta; <b>down</b> to children, MAX raises &alpha;, MIN lowers &beta;, prune the remaining children the moment <code>&alpha; &ge; &beta;</code> (equality counts). Left to right.</p>
+    </div>
+  </div>
+
+  <div class="view" id="v-paper">
+    <div class="card cheat">
+      <h3>Fall 2024-25 final paper &mdash; what was actually asked</h3>
+      <p>100 marks, 2 hours. <b>Question 5 is mandatory</b> and is answered on the question paper itself (it is the CO4 question, marked Methodology 10 / Justification 10).</p>
+      <div class="tblwrap">
+      <table class="g">
+        <thead><tr><th>Q</th><th>Topic</th><th>What it asked</th><th>Marks</th></tr></thead>
+        <tbody>
+          <tr><td><b>1</b></td><td>CSP</td><td>Block puzzle with 3 colours. (a) Represent as a constraint satisfaction problem &mdash; variables, domains, constraints &mdash; and draw the constraint graph. (b) Solve with backtracking search using <b>MRV</b>.</td><td>20</td></tr>
+          <tr><td><b>2</b></td><td>Neural network</td><td>Compute the <b>total error</b> for input (2,3) with target (1,0). <b>ReLU</b> on the hidden layer, <b>sigmoid</b> on the output. Hidden nodes share a bias; output nodes have none.</td><td>20</td></tr>
+          <tr><td><b>3</b></td><td>CSP + GA</td><td>(a) Forward checking with A, B, C over {1,2,3}, constraints A=B, B&gt;C. (b) Fitness (non-attacking pairs) of [21134, 40323, 20124] for <b>5-Queens</b>.</td><td>20</td></tr>
+          <tr><td><b>4</b></td><td>Bayesian network</td><td>Answer P(+w | +s, &minus;g) and P(&minus;w | +s, &minus;g) from the given CPTs.</td><td>20</td></tr>
+          <tr><td><b>5</b></td><td>Genetic algorithm <span style="color:var(--acc-ink)">(mandatory)</span></td><td>Maximise <code>f(x) = x&sup2;/8 + 4x</code>, x in [0,31], 5-bit. Parts (a)-(e): fitness and probability, crossover at bit 3, mutation at bit 4, acceptance, and whether it improved.</td><td>20</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <h3>What this tells you</h3>
+      <ul>
+        <li>Four topics carry the whole paper: <b>CSP, Genetic Algorithms, Bayesian Networks, Neural Networks</b>. CSP appears <b>twice</b>.</li>
+        <li><b>No Expert Systems and no Hidden Markov Models appeared.</b> That settles the question the syllabus documents disagreed about &mdash; at least for this sitting.</li>
+        <li>Every question is numerical. There is no "describe the agent" essay question anywhere on the paper.</li>
+        <li>Alpha-beta pruning is on the suggestion sheet but was <b>not</b> on this paper. Prepare it anyway &mdash; it is cheap and it is listed.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+const T = {"Q5N": {"steps": [{"title": "Chromosome 21134", "lines": [{"t": "Chromosome 21134 -> board [2, 1, 1, 3, 4]  (index = column, value = row)"}, {"t": "Total pairs = 5*4/2 = 10"}, {"t": "Attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "  col 0 (row 2) vs col 1 (row 1)  ->  diagonal", "cls": "cut"}, {"t": "  col 1 (row 1) vs col 2 (row 1)  ->  same row", "cls": "cut"}, {"t": "  col 1 (row 1) vs col 3 (row 3)  ->  diagonal", "cls": "cut"}, {"t": "  col 1 (row 1) vs col 4 (row 4)  ->  diagonal", "cls": "cut"}, {"t": "  col 3 (row 3) vs col 4 (row 4)  ->  diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacking pairs = 5", "cls": "hot"}, {"t": "Fitness (non-attacking) = 10 - 5 = 5", "cls": "goal"}]}, {"title": "Chromosome 40323", "lines": [{"t": "Chromosome 40323 -> board [4, 0, 3, 2, 3]  (index = column, value = row)"}, {"t": "Total pairs = 5*4/2 = 10"}, {"t": "Attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "  col 1 (row 0) vs col 3 (row 2)  ->  diagonal", "cls": "cut"}, {"t": "  col 1 (row 0) vs col 4 (row 3)  ->  diagonal", "cls": "cut"}, {"t": "  col 2 (row 3) vs col 3 (row 2)  ->  diagonal", "cls": "cut"}, {"t": "  col 2 (row 3) vs col 4 (row 3)  ->  same row", "cls": "cut"}, {"t": "  col 3 (row 2) vs col 4 (row 3)  ->  diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacking pairs = 5", "cls": "hot"}, {"t": "Fitness (non-attacking) = 10 - 5 = 5", "cls": "goal"}]}, {"title": "Chromosome 20124", "lines": [{"t": "Chromosome 20124 -> board [2, 0, 1, 2, 4]  (index = column, value = row)"}, {"t": "Total pairs = 5*4/2 = 10"}, {"t": "Attack if same row, or |row diff| == |col diff|."}, {"t": ""}, {"t": "  col 0 (row 2) vs col 3 (row 2)  ->  same row", "cls": "cut"}, {"t": "  col 1 (row 0) vs col 2 (row 1)  ->  diagonal", "cls": "cut"}, {"t": "  col 1 (row 0) vs col 3 (row 2)  ->  diagonal", "cls": "cut"}, {"t": "  col 2 (row 1) vs col 3 (row 2)  ->  diagonal", "cls": "cut"}, {"t": ""}, {"t": "Attacking pairs = 4", "cls": "hot"}, {"t": "Fitness (non-attacking) = 10 - 4 = 6", "cls": "goal"}]}], "final": {"path": "21134: 5 attacks, fitness 5   |   40323: 5 attacks, fitness 5   |   20124: 4 attacks, fitness 6", "cost": null, "explored": "max fitness for 5-Queens = 5*4/2 = 10"}}, "GA1": {"steps": [{"title": "(a) Fitness values and selection probability", "lines": [{"t": "f(x) = 25x - x^2,   x in [0,63],   6-bit encoding"}, {"t": ""}, {"t": "chromosome      x     f(x)        ratio f/sum"}, {"t": "[0,1,1,0,0,1]  25   0          -0.0000"}, {"t": "[1,0,0,1,0,0]  36   -396       0.2647"}, {"t": "[0,0,1,1,1,1]  15   150        -0.1003"}, {"t": "[1,1,0,0,1,0]  50   -1250      0.8356"}, {"t": ""}, {"t": "Sum of fitness = -1496"}, {"t": "Two best (highest fitness) -> PARENTS: [0,0,1,1,1,1] (f=150)  and  [0,1,1,0,0,1] (f=0)", "cls": "goal"}]}, {"title": "(b) Crossover at bit 3", "lines": [{"t": "Crossover at bit 3 - swap everything from position 4 onward."}, {"t": ""}, {"t": "parent 1  [0,0,1,1,1,1]   ->  offspring 1  [0,0,1,0,0,1]", "cls": "hot"}, {"t": "parent 2  [0,1,1,0,0,1]   ->  offspring 2  [0,1,1,1,1,1]", "cls": "hot"}, {"t": ""}, {"t": "offspring 1 = 9,  f = 144"}, {"t": "offspring 2 = 31,  f = -186"}]}, {"title": "(c) Mutation at bit 4", "lines": [{"t": "Mutation flips bit 4 of each offspring."}, {"t": ""}, {"t": "before  [0,0,1,0,0,1]   ->  after  [0,0,1,1,0,1]", "cls": "hot"}, {"t": "before  [0,1,1,1,1,1]   ->  after  [0,1,1,0,1,1]", "cls": "hot"}, {"t": ""}, {"t": "mutated 1 = 13,  f = 156"}, {"t": "mutated 2 = 27,  f = -54"}]}, {"title": "(d) Why the new offspring is accepted", "lines": [{"t": "Compare each offspring against the weakest members of the population."}, {"t": ""}, {"t": "offspring [0,0,1,1,0,1] f = 156"}, {"t": "offspring [0,1,1,0,1,1] f = -54"}, {"t": ""}, {"t": "weakest in population: [1,1,0,0,1,0] f = -1250", "cls": "dim"}, {"t": "weakest in population: [1,0,0,1,0,0] f = -396", "cls": "dim"}, {"t": ""}, {"t": "An offspring is ACCEPTED if its fitness beats the member it would replace -", "cls": "hot"}, {"t": "that is how the population's average fitness is driven upward each generation.", "cls": "hot"}]}, {"title": "(e) Has the solution improved?", "lines": [{"t": "Best fitness BEFORE this iteration = 150"}, {"t": "Best offspring fitness AFTER      = 156"}, {"t": ""}, {"t": "IMPROVED - the new best beats anything in the starting population.", "cls": "goal"}]}], "final": {"path": "best offspring fitness 156", "cost": null, "explored": "starting best was 150"}}, "GA2": {"steps": [{"title": "(a) Fitness values and selection probability", "lines": [{"t": "f(x) = x^2/8 + 4x,   x in [0,31],   5-bit encoding"}, {"t": ""}, {"t": "chromosome      x     f(x)        ratio f/sum"}, {"t": "[1,1,0,1,0]    26   188.5      0.4043"}, {"t": "[1,0,0,0,1]    17   104.125    0.2233"}, {"t": "[1,0,0,1,1]    19   121.125    0.2598"}, {"t": "[0,1,0,1,0]    10   52.5       0.1126"}, {"t": ""}, {"t": "Sum of fitness = 466.25"}, {"t": "Two best (highest fitness) -> PARENTS: [1,1,0,1,0] (f=188.5)  and  [1,0,0,1,1] (f=121.125)", "cls": "goal"}]}, {"title": "(b) Crossover at bit 3", "lines": [{"t": "Crossover at bit 3 - swap everything from position 4 onward."}, {"t": ""}, {"t": "parent 1  [1,1,0,1,0]   ->  offspring 1  [1,1,0,1,1]", "cls": "hot"}, {"t": "parent 2  [1,0,0,1,1]   ->  offspring 2  [1,0,0,1,0]", "cls": "hot"}, {"t": ""}, {"t": "offspring 1 = 27,  f = 199.125"}, {"t": "offspring 2 = 18,  f = 112.5"}]}, {"title": "(c) Mutation at bit 4", "lines": [{"t": "Mutation flips bit 4 of each offspring."}, {"t": ""}, {"t": "before  [1,1,0,1,1]   ->  after  [1,1,0,0,1]", "cls": "hot"}, {"t": "before  [1,0,0,1,0]   ->  after  [1,0,0,0,0]", "cls": "hot"}, {"t": ""}, {"t": "mutated 1 = 25,  f = 178.125"}, {"t": "mutated 2 = 16,  f = 96"}]}, {"title": "(d) Why the new offspring is accepted", "lines": [{"t": "Compare each offspring against the weakest members of the population."}, {"t": ""}, {"t": "offspring [1,1,0,0,1] f = 178.125"}, {"t": "offspring [1,0,0,0,0] f = 96"}, {"t": ""}, {"t": "weakest in population: [0,1,0,1,0] f = 52.5", "cls": "dim"}, {"t": "weakest in population: [1,0,0,0,1] f = 104.125", "cls": "dim"}, {"t": ""}, {"t": "An offspring is ACCEPTED if its fitness beats the member it would replace -", "cls": "hot"}, {"t": "that is how the population's average fitness is driven upward each generation.", "cls": "hot"}]}, {"title": "(e) Has the solution improved?", "lines": [{"t": "Best fitness BEFORE this iteration = 188.5"}, {"t": "Best offspring fitness AFTER      = 178.125"}, {"t": ""}, {"t": "The best offspring is WORSE than the best parent this round.", "cls": "hot"}, {"t": "GA is stochastic - improvement is expected over many generations, not every one.", "cls": "hot"}]}], "final": {"path": "best offspring fitness 178.125", "cost": null, "explored": "starting best was 188.5"}}, "FC": {"steps": [{"title": "Setup", "lines": [{"t": "Variables A, B, C   domains {1,2,3}"}, {"t": "Constraints:  A = B   and   B > C"}, {"t": "Forward checking: after each assignment, delete values from the"}, {"t": "domains of the UNASSIGNED neighbours that can no longer work."}, {"t": "If any domain becomes empty, backtrack immediately."}]}, {"title": "A = 1  (fails)", "lines": [{"t": "Try A = 1"}, {"t": "  A = B  =>  B must equal 1   ->  B = {1}"}, {"t": "  B > C  =>  C must be less than 1   ->  C = {}"}, {"t": "  C is EMPTY  ->  dead end, backtrack immediately.", "cls": "cut"}]}, {"title": "A = 2", "lines": [{"t": "Try A = 2"}, {"t": "  A = B  =>  B must equal 2   ->  B = {2}"}, {"t": "  B > C  =>  C must be less than 2   ->  C = {1}"}, {"t": "  domains: A=2   B={2}   C={1}"}, {"t": "  no empty domain -> this branch survives", "cls": "hot"}, {"t": "  SOLUTION: A=2, B=2, C=1", "cls": "goal"}]}, {"title": "A = 3", "lines": [{"t": "Try A = 3"}, {"t": "  A = B  =>  B must equal 3   ->  B = {3}"}, {"t": "  B > C  =>  C must be less than 3   ->  C = {1,2}"}, {"t": "  domains: A=3   B={3}   C={1,2}"}, {"t": "  no empty domain -> this branch survives", "cls": "hot"}, {"t": "  SOLUTION: A=3, B=3, C=1", "cls": "goal"}, {"t": "  SOLUTION: A=3, B=3, C=2", "cls": "goal"}]}], "final": {"path": "solutions: A=2 B=2 C=1, A=3 B=3 C=1, A=3 B=3 C=2", "cost": null, "explored": "A=1 dies instantly: C would need a value below 1"}}, "BCN": {"steps": [{"title": "Setup", "lines": [{"t": "D1 = {1,3,4}   D2 = {3,8,9}   D3 = {2,3,5}   D4 = {3,5,9}"}, {"t": "Constraints:  (X1 >= X2)   (X2 > X3  OR  X3 - X2 = 2)   (X3 != X4)"}]}, {"title": "Constraint 1:  X1 >= X2", "lines": [{"t": "X1 >= X2 with X1 in {1,3,4} and X2 in {3,8,9}."}, {"t": "The largest X1 is 4, the smallest X2 is 3, so X2 can only be 3."}, {"t": ""}, {"t": "  X1=3, X2=3  ok", "cls": "hot"}, {"t": "  X1=4, X2=3  ok", "cls": "hot"}, {"t": ""}, {"t": "=> X2 = 3, and X1 is in {3,4}. Values 8 and 9 are pruned from D2.", "cls": "goal"}]}, {"title": "Constraint 2:  X2 > X3  or  X3 - X2 = 2", "lines": [{"t": "With X2 = 3, test each X3 in {2,3,5} against  (X2 > X3) OR (X3 - X2 = 2):"}, {"t": "  X3 = 2  ->  KEEP   (X2 > X3 holds)", "cls": "hot"}, {"t": "  X3 = 3  ->  prune   (neither disjunct holds)", "cls": "cut"}, {"t": "  X3 = 5  ->  KEEP   (X3 - X2 = 2 holds)", "cls": "hot"}, {"t": ""}, {"t": "=> X3 is in {2,5}", "cls": "goal"}]}, {"title": "Constraint 3:  X3 != X4", "lines": [{"t": "X3 != X4, with X4 in {3,5,9}."}, {"t": "  if X3 = 2  ->  X4 in {3,5,9}"}, {"t": "  if X3 = 5  ->  X4 in {3,9}"}]}, {"title": "Does the CSP have a solution?", "lines": [{"t": "YES - the network is satisfiable. Total solutions: 10", "cls": "goal"}, {"t": ""}, {"t": "  X1=3  X2=3  X3=2  X4=3"}, {"t": "  X1=3  X2=3  X3=2  X4=5"}, {"t": "  X1=3  X2=3  X3=2  X4=9"}, {"t": "  X1=3  X2=3  X3=5  X4=3"}, {"t": "  X1=3  X2=3  X3=5  X4=9"}, {"t": "  X1=4  X2=3  X3=2  X4=3"}, {"t": "  ... and 4 more", "cls": "dim"}, {"t": ""}, {"t": "Quote one as your answer, e.g. X1=3, X2=3, X3=2, X4=3.", "cls": "hot"}]}], "final": {"path": "YES - e.g. X1=3, X2=3, X3=2, X4=3", "cost": null, "explored": "10 solutions exist in total"}}, "FC2": {"steps": [{"title": "Setup", "lines": [{"t": "Variables a, b, c    domain {0,1,2,3}"}, {"t": "Constraints:  a < b   and   b > c"}, {"t": "Order the variables a, b, c and forward-check after every assignment."}]}, {"title": "Try a = 0", "lines": [{"t": "a = 0   ->  forward check b:  b > 0   =>  b in {1,2,3}"}, {"t": "  take b = 1  ->  forward check c:  c < 1   =>  c in {0}"}, {"t": "  take c = 0", "cls": "hot"}, {"t": "  SOLUTION  a=0, b=1, c=0", "cls": "goal"}]}], "final": {"path": "a=0, b=1, c=0", "cost": null, "explored": "14 solutions exist; backtracking returns the first"}}, "B41": {"steps": [{"title": "The network and the query", "lines": [{"t": "Structure:  H -> W ,  W -> S ,  W -> G"}, {"t": "Joint = P(H) * P(W|H) * P(S|W) * P(G|W)"}, {"t": ""}, {"t": "Query: P(+w | +s, -g)"}, {"t": "Use  P(+w|+s,-g) = P(+w,+s,-g) / P(+s,-g),  summing H out of both."}]}, {"title": "Numerator", "lines": [{"t": "P(+w,+s,-g) = sum over h of P(h) P(+w|h) P(+s|+w) P(-g|+w)"}, {"t": ""}, {"t": "  h=+h: 0.1 * 0.667 * 0.4 * 0.75 = 0.020010"}, {"t": "  h=-h: 0.9 * 0.25 * 0.4 * 0.75 = 0.067500"}, {"t": ""}, {"t": "P(+w,+s,-g) = 0.087510", "cls": "hot"}]}, {"title": "Denominator (normalise)", "lines": [{"t": "P(-w,+s,-g) = sum over h of P(h) P(-w|h) P(+s|-w) P(-g|-w)"}, {"t": ""}, {"t": "  h=+h: 0.1 * 0.333 * 0.2 * 0.5 = 0.003330"}, {"t": "  h=-h: 0.9 * 0.75 * 0.2 * 0.5 = 0.067500"}, {"t": ""}, {"t": "P(-w,+s,-g) = 0.070830", "cls": "hot"}, {"t": "P(+s,-g) = 0.087510 + 0.070830 = 0.158340"}]}, {"title": "Answer", "lines": [{"t": "P(+w | +s, -g) = 0.087510 / 0.158340 = 0.5527", "cls": "goal"}, {"t": "P(-w | +s, -g) = 0.4473", "cls": "goal"}, {"t": ""}, {"t": "They sum to 1 - always state that as your check.", "cls": "hot"}]}], "final": {"path": "P(+w|+s,-g) = 0.5527 ,  P(-w|+s,-g) = 0.4473", "cost": null, "explored": "matches the 0.553 printed on your sheet"}}, "B42": {"steps": [{"title": "What you are given", "lines": [{"t": "P(no fire) = 0.95   =>   P(Fire) = 0.05"}, {"t": "P(Smoke) = 0.1     (smoke for any reason)"}, {"t": "P(Smoke | Fire) = 0.9   (90% of fires produce smoke)"}, {"t": ""}, {"t": "Wanted: P(Fire | Smoke)"}]}, {"title": "Bayes' rule", "lines": [{"t": "P(Fire|Smoke) = P(Smoke|Fire) * P(Fire) / P(Smoke)"}, {"t": ""}, {"t": "             = (0.9 * 0.05) / 0.1"}, {"t": "             = 0.045 / 0.1"}, {"t": "             = 0.45", "cls": "goal"}, {"t": ""}, {"t": "Seeing smoke lifts the chance of fire from 5% to 45% - a 9x jump,", "cls": "hot"}, {"t": "but it is still more likely than not that there is NO fire.", "cls": "hot"}]}], "final": {"path": "P(Fire | Smoke) = 0.45", "cost": null, "explored": "prior 0.05 -> posterior 0.45"}}, "B43": {"steps": [{"title": "(i)  P(-b, +e, +a, +j, +m)", "lines": [{"t": "Full joint = P(-b) P(+e) P(+a | -b,+e) P(+j | +a) P(+m | +a)"}, {"t": ""}, {"t": "  = 0.999 * 0.002 * 0.29 * 0.9 * 0.7"}, {"t": "  = 0.00036503", "cls": "goal"}, {"t": ""}, {"t": "Read P(+a|-b,+e) = 0.29 straight off the alarm CPT row b=-b, e=+e.", "cls": "hot"}]}, {"title": "(ii)  P(-b | +e, +j, +m)", "lines": [{"t": "Sum the alarm variable out of numerator and denominator."}, {"t": ""}, {"t": "P(-b,+e,+j,+m) = sum over a:"}, {"t": "   a=+a: 0.999*0.002*0.29*0.9*0.7   = 0.000365035"}, {"t": "   a=-a: 0.999*0.002*0.71*0.05*0.01 = 0.000000709"}, {"t": "   total = 0.000365744", "cls": "hot"}, {"t": ""}, {"t": "P(+b,+e,+j,+m) = sum over a:"}, {"t": "   a=+a: 0.001*0.002*0.95*0.9*0.7   = 0.000001197"}, {"t": "   a=-a: 0.001*0.002*0.05*0.05*0.01 = 0.000000000"}, {"t": "   total = 0.000001197", "cls": "hot"}, {"t": ""}, {"t": "P(-b | +e,+j,+m) = 0.000365744 / (0.000365744 + 0.000001197)"}, {"t": "                 = 0.9967", "cls": "goal"}, {"t": ""}, {"t": "Almost certainly NOT a burglary: the earthquake already explains the alarm.", "cls": "hot"}]}], "final": {"path": "P(-b,+e,+a,+j,+m) = 0.00036503   |   P(-b|+e,+j,+m) = 0.9967", "cost": null, "explored": "classic explaining-away result"}}, "B44": {"steps": [{"title": "(i)  Joint  P(+x,+y,+z,-w)", "lines": [{"t": "Structure: X -> Y, X -> Z, Z -> W"}, {"t": "Joint = P(x) P(y|x) P(z|x) P(w|z)"}, {"t": ""}, {"t": "  = P(+x) * P(+y|+x) * P(+z|+x) * P(-w|+z)"}, {"t": "  = 0.6 * 0.7 * 0.9 * 0.15"}, {"t": "  = 0.0567", "cls": "goal"}]}, {"title": "(ii)  Marginal  P(+y,+z,+w)", "lines": [{"t": "X is not in the query, so SUM IT OUT."}, {"t": ""}, {"t": "  x=+x: 0.6 * 0.7 * 0.9 * 0.85 = 0.3213"}, {"t": "  x=-x: 0.4 * 0.2 * 0.5 * 0.85 = 0.0340"}, {"t": ""}, {"t": "  P(+y,+z,+w) = 0.3553", "cls": "goal"}, {"t": ""}, {"t": "P(+w|+z) = 0.85 is common to both rows because W depends only on Z.", "cls": "hot"}]}, {"title": "(iii)  Conditional  P(+x | +y,+z,+w)", "lines": [{"t": "P(+x | +y,+z,+w) = P(+x,+y,+z,+w) / P(+y,+z,+w)"}, {"t": ""}, {"t": "  numerator   = 0.3213   (the x=+x row above)"}, {"t": "  denominator = 0.3553   (part ii)"}, {"t": ""}, {"t": "  = 0.9043", "cls": "goal"}, {"t": ""}, {"t": "Reuse part (ii) - do not recompute it. That is the whole point of the ordering.", "cls": "hot"}]}], "final": {"path": "(i) 0.0567   (ii) 0.3553   (iii) 0.9043", "cost": null, "explored": "matches the worked solution on your sheet"}}};
+
+function bnSVG(nodes, edges, w, h){
+  let s = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Bayesian network">';
+  s += '<defs><marker id="bam" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink3)"/></marker></defs>';
+  const P = {}; nodes.forEach(n => P[n[0]] = n);
+  for (const [u, v] of edges){
+    const a = P[u], b = P[v];
+    const dx = b[1]-a[1], dy = b[2]-a[2], L = Math.hypot(dx,dy), r = 21;
+    s += '<line class="be" x1="'+(a[1]+dx/L*r)+'" y1="'+(a[2]+dy/L*r)+'" x2="'+(b[1]-dx/L*(r+5))+'" y2="'+(b[2]-dy/L*(r+5))+'" marker-end="url(#bam)"/>';
+  }
+  for (const [id,x,y,cap] of nodes){
+    s += '<circle class="bn" cx="'+x+'" cy="'+y+'" r="21"/><text class="bl" x="'+x+'" y="'+y+'">'+id+'</text>';
+    if (cap) s += '<text class="bq" x="'+x+'" y="'+(y+36)+'">'+cap+'</text>';
+  }
+  return s + '</svg>';
+}
+const FIG = {
+  b41: () => bnSVG([['H',300,40,'P(+h)=0.1'],['W',300,140,'P(+w|+h)=0.667  P(+w|-h)=0.25'],
+                    ['S',195,250,'P(+s|+w)=0.4  P(+s|-w)=0.2'],['G',415,250,'P(+g|+w)=0.25  P(+g|-w)=0.5']],
+                   [['H','W'],['W','S'],['W','G']], 600, 300),
+  b43: () => bnSVG([['B',185,40,'P(+b)=0.001'],['E',415,40,'P(+e)=0.002'],['A',300,140,'alarm CPT: .95 .94 .29 .001'],
+                    ['J',195,250,'P(+j|+a)=0.9  P(+j|-a)=0.05'],['M',415,250,'P(+m|+a)=0.7  P(+m|-a)=0.01']],
+                   [['B','A'],['E','A'],['A','J'],['A','M']], 600, 300),
+  b44: () => bnSVG([['X',300,40,'P(+x)=0.6'],['Y',175,150,'P(+y|+x)=0.7  P(+y|-x)=0.2'],
+                    ['Z',425,150,'P(+z|+x)=0.9  P(+z|-x)=0.5'],['W',425,255,'P(+w|+z)=0.85  P(+w|-z)=0.3']],
+                   [['X','Y'],['X','Z'],['Z','W']], 600, 305),
+};
+
+const D = [
+ {g:'Genetic Algorithm', id:'GA2', n:'Q5 (mandatory)', star:true,
+  t:'Q5 - the mandatory GA numerical', mk:'20 marks',
+  sub:'The exact question from the Fall 2024-25 final paper, with its real starting population.',
+  q:'Maximise <code>f(x) = x&sup2;/8 + 4x</code> where x is an integer from 0 to 31, encoded in <b>5 binary bits</b>. Initial population of 4 chromosomes: <b>[1,1,0,1,0]</b>, <b>[1,0,0,0,1]</b>, <b>[1,0,0,1,1]</b>, <b>[0,1,0,1,0]</b>.<ol type="a"><li>Compute f(x) and the selection probability (fitness ratio). Determine the <b>two best parents</b>.</li><li>Perform <b>crossover at bit 3</b> on the selected parents.</li><li>Perform <b>mutation at bit 4</b> of the offsprings. Draw before and after.</li><li>Explain how the new offspring is accepted and why.</li><li>Comment on whether the solution has improved after this iteration.</li></ol>',
+  tip:'<b>Marks are split 10 methodology / 10 justification.</b> Parts (d) and (e) are half the question and they are written answers. Budget time for them.',
+  warn:'<b>Part (e) is a trap and the honest answer is "no".</b> Crossover lifts the best to 199.125, then the mutation at bit 4 knocks it down to 178.125 - below the starting best of 188.5. Say so explicitly and explain that GA improves over many generations, not necessarily in one.'},
+ {g:'Genetic Algorithm', id:'GA1', n:'GA: 25x - x^2',
+  t:'Suggestion 2.2 - the 6-bit variant', mk:'same (a)-(e)',
+  sub:'Identical structure, different function and 6-bit encoding.',
+  q:'Maximise <code>f(x) = 25x &minus; x&sup2;</code> where x is an integer from 0 to 63, encoded in <b>6 binary bits</b> (000000 to 111111). Same parts (a) to (e) as Q5.',
+  tip:'<b>Watch the shape of this function.</b> 25x &minus; x&sup2; peaks at x = 12.5 and goes <b>negative</b> above x = 25. A chromosome like 111111 (=63) scores &minus;2394. Clamp negatives to 0 for the roulette wheel, or that chromosome breaks your probabilities.',
+  note:'<b>Population note:</b> the initial population was not printed on the copy of the sheet I could read, so the four chromosomes below are representative. The <b>method</b> is what is examinable - swap in your own four and every step follows identically.'},
+ {g:'Genetic Algorithm', id:'Q5N', n:'5-Queens fitness',
+  t:'5-Queens - fitness of three chromosomes', mk:'Q3(b), 10 marks',
+  sub:'Straight from the Fall 2024-25 paper, question 3(b).',
+  q:'Find the fitness value (<b>non-attacking pairs</b>) of the following populations <b>[21134, 40323, 20124]</b> for the <b>5-Queens</b> problem.',
+  tip:'<b>Max fitness is 5&times;4/2 = 10.</b> Work through the 10 column pairs in order and tick each off - judging diagonals by eye is where the marks are lost.'},
+
+ {g:'CSP', id:'FC', n:'Forward checking A=B, B>C',
+  t:'Forward checking on A, B, C', mk:'Q3(a), 10 marks',
+  sub:'From the Fall 2024-25 paper, question 3(a), and suggestion 3.2.',
+  q:'Identify the values of <b>A, B, C</b> using <b>Forward Checking</b>: A = {1,2,3}, B = {1,2,3}, C = {1,2,3}, with constraints <b>A = B</b> and <b>B &gt; C</b>.',
+  tip:'<b>Show the domains after every assignment.</b> That table is the answer - not just the final triple. Mark clearly where a domain empties.'},
+ {g:'CSP', id:'BCN', n:'Binary constraint network',
+  t:'Suggestion 3.3 - does a solution exist?', mk:'20 marks',
+  sub:'Four variables, one disjunctive constraint.',
+  q:'Four variables <b>X&#8321;, X&#8322;, X&#8323;, X&#8324;</b> with domains D&#8321; = {1,3,4}, D&#8322; = {3,8,9}, D&#8323; = {2,3,5}, D&#8324; = {3,5,9}. The three binary constraints are: <b>(X&#8321; &ge; X&#8322;)</b>, <b>(X&#8322; &gt; X&#8323; or X&#8323; &minus; X&#8322; = 2)</b>, <b>(X&#8323; &ne; X&#8324;)</b>. Does the CSP have a solution? If yes, give one.',
+  tip:'<b>Start with the tightest constraint.</b> X&#8321; &ge; X&#8322; is brutal here: the biggest X&#8321; is 4 and the smallest X&#8322; is 3, so X&#8322; collapses to a single value immediately. Everything else follows from that.',
+  note:'<b>The middle constraint is a disjunction</b> - "or". A value survives if <b>either</b> half holds. Test both halves for every candidate and say which one saved it.'},
+ {g:'CSP', id:'FC2', n:'Backtracking + FC',
+  t:'Suggestion 3.4 - backtracking with forward checking', mk:'20 marks',
+  sub:'Small domains, so it is quick - but show the pruning.',
+  q:'Given the CSP: variables <b>{a, b, c}</b>, domain <b>{0,1,2,3}</b>, constraints <b>a &lt; b</b> and <b>b &gt; c</b>. Find a solution using <b>backtracking with forward checking</b>.',
+  tip:'<b>The examiner wants the pruning, not the answer.</b> After a = 0, immediately write "b in {1,2,3}"; after b = 1, immediately write "c in {0}". That running domain trace is the marked work.'},
+
+ {g:'Bayesian Networks', id:'B41', n:'Q4: P(+w|+s,-g)', star:true,
+  t:'Q4 - the exam Bayesian network', mk:'20 marks',
+  sub:'The exact question from the Fall 2024-25 final paper.',
+  q:'A simple Bayesian network is given with its probability distribution tables. Answer the query <b>P(+w | +s, &minus;g)</b> and <b>P(&minus;w | +s, &minus;g)</b>.',
+  fig:'b41',
+  tip:'<b>H is not in the query, so sum it out</b> - in the numerator and the denominator. Then normalise. Your two answers must add to 1; write that line down as your check.'},
+ {g:'Bayesian Networks', id:'B44', n:'Joint / marginal / conditional',
+  t:'Suggestion 4.4 - all three question types', mk:'20 marks',
+  sub:'One network, the three ways they can ask it.',
+  q:'For the network shown: (i) compute the <b>joint</b> probability P(+x,+y,+z,&minus;w); (ii) compute the <b>marginal</b> P(+y,+z,+w); (iii) compute the <b>conditional</b> P(+x | +y,+z,+w).',
+  fig:'b44',
+  tip:'<b>Do them in order and reuse.</b> Part (iii) is just one row of part (ii) divided by part (ii)\'s total. Recomputing from scratch wastes the time you need elsewhere.'},
+ {g:'Bayesian Networks', id:'B43', n:'Burglary network',
+  t:'Suggestion 4.3 - the burglary/alarm network', mk:'20 marks',
+  sub:'The classic AIMA network, two queries.',
+  q:'For the burglary network shown, answer: <b>P(&minus;b, +e, +a, +j, +m)</b> and <b>P(&minus;b | +e, +j, +m)</b>.',
+  fig:'b43',
+  tip:'<b>First query is a full joint</b> - every variable is fixed, so it is a single product with no summing. <b>Second query needs the alarm summed out</b>, because A is not mentioned.'},
+ {g:'Bayesian Networks', id:'B42', n:'Fire | Smoke',
+  t:'Suggestion 4.2 - plain Bayes rule', mk:'short',
+  sub:'No network needed - one line of Bayes.',
+  q:'Find the probability of <b>fire</b> given there is <b>smoke</b>. The chance of no fire is 95%, so P(Fire) = 0.05. The chance of smoke for any reason is P(Smoke) = 0.1. In 90% of cases there is smoke because of fire, so P(Smoke | Fire) = 0.9.',
+  tip:'<b>Add the interpretation sentence.</b> Smoke raises fire from 5% to 45% - a nine-fold jump - yet it is still more likely than not that there is no fire. That sentence is what separates a full-mark answer.'},
+];
+
+let store={};try{store=JSON.parse(localStorage.getItem('csc3217final')||'{}')}catch(e){store={}}
+const save=()=>{try{localStorage.setItem('csc3217final',JSON.stringify(store))}catch(e){}};
+let ci=0,cs=0;
+const side=document.getElementById('side'),main=document.getElementById('main');
+const key=i=>'d.'+D[i].id;
+
+function renderSide(){
+  side.innerHTML='';
+  let lastG=null;
+  D.forEach((d,i)=>{
+    if(d.g!==lastG){const h=document.createElement('div');h.className='grp';h.textContent=d.g;side.appendChild(h);lastG=d.g}
+    const b=document.createElement('button');
+    b.innerHTML=(d.star?'<span class="star">&#9733;</span>':'')+d.n+'<span class="tick '+(store[key(i)]?'done':'')+'"></span>';
+    if(i===ci)b.classList.add('on');
+    b.onclick=()=>{ci=i;cs=0;renderSide();renderMain()};
+    side.appendChild(b);
+  });
+}
+function renderMain(){
+  const d=D[ci];
+  main.innerHTML='<div class="card">'
+    +'<h2>'+d.t+'<span class="mk">'+d.mk+'</span></h2>'
+    +'<p class="sub">'+d.sub+'</p>'
+    +'<div class="qbox"><span class="lbl">Question</span>'+d.q+'</div>'
+    +(d.fig?'<div class="figbox">'+FIG[d.fig]()+'</div>':'')
+    +'<div class="stepper"><div class="bar"><span class="lbl" id="sl"></span>'
+    +'<button id="bk">&#8592; Back</button><button id="nx" class="pri">Next step &#8594;</button>'
+    +'<button id="al">Reveal all</button><button id="rs">Reset</button></div>'
+    +'<div class="steps" id="st"></div><div class="fin" id="fin"></div></div>'
+    +(d.warn?'<div class="warn">'+d.warn+'</div>':'')
+    +(d.note?'<div class="note">'+d.note+'</div>':'')
+    +'<div class="tip">'+d.tip+'</div>'
+    +'<div class="done"><label><input type="checkbox" id="ck"> I solved this on paper first</label></div></div>';
+  document.getElementById('bk').onclick=()=>{if(cs>0){cs--;renderSteps()}};
+  document.getElementById('nx').onclick=next;
+  document.getElementById('al').onclick=()=>{cs=T[d.id].steps.length;renderSteps()};
+  document.getElementById('rs').onclick=()=>{cs=0;renderSteps()};
+  const ck=document.getElementById('ck');
+  ck.checked=!!store[key(ci)];
+  ck.onchange=()=>{store[key(ci)]=ck.checked;save();renderSide()};
+  renderSteps();
+}
+function next(){const n=T[D[ci].id].steps.length;if(cs<n){cs++;renderSteps()}}
+function renderSteps(){
+  const d=D[ci],tr=T[d.id],el=document.getElementById('st');
+  document.getElementById('sl').textContent=cs===0?tr.steps.length+' steps - solve it on paper first':'step '+cs+' / '+tr.steps.length;
+  if(cs===0){el.innerHTML='<div class="hint">Work it out on paper first. Then reveal one step at a time and check each line against your working.</div>'}
+  else{
+    el.innerHTML=tr.steps.slice(0,cs).map((s,i)=>
+      '<div class="step '+(i===cs-1?'cur':'')+'"><h5>'+s.title+'</h5>'
+      +s.lines.map(l=>'<div class="tl '+(l.cls||'')+'">'+(l.t||'&nbsp;')+'</div>').join('')+'</div>').join('');
+    const last=el.lastElementChild; if(last)last.scrollIntoView({block:'nearest'});
+  }
+  const done=cs>=tr.steps.length,f=document.getElementById('fin');
+  f.classList.toggle('on',done);
+  if(done)f.innerHTML='ANSWER &nbsp; '+tr.final.path+(tr.final.explored?'<br>'+tr.final.explored:'');
+  document.getElementById('bk').disabled=cs===0;
+  document.getElementById('nx').disabled=done;
+}
+document.getElementById('nav').querySelectorAll('button').forEach(b=>{
+  b.onclick=()=>{
+    document.querySelectorAll('#nav button').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');document.getElementById('v-'+b.dataset.v).classList.add('on');
+  };
+});
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT')return;
+  if(document.querySelector('.view.on').id!=='v-drills')return;
+  if(e.key==='ArrowRight'){next();e.preventDefault()}
+  if(e.key==='ArrowLeft'&&cs>0){cs--;renderSteps();e.preventDefault()}
+});
+renderSide();renderMain();
+</script>
