@@ -1,0 +1,795 @@
+<title>AI Lab Notes - Clean Edition</title>
+<style>
+  :root{
+    --paper:#f2efe8; --card:#fffdf8; --card2:#f7f4ec; --edge:#ddd6c7; --edge2:#e9e3d6;
+    --ink:#23201b; --ink2:#5f594e; --ink3:#918a7c;
+    --blue:#1d4e79; --blue-bg:#e6eef6;
+    --red:#b3352c; --red-bg:#f8e9e6;
+    --green:#2c7048; --green-bg:#e6f0e9;
+    --amber:#9a6a12; --amber-bg:#f8efdb;
+    --sans:"Segoe UI",system-ui,-apple-system,sans-serif;
+    --serif:Georgia,"Times New Roman",serif;
+    --mono:"Cascadia Code",Consolas,ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#16151300; --paper:#161513; --card:#1e1c19; --card2:#252220; --edge:#38332c; --edge2:#2c2825;
+      --ink:#eae5db; --ink2:#a9a294; --ink3:#78715f;
+      --blue:#79aede; --blue-bg:#16232f;
+      --red:#e08175; --red-bg:#2e1a17;
+      --green:#6cbb8c; --green-bg:#16281d;
+      --amber:#dfa845; --amber-bg:#2d2412;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#161513; --card:#1e1c19; --card2:#252220; --edge:#38332c; --edge2:#2c2825;
+    --ink:#eae5db; --ink2:#a9a294; --ink3:#78715f;
+    --blue:#79aede; --blue-bg:#16232f;
+    --red:#e08175; --red-bg:#2e1a17;
+    --green:#6cbb8c; --green-bg:#16281d;
+    --amber:#dfa845; --amber-bg:#2d2412;
+  }
+  :root[data-theme="light"]{
+    --paper:#f2efe8; --card:#fffdf8; --card2:#f7f4ec; --edge:#ddd6c7; --edge2:#e9e3d6;
+    --ink:#23201b; --ink2:#5f594e; --ink3:#918a7c;
+    --blue:#1d4e79; --blue-bg:#e6eef6;
+    --red:#b3352c; --red-bg:#f8e9e6;
+    --green:#2c7048; --green-bg:#e6f0e9;
+    --amber:#9a6a12; --amber-bg:#f8efdb;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px 80px}
+
+  header{padding:44px 0 22px;border-bottom:2px solid var(--edge)}
+  .eye{font-family:var(--sans);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--red)}
+  h1{font-family:var(--sans);font-weight:800;font-size:clamp(28px,5vw,40px);letter-spacing:-.02em;margin:9px 0 7px;line-height:1.05}
+  .lede{color:var(--ink2);font-size:16px;max-width:62ch;margin:0}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;font-family:var(--sans);font-size:12.5px}
+  .meta span{background:var(--card);border:1px solid var(--edge);border-radius:999px;padding:4px 12px;color:var(--ink2)}
+  .meta b{color:var(--ink)}
+
+  .jump{display:flex;gap:6px;flex-wrap:wrap;margin:20px 0 4px;font-family:var(--sans)}
+  .jump a{font-size:12.5px;font-weight:700;text-decoration:none;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue);border-radius:6px;padding:4px 11px}
+  .jump a.off{color:var(--ink3);background:transparent;border-color:var(--edge)}
+
+  .pg{background:var(--card);border:1px solid var(--edge);border-radius:12px;margin:26px 0;overflow:hidden;scroll-margin-top:14px}
+  .pg > .hd{display:flex;align-items:baseline;gap:12px;background:var(--card2);border-bottom:1px solid var(--edge);padding:13px 22px;flex-wrap:wrap}
+  .pg .num{font-family:var(--mono);font-size:12px;font-weight:700;color:#fff;background:var(--blue);border-radius:5px;padding:2px 9px}
+  .pg .ttl{font-family:var(--sans);font-weight:800;font-size:17px;letter-spacing:-.01em}
+  .pg .date{font-family:var(--sans);font-size:12px;color:var(--ink3);margin-left:auto}
+  .pg .quiz{font-family:var(--sans);font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--red);background:var(--red-bg);border:1px solid var(--red);border-radius:999px;padding:2px 9px}
+  .bd{padding:16px 22px 20px}
+
+  h3{font-family:var(--sans);font-size:15px;font-weight:800;color:var(--red);margin:20px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--red-bg)}
+  h3:first-child{margin-top:0}
+  h4{font-family:var(--sans);font-size:13.5px;font-weight:700;color:var(--blue);margin:15px 0 5px}
+  p{margin:8px 0}
+  ul,ol{padding-left:22px;margin:8px 0}
+  li{margin:5px 0}
+  code{font-family:var(--mono);font-size:.88em;background:var(--card2);border:1px solid var(--edge2);padding:.08em .38em;border-radius:4px}
+  .star{color:var(--red);font-weight:700}
+
+  .box{background:var(--card2);border:1px solid var(--edge2);border-radius:8px;padding:12px 16px;margin:12px 0}
+  .box.blue{background:var(--blue-bg);border-color:var(--blue)}
+  .box.red{background:var(--red-bg);border-color:var(--red)}
+  .box.green{background:var(--green-bg);border-color:var(--green)}
+  .box .lbl{font-family:var(--sans);font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:5px}
+  .box.blue .lbl{color:var(--blue)} .box.red .lbl{color:var(--red)} .box.green .lbl{color:var(--green)}
+  .unc{background:var(--amber-bg);border-left:3px solid var(--amber);border-radius:5px;padding:9px 14px;margin:11px 0;font-family:var(--sans);font-size:13px}
+  .unc b{color:var(--amber)}
+
+  .tblwrap{overflow-x:auto;margin:12px 0}
+  table{border-collapse:collapse;font-family:var(--sans);font-size:13.5px;width:100%}
+  th,td{border:1px solid var(--edge);padding:6px 10px;text-align:left;vertical-align:top}
+  th{background:var(--card2);font-weight:700;font-size:12.5px}
+  td.m,th.m{font-family:var(--mono);font-size:12.5px}
+  .fig{background:var(--card2);border:1px solid var(--edge2);border-radius:8px;padding:10px;margin:12px 0;overflow-x:auto}
+  .fig .cap{font-family:var(--sans);font-size:12px;color:var(--ink3);text-align:center;margin-top:5px}
+  svg{display:block;margin:0 auto;max-width:100%;height:auto}
+  .calc{font-family:var(--mono);font-size:13px;line-height:1.85;background:var(--card2);border:1px solid var(--edge2);border-radius:8px;padding:13px 16px;margin:12px 0;overflow-x:auto;white-space:pre}
+  .calc .ok{color:var(--green);font-weight:700}
+  .calc .no{color:var(--red);font-weight:700}
+
+  .cv{fill:none;stroke:var(--ink);stroke-width:2}
+  .ax{stroke:var(--ink2);stroke-width:1.5}
+  .lb{fill:var(--ink2);font-family:var(--sans);font-size:11px;text-anchor:middle}
+  .lb.r{fill:var(--red);font-weight:700}
+  .lb.g{fill:var(--green);font-weight:700}
+  .nd{fill:var(--card);stroke:var(--ink2);stroke-width:1.7}
+  .nl{fill:var(--ink);font-family:var(--sans);font-weight:800;font-size:12px;text-anchor:middle;dominant-baseline:central}
+  .nv{fill:var(--blue);font-family:var(--mono);font-weight:700;font-size:10.5px;text-anchor:middle}
+  .ed{stroke:var(--ink3);stroke-width:1.5;fill:none}
+  .cell{fill:var(--card);stroke:var(--ink2);stroke-width:1.2}
+  .q{fill:var(--red);font-family:var(--sans);font-weight:800;font-size:13px;text-anchor:middle;dominant-baseline:central}
+
+  footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--edge);font-family:var(--sans);font-size:13px;color:var(--ink3)}
+  .top{position:fixed;right:16px;bottom:16px;background:var(--blue);color:#fff;font-family:var(--sans);font-size:12.5px;font-weight:700;text-decoration:none;padding:8px 13px;border-radius:999px;opacity:.9}
+  @media print{.jump,.top{display:none}.pg{break-inside:avoid}}
+</style>
+
+<div class="wrap">
+<header id="top">
+  <div class="eye">CSC 3217 &middot; Lab class notes, typeset</div>
+  <h1>AI Lab Notes &mdash; Clean Edition</h1>
+  <p class="lede">A faithful transcription of the 17 handwritten pages, with every diagram redrawn. Same content, same order, same page numbers &mdash; just legible.</p>
+  <div class="meta">
+    <span><b>17</b> pages</span>
+    <span>Lab classes <b>10, 12, 17, 19 August</b></span>
+    <span><b>Pages 1-9</b> = quiz material</span>
+    <span>Pages 10-17 = CSP and Bayes</span>
+  </div>
+  <div class="jump">
+    <a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#p4">4</a><a href="#p5">5</a>
+    <a href="#p6">6</a><a href="#p7">7</a><a href="#p8">8</a><a href="#p9">9</a>
+    <a href="#p10" class="off">10</a><a href="#p11" class="off">11</a><a href="#p12" class="off">12</a>
+    <a href="#p13" class="off">13</a><a href="#p14" class="off">14</a><a href="#p15" class="off">15</a>
+    <a href="#p16" class="off">16</a><a href="#p17" class="off">17</a>
+  </div>
+</header>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="pg" id="p1">
+  <div class="hd"><span class="num">01</span><span class="ttl">Local Search &middot; Simple Hill Climbing</span><span class="quiz">quiz</span><span class="date">Lab class 1 &middot; 10 Aug 25</span></div>
+  <div class="bd">
+    <h3>Local Search</h3>
+    <ul>
+      <li>Operates using a <b>single current node</b>.</li>
+      <li><b>No backtracking.</b></li>
+      <li>Keeps a <b>small number of nodes</b> in memory.</li>
+      <li>Node search is on the <b>surrounding nodes only</b>.</li>
+    </ul>
+
+    <h3>Simple Hill Climbing</h3>
+    <div class="fig">
+      <svg viewBox="0 0 640 300" role="img" aria-label="Four landscape curves: maximisation and minimisation, local versus global optima">
+        <!-- top-left: maximize, local + global separate -->
+        <g transform="translate(20,10)">
+          <line class="ax" x1="10" y1="10" x2="10" y2="115"/><line class="ax" x1="10" y1="115" x2="250" y2="115"/>
+          <path class="cv" d="M14,112 C40,110 55,55 80,55 C105,55 112,95 140,98 C170,101 180,26 210,26 C232,26 240,70 248,110"/>
+          <circle cx="80" cy="55" r="3.5" fill="var(--red)"/><text class="lb r" x="72" y="46">local maxima</text>
+          <circle cx="210" cy="26" r="3.5" fill="var(--green)"/><text class="lb g" x="205" y="18">global maxima</text>
+          <text class="lb" x="130" y="136" style="font-weight:700">(maximize)</text>
+        </g>
+        <!-- top-right: maximize, local + global together -->
+        <g transform="translate(350,10)">
+          <line class="ax" x1="10" y1="10" x2="10" y2="115"/><line class="ax" x1="10" y1="115" x2="250" y2="115"/>
+          <path class="cv" d="M14,112 C50,108 70,28 105,28 C140,28 150,88 180,92 C205,95 215,62 232,66 C243,69 246,95 248,111"/>
+          <circle cx="105" cy="28" r="3.5" fill="var(--green)"/><text class="lb g" x="105" y="20">local + global maxima</text>
+          <text class="lb" x="130" y="136" style="font-weight:700">(maximize)</text>
+        </g>
+        <!-- bottom-left: minimize -->
+        <g transform="translate(20,160)">
+          <line class="ax" x1="10" y1="8" x2="10" y2="112"/><line class="ax" x1="10" y1="112" x2="250" y2="112"/>
+          <path class="cv" d="M14,14 C42,16 55,74 82,74 C108,74 116,34 142,31 C172,28 182,100 212,100 C234,100 242,60 248,16"/>
+          <circle cx="82" cy="74" r="3.5" fill="var(--red)"/><text class="lb r" x="70" y="66">local minima</text>
+          <circle cx="212" cy="100" r="3.5" fill="var(--green)"/><text class="lb g" x="212" y="112">global minima</text>
+          <text class="lb" x="130" y="133" style="font-weight:700">(minimize)</text>
+        </g>
+        <!-- bottom-right: minimize together -->
+        <g transform="translate(350,160)">
+          <line class="ax" x1="10" y1="8" x2="10" y2="112"/><line class="ax" x1="10" y1="112" x2="250" y2="112"/>
+          <path class="cv" d="M14,14 C48,18 68,98 104,98 C140,98 150,40 180,36 C206,33 216,66 232,60 C243,56 246,28 248,14"/>
+          <circle cx="104" cy="98" r="3.5" fill="var(--green)"/><text class="lb g" x="104" y="110">local + global minima</text>
+          <text class="lb" x="130" y="133" style="font-weight:700">(minimize)</text>
+        </g>
+      </svg>
+      <div class="cap">The four cases drawn in the notes: local and global optima separate, or coinciding &mdash; for maximisation and minimisation.</div>
+    </div>
+
+    <div class="box blue">
+      <span class="lbl">Margin note</span>
+      Moves <b>step by step</b> and follows the better step (the step above the current one). Marked <b>"better option"</b> but also <b>"slow"</b>.
+    </div>
+
+    <h3>Limitations</h3>
+    <ol>
+      <li><b>Local maxima / minima</b></li>
+      <li><b>Plateau</b> &mdash; a flat region. Note in the margin: if the surrounding values are equal (e.g. 50, 50, 50) there is no higher value to target.</li>
+      <li><b>Ridge</b> &mdash; a direction problem: the improving moves do not line up with the available single moves.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="pg" id="p2">
+  <div class="hd"><span class="num">02</span><span class="ttl">Hill-Climbing Variants &middot; Simulated Annealing</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <h3>Steepest Hill Climbing</h3>
+    <div class="fig">
+      <svg viewBox="0 0 420 150" role="img" aria-label="Steepest ascent jumping to the highest neighbour">
+        <line class="ax" x1="18" y1="12" x2="18" y2="122"/><line class="ax" x1="18" y1="122" x2="400" y2="122"/>
+        <path class="cv" d="M22,110 C60,108 78,40 112,40 C146,40 156,96 190,100 C226,104 240,34 274,34 C306,34 316,92 348,98 C372,102 388,86 398,74"/>
+        <circle cx="40" cy="103" r="4" fill="var(--red)"/>
+        <path d="M46,100 C68,78 86,54 104,44" stroke="var(--red)" stroke-width="1.8" fill="none" stroke-dasharray="4 3" marker-end="url(#ar1)"/>
+        <defs><marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--red)"/></marker></defs>
+        <text class="lb r" x="76" y="70">1 step, a jump</text>
+      </svg>
+    </div>
+    <ul>
+      <li>Judges the <b>successor values</b> and chooses the <b>best option (highest value)</b>.</li>
+      <li>Generates the successors, then takes <b>one step &mdash; a jump</b> to the highest value.</li>
+      <li>Marked: <b>fast</b>.</li>
+    </ul>
+
+    <h3>Stochastic Hill Climbing</h3>
+    <p>Chooses <b>at random</b> among the uphill moves (the amount of "up hill" varies).</p>
+
+    <h3>Random Restart Hill Climbing</h3>
+    <p>Until you reach the <b>global maxima</b>, try and try again randomly &mdash; <b>restart again from where it stopped</b>.</p>
+
+    <h3>First Choice</h3>
+    <p class="unc" style="margin-top:8px"><b>Left blank in the notes</b> &mdash; the heading is written with no content under it. (For reference: first-choice generates successors at random until one is better than the current state.)</p>
+
+    <h3>Simulated Annealing</h3>
+    <p>Noted as: <b>complete with efficiency</b>.</p>
+    <div class="box blue">
+      <span class="lbl">Formula written in the notes</span>
+      <div class="calc" style="margin:4px 0 0;background:transparent;border:none;padding:0">e^(dE / T)
+
+  dE  = energy  (change in evaluation)
+  T   = temperature / time
+  evaluation = heuristic value</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="pg" id="p3">
+  <div class="hd"><span class="num">03</span><span class="ttl">Simulated Annealing &mdash; worked numerical</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <div class="box red">
+      <span class="lbl">The page that matters most</span>
+      This is the only page that shows the <b>current state being updated</b>. After B is accepted, C and D are measured against <b>B = 105</b>, not against S = 100.
+    </div>
+
+    <p>Successors of S (E = 100), with T = 10 and a random value for each: <b>A(95, 0.65)</b>, <b>B(105, 0.8)</b>, <b>C(90, 0.5)</b>, <b>D(85, 0.2)</b>. A bad move is accepted only if the random value is <b>less than</b> the calculated probability.</p>
+
+    <h4>For A</h4>
+<div class="calc">dE = E(A) - E(S) = 95 - 100 = -5
+e^(dE/T) = e^(-5/10) = e^(-0.5) = 0.607
+
+0.65 > 0.607   <span class="no">[X]  rejected</span>          (compare against the probability value)</div>
+
+    <h4>For B</h4>
+<div class="calc">dE = 105 - 100 = 5        positive value, so a GOOD move
+<span class="ok">accepted -> current state becomes B</span></div>
+
+    <h4>For C &nbsp;<span style="font-family:var(--sans);font-size:12.5px;color:var(--red)">[current state now updated to B]</span></h4>
+<div class="calc">dE = 90 - 105 = -15
+e^(dE/T) = e^(-15/10) = 0.22
+
+0.5 > 0.22   <span class="no">[X]  rejected</span></div>
+
+    <h4>For D</h4>
+<div class="calc">dE = 85 - 105 = -20
+e^(dE/T) = e^(-20/10) = 0.135
+
+0.2 > 0.135   <span class="no">[X]  rejected</span></div>
+
+    <div class="box green">
+      <span class="lbl">Result</span>
+      Only <b>B</b> is selected. A, C and D are all rejected.
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="pg" id="p4">
+  <div class="hd"><span class="num">04</span><span class="ttl">Local Beam Search</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <p>Marked at the top: <b>k</b> = how many values to keep, and the count of nodes to carry forward.</p>
+    <div class="fig">
+      <svg viewBox="0 0 520 250" role="img" aria-label="Search tree used for the local beam search example">
+        <g class="ed">
+          <line x1="255" y1="34" x2="150" y2="80"/><line x1="255" y1="34" x2="255" y2="80"/><line x1="255" y1="34" x2="350" y2="80"/>
+          <line x1="150" y1="94" x2="105" y2="140"/><line x1="150" y1="94" x2="205" y2="140"/>
+          <line x1="255" y1="94" x2="258" y2="140"/><line x1="255" y1="94" x2="312" y2="140"/>
+          <line x1="105" y1="154" x2="95" y2="196"/>
+          <line x1="205" y1="154" x2="185" y2="196"/><line x1="205" y1="154" x2="228" y2="196"/>
+          <line x1="258" y1="154" x2="272" y2="196"/><line x1="312" y1="154" x2="322" y2="196"/>
+        </g>
+        <g>
+          <circle class="nd" cx="255" cy="34" r="14"/><text class="nl" x="255" y="34">A</text>
+          <circle class="nd" cx="150" cy="87" r="14"/><text class="nl" x="150" y="87">B</text><text class="nv" x="128" y="76">12</text>
+          <circle class="nd" cx="255" cy="87" r="14"/><text class="nl" x="255" y="87">C</text><text class="nv" x="233" y="76">16</text>
+          <circle class="nd" cx="350" cy="87" r="14"/><text class="nl" x="350" y="87">D</text><text class="nv" x="372" y="76">15</text>
+          <circle class="nd" cx="105" cy="147" r="14"/><text class="nl" x="105" y="147">G</text><text class="nv" x="83" y="136">16</text>
+          <circle class="nd" cx="205" cy="147" r="14"/><text class="nl" x="205" y="147">H</text><text class="nv" x="183" y="136">13</text>
+          <circle class="nd" cx="258" cy="147" r="14"/><text class="nl" x="258" y="147">L</text><text class="nv" x="238" y="136">14</text>
+          <circle class="nd" cx="312" cy="147" r="14"/><text class="nl" x="312" y="147">F</text><text class="nv" x="334" y="136">15</text>
+          <circle class="nd" cx="95" cy="203" r="14"/><text class="nl" x="95" y="203">I</text><text class="nv" x="95" y="228">38</text>
+          <circle class="nd" cx="185" cy="203" r="14"/><text class="nl" x="185" y="203">J</text><text class="nv" x="185" y="228">0</text>
+          <circle class="nd" cx="228" cy="203" r="14"/><text class="nl" x="228" y="203">K</text><text class="nv" x="228" y="228">1</text>
+          <circle class="nd" cx="272" cy="203" r="14"/><text class="nl" x="272" y="203">L</text><text class="nv" x="272" y="228">3</text>
+          <circle class="nd" cx="322" cy="203" r="14"/><text class="nl" x="322" y="203">M</text><text class="nv" x="322" y="228">2</text>
+        </g>
+      </svg>
+      <div class="cap">Tree as drawn. Node values in blue.</div>
+    </div>
+
+    <h4>Open / Close list</h4>
+    <div class="tblwrap"><table>
+      <thead><tr><th style="width:34%">Open</th><th>Close</th></tr></thead>
+      <tbody>
+        <tr><td class="m">A</td><td class="m">[ ]</td></tr>
+        <tr><td class="m">B &nbsp; D &nbsp; C</td><td class="m">A</td></tr>
+        <tr><td class="m">H &nbsp; E &nbsp; F</td><td class="m">A B D C</td></tr>
+        <tr><td class="m">J &nbsp; K &nbsp; M</td><td class="m">A B D C H E F</td></tr>
+        <tr><td class="m">[ ]</td><td class="m">A B D C H E F J</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box blue">
+      <span class="lbl">Format to copy</span>
+      Your class writes local beam search as an <b>Open list / Close list</b> table &mdash; Open is the frontier, Close is the explored set. Use these two columns in the exam.
+    </div>
+
+    <h4>Second example at the foot of the page</h4>
+    <p>A short hill-climbing comparison, noted as <b>"simple H.C. &mdash; takes the better one, no backward"</b>: starting at <b>5 (100)</b>, then <b>105, 95</b>, choosing the immediate best option. Two paths are written out:</p>
+    <div class="calc">S - C - D - J
+S - A - G - H          (marked "min")</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th style="width:34%">Open</th><th>Close</th></tr></thead>
+      <tbody>
+        <tr><td class="m">S</td><td class="m">[ ]</td></tr>
+        <tr><td class="m">A &nbsp; F</td><td class="m">S</td></tr>
+        <tr><td class="m">D E F</td><td class="m">B A C</td></tr>
+        <tr><td class="m">I &nbsp; J</td><td class="m">S A C F D</td></tr>
+        <tr><td class="m">[ ]</td><td class="m">S A C F D J</td></tr>
+      </tbody>
+    </table></div>
+    <div class="unc"><b>Partly unclear:</b> this lower block is written quickly with crossings-out, and the tree it refers to is not redrawn on the page. The Open/Close columns above are transcribed as written, but treat this second example as rough working rather than a clean model answer.</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 5 ============ -->
+<section class="pg" id="p5">
+  <div class="hd"><span class="num">05</span><span class="ttl">Genetic Algorithm &mdash; the operators</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <h3>GA</h3>
+    <ul>
+      <li><b>Recombination</b> (crossover)</li>
+      <li><b>Mutation</b> &mdash; produces a new chromosome; a bit is changed</li>
+      <li><b>Termination</b> &mdash; terminate at that point, or restart again</li>
+    </ul>
+
+    <div class="tblwrap" style="max-width:230px"><table>
+      <thead><tr><th></th><th class="m">a</th><th class="m">b</th><th class="m">c</th></tr></thead>
+      <tbody>
+        <tr><td class="m">ab</td><td class="m">1</td><td class="m">1</td><td class="m">0</td></tr>
+        <tr><td class="m">ac</td><td class="m">1</td><td class="m">0</td><td class="m">1</td></tr>
+        <tr><td class="m">b</td><td class="m">0</td><td class="m">1</td><td class="m">0</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Selection</h3>
+    <p>Two kinds listed, numbered <b>(1.)</b> and <b>(2.)</b> &mdash; the names are not filled in on this page. They are developed on pages 6 and 7 (roulette wheel, and the crossover variants).</p>
+
+    <h3>Single Point Crossover</h3>
+    <div class="calc">P1 = 1 0 | 1 0 1          ->   1 0 | 1 0 0
+P2 = 1 1 | 1 0 0          ->   1 1 | 1 0 1
+
+at point 2</div>
+
+    <h3>Two Point Crossover</h3>
+    <div class="calc">P1 = 1 | 0 0 1 | 1        ->   1 | 1 1 1 | 1
+P2 = 1 | 1 1 1 | 0        ->   1 | 0 0 1 | 0
+
+at (1, 4)    -> the bits between them, positions 2 and 3, are exchanged</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 6 ============ -->
+<section class="pg" id="p6">
+  <div class="hd"><span class="num">06</span><span class="ttl">Selection &mdash; roulette wheel</span><span class="quiz">quiz</span><span class="date">12 August</span></div>
+  <div class="bd">
+    <h3>Roulette Wheel Selection</h3>
+    <div class="calc">5 bit  ->  1, 2, 4, 8, 16   ->  [31]      (max value on 5 bits)</div>
+    <p>Columns set up on the page: <b>Initial Population</b>, <b>x</b>, <b>fit</b>, <b>Pi</b>.</p>
+
+    <div class="box blue">
+      <span class="lbl">The three formulas on this page</span>
+      <div class="calc" style="margin:4px 0 0;background:transparent;border:none;padding:0">Probability      = individual / total          e.g.  169 / 1170
+
+Expected count   = N x Probability             e.g.  4 x 0.14 = 0.58
+
+Actual count     = expected count, rounded     e.g.  0.4987 -> 0
+                                                     2.1645 -> 2</div>
+    </div>
+    <p>Note beside the expected count: the chromosome is a <b>random pick</b>, and the actual count is taken as an <b>integer number</b>.</p>
+
+    <h3>Crossover point (4, 2)</h3>
+    <div class="calc">0 1 1 0 | 0        ->   0 1 1 0 1     (x value 13)
+1 1 0 0 | 1        ->   1 1 0 0 0
+
+1 1 | 0 0 1        ->   1 1 | 0 1 1
+1 0 | 0 1 1        ->   1 0 | 0 0 1</div>
+
+    <h3>Mutation</h3>
+    <p>A <b>flip</b>: <code>0 -&gt; 1</code> and <code>1 -&gt; 0</code>. The page shows a chromosome before and after flipping one bit, in binary.</p>
+    <div class="unc"><b>Partly unclear:</b> the specific before/after chromosome in the bottom-right corner is overwritten and hard to read with confidence, so it is not reproduced here. The rule itself &mdash; flip a single bit &mdash; is unambiguous.</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 7 ============ -->
+<section class="pg" id="p7">
+  <div class="hd"><span class="num">07</span><span class="ttl">GA table layout &middot; Uniform crossover</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <div class="box red">
+      <span class="lbl">Use these exact columns in the exam</span>
+      This page is the template the examiner expects. Two tables, one after the other.
+    </div>
+
+    <h4>Table 1 &mdash; evaluation and selection</h4>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Population</th><th>x</th><th>f(x)</th><th>Pi (probability)</th><th>Expected count</th><th>Actual count</th></tr></thead>
+      <tbody><tr><td colspan="6" style="color:var(--ink3);font-style:italic">one row per chromosome, then a Total row</td></tr></tbody>
+    </table></div>
+
+    <h4>Table 2 &mdash; breeding</h4>
+    <div class="tblwrap"><table>
+      <thead><tr><th>Mating population (pool)</th><th>Crossover</th><th>Offspring</th><th>Mutation</th><th>x</th><th>f(x)</th></tr></thead>
+      <tbody><tr><td colspan="6" style="color:var(--ink3);font-style:italic">one row per selected parent / offspring</td></tr></tbody>
+    </table></div>
+
+    <h3>Uniform Crossover</h3>
+    <div class="calc">Parents:     P1 -> 1 0 1 0
+             P2 -> 0 0 1 1
+
+Crossover Mask = 1 0 0 1</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th style="width:50%">Rule</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>if CM = 1, choose from P1<br>if CM = 0, choose from P2</td><td class="m">new offspring = 1 0 1 0</td></tr>
+        <tr><td><b>Reverse:</b> if CM = 0, choose from P1<br>if CM = 1, choose from P2</td><td class="m">= 0 0 1 1</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Arithmetic</h3>
+    <p>An <b>alpha</b> value is assumed, somewhere in the range <b>0 to 1</b>, and used to blend the parents.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 8 ============ -->
+<section class="pg" id="p8">
+  <div class="hd"><span class="num">08</span><span class="ttl">Fitness bins &middot; n-Queens introduced</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <h3>Calculating fitness, probability, expected count</h3>
+    <p>The probabilities are laid out as <b>cumulative</b> bins ("associated bits"):</p>
+    <div class="tblwrap" style="max-width:400px"><table>
+      <thead><tr><th>Pi</th><th>Associated bit (cumulative)</th></tr></thead>
+      <tbody>
+        <tr><td class="m">0.14</td><td class="m">0.0 &nbsp;...&nbsp; 0.14</td></tr>
+        <tr><td class="m">0.49</td><td class="m">0.15 &nbsp;...&nbsp; 0.63</td></tr>
+      </tbody>
+    </table></div>
+    <div class="calc">0.14 + 0.49 = 0.63        each bin starts where the previous one ended</div>
+    <p>Marked beside it: <b>Accepted</b> &mdash; the chromosome with the <b>highest Pi value</b> is accepted, and is <b>added as the 7th chromosome</b> to the population.</p>
+
+    <h3>n-Queens Problem</h3>
+    <div class="fig">
+      <svg viewBox="0 0 200 120" role="img" aria-label="Eight by eight board">
+        <rect class="cell" x="55" y="18" width="86" height="86"/>
+        <text class="lb" x="98" y="12">8</text>
+        <text class="lb" x="45" y="63">8</text>
+      </svg>
+    </div>
+    <ul>
+      <li>For <b>n = 8</b>: one queen per column, and no queen may attack another.</li>
+      <li>An attack counts <b>both directions</b> &mdash; there is no "backward only".</li>
+    </ul>
+    <div class="box green">
+      <span class="lbl">The formula</span>
+      <div class="calc" style="margin:4px 0 0;background:transparent;border:none;padding:0">max non-attacking pairs = n(n-1)/2 = 8(8-1)/2 = 28
+
+Non-attacking = fitness
+
+  28 - 4 attacks = 24  (fitness)</div>
+    </div>
+    <p>A chromosome such as <code>2 4 7 4 8 5 5 2</code> is read as: <b>column 1</b> has its queen in <b>row 2</b>, and so on.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 9 ============ -->
+<section class="pg" id="p9">
+  <div class="hd"><span class="num">09</span><span class="ttl">n-Queens &mdash; counting the attacks</span><span class="quiz">quiz</span></div>
+  <div class="bd">
+    <h3>Method</h3>
+    <ul>
+      <li>Count on the <b>row</b> only: look for the <b>same row value</b>.</li>
+      <li>Then take the given row value and check it with a steady <b>increment</b> and <b>decrement</b> &mdash; that catches the diagonals.</li>
+      <li>Every hit adds to the <b>attack count</b>.</li>
+    </ul>
+
+    <h4>First board</h4>
+    <div class="calc">2  4  7  4  8  5  5  2          =  4 attacks
+
+Non-attacking fitness = 28 - 4 = <span class="ok">24</span></div>
+    <p>The working shown for the leading <b>2</b>:</p>
+    <div class="calc">2 vs same value          -> found (1)          <span class="ok">[check]</span>
+2 with increment/decrement -> 2, 1                 <span class="no">[X]</span>
+2 across the rest        -> 2, 3, 4, 5, 6, 7, 8    <span class="no">[X]</span>
+                            (no further matching value)</div>
+
+    <h4>Second board</h4>
+    <div class="calc">3  2  5  4  3  2  1  3          attacks = 17
+
+n(n-1)/2 = 28 - 17 = <span class="ok">11</span>  (fitness)</div>
+    <div class="unc"><b>Partly unclear:</b> the second board has small correction digits written above several columns, so the exact chromosome is ambiguous &mdash; but the totals (17 attacks, fitness 11) are written clearly.</div>
+
+    <h3>Comparing the population</h3>
+    <div class="calc">24
+23
+20
+11   <- weakest</div>
+    <p>Noted: one value repeats, but <b>24 is the better one</b>. And again: <b>Probability = individual / total</b>, expressed as a percentage.</p>
+    <p><b>Mutation</b> &mdash; a 0 or 1 value, chosen with a random decimal.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 10 ============ -->
+<section class="pg" id="p10">
+  <div class="hd"><span class="num">10</span><span class="ttl">Course admin &middot; CSP begins</span><span class="date">Class 3 (lab) &middot; 17 Aug</span></div>
+  <div class="bd">
+    <div class="box blue">
+      <span class="lbl">Admin notes at the top of the page</span>
+      <ul style="margin:4px 0 0">
+        <li>Next class (19): <b>local search &ndash; genetic algorithm</b> was the last class.</li>
+        <li>17 lab: <b>CSP, Neural Network, Bayesian module</b>.</li>
+        <li><b>Lab evaluation &mdash; 31</b>.</li>
+        <li><b>Q2 &mdash; 02 Sep</b>.</li>
+      </ul>
+      <p style="margin-bottom:0;font-size:13px;color:var(--ink2)">Check these dates against your own timetable &mdash; they are written in shorthand.</p>
+    </div>
+
+    <h3>Constraint Satisfaction Problem (CSP)</h3>
+    <ul>
+      <li><b>Variable</b> &mdash; stores the value</li>
+      <li><b>Domain</b> &mdash; which values are allowed</li>
+      <li><b>Constraint</b> &mdash; the conditions</li>
+    </ul>
+    <div class="tblwrap" style="max-width:330px"><table>
+      <thead><tr><th>Constraint type</th><th>Variables involved</th></tr></thead>
+      <tbody>
+        <tr><td>Unary</td><td class="m">1</td></tr>
+        <tr><td>Binary</td><td class="m">2</td></tr>
+        <tr><td>Higher order</td><td class="m">2+</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Map colouring &mdash; 4 methods</h3>
+    <p><b>1. Most Constrained Variable (MRV)</b> &mdash; worked on the Australia map over three steps, narrowing each region's domain from RGB down to a single colour.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 11 ============ -->
+<section class="pg" id="p11">
+  <div class="hd"><span class="num">11</span><span class="ttl">MRV table &middot; Degree heuristic</span></div>
+  <div class="bd">
+    <h3>MRV table &mdash; Australia</h3>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th class="m">WA</th><th class="m">NT</th><th class="m">SA</th><th class="m">NSW</th><th class="m">V</th><th class="m">Q</th><th class="m">T</th></tr></thead>
+      <tbody>
+        <tr><td><b>initial</b></td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td></tr>
+        <tr><td><b>WA = R</b></td><td class="m">R</td><td class="m">GB</td><td class="m">GB</td><td class="m">RBG</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td></tr>
+        <tr><td><b>NT = G</b></td><td class="m">R</td><td class="m">G</td><td class="m">B</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td></tr>
+        <tr><td><b>NSW / SA</b></td><td colspan="7" style="color:var(--ink3);font-style:italic">row started but left unfinished on the page</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>2. Most Constraining Variable (Degree Heuristic)</h3>
+    <ul>
+      <li>Take the node with the <b>maximum degree</b> &mdash; colour that one first.</li>
+      <li><b>Degree</b> = how many other regions it is <b>connected</b> to (keep the order consistent).</li>
+    </ul>
+    <p>The worked map on the page labels each region with its degree and the colour chosen:</p>
+    <div class="calc">2 (R)     3 (B)     5 (G)     3 (R)     3 (B)     2 (R)     1</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 12 ============ -->
+<section class="pg" id="p12">
+  <div class="hd"><span class="num">12</span><span class="ttl">Least constraining value &middot; Forward checking</span></div>
+  <div class="bd">
+    <h3>3. Least Constraining Value</h3>
+    <p>Choose the value that is <b>preferable</b> &mdash; the one that leaves the neighbours with the most room. Illustrated with a diagram on the page.</p>
+
+    <h3>4. Forward Checking</h3>
+    <div class="box red">
+      <span class="lbl">Mnemonic written in the margin</span>
+      <b>MRV = min option.&nbsp;&nbsp; Forward = max option.</b>
+    </div>
+    <p>Also noted: if an <b>error</b> appears, the rules are applied again; once the error is <b>fixed</b> the assignment can continue.</p>
+
+    <h4>Worked example &mdash; four nodes A, B, C, D</h4>
+    <p>A is joined to B and C; B is joined to C and D; C is joined to D. Final colours: <b>A = R, B = G, C = B, D = R</b>.</p>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th class="m">A</th><th class="m">B</th><th class="m">C</th><th class="m">D</th></tr></thead>
+      <tbody>
+        <tr><td><b>initial</b></td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td><td class="m">RGB</td></tr>
+        <tr><td><b>A = R</b></td><td class="m">R</td><td class="m">GB</td><td class="m">GB</td><td class="m">RGB</td></tr>
+        <tr><td><b>D = G</b> <span style="color:var(--ink3)">(max option)</span></td><td class="m">R</td><td class="m">B</td><td class="m">&mdash;</td><td class="m">G</td></tr>
+        <tr><td><b>D = R</b></td><td class="m">R</td><td class="m">GB</td><td class="m">GB</td><td class="m">B</td></tr>
+        <tr><td><b>B = G</b></td><td class="m">R</td><td class="m">G</td><td class="m">B</td><td class="m">R</td></tr>
+        <tr><td><b>C = B</b></td><td class="m">R</td><td class="m">G</td><td class="m">B</td><td class="m">R</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:13.5px;color:var(--ink2)">Annotation on the row where a domain empties: two adjacent regions would take the <b>same colour</b>, which is the error &mdash; so that branch is abandoned and the connection is made with blue instead.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 13 ============ -->
+<section class="pg" id="p13">
+  <div class="hd"><span class="num">13</span><span class="ttl">Forward checking &mdash; worked twice</span></div>
+  <div class="bd">
+    <h3>Example 1</h3>
+    <div class="calc">Variables   -  A, B, C
+Domain      -  {1, 2, 3}
+Constraints -  A > B,  B != C,  C != A</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th class="m">A</th><th class="m">B</th><th class="m">C</th></tr></thead>
+      <tbody>
+        <tr><td><b>initial</b></td><td class="m">1 2 3</td><td class="m">1 2 3</td><td class="m">1 2 3</td></tr>
+        <tr><td><b>A = 1</b></td><td class="m">1</td><td class="m">&mdash;</td><td class="m">2, 3</td></tr>
+        <tr><td><b>A = 2</b></td><td class="m">2</td><td class="m">1</td><td class="m">1, 3</td></tr>
+        <tr><td><b>C = 1</b> <span style="color:var(--ink3)">(max option)</span></td><td class="m">2</td><td class="m">&mdash;</td><td class="m">1</td></tr>
+        <tr><td><b>C = 3</b></td><td class="m">2</td><td class="m">1</td><td class="m">3</td></tr>
+        <tr><td><b>B = 1</b></td><td class="m">2</td><td class="m">1</td><td class="m">3</td></tr>
+      </tbody>
+    </table></div>
+    <p>The <b>A = 1</b> row is boxed on the page: with A = 1 there is no value left for B, because B must be smaller than A.</p>
+
+    <h3>Example 2 &mdash; with MRV</h3>
+    <div class="calc">Variables   -  A, B, C
+Domain      -  A, B = {1, 2, 3}
+               C    = {1, 3}
+Constraints -  A > B,  B != C,  C != B</div>
+    <div class="tblwrap"><table>
+      <thead><tr><th></th><th class="m">A</th><th class="m">B</th><th class="m">C</th></tr></thead>
+      <tbody>
+        <tr><td><b>initial</b></td><td class="m">1, 2, 3</td><td class="m">1, 2, 3</td><td class="m">1, 3</td></tr>
+        <tr><td><b>C = 3</b> <span style="color:var(--ink3)">(min &mdash; MRV picks C, it has fewest values)</span></td><td class="m">1, 2, 3</td><td class="m">1, 2, 3</td><td class="m">3</td></tr>
+        <tr><td><b>A = 2</b></td><td class="m">2</td><td class="m">1</td><td class="m">3</td></tr>
+        <tr><td><b>B = 1</b></td><td class="m">2</td><td class="m">1</td><td class="m">3</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 14 ============ -->
+<section class="pg" id="p14">
+  <div class="hd"><span class="num">14</span><span class="ttl">Queens as a CSP &middot; Cryptarithmetic</span></div>
+  <div class="bd">
+    <div class="box red">
+      <span class="lbl">Note written across the top of the page</span>
+      <b>Forward checking is the important topic &mdash; it will come in the exam.</b>
+    </div>
+
+    <h3>Queen problem in CSP</h3>
+    <div class="calc">V  ->  Q1, Q2, Q3, Q4
+D  ->  R1, R2, R3, R4
+C  ->  queens cannot attack each other</div>
+    <div class="fig">
+      <svg viewBox="0 0 260 150" role="img" aria-label="Four by four board with queens placed">
+        <g>
+          <rect class="cell" x="40" y="15" width="30" height="30"/><rect class="cell" x="70" y="15" width="30" height="30"/><rect class="cell" x="100" y="15" width="30" height="30"/><rect class="cell" x="130" y="15" width="30" height="30"/>
+          <rect class="cell" x="40" y="45" width="30" height="30"/><rect class="cell" x="70" y="45" width="30" height="30"/><rect class="cell" x="100" y="45" width="30" height="30"/><rect class="cell" x="130" y="45" width="30" height="30"/>
+          <rect class="cell" x="40" y="75" width="30" height="30"/><rect class="cell" x="70" y="75" width="30" height="30"/><rect class="cell" x="100" y="75" width="30" height="30"/><rect class="cell" x="130" y="75" width="30" height="30"/>
+          <rect class="cell" x="40" y="105" width="30" height="30"/><rect class="cell" x="70" y="105" width="30" height="30"/><rect class="cell" x="100" y="105" width="30" height="30"/><rect class="cell" x="130" y="105" width="30" height="30"/>
+        </g>
+        <text class="q" x="85" y="30">Q</text>
+        <text class="q" x="145" y="60">Q</text>
+        <text class="q" x="55" y="90">Q</text>
+        <text class="q" x="115" y="120">Q</text>
+        <text class="lb" x="22" y="30">R1</text><text class="lb" x="22" y="60">R2</text><text class="lb" x="22" y="90">R3</text><text class="lb" x="22" y="120">R4</text>
+      </svg>
+      <div class="cap">Queens placed one per column, as drawn on the page.</div>
+    </div>
+    <div class="calc">(i)   R1 != R2
+(ii)  C1 != C2
+(iii) |R1 - R2| != |C1 - C2|</div>
+    <p>The note beside (iii): if the two differences come out <b>equal</b>, the queens lie on the same diagonal &mdash; that is the attack.</p>
+
+    <h3>Cryptarithmetic Problem</h3>
+    <div class="calc">V = A - Z
+D = 0 - 9
+C = no variables can have the same value, and the carry bit should be 1
+
+    T W O
+  + T W O
+  -------
+  F O U R</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 15 ============ -->
+<section class="pg" id="p15">
+  <div class="hd"><span class="num">15</span><span class="ttl">Cryptarithmetic hypergraph</span></div>
+  <div class="bd">
+    <p>Both puzzles are drawn as <b>hypergraphs</b>: the letters sit in a row as variable nodes, a bar above joins them in the all-different constraint, and the carry variables hang below, each joined to the column it belongs to.</p>
+
+    <h4>TWO + TWO = FOUR</h4>
+    <div class="calc">    T W O
+  + T W O
+  -------
+  F O U R
+
+letters:  F  T  W  O  U  R
+carries:  C1  C2  C3</div>
+
+    <h4>SEND + MORE = MONEY</h4>
+    <div class="calc">   S E N D
+ + M O R E
+ ---------
+ M O N E Y
+
+letters:  S  E  N  D  M  O  R  Y
+carries:  C1  C2  C3  C4</div>
+    <p>Margin note: the graph itself carries <b>no values</b> &mdash; it only records which letters and carries share a constraint.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 16 ============ -->
+<section class="pg" id="p16">
+  <div class="hd"><span class="num">16</span><span class="ttl">Bayesian Network &middot; Naive Bayes</span><span class="date">19 Aug</span></div>
+  <div class="bd">
+    <h3>Naive Bayes Theorem</h3>
+    <div class="calc">P(A|B) = P(B|A) . P(A) / P(B)</div>
+    <p style="font-size:13.5px;color:var(--ink2)">The page first writes <code>P(B|A)</code> and crosses it out before settling on the form above.</p>
+
+    <h3>Example 1</h3>
+    <div class="calc">P(J, A, -E)
+  = P(J|A) . P(A|-E) . P(-E)
+
+  = 0.5 x 0.2 x 0.7
+
+  = <span class="ok">0.07</span></div>
+    <p>And the conditional form, using the chain rule:</p>
+    <div class="calc">P(J | A, -E) = P(J, A, -E) / P(A, -E)</div>
+    <p>Margin note: if an event has <b>already occurred</b>, its probability is taken as <b>1</b>.</p>
+
+    <h3>Example 2</h3>
+    <div class="calc">P(A | J, -M)
+  = P(A, J, -M) / P(J, -M)
+
+  = [ P(A|-E) x P(J|A) x P(-M|A) ] / [ P(J|A) x P(-M|A) ]
+
+  = (0.2 x 0.5 x 0.4) / (0.5 x 0.4)
+
+  = <span class="ok">0.2</span></div>
+  </div>
+</section>
+
+<!-- ============ PAGE 17 ============ -->
+<section class="pg" id="p17">
+  <div class="hd"><span class="num">17</span><span class="ttl">Bayesian inference &mdash; full worked query</span></div>
+  <div class="bd">
+    <h3>Query</h3>
+    <div class="calc">P(-A | J, -M)  =  P(-A, J, -M) / P(J, -M)</div>
+
+    <p>Both parts are expanded by summing the hidden variables out. The numerator sums over <b>E</b>; the denominator sums over <b>E</b> and <b>A</b>, giving four terms:</p>
+    <div class="calc">numerator    =  sum over E of  P(E) . P(-A|E) . P(J|-A) . P(-M|-A)
+
+denominator  =  sum over E, A of  P(E) . P(A|E) . P(J|A) . P(-M|A)
+                (four combinations: +E/-E crossed with +A/-A)</div>
+
+    <h3>Numbers substituted</h3>
+    <div class="calc">numerator    =  {0.3 x 0.8 x 0.5 x 0.6} + {0.7 x 0.82 x 0.5 x 0.6}
+
+denominator  =  {0.3 x 0.2 x 0.5 x 0.4} + {0.7 x 0.2 x 0.5 x 0.6}
+              + {0.7 x 0.8 x 0.5 x 0.4} + {0.3 x 0.8 x 0.5 x 0.6}</div>
+
+    <div class="box green">
+      <span class="lbl">Result written on the page</span>
+      <div class="calc" style="margin:4px 0 0;background:transparent;border:none;padding:0">0.114 / 0.238  =  <span class="ok">0.48</span></div>
+    </div>
+
+    <div class="unc"><b>Partly unclear:</b> this page is dense and several factors are overwritten, so the individual terms above are transcribed as best they can be read and do not all reconcile cleanly to the final figures. The <b>method</b> (expand, sum out the hidden variables, divide) and the <b>final answer 0.114 / 0.238 = 0.48</b> are written plainly.</div>
+  </div>
+</section>
+
+<footer>
+  Transcribed from the 17-page CamScanner set of a classmate's lab notes (classes of 10, 12, 17 and 19 August). Content, order and page numbering follow the original; diagrams have been redrawn. Where the handwriting could not be read with confidence, that is flagged in an amber note rather than guessed at &mdash; check those spots against the scan.
+</footer>
+</div>
+<a class="top" href="#top">&#8593; Top</a>
